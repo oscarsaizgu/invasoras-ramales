@@ -556,10 +556,10 @@
           document.getElementById('success-screen').style.display = 'block';
         } else { throw new Error(); }
       } catch(err) {
-        alert('Error al enviar. Comprueba tu conexión e inténtalo de nuevo.');
+        alert('¡Error al enviar!. Comprueba tu conexión e inténtalo de nuevo.');
       }
       btn.disabled = false; btn.textContent = 'Enviar reporte →';
-    });
+    }); 
 
     function resetForm() {
       document.getElementById('report-form').reset();
