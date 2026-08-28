@@ -55,7 +55,7 @@
 
     /* Logo Ramales Natural */
     .header-logo {
-      height: 70px;   /* ← cambia este número para hacer el logo más grande o pequeño */
+      height: 95px;   /* ← cambia este número para hacer el logo más grande o pequeño */
       width: auto;
       flex-shrink: 0;
     }
@@ -520,10 +520,9 @@
   </div>
 
   <footer>
-  <img src="RamalesLogoAyto.png" alt="Ayuntamiento de Ramales de la Victoria" style="height:70px; width:auto; margin-bottom:10px; opacity:0.85;">
-  <br>
-    Los datos recogidos se usan exclusivamente para gestión ambiental municipal.
-    <br><br>© Oscar Saiz Gutiérrez
+  <img src="RamalesLogoAyto.png" alt="Ayuntamiento de Ramales de la Victoria" style="height:100px; width:auto; margin-bottom:4px; opacity:0.85;"><br>
+    Los datos recogidos se usan exclusivamente para gestión ambiental municipal.<br>
+    © Oscar Saiz Gutiérrez
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -566,6 +565,7 @@
         const div = document.createElement('div');
         div.className = 'species-btn';
         div.dataset.species = sp.cientifico;
+        if (sp.cientifico === 'Otras') div.id = 'btn-otras';
         div.onclick = () => selectSpecies(div);
         if (sp.imagen) {
           div.style.backgroundImage = `url('${sp.imagen}')`;
