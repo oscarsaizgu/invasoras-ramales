@@ -520,9 +520,10 @@
   </div>
 
   <footer>
-  <img src="RamalesLogo Ayto.jpg" alt="Ayuntamiento de Ramales de la Victoria" style="height:70px; width:auto; margin-bottom:10px; opacity:0.85;">
+  <img src="RamalesLogoAyto.png" alt="Ayuntamiento de Ramales de la Victoria" style="height:70px; width:auto; margin-bottom:10px; opacity:0.85;">
   <br>
     Los datos recogidos se usan exclusivamente para gestión ambiental municipal.
+    <br><br>© Oscar Saiz Gutiérrez
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -564,7 +565,6 @@
       ESPECIES.forEach(sp => {
         const div = document.createElement('div');
         div.className = 'species-btn';
-        if (sp.cientifico === 'Otras') div.id = 'btn-otras';
         div.dataset.species = sp.cientifico;
         div.onclick = () => selectSpecies(div);
         if (sp.imagen) {
