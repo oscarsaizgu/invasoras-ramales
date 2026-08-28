@@ -264,7 +264,13 @@
       background: none; border: none; color: #fff;
       font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 0 2px;
     }
-#map { flex: 1; min-height: 0; max-height: 45vh; }
+#map-modal-inner {
+  display: flex; flex-direction: column;
+  width: 100%; max-width: 520px;
+  border-radius: 12px; overflow: hidden;
+  height: min(90vh, 600px);
+}
+#map { flex: 1; min-height: 0; }
     #map-modal-footer {
       padding: 10px 14px 14px;
       background: var(--bg);
@@ -440,7 +446,7 @@
 
       <!-- Modal mapa pantalla completa -->
 <div id="map-modal" role="dialog" aria-modal="true" aria-label="Indicar ubicación">
-  <div style="display:flex; flex-direction:column; width:100%; max-width:520px; border-radius:12px; overflow:hidden; max-height:90vh;">
+  <div id="map-modal-inner">
   <div id="map-modal-header">
           <span>📍 Indica la ubicación</span>
           <button id="map-modal-close" onclick="closeMapModal()" aria-label="Cerrar">✕</button>
@@ -558,6 +564,7 @@
       ESPECIES.forEach(sp => {
         const div = document.createElement('div');
         div.className = 'species-btn';
+        if (sp.cientifico === 'Otras') div.id = 'btn-otras';
         div.dataset.species = sp.cientifico;
         div.onclick = () => selectSpecies(div);
         if (sp.imagen) {
@@ -632,6 +639,7 @@
             attribution: '© OpenStreetMap contributors'
           }).addTo(leafletMap);
           leafletMap.on('click', onMapClick);
+          setTimeout(() => leafletMap.invalidateSize(), 150);
         } else {
           setTimeout(() => leafletMap.invalidateSize(), 80);
         }
