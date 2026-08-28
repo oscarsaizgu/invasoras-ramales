@@ -242,13 +242,16 @@
     #loc-result.ok { color: var(--verde-suave); font-weight: 700; }
     #loc-result.err { color: #c0392b; }
     /* ── Modal mapa ── */
-    #map-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      flex-direction: column;
-    }
+#map-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
     #map-modal.open { display: flex; }
     #map-modal-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -261,7 +264,7 @@
       background: none; border: none; color: #fff;
       font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 0 2px;
     }
-    #map { flex: 1; min-height: 0; }
+#map { flex: 1; min-height: 0; max-height: 45vh; }
     #map-modal-footer {
       padding: 10px 14px 14px;
       background: var(--bg);
@@ -464,8 +467,9 @@
       <div id="loc-result"></div>
 
       <!-- Modal mapa pantalla completa -->
-      <div id="map-modal" role="dialog" aria-modal="true" aria-label="Indicar ubicación">
-        <div id="map-modal-header">
+<div id="map-modal" role="dialog" aria-modal="true" aria-label="Indicar ubicación">
+  <div style="display:flex; flex-direction:column; width:100%; max-width:520px; border-radius:12px; overflow:hidden; max-height:90vh;">
+  <div id="map-modal-header">
           <span>📍 Indica la ubicación</span>
           <button id="map-modal-close" onclick="closeMapModal()" aria-label="Cerrar">✕</button>
         </div>
