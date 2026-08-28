@@ -674,7 +674,6 @@
       e.preventDefault();
       const especie = document.getElementById('especie-seleccionada').value;
       if (!especie)                              { alert('Por favor, selecciona la especie observada.'); return; }
-      if (!selectedPhotos.length)                { alert('Por favor, añade al menos una foto.'); return; }
       if (!document.getElementById('lat').value) { alert('Por favor, indica la ubicación usando el botón del mapa.'); return; }
 
       const btn = document.getElementById('submit-btn');
