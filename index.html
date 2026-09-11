@@ -119,9 +119,33 @@
   <section id="screen-especies-info" class="screen content-page" aria-labelledby="especies-info-titulo">
     <p class="content-label">Ramales Natural</p>
     <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">Especies invasoras</h1>
-    <p class="content-lead">Estas son las especies de flora invasora más presentes en nuestro entorno. Conocerlas es el primer paso para ayudar a controlarlas.</p>
+    <p class="content-lead">Conoce las especies de flora incluidas en el Catálogo Español de Especies Exóticas Invasoras y aprende a reconocerlas.</p>
 
-    <div class="info-especies-grid" id="info-especies-grid"></div>
+    <div class="catalogo-buscador">
+      <span class="catalogo-buscador__icon" aria-hidden="true">🔎</span>
+      <input type="search" id="catalogo-buscar" placeholder="Buscar una especie..." aria-label="Buscar una especie por nombre común o científico">
+    </div>
+
+    <div class="catalogo-seccion">
+      <h2 class="catalogo-seccion__titulo">Especies que puedes encontrar en nuestro entorno</h2>
+      <div class="catalogo-grid catalogo-grid--destacadas" id="catalogo-destacadas"></div>
+    </div>
+
+    <div class="catalogo-filtros" id="catalogo-filtros" role="group" aria-label="Filtrar catálogo de especies">
+      <button type="button" class="catalogo-filtro is-active" data-filtro="todas">Todas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="ramales">Más relevantes en Ramales</button>
+      <button type="button" class="catalogo-filtro" data-filtro="terrestre">Flora terrestre</button>
+      <button type="button" class="catalogo-filtro" data-filtro="acuatica">Flora acuática</button>
+    </div>
+
+    <div class="catalogo-seccion">
+      <h2 class="catalogo-seccion__titulo">Catálogo completo</h2>
+      <p class="catalogo-fuente">Fuente oficial: <a href="https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html" target="_blank" rel="noopener">Catálogo Español de Especies Exóticas Invasoras (CEEEI) · MITECO</a></p>
+      <p class="catalogo-resultados" id="catalogo-resultados-info" aria-live="polite"></p>
+      <div class="catalogo-grid" id="catalogo-grid"></div>
+      <p class="catalogo-vacio" id="catalogo-vacio" hidden>No hemos encontrado ninguna especie con ese nombre.</p>
+      <button type="button" class="btn btn-secondary catalogo-cargar-mas" id="catalogo-cargar-mas" hidden>Ver más especies</button>
+    </div>
 
     <div class="paisaje-montanas" aria-hidden="true">
       <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,6 +155,25 @@
       </svg>
     </div>
   </section>
+
+  <!-- FICHA DE ESPECIE (catálogo) -->
+  <div class="ficha-overlay" id="ficha-overlay" hidden>
+    <div class="ficha-panel" role="dialog" aria-modal="true" aria-labelledby="ficha-comun">
+      <button type="button" class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">✕</button>
+      <div class="ficha-foto" id="ficha-foto"></div>
+      <div class="ficha-cuerpo">
+        <p class="ficha-comun" id="ficha-comun"></p>
+        <p class="ficha-cientifico" id="ficha-cientifico"></p>
+        <p class="ficha-ambito" id="ficha-ambito"></p>
+        <div class="ficha-descripcion" id="ficha-descripcion"></div>
+        <p class="ficha-nota" id="ficha-nota" hidden></p>
+        <div class="ficha-acciones">
+          <a href="#" target="_blank" rel="noopener" class="btn btn-secondary ficha-btn-oficial" id="ficha-btn-oficial">Consultar ficha oficial</a>
+          <button type="button" class="btn btn-primary ficha-btn-reportar" id="ficha-btn-reportar">+ Reportar esta especie</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- CÓMO HACER UN BUEN REPORTE -->
   <section id="screen-como-reportar" class="screen content-page" aria-labelledby="como-reportar-titulo">

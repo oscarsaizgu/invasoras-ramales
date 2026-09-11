@@ -1,11 +1,12 @@
 import { state, goTo, goBack, currentStep, setNextEnabled } from './wizard.js';
-import { renderEspecies, especieDescripcionInput, renderEspeciesInfo } from './especies.js';
+import { renderEspecies, especieDescripcionInput } from './especies.js';
 import { renderFotoSlots } from './fotos.js';
 import { initUbicacionStep } from './mapa.js';
 import {
   renderTamanyos, initObservacionesStep, initContactoStep,
   renderRevision, enviarReporte, resetAll,
 } from './formulario.js';
+import { initCatalogo } from './catalogo.js';
 
 function isStepValid(step) {
   switch (step) {
@@ -58,7 +59,7 @@ async function handleSiguiente() {
   }
 }
 
-function goToStepAndEnter(step) {
+export function goToStepAndEnter(step) {
   goTo(step);
   enterStep(step);
 }
@@ -109,13 +110,13 @@ function initMenu() {
 
 function init() {
   renderEspecies();
-  renderEspeciesInfo();
   renderFotoSlots();
   renderTamanyos();
   initUbicacionStep();
   initObservacionesStep();
   initContactoStep();
   initMenu();
+  initCatalogo();
 
   document.getElementById('btn-empezar').addEventListener('click', () => goToStepAndEnter('especie'));
   document.getElementById('header-back').addEventListener('click', () => {
