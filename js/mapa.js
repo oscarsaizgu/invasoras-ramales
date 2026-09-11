@@ -76,15 +76,9 @@ function requestGps() {
       document.getElementById('map-confirm-btn').disabled = false;
     },
     err => {
-      const denegado = err.code === 1;
-      setHint(
-        denegado
-          ? 'No hemos podido acceder a tu ubicación. Toca en el mapa donde viste la planta.'
-          : 'No se ha podido obtener el GPS. Toca en el mapa donde viste la planta.',
-        'err'
-      );
+      setHint('No hemos podido obtener tu ubicación. Puedes colocarla manualmente en el mapa.', 'err');
     },
-    { timeout: 10000, enableHighAccuracy: true }
+    { timeout: 10000, enableHighAccuracy: true, maximumAge: 60000 }
   );
 }
 

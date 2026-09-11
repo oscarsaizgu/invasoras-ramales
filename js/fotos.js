@@ -19,7 +19,7 @@ export function renderFotoSlots() {
       slot.innerHTML = `
         <img src="${foto.dataUrl}" alt="Fotografía ${i + 1} de la planta">
         <button type="button" class="photo-slot__remove" aria-label="Eliminar fotografía ${i + 1}">✕</button>
-        <input type="file" accept="image/*" capture="environment" aria-label="Sustituir fotografía ${i + 1}">`;
+        <input type="file" accept="image/*" aria-label="Sustituir fotografía ${i + 1}">`;
       slot.querySelector('.photo-slot__remove').addEventListener('click', (e) => {
         e.stopPropagation();
         removeFoto(i);
@@ -27,7 +27,7 @@ export function renderFotoSlots() {
     } else {
       slot.innerHTML = `
         <span class="photo-slot__icon" aria-hidden="true">📷</span>
-        <input type="file" accept="image/*" capture="environment" aria-label="Añadir fotografía ${i + 1}">`;
+        <input type="file" accept="image/*" aria-label="Añadir fotografía ${i + 1}">`;
     }
 
     slot.querySelector('input').addEventListener('change', (e) => handleFotoInput(e, i));

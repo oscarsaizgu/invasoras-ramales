@@ -2,9 +2,13 @@
 export const CONFIG = {
   mapaCenter: [43.2522, -3.4628],
   mapaZoom: 15,
-  formName: 'reporte-invasoras',
-  submitUrl: '/',
-  emailAsunto: '🌿 Reporte invasora',
+  // Servicio de formulario-a-email usado por GitHub Pages (sitio estático,
+  // sin backend propio). No es una clave secreta: es el mismo email
+  // público de destino que antes se usaba con Netlify Forms.
+  // Ver README.md → "Envío de reportes por email" para el paso de
+  // activación necesario la primera vez.
+  submitUrl: 'https://formsubmit.co/ajax/invasorasenramales@gmail.com',
+  emailAsunto: '🌿 Nuevo reporte de especie invasora',
   maxFotos: 3,
   // Lado máximo (px) al que se redimensionan las fotos antes de enviarlas.
   fotoMaxLado: 1600,

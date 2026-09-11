@@ -22,27 +22,6 @@
 </head>
 <body>
 
-<!--
-  Formulario oculto: Netlify necesita ver un <form> estático con todos
-  los campos en el HTML servido para poder detectarlo en el build.
-  El formulario real se envía por JavaScript (ver js/formulario.js).
--->
-<form name="reporte-invasoras" data-netlify="true" hidden>
-  <input type="text" name="Especie">
-  <input type="text" name="Fecha">
-  <input type="text" name="Latitud">
-  <input type="text" name="Longitud">
-  <input type="text" name="Google Maps">
-  <input type="text" name="Lugar descripcion">
-  <input type="text" name="Tamanyo colonia">
-  <input type="text" name="Observaciones">
-  <input type="text" name="Nombre ciudadano">
-  <input type="email" name="Email ciudadano">
-  <input type="file" name="foto_1">
-  <input type="file" name="foto_2">
-  <input type="file" name="foto_3">
-</form>
-
 <a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
 
 <header class="app-header" id="app-header">
@@ -68,7 +47,6 @@
     <p>Ayúdanos a localizarla y a conocer su presencia en nuestro entorno.</p>
     <button type="button" class="btn btn-primary home__cta" id="btn-empezar">+ Hacer un reporte</button>
     <p class="home__note">No necesitas saber identificar la especie.</p>
-    <p class="home__secondary"><a href="mapa.html">Ver el mapa de avistamientos →</a></p>
   </section>
 
   <!-- PASO 1: ESPECIE -->
@@ -182,7 +160,6 @@
     <p>Cada reporte nos ayuda a conocer mejor y proteger nuestro entorno.</p>
     <div class="success__actions">
       <button type="button" class="btn btn-primary" id="btn-reportar-otro">Reportar otra especie</button>
-      <a href="mapa.html" class="btn btn-secondary" style="text-decoration:none; text-align:center; display:block;">Ver mapa</a>
     </div>
   </section>
 
