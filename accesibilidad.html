@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accesibilidad | Ramales Natural</title>
+<meta name="theme-color" content="#22392c">
+<link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="legal-page">
+<header class="app-header">
+  <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <div class="app-header__text">
+    <h1 style="font-size:0.95rem;">Ramales Natural</h1>
+    <p>Reporte de especies invasoras</p>
+  </div>
+</header>
+<main class="container">
+  <a class="back-link" href="index.html">← Volver a la aplicación</a>
+  <h1>Declaración de accesibilidad</h1>
+  <p class="legal-updated">Última actualización: septiembre de 2026</p>
+
+  <h2>1. Compromiso</h2>
+  <p>
+    Ramales Natural se compromete a que esta aplicación pueda ser utilizada
+    por el mayor número posible de personas, incluidas aquellas que usan
+    tecnologías de asistencia (lectores de pantalla, navegación por teclado,
+    control por voz, etc.).
+  </p>
+
+  <h2>2. Medidas aplicadas</h2>
+  <ul>
+    <li>Contraste de color revisado entre texto y fondo.</li>
+    <li>Foco visible en todos los elementos interactivos al navegar con teclado.</li>
+    <li>Etiquetas (<code>label</code>) asociadas a todos los campos del formulario.</li>
+    <li>Textos alternativos en las imágenes con significado.</li>
+    <li>Botones y campos con un tamaño cómodo para su uso táctil en móvil.</li>
+    <li>Mensajes de error y confirmación anunciados a lectores de pantalla mediante regiones dinámicas (<code>aria-live</code>, <code>role="status"</code>).</li>
+    <li>Ningún estado (seleccionado, error) se comunica únicamente mediante el color.</li>
+  </ul>
+
+  <h2>3. Limitaciones conocidas</h2>
+  <p>
+    El mapa interactivo (basado en la librería Leaflet y en OpenStreetMap) es
+    un componente de terceros cuya accesibilidad completa por teclado puede
+    ser limitada. Por ello, la aplicación permite indicar la ubicación
+    manualmente y siempre puede continuarse el reporte aunque no se use el
+    mapa con precisión total.
+  </p>
+
+  <h2>4. Cómo comunicar un problema de accesibilidad</h2>
+  <p>
+    Si detectas alguna barrera de accesibilidad al usar esta aplicación,
+    puedes comunicarlo a
+    <a href="mailto:info@ramalesnatural.org">info@ramalesnatural.org</a>.
+  </p>
+</main>
+<footer class="app-footer">
+  <p class="app-footer__brand">Ramales Natural</p>
+  <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  <nav class="app-footer__legal" aria-label="Información legal">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accesibilidad.html">Accesibilidad</a>
+  </nav>
+  <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
+</footer>
+</body>
+</html>

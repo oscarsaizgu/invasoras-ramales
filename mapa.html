@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mapa de avistamientos | Ramales Natural</title>
+<meta name="description" content="Mapa público de avistamientos de especies invasoras comunicados en Ramales de la Victoria.">
+<meta name="theme-color" content="#22392c">
+<link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="public-map-page">
+
+<header class="app-header">
+  <a class="app-header__back" href="index.html" aria-label="Volver al inicio" style="text-decoration:none;">←</a>
+  <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <div class="app-header__text">
+    <h1>Mapa de avistamientos</h1>
+    <p>Ramales Natural</p>
+  </div>
+</header>
+
+<div class="map-filters" role="group" aria-label="Filtrar por especie">
+  <button type="button" class="map-filter-chip selected">Todas</button>
+  <button type="button" class="map-filter-chip">Plumero</button>
+  <button type="button" class="map-filter-chip">Bambú japonés</button>
+  <button type="button" class="map-filter-chip">Amor de hombre</button>
+  <button type="button" class="map-filter-chip">Vara de San José</button>
+</div>
+
+<div id="public-map"></div>
+
+<div id="public-map-empty" class="public-map-empty" hidden>
+  <p><strong>Todavía no hay avistamientos públicos que mostrar.</strong></p>
+  <p>En cuanto se confirmen los primeros reportes, aparecerán aquí.</p>
+</div>
+
+<footer class="app-footer">
+  <p class="app-footer__brand">Ramales Natural</p>
+  <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  <nav class="app-footer__legal" aria-label="Información legal">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accesibilidad.html">Accesibilidad</a>
+  </nav>
+  <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="js/mapa-publico.js"></script>
+</body>
+</html>

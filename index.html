@@ -1,780 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reportar Especie Invasora · Ramales Natural</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Reporte de especies invasoras | Ramales Natural</title>
+<meta name="description" content="Colabora con Ramales Natural y ayúdanos a localizar especies de flora invasora en Ramales de la Victoria. Haz una foto, indica dónde está y envíanosla en menos de un minuto.">
+<meta name="theme-color" content="#22392c">
+<link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo-rn-blanco.png">
+<link rel="canonical" href="https://reporteinvasoras.ramalesnatural.org/">
 
+<meta property="og:type" content="website">
+<meta property="og:title" content="Reporte de especies invasoras | Ramales Natural">
+<meta property="og:description" content="¿Has visto una planta invasora en Ramales de la Victoria? Ayúdanos a localizarla: haz una foto y envíanos un aviso en un minuto.">
+<meta property="og:image" content="https://reporteinvasoras.ramalesnatural.org/images/promo-portada.png">
+<meta property="og:locale" content="es_ES">
 
-  <style>
-
-    /* ================================================================
-       1. VARIABLES GLOBALES — edita aquí para cambiar colores
-       ================================================================ */
-    :root {
-      --verde-oscuro:   #273f32;   /* Color principal, cabecera, botones */
-      --verde-medio:    #2d4639;   /* Hover de botones */
-      --verde-suave:    #7a866d;   /* Acentos secundarios */
-      --gris-verde:     #a8ac91;   /* Bordes y detalles */
-      --borde:          #cbcebf;   /* Líneas y bordes de campos */
-      --bg:             #fbf0df;   /* Fondo de página (crema) */
-      --card:           #ffffff;   /* Fondo de tarjetas */
-      --seleccion:      #fce8c6;   /* Fondo al seleccionar especie */
-      --text:           #2e4538;   /* Texto principal */
-      --text-muted:     #7a866d;   /* Texto secundario */
-      --radius:         10px;
-      --font:           'Nunito', sans-serif;
-    }
-
-    /* ================================================================
-       2. BASE
-       ================================================================ */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ================================================================
-       3. CABECERA
-       — Fondo verde oscuro para que el logo blanco sea visible
-       ================================================================ */
-    header {
-      background: var(--verde-oscuro);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    /* Logo Ramales Natural */
-    .header-logo {
-      height: 95px;   /* ← cambia este número para hacer el logo más grande o pequeño */
-      width: auto;
-      flex-shrink: 0;
-    }
-
-    /* Separador vertical entre logo y texto */
-    .header-divider {
-      width: 1px;
-      height: 36px;
-      background: rgba(255,255,255,0.25);
-    }
-
-    header h1 {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #fce8c6;
-      line-height: 1.2;
-    }
-
-    header p {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.65);
-      margin-top: 2px;
-    }
-
-    /* ================================================================
-       4. CONTENEDOR
-       ================================================================ */
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 20px 16px 48px;
-    }
-
-    /* ================================================================
-       5. ETIQUETAS DE SECCIÓN
-       ================================================================ */
-    .section-label {
-      font-size: 0.68rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--verde-suave);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--borde);
-    }
-
-    /* ================================================================
-       6. TARJETAS
-       ================================================================ */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--borde);
-      border-radius: var(--radius);
-      padding: 18px;
-      margin-bottom: 12px;
-    }
-
-    /* ================================================================
-       7. CAMPOS DE FORMULARIO
-       ================================================================ */
-    label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .req { color: var(--verde-oscuro); }
-
-    input[type="text"], input[type="email"], input[type="date"],
-    select, textarea {
-      width: 100%;
-      border: 1.5px solid var(--borde);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 0.9rem;
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      transition: border-color 0.15s, box-shadow 0.15s;
-      -webkit-appearance: none;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--verde-oscuro);
-      box-shadow: 0 0 0 3px rgba(39,63,50,0.1);
-      background: #fff;
-    }
-
-    .field { margin-bottom: 14px; }
-
-    /* ================================================================
-       8. BOTONES DE ESPECIE
-       ================================================================ */
-    .species-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .species-btn {
-      border: 1.5px solid var(--borde);
-      border-radius: 8px;
-      padding: 150px 20px 10px;
-      text-align: center;
-      cursor: pointer;
-      background: var(--card);
-      transition: border-color 0.15s, background 0.15s;
-      user-select: none;
-    }
-
-    .species-btn.selected {
-      border-color: var(--verde-oscuro);
-      background: var(--seleccion);
-      box-shadow: inset 0 0 0 1000px rgba(39,63,50,0.55);
-    }
-
-    .species-btn .sp-icon { font-size: 1.5rem; display: block; margin-bottom: 5px; }
-    .species-btn .sp-name { font-size: 0.8rem; font-weight: 800; color: var(--text); display: block; line-height: 1.2; }
-    .species-btn .sp-sci  { font-size: 0.67rem; color: var(--text-muted); font-style: italic; display: block; margin-top: 2px; }
-    .species-btn.selected .sp-name { color: var(--verde-oscuro); }
-
-    #otras-nombre { display: none; margin-top: 10px; }
-
-    /* ================================================================
-       9. ZONA DE FOTO
-       ================================================================ */
-    .photo-area {
-      border: 1.5px dashed var(--gris-verde);
-      border-radius: 8px;
-      padding: 28px 16px;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      transition: border-color 0.15s, background 0.15s;
-      background: var(--bg);
-    }
-
-    .photo-area:hover, .photo-area.has-photo {
-      border-color: var(--verde-oscuro);
-      background: var(--seleccion);
-    }
-
-    .photo-area input {
-      position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer;
-    }
-
-    .photo-area .ph-icon { font-size: 1.8rem; margin-bottom: 8px; opacity: 0.5; }
-    .photo-area .ph-text { font-size: 0.85rem; color: var(--text-muted); }
-    .photo-area .ph-text strong { color: var(--verde-oscuro); font-weight: 700; }
-
-    #preview-container { margin-top: 12px; display: none; }
-    #preview-container img { width: 100%; border-radius: 6px; max-height: 200px; object-fit: cover; }
-    #photo-count { font-size: 0.78rem; color: var(--verde-suave); font-weight: 700; margin-top: 6px; }
-
-    /* ================================================================
-       10. BOTÓN GPS
-       ================================================================ */
-    /* Botón único de ubicación */
-    .loc-open-btn {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      width: 100%; padding: 13px 14px;
-      border: 1.5px solid var(--borde); border-radius: 10px;
-      background: var(--bg); cursor: pointer;
-      font-size: 0.9rem; font-family: var(--font);
-      color: var(--text); font-weight: 700;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .loc-open-btn:hover { border-color: var(--verde-oscuro); background: var(--seleccion); }
-    #loc-result {
-      font-size: 0.78rem; margin-top: 8px; color: var(--text-muted); min-height: 16px;
-    }
-    #loc-result.ok { color: var(--verde-suave); font-weight: 700; }
-    #loc-result.err { color: #c0392b; }
-    /* ── Modal mapa ── */
-#map-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.55);
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-    #map-modal.open { display: flex; }
-    #map-modal-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 16px;
-      background: var(--verde-oscuro);
-      color: #fff; font-weight: 700; font-size: 0.92rem;
-      flex-shrink: 0;
-    }
-    #map-modal-close {
-      background: none; border: none; color: #fff;
-      font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 0 2px;
-    }
-#map-modal-inner {
-  display: flex; flex-direction: column;
-  width: 100%; max-width: 520px;
-  border-radius: 12px; overflow: hidden;
-  height: min(90vh, 600px);
-}
-#map { flex: 1; min-height: 0; }
-    #map-modal-footer {
-      padding: 10px 14px 14px;
-      background: var(--bg);
-      flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;
-      /* sombra hacia arriba para que destaque del mapa */
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.12);
-    }
-    #map-hint {
-      font-size: 0.8rem; color: var(--text-muted);
-      text-align: center; line-height: 1.4;
-    }
-    #map-hint.ok { color: var(--verde-suave); font-weight: 700; }
-    #map-hint.err { color: #c0392b; }
-    #map-confirm-btn {
-      width: 100%; padding: 13px;
-      background: var(--verde-oscuro); color: #fff;
-      border: none; border-radius: 10px;
-      font-size: 1rem; font-family: var(--font); font-weight: 700;
-      cursor: pointer; opacity: 0.35; pointer-events: none;
-      transition: opacity 0.2s;
-    }
-    #map-confirm-btn.ready { opacity: 1; pointer-events: auto; }
-
-
-    /* ================================================================
-       11. CONSEJO
-       ================================================================ */
-    .tip {
-      display: flex; gap: 8px; align-items: flex-start;
-      background: var(--seleccion);
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 0.78rem;
-      color: var(--verde-medio);
-      margin-top: 12px;
-      line-height: 1.5;
-    }
-
-    /* ================================================================
-       12. BOTÓN ENVIAR
-       ================================================================ */
-    .submit-btn {
-      display: block; width: 100%;
-      padding: 15px;
-      background: var(--verde-oscuro);
-      color: #ffffff;
-      border: none; border-radius: var(--radius);
-      font-size: 1rem; font-weight: 800;
-      font-family: var(--font); cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      margin-top: 6px;
-      letter-spacing: 0.02em;
-    }
-
-    .submit-btn:hover    { background: var(--verde-medio); }
-    .submit-btn:active   { transform: scale(0.99); }
-    .submit-btn:disabled { background: var(--gris-verde); cursor: not-allowed; }
-
-    /* ================================================================
-       13. PANTALLA DE ÉXITO
-       ================================================================ */
-    #success-screen { display: none; text-align: center; padding: 48px 24px; }
-    #success-screen .s-icon { font-size: 3rem; margin-bottom: 16px; }
-    #success-screen h2 { font-size: 1.2rem; font-weight: 800; color: var(--verde-oscuro); margin-bottom: 8px; }
-    #success-screen p  { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
-
-    #success-screen .new-btn {
-      display: inline-block; margin-top: 24px;
-      padding: 12px 28px; background: var(--verde-oscuro);
-      color: white; border-radius: 8px;
-      font-weight: 700; font-size: 0.88rem;
-      cursor: pointer; border: none; font-family: var(--font);
-    }
-
-    /* ================================================================
-       14. PIE DE PÁGINA
-       ================================================================ */
-    footer {
-      text-align: center; padding: 20px 16px;
-      font-size: 0.72rem; color: var(--text-muted); line-height: 1.6;
-    }
-  
-  
-    /* Las imágenes de especie se aplican dinámicamente desde el array ESPECIES en el script */
-#btn-otras {
-  grid-column: 1 / -1;  /* ocupa las dos columnas */
-  padding: 8px;          /* menos alto */
-}
-    .species-btn .sp-name {
-      background: rgba(255,255,255,0.7);
-      border-radius: 9px;
-      padding: 2px 15px;
-    }
-    .species-btn .sp-sci {
-      background: rgba(255,255,255,0.7);
-      border-radius: 9px;
-      padding: 1px 4px;
-    }
-  </style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<!--
+  Formulario oculto: Netlify necesita ver un <form> estático con todos
+  los campos en el HTML servido para poder detectarlo en el build.
+  El formulario real se envía por JavaScript (ver js/formulario.js).
+-->
 <form name="reporte-invasoras" data-netlify="true" hidden>
-    <input type="text" name="Especie">
-    <input type="text" name="Fecha">
-    <input type="text" name="Latitud">
-    <input type="text" name="Longitud">
-    <input type="text" name="Google Maps">
-    <input type="text" name="Lugar descripcion">
-    <input type="text" name="Tamanyo colonia">
-    <input type="text" name="Observaciones">
-    <input type="text" name="Nombre ciudadano">
-    <input type="email" name="Email ciudadano">
-    <input type="file" name="foto_1">
-    <input type="file" name="foto_2">
-    <input type="file" name="foto_3">
-  </form>
-  <!-- CABECERA -->
-  <header>
-    <img class="header-logo" src="Logo_RN_blanco.png" alt="Ramales Natural">
-    <div class="header-divider"></div>
-    <div>
-      <h1>Registrar Especie Invasora</h1>
-      <p>Ayuntamiento de Ramales de la Victoria</p>
-    </div>
-  </header>
+  <input type="text" name="Especie">
+  <input type="text" name="Fecha">
+  <input type="text" name="Latitud">
+  <input type="text" name="Longitud">
+  <input type="text" name="Google Maps">
+  <input type="text" name="Lugar descripcion">
+  <input type="text" name="Tamanyo colonia">
+  <input type="text" name="Observaciones">
+  <input type="text" name="Nombre ciudadano">
+  <input type="email" name="Email ciudadano">
+  <input type="file" name="foto_1">
+  <input type="file" name="foto_2">
+  <input type="file" name="foto_3">
+</form>
 
-  <div class="container">
-  <form id="report-form" name="reporte-invasoras" data-netlify="true">
+<a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
 
-    <!-- SECCIÓN 1: ESPECIE -->
-    <p class="section-label">Especie</p>
-    <div class="card">
-      <div class="field" style="margin-bottom:0">
-        <label>¿Qué especie has visto? <span class="req">*</span></label>
-        <div class="species-grid">
+<header class="app-header" id="app-header">
+  <button type="button" class="app-header__back" id="header-back" aria-label="Volver atrás" hidden>←</button>
+  <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <div class="app-header__text">
+    <h1>Reporte de invasoras</h1>
+    <p>Ramales Natural</p>
+  </div>
+</header>
 
-          <!-- Los botones de especie se generan automáticamente desde el array ESPECIES del script -->
+<div class="progress-track" id="progress-wrap" hidden>
+  <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+</div>
+<p class="progress-label" id="progress-label"></p>
 
-        </div>
-        <div id="otras-nombre">
-          <input type="text" id="otras-nombre-input" placeholder="¿Cómo la describirías?">
-        </div>
-        <input type="hidden" id="especie-seleccionada" required>
+<main id="main-content" class="container">
+
+  <!-- PORTADA -->
+  <section id="screen-inicio" class="screen home" aria-labelledby="inicio-titulo">
+    <div class="home__art" aria-hidden="true">🌿</div>
+    <h1 id="inicio-titulo" tabindex="-1">¿Has visto una planta invasora?</h1>
+    <p>Ayúdanos a localizarla y a conocer su presencia en nuestro entorno.</p>
+    <button type="button" class="btn btn-primary home__cta" id="btn-empezar">+ Hacer un reporte</button>
+    <p class="home__note">No necesitas saber identificar la especie.</p>
+    <p class="home__secondary"><a href="mapa.html">Ver el mapa de avistamientos →</a></p>
+  </section>
+
+  <!-- PASO 1: ESPECIE -->
+  <section id="screen-especie" class="screen" aria-labelledby="especie-titulo">
+    <h2 id="especie-titulo" class="step-question" tabindex="-1">¿Qué planta has visto?</h2>
+    <p class="step-hint">Elige la que más se parezca. Si no la reconoces, no pasa nada.</p>
+    <div class="species-grid" id="species-grid" role="group" aria-label="Selección de especie"></div>
+    <div class="other-help" id="other-help" hidden>
+      <p><strong>¿No sabes qué planta es?</strong> Tranquilo. Haz una fotografía y nosotros podremos revisarla.</p>
+      <div class="field" style="margin-top:10px; margin-bottom:0">
+        <label for="otra-descripcion">¿Cómo la describirías? <span class="label-optional">(opcional)</span></label>
+        <input type="text" id="otra-descripcion" placeholder="Ej: una planta alta con flores moradas">
       </div>
     </div>
+  </section>
 
-    <!-- SECCIÓN 2: FOTO -->
-    <p class="section-label">Foto</p>
+  <!-- PASO 2: FOTO -->
+  <section id="screen-foto" class="screen" aria-labelledby="foto-titulo">
+    <h2 id="foto-titulo" class="step-question" tabindex="-1">Haz una foto</h2>
+    <p class="step-hint">Puedes añadir hasta 3 fotografías. La foto es opcional, pero nos ayuda mucho a identificar la planta.</p>
+    <div class="photo-grid" id="photo-grid" role="group" aria-label="Fotografías de la planta"></div>
+    <p id="photo-count" aria-live="polite" style="font-size:0.82rem;color:var(--verde-suave);font-weight:700;margin-bottom:10px;"></p>
+    <p id="foto-error" class="error-text" style="display:none"></p>
+    <div class="tip">
+      <span class="tip__icon" aria-hidden="true">💡</span>
+      <span>Si puedes, fotografía la planta completa y algún detalle de sus hojas o flores.</span>
+    </div>
+  </section>
+
+  <!-- PASO 3: UBICACIÓN -->
+  <section id="screen-ubicacion" class="screen" aria-labelledby="ubicacion-titulo">
+    <h2 id="ubicacion-titulo" class="step-question" tabindex="-1">¿Dónde la has visto?</h2>
+    <p class="step-hint">Intentaremos detectar tu ubicación automáticamente. También puedes marcarla tú a mano en el mapa.</p>
+    <button type="button" class="loc-open-btn" id="btn-abrir-mapa">📍 Indicar ubicación en el mapa</button>
+    <p class="loc-status" id="loc-result" role="status"></p>
+    <div class="field" style="margin-top:16px; margin-bottom:0">
+      <label for="lugar-desc">Descripción del lugar <span class="label-optional">(opcional)</span></label>
+      <input type="text" id="lugar-desc" placeholder="Ej: junto al río, detrás del puente">
+    </div>
+  </section>
+
+  <!-- PASO 4: CANTIDAD -->
+  <section id="screen-cantidad" class="screen" aria-labelledby="cantidad-titulo">
+    <h2 id="cantidad-titulo" class="step-question" tabindex="-1">¿Cuánto hay?</h2>
+    <p class="step-hint">Una estimación aproximada es suficiente.</p>
+    <div class="option-grid" id="tamanyo-grid" role="group" aria-label="Cantidad aproximada"></div>
+  </section>
+
+  <!-- PASO 5: OBSERVACIONES -->
+  <section id="screen-observaciones" class="screen" aria-labelledby="observaciones-titulo">
+    <h2 id="observaciones-titulo" class="step-question" tabindex="-1">¿Quieres añadir algo más?</h2>
+    <p class="step-hint">Es opcional. Por ejemplo: "está junto a un camino" o "hay muchas plantas cerca".</p>
+    <div class="field">
+      <label for="observaciones-input" class="label-optional">Observaciones (opcional)</label>
+      <textarea id="observaciones-input" rows="4" placeholder="Escribe aquí si quieres contarnos algo más..."></textarea>
+    </div>
+  </section>
+
+  <!-- PASO 6: CONTACTO -->
+  <section id="screen-contacto" class="screen" aria-labelledby="contacto-titulo">
+    <h2 id="contacto-titulo" class="step-question" tabindex="-1">¿Quieres que podamos contactarte?</h2>
+    <p class="step-hint">Estos datos no son necesarios para enviar el reporte. Puedes dejarlos en blanco.</p>
+    <div class="field">
+      <label for="nombre-input" class="label-optional">Nombre (opcional)</label>
+      <input type="text" id="nombre-input" placeholder="Tu nombre" autocomplete="name">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label for="email-input" class="label-optional">Email (opcional)</label>
+      <input type="email" id="email-input" placeholder="correo@ejemplo.com" autocomplete="email">
+    </div>
+  </section>
+
+  <!-- PASO 7: REVISIÓN -->
+  <section id="screen-revision" class="screen" aria-labelledby="revision-titulo">
+    <h2 id="revision-titulo" class="step-question" tabindex="-1">Revisa tu reporte</h2>
+    <p class="step-hint">Comprueba que todo esté bien antes de enviarlo. Puedes editar cualquier apartado.</p>
     <div class="card">
-      <div class="photo-area" id="photo-drop">
-        <input type="file" id="photo-input" accept="image/*" multiple onchange="previewPhotos(this)">
-        <div class="ph-icon">📷</div>
-        <p class="ph-text"><strong>Toca para hacer una foto</strong><br>o elige de tu galería</p>
+      <div class="review-section">
+        <div><p class="review-section__label">Especie</p><p class="review-section__value" id="revision-especie"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="especie">Editar</button>
       </div>
-      <div id="preview-container">
-        <img id="preview-img" src="" alt="Vista previa">
-        <div id="photo-count"></div>
+      <div class="review-section">
+        <div><p class="review-section__label">Fotografías</p><div class="review-photos" id="revision-fotos"></div></div>
+        <button type="button" class="review-section__edit" data-edit-step="foto">Editar</button>
       </div>
-      <div class="tip">
-        <span>💡</span>
-        <span>Intenta sacar la planta entera, las hojas y, si puedes, las flores. Cuanto más detalle, mejor.</span>
+      <div class="review-section">
+        <div><p class="review-section__label">Ubicación</p><p class="review-section__value" id="revision-ubicacion"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="ubicacion">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Cantidad</p><p class="review-section__value" id="revision-cantidad"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="cantidad">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Observaciones</p><p class="review-section__value" id="revision-observaciones"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="observaciones">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Contacto</p><p class="review-section__value" id="revision-contacto"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="contacto">Editar</button>
       </div>
     </div>
+    <p id="envio-error" class="error-text" style="display:none"></p>
+  </section>
 
-    <!-- SECCIÓN 3: UBICACIÓN -->
-    <p class="section-label">Ubicación</p>
-    <div class="card">
-      <!-- Botón único de ubicación -->
-      <button type="button" class="loc-open-btn" onclick="openMapModal()">
-        📍 Indicar ubicación en el mapa
-      </button>
-      <div id="loc-result"></div>
+  <!-- ÉXITO -->
+  <section id="screen-exito" class="screen success" aria-labelledby="exito-titulo">
+    <div class="success__icon" aria-hidden="true">✓</div>
+    <h2 id="exito-titulo" tabindex="-1">¡Gracias!</h2>
+    <p>Tu observación ha sido enviada correctamente.</p>
+    <p>Cada reporte nos ayuda a conocer mejor y proteger nuestro entorno.</p>
+    <div class="success__actions">
+      <button type="button" class="btn btn-primary" id="btn-reportar-otro">Reportar otra especie</button>
+      <a href="mapa.html" class="btn btn-secondary" style="text-decoration:none; text-align:center; display:block;">Ver mapa</a>
+    </div>
+  </section>
 
-      <!-- Modal mapa pantalla completa -->
+</main>
+
+<nav class="wizard-nav" id="wizard-nav" hidden aria-label="Navegación del asistente">
+  <div class="wizard-nav__inner">
+    <button type="button" class="btn btn-primary" id="btn-siguiente" disabled>Continuar</button>
+  </div>
+</nav>
+
+<footer class="app-footer" id="app-footer">
+  <p class="app-footer__brand">Ramales Natural</p>
+  <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  <nav class="app-footer__legal" aria-label="Información legal">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accesibilidad.html">Accesibilidad</a>
+  </nav>
+  <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
+</footer>
+
+<!-- MODAL DE MAPA -->
 <div id="map-modal" role="dialog" aria-modal="true" aria-label="Indicar ubicación">
   <div id="map-modal-inner">
-  <div id="map-modal-header">
-          <span>📍 Indica la ubicación</span>
-          <button id="map-modal-close" onclick="closeMapModal()" aria-label="Cerrar">✕</button>
-        </div>
-        <div id="map"></div>
-        <div id="map-modal-footer">
-          <div id="map-hint">🔍 Buscando tu ubicación GPS...</div>
-          <button type="button" id="map-confirm-btn" onclick="confirmMapLocation()">Confirmar ubicación</button>
-        </div>
-      </div>
+    <div id="map-modal-header">
+      <span>📍 Indica la ubicación</span>
+      <button id="map-modal-close" aria-label="Cerrar mapa">✕</button>
     </div>
-      <input type="hidden" id="lat">
-      <input type="hidden" id="lon">
-      <div class="field" style="margin-top:14px; margin-bottom:0">
-        <label for="lugar-desc">Descripción del lugar (opcional)</label>
-        <input type="text" id="lugar-desc" placeholder="Ej: Junto al río Asón, cerca del puente romano">
-      </div>
+    <div id="map"></div>
+    <div id="map-modal-footer">
+      <div id="map-hint" role="status">🔍 Buscando tu ubicación GPS...</div>
+      <button type="button" id="map-confirm-btn" class="btn btn-primary" disabled>Confirmar ubicación</button>
     </div>
-
-    <!-- SECCIÓN 4: DETALLES -->
-    <p class="section-label">Detalles</p>
-    <div class="card">
-      <div class="field">
-        <label for="fecha">Fecha <span class="req">*</span></label>
-        <input type="date" id="fecha" required>
-      </div>
-      <div class="field">
-        <label for="cantidad">Tamaño aproximado de la colonización</label>
-        <select id="cantidad">
-          <option value="">Selecciona...</option>
-          <option value="Planta aislada (1-3 ejemplares)">Planta aislada (1-3 ejemplares)</option>
-          <option value="Pequeño grupo (menos de 10 m²)">Pequeño grupo (menos de 10 m²)</option>
-          <option value="Colonia mediana (10-100 m²)">Colonia mediana (10-100 m²)</option>
-          <option value="Colonia grande (más de 100 m²)">Colonia grande (más de 100 m²)</option>
-          <option value="No sé estimarlo">No sé estimarlo</option>
-        </select>
-      </div>
-      <div class="field" style="margin-bottom:0">
-        <label for="observaciones">Observaciones</label>
-        <textarea id="observaciones" rows="3" placeholder="¿Algo llamativo? ¿Zona de difícil acceso? ¿Hay más plantas cerca?"></textarea>
-      </div>
-    </div>
-
-    <!-- SECCIÓN 5: DATOS PERSONALES -->
-    <p class="section-label">Datos personales (opcionales)</p>
-    <div class="card">
-      <div class="field">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" placeholder="Tu nombre">
-      </div>
-      <div class="field" style="margin-bottom:0">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="correo@ejemplo.com">
-      </div>
-    </div>
-
-    <!-- BOTÓN ENVIAR — cambia el texto si quieres -->
-    <button type="submit" class="submit-btn" id="submit-btn">Enviar registro →</button>
-
-  </form>
-
-  <!-- PANTALLA DE ÉXITO -->
-  <div id="success-screen" class="card">
-    <div class="s-icon">✅</div>
-    <h2>¡Gracias por tu reporte!</h2>
-    <p>Tu avistamiento ha sido registrado y será revisado por el Técnico de Medio Ambiente del Ayuntamiento de Ramales de la Victoria.</p>
-    <p style="margin-top:8px">Tu colaboración ayuda a proteger los ecosistemas locales.</p>
-    <button class="new-btn" onclick="resetForm()">Reportar otro avistamiento</button>
   </div>
+</div>
 
-  </div>
-
-  <footer>
-  <img src="RamalesLogoAyto.png" alt="Ayuntamiento de Ramales de la Victoria" style="height:100px; width:auto; margin-bottom:4px; opacity:0.85;"><br>
-    Los datos recogidos se usan exclusivamente para gestión ambiental municipal.<br>
-    © Oscar Saiz Gutiérrez
-  </footer>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    /* ================================================================
-       ✏️  CONFIGURACIÓN — edita aquí sin tocar el resto del código
-       ================================================================ */
-    const CONFIG = {
-      // Coordenadas del centro del mapa al abrirse (lat, lon)
-      mapaCenter: [43.2522, -3.4628],
-      // Zoom inicial del mapa (mayor número = más cerca)
-      mapaZoom: 15,
-      // Nombre interno del formulario (debe coincidir con data-netlify en el <form>)
-      formName: 'reporte-invasoras',
-      // URL de envío del formulario (Netlify: '/', Formspree: 'https://formspree.io/f/XXXX')
-      submitUrl: '/',
-      // Asunto del email que recibirás con cada reporte
-      emailAsunto: '🌿 Reporte invasora',
-    };
-
-    /* ================================================================
-       🌿  ESPECIES — añade, quita o edita filas aquí
-            nombre:     nombre común visible en el botón
-            cientifico: nombre científico (también es el valor que se envía)
-            imagen:     archivo de imagen de la carpeta del proyecto (o '' si no hay)
-            icono:      emoji que se muestra cuando no hay imagen
-       ================================================================ */
-    const ESPECIES = [
-      { nombre: 'Plumero',        cientifico: 'Cortaderia selloana',        imagen: 'plumero.jpg',  icono: '' },
-      { nombre: 'Bambú japonés',  cientifico: 'Fallopia japonica',          imagen: 'bambu.jpg',    icono: '' },
-      { nombre: 'Amor de hombre', cientifico: 'Tradescantia fluminensis',   imagen: 'amor.jpg',     icono: '' },
-      { nombre: 'Vara de San José',cientifico: 'Crocosmia x crocosmiiflora',imagen: 'vara.jpeg',    icono: '' },
-      { nombre: 'Otra / No sé',   cientifico: 'Otras',                      imagen: '',             icono: '❓' },
-    ];
-
-    /* Genera los botones de especie a partir del array ESPECIES */
-    (function renderEspecies() {
-      const grid = document.querySelector('.species-grid');
-      ESPECIES.forEach(sp => {
-        const div = document.createElement('div');
-        div.className = 'species-btn';
-        div.dataset.species = sp.cientifico;
-        if (sp.cientifico === 'Otras') div.id = 'btn-otras';
-        div.onclick = () => selectSpecies(div);
-        if (sp.imagen) {
-          div.style.backgroundImage = `url('${sp.imagen}')`;
-          div.style.backgroundSize = 'cover';
-          div.style.backgroundPosition = 'center';
-        }
-        div.innerHTML = `
-          <span class="sp-icon">${sp.icono}</span>
-          <span class="sp-name">${sp.nombre}</span>
-          <span class="sp-sci">${sp.cientifico}</span>`;
-        grid.appendChild(div);
-      });
-    })();
-
-    /* ================================================================
-       El resto del código no necesitas tocarlo normalmente
-       ================================================================ */
-    document.getElementById('fecha').valueAsDate = new Date();
-    let selectedPhotos = [];
-
-    function selectSpecies(el) {
-      document.querySelectorAll('.species-btn').forEach(b => b.classList.remove('selected'));
-      el.classList.add('selected');
-      const sp = el.dataset.species;
-      document.getElementById('especie-seleccionada').value = sp;
-      document.getElementById('otras-nombre').style.display = sp === 'Otras' ? 'block' : 'none';
-    }
-
-    function previewPhotos(input) {
-      selectedPhotos = Array.from(input.files);
-      if (!selectedPhotos.length) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        document.getElementById('preview-img').src = e.target.result;
-        document.getElementById('preview-container').style.display = 'block';
-        document.getElementById('photo-count').textContent = selectedPhotos.length === 1
-          ? '1 foto seleccionada ✓'
-          : selectedPhotos.length + ' fotos seleccionadas ✓';
-        document.getElementById('photo-drop').classList.add('has-photo');
-      };
-      reader.readAsDataURL(selectedPhotos[0]);
-    }
-
-    let leafletMap = null;
-    let mapMarker = null;
-    let pendingLat = null;
-    let pendingLon = null;
-    let gpsLat = null;
-    let gpsLon = null;
-
-    function setHint(text, cls) {
-      const el = document.getElementById('map-hint');
-      el.textContent = text;
-      el.className = cls || '';
-    }
-
-    function openMapModal() {
-      // Reiniciar estado del modal
-      pendingLat = null; pendingLon = null;
-      gpsLat = null; gpsLon = null;
-      document.getElementById('map-confirm-btn').classList.remove('ready');
-      setHint('🔍 Buscando tu ubicación GPS...');
-
-      document.getElementById('map-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-
-      const initMap = () => {
-        if (!leafletMap) {
-          leafletMap = L.map('map').setView(CONFIG.mapaCenter, CONFIG.mapaZoom);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(leafletMap);
-          leafletMap.on('click', onMapClick);
-          setTimeout(() => leafletMap.invalidateSize(), 150);
-        } else {
-          setTimeout(() => leafletMap.invalidateSize(), 80);
-        }
-        // Borrar marcador anterior
-        if (mapMarker) { mapMarker.remove(); mapMarker = null; }
-        // Pedir GPS
-        requestGps();
-      };
-
-      setTimeout(initMap, 80);
-    }
-
-    function requestGps() {
-      if (!navigator.geolocation) {
-        setHint('GPS no disponible. Toca en el mapa para indicar la ubicación.', 'err');
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        pos => {
-          gpsLat = pos.coords.latitude.toFixed(6);
-          gpsLon = pos.coords.longitude.toFixed(6);
-          pendingLat = gpsLat;
-          pendingLon = gpsLon;
-          const latlng = [parseFloat(gpsLat), parseFloat(gpsLon)];
-          if (mapMarker) mapMarker.setLatLng(latlng);
-          else mapMarker = L.marker(latlng).addTo(leafletMap);
-          leafletMap.setView(latlng, 16);
-          leafletMap.invalidateSize();
-          setHint('📍 Tu ubicación GPS marcada. Puedes tocar el mapa para ajustarla si lo necesitas.', 'ok');
-          document.getElementById('map-confirm-btn').classList.add('ready');
-        },
-        err => {
-          const denegado = err.code === 1;
-          setHint(
-            denegado
-              ? '⚠️ Permiso de ubicación denegado. Toca en el mapa donde viste la especie.'
-              : '⚠️ No se pudo obtener el GPS. Toca en el mapa donde viste la especie.',
-            'err'
-          );
-        },
-        { timeout: 10000, enableHighAccuracy: true }
-      );
-    }
-
-    function onMapClick(e) {
-      pendingLat = e.latlng.lat.toFixed(6);
-      pendingLon = e.latlng.lng.toFixed(6);
-      if (mapMarker) mapMarker.setLatLng(e.latlng);
-      else mapMarker = L.marker(e.latlng).addTo(leafletMap);
-      setHint('📍 Ubicación seleccionada en el mapa. Pulsa Confirmar cuando estés listo.', 'ok');
-      document.getElementById('map-confirm-btn').classList.add('ready');
-    }
-
-    function closeMapModal() {
-      document.getElementById('map-modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function confirmMapLocation() {
-      if (!pendingLat || !pendingLon) return;
-      document.getElementById('lat').value = pendingLat;
-      document.getElementById('lon').value = pendingLon;
-      const res = document.getElementById('loc-result');
-      res.textContent = pendingLat === gpsLat && pendingLon === gpsLon
-        ? '📍 Ubicación GPS confirmada ✓'
-        : '📍 Ubicación seleccionada en el mapa ✓';
-      res.className = 'ok';
-      closeMapModal();
-    }
-
-    document.getElementById('report-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const especie = document.getElementById('especie-seleccionada').value;
-      if (!especie)                              { alert('Por favor, selecciona la especie observada.'); return; }
-      if (!document.getElementById('lat').value) { alert('Por favor, indica la ubicación usando el botón del mapa.'); return; }
-
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true; btn.textContent = 'Enviando...';
-
-      const lat = document.getElementById('lat').value;
-      const lon = document.getElementById('lon').value;
-      const especieNombre = especie === 'Otras'
-        ? 'Otras: ' + (document.getElementById('otras-nombre-input').value || 'No especificado')
-        : especie;
-
-      const data = new FormData();
-      data.append('_subject',          CONFIG.emailAsunto + ': ' + especieNombre + ' · Ramales');
-      data.append('_replyto',          document.getElementById('email').value || 'sin-email@ejemplo.com');
-      data.append('Especie',           especieNombre);
-      data.append('Fecha',             document.getElementById('fecha').value);
-      data.append('Latitud',           lat);
-      data.append('Longitud',          lon);
-      data.append('Google Maps',       'https://maps.google.com/?q=' + lat + ',' + lon);
-      data.append('Lugar descripcion', document.getElementById('lugar-desc').value || '—');
-      data.append('Tamanyo colonia',   document.getElementById('cantidad').value || '—');
-      data.append('Observaciones',     document.getElementById('observaciones').value || '—');
-      data.append('Nombre ciudadano',  document.getElementById('nombre').value || 'Anónimo');
-      data.append('Email ciudadano',   document.getElementById('email').value || '—');
-      selectedPhotos.forEach((f, i) => data.append('foto_' + (i+1), f));
-
-      // ← ID de Formspree conectado a invasorasenramales@gmail.com
-      try {
-        data.append('form-name', CONFIG.formName);
-        const resp = await fetch(CONFIG.submitUrl, {
-          method: 'POST', body: data
-        });
-        if (resp.ok) {
-          document.getElementById('report-form').style.display = 'none';
-          document.getElementById('success-screen').style.display = 'block';
-        } else { throw new Error(); }
-      } catch(err) {
-        alert('¡Error al enviar!. Comprueba tu conexión e inténtalo de nuevo.');
-      }
-      btn.disabled = false; btn.textContent = 'Enviar reporte →';
-    }); 
-
-    function resetForm() {
-      document.getElementById('report-form').reset();
-      document.getElementById('report-form').style.display = 'block';
-      document.getElementById('success-screen').style.display = 'none';
-      document.querySelectorAll('.species-btn').forEach(b => b.classList.remove('selected'));
-      document.getElementById('especie-seleccionada').value = '';
-      document.getElementById('otras-nombre').style.display = 'none';
-      document.getElementById('preview-container').style.display = 'none';
-      document.getElementById('photo-drop').classList.remove('has-photo');
-      document.getElementById('lat').value = '';
-      document.getElementById('lon').value = '';
-      document.getElementById('loc-result').textContent = '';
-      document.getElementById('loc-result').className = '';
-      pendingLat = null; pendingLon = null; gpsLat = null; gpsLon = null;
-      if (mapMarker) { mapMarker.remove(); mapMarker = null; }
-      selectedPhotos = [];
-      document.getElementById('fecha').valueAsDate = new Date();
-    }
-  </script>
-
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
