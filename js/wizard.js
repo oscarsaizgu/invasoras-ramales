@@ -55,9 +55,13 @@ export function setNextEnabled(enabled) {
 
 export const STEPS = STEP_ORDER;
 
+function pad2(n) {
+  return String(n).padStart(2, '0');
+}
+
 function updateChrome(name) {
-  const header = document.getElementById('app-header');
   const backBtn = document.getElementById('header-back');
+  const menuBtn = document.getElementById('header-menu');
   const progressWrap = document.getElementById('progress-wrap');
   const progressFill = document.getElementById('progress-fill');
   const progressLabel = document.getElementById('progress-label');
@@ -65,20 +69,25 @@ function updateChrome(name) {
   const nav = document.getElementById('wizard-nav');
 
   const isChrome = name !== 'inicio' && name !== 'exito';
+  const isWizardStep = STEP_ORDER.includes(name);
+
   backBtn.hidden = !isChrome || history.length === 0;
-  footer.hidden = isChrome;
+  // El menú de navegación queda oculto durante el recorrido guiado del
+  // reporte, para que cada pantalla tenga una única acción principal.
+  if (menuBtn) menuBtn.hidden = isWizardStep;
+  footer.hidden = isWizardStep;
+  nav.hidden = !isWizardStep;
 
   const stepIndex = STEP_ORDER.indexOf(name);
   if (stepIndex >= 0) {
     progressWrap.hidden = false;
     const pct = ((stepIndex + 1) / STEP_ORDER.length) * 100;
     progressFill.style.width = pct + '%';
-    progressLabel.textContent = `Paso ${stepIndex + 1} de ${STEP_ORDER.length}`;
+    progressLabel.textContent = `${pad2(stepIndex + 1)} / ${pad2(STEP_ORDER.length)}`;
   } else {
     progressWrap.hidden = true;
+    progressLabel.textContent = '';
   }
-
-  nav.hidden = (name === 'inicio' || name === 'exito');
 }
 
 export function resetWizard() {

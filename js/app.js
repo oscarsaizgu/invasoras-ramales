@@ -1,5 +1,5 @@
 import { state, goTo, goBack, currentStep, setNextEnabled } from './wizard.js';
-import { renderEspecies, especieDescripcionInput } from './especies.js';
+import { renderEspecies, especieDescripcionInput, renderEspeciesInfo } from './especies.js';
 import { renderFotoSlots } from './fotos.js';
 import { initUbicacionStep } from './mapa.js';
 import {
@@ -63,13 +63,59 @@ function goToStepAndEnter(step) {
   enterStep(step);
 }
 
+// ── Menú de navegación (hamburguesa) ──
+// Da acceso a las pantallas de contenido (Sobre el proyecto, Especies
+// invasoras, Cómo hacer un buen reporte); no interviene en el flujo de
+// reporte ni en su lógica de envío.
+let menuHideTimer = null;
+
+function openMenu() {
+  const overlay = document.getElementById('menu-overlay');
+  if (!overlay) return;
+  clearTimeout(menuHideTimer);
+  overlay.hidden = false;
+  // Fuerza un reflow para que la transición de apertura se aplique de
+  // forma síncrona (evita la carrera de un requestAnimationFrame si el
+  // menú se cierra inmediatamente después de abrirse).
+  void overlay.offsetWidth;
+  overlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  const overlay = document.getElementById('menu-overlay');
+  if (!overlay || overlay.hidden) return;
+  overlay.classList.remove('is-open');
+  document.body.style.overflow = '';
+  clearTimeout(menuHideTimer);
+  menuHideTimer = setTimeout(() => { overlay.hidden = true; }, 200);
+}
+
+function initMenu() {
+  const menuBtn = document.getElementById('header-menu');
+  const closeBtn = document.getElementById('menu-close');
+  const overlay = document.getElementById('menu-overlay');
+  if (!menuBtn || !overlay) return;
+
+  menuBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+}
+
 function init() {
   renderEspecies();
+  renderEspeciesInfo();
   renderFotoSlots();
   renderTamanyos();
   initUbicacionStep();
   initObservacionesStep();
   initContactoStep();
+  initMenu();
 
   document.getElementById('btn-empezar').addEventListener('click', () => goToStepAndEnter('especie'));
   document.getElementById('header-back').addEventListener('click', () => {
@@ -79,7 +125,10 @@ function init() {
   document.getElementById('btn-siguiente').addEventListener('click', handleSiguiente);
 
   document.querySelectorAll('[data-goto]').forEach(el => {
-    el.addEventListener('click', () => goToStepAndEnter(el.dataset.goto));
+    el.addEventListener('click', () => {
+      closeMenu();
+      goToStepAndEnter(el.dataset.goto);
+    });
   });
 
   document.querySelectorAll('[data-edit-step]').forEach(el => {

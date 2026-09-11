@@ -16,7 +16,6 @@
 <meta property="og:image" content="https://reporteinvasoras.ramalesnatural.org/images/promo-portada.png">
 <meta property="og:locale" content="es_ES">
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -28,10 +27,31 @@
   <button type="button" class="app-header__back" id="header-back" aria-label="Volver atrás" hidden>←</button>
   <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
   <div class="app-header__text">
-    <h1>Reporte de invasoras</h1>
+    <h1>Invasoras</h1>
     <p>Ramales Natural</p>
   </div>
+  <button type="button" class="app-header__menu" id="header-menu" aria-label="Abrir menú" aria-haspopup="true">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<!-- MENÚ PRINCIPAL -->
+<div class="menu-overlay" id="menu-overlay" hidden>
+  <nav class="menu-panel" aria-label="Menú principal">
+    <div class="menu-panel__head">
+      <img src="images/logo-rn-blanco.png" alt="Ramales Natural" class="menu-panel__logo">
+      <button type="button" class="menu-close" id="menu-close" aria-label="Cerrar menú">✕</button>
+    </div>
+    <ul class="menu-list">
+      <li><button type="button" class="menu-link" data-goto="sobre-proyecto">Sobre el proyecto</button></li>
+      <li><button type="button" class="menu-link" data-goto="especies-info">Especies invasoras</button></li>
+      <li><button type="button" class="menu-link" data-goto="como-reportar">Cómo hacer un buen reporte</button></li>
+      <li><span class="menu-link menu-link--disabled" aria-disabled="true">Ver mapa <span class="menu-tag">Próximamente</span></span></li>
+    </ul>
+    <button type="button" class="btn btn-accent menu-panel__cta" data-goto="especie">+ Hacer un reporte</button>
+    <p class="menu-panel__social">Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  </nav>
+</div>
 
 <div class="progress-track" id="progress-wrap" hidden>
   <div class="progress-fill" id="progress-fill" style="width:0%"></div>
@@ -42,11 +62,91 @@
 
   <!-- PORTADA -->
   <section id="screen-inicio" class="screen home" aria-labelledby="inicio-titulo">
-    <div class="home__art" aria-hidden="true">🌿</div>
-    <h1 id="inicio-titulo" tabindex="-1">¿Has visto una planta invasora?</h1>
-    <p>Ayúdanos a localizarla y a conocer su presencia en nuestro entorno.</p>
-    <button type="button" class="btn btn-primary home__cta" id="btn-empezar">+ Hacer un reporte</button>
-    <p class="home__note">No necesitas saber identificar la especie.</p>
+    <div class="home-hero">
+      <img class="home-hero__photo" src="images/paisajes/hero-ramales.jpg" alt="Vista de las montañas y el valle de Ramales de la Victoria">
+      <div class="home-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="home-body">
+      <p class="home__label">Ramales Natural · Invasoras</p>
+      <h1 id="inicio-titulo" tabindex="-1">¿Has visto una<br>planta invasora?</h1>
+      <p>Ayúdanos a localizarla y a conocer su presencia en nuestro entorno.</p>
+      <button type="button" class="btn btn-primary home__cta" id="btn-empezar">+ Hacer un reporte</button>
+      <p class="home__note">No necesitas saber identificar la especie.</p>
+
+      <div class="home-card">
+        <span class="home-card__leaf" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 5C48 11 56 27 49 42 44 53 34 59 32 60 30 59 20 53 15 42 8 27 16 11 32 5Z" fill="currentColor"/><path d="M32 12V54" stroke="var(--verde)" stroke-width="1.6" opacity="0.35"/></svg>
+        </span>
+        <p class="home-card__title">Juntos por un entorno más natural</p>
+        <p class="home-card__text">La ciencia ciudadana también protege la biodiversidad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE EL PROYECTO -->
+  <section id="screen-sobre-proyecto" class="screen content-page" aria-labelledby="sobre-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="sobre-titulo" class="content-titulo" tabindex="-1">Sobre el proyecto</h1>
+    <p class="content-lead">Reporte Invasoras es una iniciativa de Ramales Natural para localizar y conocer la presencia de especies de flora invasora en Ramales de la Victoria.</p>
+
+    <div class="content-photo">
+      <img src="images/paisajes/rio-ramales.jpg" alt="Río y bosque de ribera en el entorno de Ramales de la Victoria">
+    </div>
+
+    <div class="content-block">
+      <h2>La colaboración ciudadana importa</h2>
+      <p>Cada persona que camina por nuestros montes, ríos y caminos puede ayudar a detectar antes la presencia de especies invasoras. Cuantos más ojos observan el entorno, antes se puede actuar para proteger la biodiversidad local.</p>
+    </div>
+
+    <div class="content-highlight">
+      <span class="content-highlight__leaf" aria-hidden="true">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 5C48 11 56 27 49 42 44 53 34 59 32 60 30 59 20 53 15 42 8 27 16 11 32 5Z" fill="currentColor"/><path d="M32 12V54" stroke="var(--verde)" stroke-width="1.6" opacity="0.35"/></svg>
+      </span>
+      <p class="content-highlight__text">Pequeños gestos,<br>grandes cambios.</p>
+    </div>
+
+    <div class="paisaje-montanas" aria-hidden="true">
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 90 L40 55 L75 80 L110 40 L150 85 L190 50 L230 88 L270 45 L310 82 L350 58 L400 90 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.10"/>
+        <path d="M0 100 L60 70 L100 95 L150 60 L200 100 L250 65 L300 98 L350 72 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.18"/>
+        <path d="M0 112 L50 92 L120 110 L180 85 L240 112 L300 90 L360 110 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ESPECIES INVASORAS (informativa) -->
+  <section id="screen-especies-info" class="screen content-page" aria-labelledby="especies-info-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">Especies invasoras</h1>
+    <p class="content-lead">Estas son las especies de flora invasora más presentes en nuestro entorno. Conocerlas es el primer paso para ayudar a controlarlas.</p>
+
+    <div class="info-especies-grid" id="info-especies-grid"></div>
+
+    <div class="paisaje-montanas" aria-hidden="true">
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 90 L40 55 L75 80 L110 40 L150 85 L190 50 L230 88 L270 45 L310 82 L350 58 L400 90 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.10"/>
+        <path d="M0 100 L60 70 L100 95 L150 60 L200 100 L250 65 L300 98 L350 72 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.18"/>
+        <path d="M0 112 L50 92 L120 110 L180 85 L240 112 L300 90 L360 110 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CÓMO HACER UN BUEN REPORTE -->
+  <section id="screen-como-reportar" class="screen content-page" aria-labelledby="como-reportar-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="como-reportar-titulo" class="content-titulo" tabindex="-1">Cómo hacer un buen reporte</h1>
+    <p class="content-lead">Con estos cinco pasos nos ayudas a identificar y localizar mejor cada planta.</p>
+
+    <ol class="steps-list">
+      <li class="steps-item"><span class="steps-num">01</span><p>Fotografía la planta completa.</p></li>
+      <li class="steps-item"><span class="steps-num">02</span><p>Si puedes, fotografía también hojas, flores o frutos.</p></li>
+      <li class="steps-item"><span class="steps-num">03</span><p>Indica dónde la has encontrado.</p></li>
+      <li class="steps-item"><span class="steps-num">04</span><p>Cuéntanos aproximadamente cuántas plantas hay.</p></li>
+      <li class="steps-item"><span class="steps-num">05</span><p>Envía el reporte.</p></li>
+    </ol>
+
+    <button type="button" class="btn btn-primary steps-cta" data-goto="especie">+ Hacer un reporte</button>
   </section>
 
   <!-- PASO 1: ESPECIE -->
@@ -160,6 +260,7 @@
     <p>Cada reporte nos ayuda a conocer mejor y proteger nuestro entorno.</p>
     <div class="success__actions">
       <button type="button" class="btn btn-primary" id="btn-reportar-otro">Reportar otra especie</button>
+      <p class="home__secondary"><a href="https://www.ramalesnatural.org/" target="_blank" rel="noopener">Ramales Natural</a></p>
     </div>
   </section>
 
@@ -172,7 +273,8 @@
 </nav>
 
 <footer class="app-footer" id="app-footer">
-  <p class="app-footer__brand">Ramales Natural</p>
+  <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <p class="app-footer__brand">Ayuntamiento de Ramales de la Victoria</p>
   <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
   <nav class="app-footer__legal" aria-label="Información legal">
     <a href="aviso-legal.html">Aviso legal</a>
