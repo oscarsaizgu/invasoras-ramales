@@ -1047,29 +1047,44 @@ textarea { resize: vertical; min-height: 90px; }
   display: flex; align-items: center; justify-content: center;
 }
 
-.ficha-foto {
-  width: 100%; height: 200px;
+/* ── Carrusel de fotografías ── */
+.ficha-carrusel {
+  width: 100%; height: 240px;
   background: var(--seleccion);
   overflow: hidden;
   position: relative;
 }
-.ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ficha-foto__neutra {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.6rem;
+.ficha-carrusel__img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  cursor: zoom-in;
 }
-.ficha-foto__credito {
+.ficha-carrusel__flecha {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(20,26,20,0.55); color: #fff;
+  border: none; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.ficha-carrusel__flecha--prev { left: 0.6rem; }
+.ficha-carrusel__flecha--next { right: 0.6rem; }
+.ficha-carrusel__flecha:hover { background: rgba(20,26,20,0.75); }
+.ficha-carrusel__contador {
+  position: absolute; top: 0.6rem; right: 0.7rem;
+  background: rgba(20,26,20,0.55); color: #fff;
+  font-family: var(--font); font-size: 0.68rem; font-weight: 700;
+  padding: 0.2rem 0.55rem; border-radius: 20px;
+}
+.ficha-carrusel__credito {
   position: absolute; left: 0; right: 0; bottom: 0;
   background: linear-gradient(to top, rgba(20,26,20,0.75), transparent);
   color: rgba(255,255,255,0.85);
   font-family: var(--font);
-  font-size: 0.64rem;
+  font-size: 0.62rem;
   line-height: 1.4;
-  padding: 0.9rem 0.7rem 0.4rem;
+  padding: 1.1rem 0.7rem 0.4rem;
   text-decoration: none;
 }
-.ficha-foto__credito:hover { color: #fff; text-decoration: underline; }
+.ficha-carrusel__credito:hover { color: #fff; text-decoration: underline; }
 
 .ficha-cuerpo { padding: 1.4rem 1.4rem calc(1.6rem + var(--safe-bottom)); }
 
@@ -1086,51 +1101,111 @@ textarea { resize: vertical; min-height: 90px; }
   font-size: 0.9rem;
   font-style: italic;
   color: var(--text-muted);
-  margin: 0 0 0.9rem;
+  margin: 0 0 1.1rem;
 }
-.ficha-ambito {
-  font-family: var(--font);
-  font-size: 0.8rem;
-  color: var(--text);
-  background: var(--seleccion);
-  border-radius: var(--radio-sm, 8px);
-  padding: 0.5rem 0.7rem;
-  margin: 0 0 1rem;
-}
-.ficha-ambito strong { color: var(--verde); }
 
-.ficha-descripcion {
+/* ── Secciones de la ficha (Cómo reconocerla, Características...) ── */
+.ficha-seccion {
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--borde);
+}
+.ficha-seccion:first-of-type { border-top: none; padding-top: 0; }
+.ficha-seccion h3 {
+  font-family: var(--font-titulo);
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--verde);
+  margin: 0 0 0.5rem;
+}
+.ficha-seccion p {
   font-family: var(--font);
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   line-height: 1.62;
   color: var(--text);
+  margin: 0;
 }
-.ficha-descripcion p { margin: 0 0 0.7rem; }
-.ficha-descripcion p:last-child { margin-bottom: 0; }
-.ficha-descripcion strong { color: var(--verde); }
-.ficha-fuente {
-  font-size: 0.74rem !important;
-  color: var(--text-muted) !important;
-  font-style: italic;
+.ficha-caracteristicas {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 0.3rem;
 }
-
-.ficha-nota {
+.ficha-caracteristicas li {
   font-family: var(--font);
-  font-size: 0.8rem;
-  line-height: 1.55;
-  color: var(--tierra-oscura);
-  background: rgba(168,88,42,0.09);
-  border-left: 2px solid var(--tierra);
-  border-radius: 0 8px 8px 0;
-  padding: 0.7rem 0.85rem;
-  margin: 1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text);
 }
+.ficha-caracteristicas strong { color: var(--verde); }
+
+.ficha-fuentes {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.ficha-fuentes li {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ficha-fuentes a { color: var(--verde); }
 
 .ficha-acciones {
   display: flex; flex-direction: column; gap: 0.6rem;
   margin-top: 1.4rem;
 }
 .ficha-acciones .btn { width: 100%; text-align: center; text-decoration: none; }
+
+/* ── Zoom de fotografía ── */
+.zoom-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(10,14,10,0.92);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.2rem;
+  opacity: 0; transition: opacity 0.2s ease;
+  cursor: zoom-out;
+}
+.zoom-overlay[hidden] { display: none; }
+.zoom-overlay.is-open { opacity: 1; }
+.zoom-overlay__img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* ── CTA "¿No sabes qué planta es?" ── */
+.identificar-cta {
+  text-align: center;
+  background: var(--verde);
+  border-radius: var(--radio-grande);
+  padding: 2rem 1.4rem;
+  margin-bottom: 2.2rem;
+}
+.identificar-cta__icon { font-size: 1.8rem; display: block; margin-bottom: 0.6rem; }
+.identificar-cta__titulo {
+  font-family: var(--font-titulo);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--crema);
+  margin: 0 0 0.5rem;
+}
+.identificar-cta__texto {
+  font-family: var(--font);
+  font-size: 0.88rem;
+  color: rgba(245,234,216,0.75);
+  margin: 0 0 1.3rem;
+  line-height: 1.5;
+}
+.identificar-cta__btn { width: 100%; max-width: 320px; }
+
+/* ── "Ver la especie →" en las tarjetas ── */
+.especie-card__ver {
+  font-family: var(--font);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--tierra);
+  margin-top: 0.3rem;
+}
 
 /* ── Cómo hacer un buen reporte ── */
 .steps-list { list-style: none; margin: 0 0 1.8rem; padding: 0; }
