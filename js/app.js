@@ -7,6 +7,7 @@ import {
   renderRevision, enviarReporte, resetAll,
 } from './formulario.js';
 import { initCatalogo } from './catalogo.js';
+import { initIdentificar } from './identificar.js';
 
 function isStepValid(step) {
   switch (step) {
@@ -117,6 +118,7 @@ function init() {
   initContactoStep();
   initMenu();
   initCatalogo();
+  initIdentificar();
 
   document.getElementById('btn-empezar').addEventListener('click', () => goToStepAndEnter('especie'));
   document.getElementById('header-back').addEventListener('click', () => {

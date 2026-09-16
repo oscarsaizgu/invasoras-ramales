@@ -220,6 +220,63 @@
     <img class="zoom-overlay__img" id="zoom-overlay-img" alt="">
   </div>
 
+  <!-- IDENTIFICAR PLANTA (Pl@ntNet) -->
+  <div class="identificar-overlay" id="identificar-overlay" hidden>
+    <div class="identificar-panel" role="dialog" aria-modal="true" aria-labelledby="identificar-titulo-activo">
+      <button type="button" class="ficha-cerrar" id="identificar-cerrar" aria-label="Cerrar">✕</button>
+
+      <!-- Estado 1: elegir foto(s) -->
+      <div class="identificar-estado" id="identificar-estado-inicio">
+        <span class="identificar-icono" aria-hidden="true">📷</span>
+        <h2 id="identificar-titulo-activo">Identificar planta</h2>
+        <p>Haz una o varias fotografías de la misma planta (hasta 5). Cuantas más partes se vean —hoja, flor, planta completa—, mejor será el resultado.</p>
+
+        <div class="identificar-miniaturas" id="identificar-miniaturas" hidden></div>
+
+        <label class="btn btn-primary identificar-input-btn">
+          📷 Hacer una fotografía
+          <input type="file" accept="image/*" capture="environment" id="identificar-input-camara">
+        </label>
+        <label class="btn btn-secondary identificar-input-btn">
+          🖼️ Elegir de la galería
+          <input type="file" accept="image/*" multiple id="identificar-input-galeria">
+        </label>
+        <button type="button" class="btn btn-accent identificar-btn-analizar" id="identificar-btn-analizar" disabled>🔎 Identificar planta</button>
+        <p class="identificar-credito">Identificación por <a href="https://my.plantnet.org/" target="_blank" rel="noopener">Pl@ntNet</a></p>
+      </div>
+
+      <!-- Estado 2: cargando -->
+      <div class="identificar-estado" id="identificar-estado-cargando" hidden>
+        <span class="identificar-spinner" aria-hidden="true"></span>
+        <h2>Identificando tu foto…</h2>
+        <p>Puede tardar unos segundos.</p>
+      </div>
+
+      <!-- Estado 3: resultados -->
+      <div class="identificar-estado identificar-estado--resultados" id="identificar-estado-resultados" hidden>
+        <img class="identificar-foto-enviada" id="identificar-foto-enviada" alt="Fotografía enviada">
+        <h2 id="identificar-resultados-titulo">Podría ser…</h2>
+        <p id="identificar-resultados-intro" hidden>Estas son las especies que más se parecen a tu fotografía.</p>
+        <div class="identificar-resultados-lista" id="identificar-resultados-lista"></div>
+        <div class="identificar-duda" id="identificar-duda" hidden>
+          <p>Si no estás seguro de qué planta es, también puedes enviarnos la fotografía para que podamos revisarla.</p>
+          <button type="button" class="btn btn-accent" id="identificar-btn-mandar-duda">📍 Mandar registro</button>
+        </div>
+        <button type="button" class="btn btn-ghost identificar-otra-foto" id="identificar-otra-foto">Probar con otra foto</button>
+      </div>
+
+      <!-- Estado 4: error / no configurado -->
+      <div class="identificar-estado" id="identificar-estado-error" hidden>
+        <span class="identificar-icono" aria-hidden="true">⚠️</span>
+        <h2>No hemos podido identificarla</h2>
+        <p id="identificar-error-mensaje">Ha ocurrido un problema al conectar con el servicio de identificación.</p>
+        <p>Puedes intentarlo de nuevo o enviarnos directamente la fotografía para que la revisemos.</p>
+        <button type="button" class="btn btn-secondary" id="identificar-reintentar">Volver a intentarlo</button>
+        <button type="button" class="btn btn-accent" id="identificar-btn-mandar-error">📍 Mandar registro</button>
+      </div>
+    </div>
+  </div>
+
   <!-- CÓMO HACER UN BUEN REPORTE -->
   <section id="screen-como-reportar" class="screen content-page" aria-labelledby="como-reportar-titulo">
     <p class="content-label">Ramales Natural</p>

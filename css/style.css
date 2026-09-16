@@ -1171,6 +1171,189 @@ textarea { resize: vertical; min-height: 90px; }
   border-radius: 4px;
 }
 
+/* ================================================================
+   IDENTIFICAR PLANTA (Pl@ntNet)
+   ================================================================ */
+.identificar-overlay {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(20,26,20,0.55);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; transition: opacity 0.2s ease;
+}
+.identificar-overlay[hidden] { display: none; }
+.identificar-overlay.is-open { opacity: 1; }
+
+.identificar-panel {
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg);
+  border-radius: 20px 20px 0 0;
+  position: relative;
+  padding: 1.6rem 1.4rem calc(1.8rem + var(--safe-bottom));
+  text-align: center;
+  transform: translateY(16px);
+  transition: transform 0.22s ease;
+}
+.identificar-overlay.is-open .identificar-panel { transform: translateY(0); }
+
+@media (min-width: 640px) {
+  .identificar-overlay { align-items: center; padding: 1.5rem; }
+  .identificar-panel { max-width: 480px; border-radius: 20px; max-height: 88vh; }
+}
+
+.identificar-estado h2 {
+  font-family: var(--font-titulo);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--verde);
+  margin: 0.3rem 0 0.6rem;
+}
+.identificar-estado > p {
+  font-family: var(--font);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 1.2rem;
+}
+.identificar-icono { font-size: 2.2rem; }
+
+.identificar-input-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; margin-bottom: 0.7rem;
+  cursor: pointer;
+  position: relative;
+}
+.identificar-input-btn input[type="file"] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer;
+}
+.identificar-credito {
+  margin-top: 1rem !important;
+  font-size: 0.7rem !important;
+}
+.identificar-credito a { color: var(--verde); }
+
+.identificar-miniaturas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.identificar-miniatura {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radio-sm, 8px);
+  overflow: hidden;
+  border: 1px solid var(--borde);
+}
+.identificar-miniatura img { width: 100%; height: 100%; object-fit: cover; }
+.identificar-miniatura__quitar {
+  position: absolute; top: 2px; right: 2px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(20,26,20,0.7); color: #fff;
+  border: none; font-size: 0.7rem; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+
+.identificar-btn-analizar {
+  width: 100%; margin: 0.3rem 0 0.9rem;
+}
+.identificar-btn-analizar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.identificar-spinner {
+  display: inline-block;
+  width: 34px; height: 34px;
+  border: 3px solid var(--borde);
+  border-top-color: var(--verde);
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  animation: identificar-girar 0.8s linear infinite;
+}
+@keyframes identificar-girar { to { transform: rotate(360deg); } }
+
+.identificar-foto-enviada {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: var(--radio-grande);
+  margin-bottom: 1.1rem;
+}
+
+.identificar-resultados-lista {
+  display: flex; flex-direction: column; gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.identificar-resultado {
+  background: var(--card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem;
+  text-align: left;
+}
+.identificar-resultado__comun {
+  font-family: var(--font-titulo);
+  font-size: 1.02rem;
+  font-weight: 400;
+  color: var(--verde);
+  margin: 0 0 0.1rem;
+}
+.identificar-resultado__cientifico {
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+.identificar-resultado__score {
+  font-family: var(--font);
+  font-size: 0.76rem;
+  color: var(--text);
+  margin: 0 0 0.4rem;
+}
+.identificar-resultado__estado {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+}
+.identificar-resultado__estado--invasora { color: #a8342a; }
+.identificar-resultado__estado--autoctona { color: #2d6a2d; }
+.identificar-resultado__estado--desconocido { color: var(--text-muted); }
+.identificar-resultado__no-incluida {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+.identificar-resultado__acciones {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+.identificar-resultado__acciones .btn {
+  width: 100%; padding: 0.7rem 1rem; font-size: 0.85rem; min-height: 44px;
+}
+
+.identificar-duda {
+  background: var(--seleccion);
+  border-left: 2px solid var(--tierra);
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.identificar-duda p {
+  font-family: var(--font);
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0 0 0.7rem;
+}
+.identificar-duda .btn { width: 100%; }
+
+.identificar-otra-foto { width: 100%; }
+
 /* ── CTA "¿No sabes qué planta es?" ── */
 .identificar-cta {
   text-align: center;

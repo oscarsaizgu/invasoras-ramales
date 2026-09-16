@@ -45,7 +45,7 @@ function nombreComunDe(entry) {
   return (entry.comunes && entry.comunes.length) ? entry.comunes[0] : 'Nombre común no disponible';
 }
 
-async function cargarDatos() {
+export async function cargarDatos() {
   try {
     const resp = await fetch('data/cantabria-flora.json', { cache: 'no-store' });
     if (!resp.ok) return [];
@@ -303,8 +303,10 @@ function cerrarZoom() {
 // ── Conexión con el flujo de reporte existente ──
 // Reutiliza tal cual los botones y el estado ya existentes del asistente
 // (especies.js / wizard.js / app.js): no se toca su lógica, solo se simula
-// la misma selección que haría la persona usuaria a mano.
-function reportarEspecie(cientifico) {
+// la misma selección que haría la persona usuaria a mano. Se exporta para
+// que identificar.js (resultados de Pl@ntNet) pueda arrancar el mismo
+// reporte con la especie identificada ya seleccionada.
+export function seleccionarEspecieParaReportar(cientifico) {
   const boton = document.querySelector(`.species-btn[data-especie="${CSS.escape(cientifico)}"]`);
   if (boton) {
     boton.click();
@@ -314,17 +316,12 @@ function reportarEspecie(cientifico) {
     if (otraBtn) otraBtn.click();
     if (otraInput) otraInput.value = cientifico;
   }
-  cerrarFicha();
   goToStepAndEnter('especie');
 }
 
-// Botón "Ayúdame a identificarla": todavía no hay IA (fase futura). Por
-// ahora selecciona "Otra / No sé" y lleva directamente al paso de la foto
-// del flujo de reporte que ya existe, sin tocar su lógica.
-function ayudameAIdentificarla() {
-  const otraBtn = document.querySelector('.species-btn--other');
-  if (otraBtn) otraBtn.click();
-  goToStepAndEnter('foto');
+function reportarEspecie(cientifico) {
+  cerrarFicha();
+  seleccionarEspecieParaReportar(cientifico);
 }
 
 // ── Buscador, filtros y paginación ──
@@ -390,9 +387,17 @@ function initZoom() {
   });
 }
 
-function initIdentificar() {
-  const btn = document.getElementById('btn-identificar');
-  if (btn) btn.addEventListener('click', ayudameAIdentificarla);
+// Permite a otros módulos (identificar.js) abrir la misma ficha rica de
+// una especie ya cargada, a partir de su nombre científico.
+export function abrirFichaPorCientifico(cientifico) {
+  const nc = normalizar(cientifico);
+  const entry = ESPECIES.find(e => normalizar(e.cientifico) === nc);
+  if (entry) abrirFicha(entry);
+  return entry || null;
+}
+
+export function getEspecies() {
+  return ESPECIES;
 }
 
 export async function initCatalogo() {
@@ -401,7 +406,6 @@ export async function initCatalogo() {
   initCargarMas();
   initFicha();
   initZoom();
-  initIdentificar();
 
   ESPECIES = await cargarDatos();
   renderDestacadas();
