@@ -150,8 +150,19 @@ async function mostrarResultados(resultados, fotoDataUrl) {
   mostrarEstado('resultados');
 }
 
-function mostrarError(mensaje) {
+// `detalleTecnico` es opcional y solo sirve para poder diagnosticar un
+// fallo real de un usuario (estado HTTP, fragmento de la respuesta de
+// Pl@ntNet...) sin necesitar acceso a las herramientas de desarrollador
+// de su móvil: se ve como una línea pequeña bajo el mensaje de error.
+function mostrarError(mensaje, detalleTecnico) {
   document.getElementById('identificar-error-mensaje').textContent = mensaje;
+  const tecnico = document.getElementById('identificar-error-tecnico');
+  if (detalleTecnico) {
+    tecnico.textContent = detalleTecnico;
+    tecnico.hidden = false;
+  } else {
+    tecnico.hidden = true;
+  }
   document.getElementById('identificar-btn-mandar-error').onclick = () => {
     cerrarIdentificar();
     seleccionarEspecieParaReportar('Otras');
@@ -166,6 +177,47 @@ function leerComoDataUrl(file) {
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+}
+
+// ── Normalización de fotos de cámara (sobre todo iPhone) ──
+// La cámara del móvil (especialmente iOS, por defecto) puede entregar
+// la fotografía en HEIC/HEIF en vez de JPEG, y con resoluciones muy
+// altas (10-15 MB). Pl@ntNet no acepta HEIC y una petición multipart
+// muy pesada puede fallar o tardar demasiado en redes móviles. Esto
+// solo afecta a la fotografía tomada con la cámara del propio
+// dispositivo: en ordenador, la imagen ya suele ser un JPEG normal, por
+// lo que ese caso funciona sin pasar por aquí.
+// Para evitarlo, convertimos SIEMPRE la imagen a JPEG y limitamos su
+// lado mayor a 2000px mediante un <canvas> antes de guardarla, tanto si
+// viene de la cámara como de la galería. Si la conversión falla por lo
+// que sea (formato no soportado por el navegador, etc.), se usa el
+// archivo original tal cual, para no bloquear el flujo.
+const LADO_MAXIMO = 2000;
+
+async function normalizarFoto(file) {
+  try {
+    const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    const escala = Math.min(1, LADO_MAXIMO / Math.max(bitmap.width, bitmap.height));
+    const ancho = Math.round(bitmap.width * escala);
+    const alto = Math.round(bitmap.height * escala);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = ancho;
+    canvas.height = alto;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(bitmap, 0, 0, ancho, alto);
+    bitmap.close?.();
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+    if (!blob) return file;
+
+    const nombre = (file.name || 'foto').replace(/\.\w+$/, '') + '.jpg';
+    return new File([blob], nombre, { type: 'image/jpeg' });
+  } catch (err) {
+    // No se ha podido normalizar (formato no soportado por el
+    // navegador, etc.): seguimos con el archivo original.
+    return file;
+  }
 }
 
 // ── Selección de fotografías (una o varias, hasta el límite de Pl@ntNet) ──
@@ -197,10 +249,14 @@ function renderMiniaturas() {
   });
 }
 
-function agregarFotos(fileList) {
-  const nuevas = Array.from(fileList || []).filter(f => f.type.startsWith('image/'));
+async function agregarFotos(fileList) {
+  const nuevas = Array.from(fileList || []).filter(f => f.type.startsWith('image/') || /\.(heic|heif)$/i.test(f.name || ''));
   const espacio = MAX_FOTOS - fotosSeleccionadas.length;
-  fotosSeleccionadas = fotosSeleccionadas.concat(nuevas.slice(0, Math.max(0, espacio)));
+  const admitidas = nuevas.slice(0, Math.max(0, espacio));
+  if (!admitidas.length) return;
+
+  const normalizadas = await Promise.all(admitidas.map(normalizarFoto));
+  fotosSeleccionadas = fotosSeleccionadas.concat(normalizadas);
   renderMiniaturas();
 }
 
@@ -240,7 +296,13 @@ async function identificarFotos() {
       return;
     }
     if (!resp.ok) {
-      mostrarError('No hemos podido identificar la fotografía. Puedes enviárnosla directamente y la revisaremos.');
+      let cuerpo = '';
+      try { cuerpo = (await resp.text()).slice(0, 200); } catch (e) { /* sin cuerpo legible */ }
+      console.error('Pl@ntNet respondió con error', resp.status, cuerpo);
+      mostrarError(
+        'No hemos podido identificar la fotografía. Puedes enviárnosla directamente y la revisaremos.',
+        `Detalle técnico: HTTP ${resp.status}${cuerpo ? ' — ' + cuerpo : ''}`
+      );
       return;
     }
 
@@ -255,7 +317,11 @@ async function identificarFotos() {
   } catch (err) {
     // Un error de red aquí suele significar que el dominio todavía no
     // está en "Authorized domains" de Pl@ntNet, o que no hay conexión.
-    mostrarError('No hemos podido conectar con Pl@ntNet. Comprueba tu conexión, o puede que el dominio aún no esté autorizado en la configuración de Pl@ntNet.');
+    console.error('Error de red al llamar a Pl@ntNet', err);
+    mostrarError(
+      'No hemos podido conectar con Pl@ntNet. Comprueba tu conexión, o puede que el dominio aún no esté autorizado en la configuración de Pl@ntNet.',
+      `Detalle técnico: ${err && err.message ? err.message : err}`
+    );
   }
 }
 
