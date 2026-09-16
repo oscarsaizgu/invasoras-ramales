@@ -25,25 +25,83 @@ ciudadano que envió el reporte. Si el reporte contiene información
 sensible, la coordenada pública debe redondearse para no señalar un
 punto exacto.
 
-# Estatus de flora fuera del catálogo (`estatus-flora.json`)
+# Guía Botánica (`cantabria-flora.json`)
 
-Tabla ligera, independiente de `cantabria-flora.json`, para poder mostrar
-el estatus (autóctona / exótica / invasora) de una especie identificada
-por Pl@ntNet que todavía no tiene ficha completa en la guía botánica.
-No sustituye una ficha ni añade nuevas especies al catálogo (eso es la
-fase 2): solo permite etiquetar el estatus cuando existe una fuente
-oficial fiable que lo confirme.
+Catálogo botánico de especies de flora documentadas en Cantabria (no solo
+invasoras). Cada especie puede tener, cuando hay fuente fiable que lo
+sostenga: nombre científico aceptado, `sinonimos` (para que Pl@ntNet
+pueda devolver un nombre distinto y aun así encontrarse la ficha),
+nombre(s) común(es), familia, biotipo/categoría, `estatus`
+(`autoctona` | `exotica` | `invasora` | `null` si no se puede determinar
+con fiabilidad — ver `Laurus nobilis` como ejemplo de estatus dejado sin
+determinar a propósito), descripción divulgativa (`queEs`,
+`comoReconocerla`, `hojas`, `flores`, `frutosSemillas`, `floracion`,
+`fructificacion`, `habitat`, `distribucionGeneralidades`,
+`interesEcologico`, `importanciaCantabria`, `curiosidades`),
+`destacadaRamales` y `fuentes`.
 
-Está vacío a propósito hasta que se decida qué fuente oficial citar para
-especies autóctonas/exóticas (para las invasoras ya sirve el Plan de
-Cantabria de `cantabria-flora.json`). No añadir entradas sin una fuente
-citable — no se debe inferir ni suponer el estatus.
+`fichaCompleta: true|false` distingue las especies con ficha divulgativa
+desarrollada de las que solo tienen los datos mínimos (nombre,
+sinónimos, estatus) mientras se completan progresivamente — así se puede
+seguir ampliando el catálogo sin tener que redactar toda la ficha de
+golpe.
 
-Formato esperado por `js/catalogo.js`, un array de:
+**IMPORTANTE:** el campo `estatus` de este archivo (autóctona / exótica /
+invasora) es la clasificación **botánica general** de la especie. NO es
+la fuente que determina si un registro debe considerarse invasora para
+efectos de reporte — para eso existe `catalogo-invasoras.json`,
+independiente y comprobable por separado (ver más abajo). Que una
+especie esté en esta guía no implica que sea invasora, y que no esté
+todavía no implica que no lo sea.
+
+# Catálogo independiente de especies invasoras (`catalogo-invasoras.json`)
+
+Lista independiente de `cantabria-flora.json`, cuyo único propósito es
+responder a una pregunta: "¿esta especie está reconocida como invasora
+por una fuente oficial?" — usada para decidir si una identificación
+puede generar un registro de invasora. Se construye a partir de:
+
+- Las especies objetivo del *Plan Estratégico Regional de Gestión y
+  Control de Especies Exóticas Invasoras de Cantabria* (Gobierno de
+  Cantabria, 2017) — ámbito `regional-cantabria`.
+- El listado de flora del *Catálogo Español de Especies Exóticas
+  Invasoras* (CEEEI, MITECO) — ámbito `nacional`.
+
+No es una copia de la guía botánica: una especie puede estar en el
+catálogo de invasoras sin tener todavía ficha divulgativa completa en
+`cantabria-flora.json` (en ese caso, `resolverEspecie()` la resuelve con
+los datos mínimos disponibles). También se han excluido explícitamente
+del listado nacional tres táxones (*Arbutus unedo*, *Cytisus scoparius*,
+*Ulex europaeus*) que aparecían en una extracción automática de la
+página del MITECO pero que son especies nativas ibéricas bien
+documentadas — su inclusión no pudo confirmarse contra el texto legal
+primario y se prefirió omitirlas antes que arriesgar una clasificación
+errónea. Esta lista debe revisarse periódicamente contra la fuente
+primaria del MITECO (el Excel/BOE oficial), no solo contra su página web.
+
+Formato, un array de:
 
 ```json
 {
-  "cientifico": "Quercus robur",
+  "cientifico": "Ailanthus altissima",
+  "sinonimos": [],
+  "fuentes": [{ "label": "...", "url": "https://..." }],
+  "ambito": "regional-cantabria+nacional"
+}
+```
+
+# Estatus de flora fuera del catálogo (`estatus-flora.json`)
+
+Tabla ligera adicional para casos concretos: permite fijar el estatus
+autóctona/exótica (no invasora — eso ya lo cubre
+`catalogo-invasoras.json`) de una especie identificada por Pl@ntNet que
+todavía no tiene ficha en `cantabria-flora.json`. Está vacía salvo que
+se documente una fuente fiable puntual; no añadir entradas sin fuente
+citable.
+
+```json
+{
+  "cientifico": "Nombre científico",
   "estatus": "autoctona",
   "fuente": { "label": "Nombre de la fuente oficial", "url": "https://..." }
 }

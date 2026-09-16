@@ -1321,12 +1321,18 @@ body:has(#screen-inicio.is-active) .app-header__menu {
 .ficha-estatus--autoctona { background: rgba(45,106,45,0.12); color: #2d6a2d; }
 .ficha-estatus--exotica { background: rgba(180,140,30,0.14); color: #8a6a10; }
 
-/* ── Secciones de la ficha (Cómo reconocerla, Características...) ── */
+/* ── Secciones de la ficha (Cómo reconocerla, Características...) ──
+   Como ahora hay más secciones opcionales y varían según la especie,
+   el borde superior se aplica solo a partir de la segunda sección
+   REALMENTE visible (no de la primera del DOM, que puede estar oculta
+   por falta de datos) mediante el combinador de hermanos generales. */
 .ficha-seccion {
+  padding: 0;
+}
+.ficha-seccion:not([hidden]) ~ .ficha-seccion:not([hidden]) {
   padding: 0.9rem 0;
   border-top: 1px solid var(--borde);
 }
-.ficha-seccion:first-of-type { border-top: none; padding-top: 0; }
 .ficha-seccion h3 {
   font-family: var(--font-titulo);
   font-size: 0.86rem;
@@ -1537,6 +1543,15 @@ body:has(#screen-inicio.is-active) .app-header__menu {
   color: var(--text);
   margin: 0 0 0.4rem;
 }
+.identificar-resultado__estado {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+.identificar-resultado__estado--invasora { color: #a8342a; }
+.identificar-resultado__estado--autoctona { color: #2d6a2d; }
+.identificar-resultado__estado--exotica { color: #8a6a10; }
 .identificar-resultado__no-incluida {
   font-family: var(--font);
   font-size: 0.78rem;

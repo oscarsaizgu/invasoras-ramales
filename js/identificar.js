@@ -1,5 +1,5 @@
 import { PLANTNET_API_KEY } from './identificar-config.js';
-import { resolverEspecie, abrirFichaDesdeIdentificacion, seleccionarEspecieParaReportar } from './catalogo.js';
+import { resolverEspecie, abrirFichaDesdeIdentificacion, seleccionarEspecieParaReportar, ETIQUETA_NIVEL } from './catalogo.js';
 
 // ================================================================
 // Identificación de plantas con Pl@ntNet — llamada directa desde el
@@ -29,10 +29,13 @@ const CONFIANZA_MINIMA = 0.20;
 let fotosSeleccionadas = [];
 let ultimaFotoDataUrl = '';
 
-// Tarjeta de identificación: solo nombre, científico y % de
-// coincidencia (lo único que aporta Pl@ntNet en este paso). El botón
+// Tarjeta de identificación: nombre, científico, % de coincidencia
+// (Pl@ntNet) y el estatus resuelto de forma independiente por
+// catalogo.js — siempre uno de los tres estados 🔴/🟢/⚪, o ninguno si
+// de verdad no se puede determinar con una fuente fiable. El botón
 // "Conocer esta especie" abre siempre la misma ficha botánica, exista
-// o no ya una ficha propia para esa especie.
+// o no ya una ficha propia para esa especie. "Mandar registro" solo se
+// ofrece cuando el estatus resuelto es realmente INVASORA.
 function crearTarjetaResultado(resultado, fotoDataUrl) {
   const registro = resolverEspecie({
     cientifico: resultado.scientificName,
@@ -41,6 +44,8 @@ function crearTarjetaResultado(resultado, fotoDataUrl) {
   });
   const porcentaje = resultado.score != null ? Math.round(resultado.score * 100) : null;
   const nombreMostrado = (registro.comunes && registro.comunes[0]) || resultado.scientificName;
+  const esInvasora = registro.nivelInvasion === 'invasora';
+  const etiquetaNivel = ETIQUETA_NIVEL[registro.nivelInvasion];
 
   const div = document.createElement('div');
   div.className = 'identificar-resultado';
@@ -49,9 +54,10 @@ function crearTarjetaResultado(resultado, fotoDataUrl) {
     <p class="identificar-resultado__comun">${nombreMostrado}</p>
     <p class="identificar-resultado__cientifico">${resultado.scientificName}</p>
     ${porcentaje != null ? `<p class="identificar-resultado__score">${porcentaje}% de coincidencia (Pl@ntNet)</p>` : ''}
+    ${etiquetaNivel ? `<p class="identificar-resultado__estado identificar-resultado__estado--${etiquetaNivel.clase}">${etiquetaNivel.emoji} ${etiquetaNivel.texto}</p>` : ''}
     <div class="identificar-resultado__acciones">
       <button type="button" class="btn btn-secondary identificar-btn-conocer">Conocer esta especie</button>
-      <button type="button" class="btn btn-primary identificar-btn-reportar">📍 Mandar registro</button>
+      ${esInvasora ? '<button type="button" class="btn btn-primary identificar-btn-reportar">📍 Mandar registro</button>' : ''}
     </div>`;
 
   div.querySelector('.identificar-btn-conocer').addEventListener('click', () => {
@@ -62,10 +68,12 @@ function crearTarjetaResultado(resultado, fotoDataUrl) {
       fotoDataUrl,
     });
   });
-  div.querySelector('.identificar-btn-reportar').addEventListener('click', () => {
-    cerrarIdentificar();
-    seleccionarEspecieParaReportar(resultado.scientificName);
-  });
+  if (esInvasora) {
+    div.querySelector('.identificar-btn-reportar').addEventListener('click', () => {
+      cerrarIdentificar();
+      seleccionarEspecieParaReportar(resultado.scientificName);
+    });
+  }
 
   return div;
 }
