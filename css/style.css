@@ -1263,8 +1263,9 @@ body:has(#screen-inicio.is-active) .app-header__menu {
   width: 34px; height: 34px; border-radius: 50%;
   background: rgba(20,26,20,0.55); color: #fff;
   border: none; cursor: pointer; font-size: 1rem;
-  display: flex; align-items: center; justify-content: center;
+  align-items: center; justify-content: center;
 }
+.ficha-carrusel__flecha:not([hidden]) { display: flex; }
 .ficha-carrusel__flecha--prev { left: 0.6rem; }
 .ficha-carrusel__flecha--next { right: 0.6rem; }
 .ficha-carrusel__flecha:hover { background: rgba(20,26,20,0.75); }
@@ -1304,8 +1305,10 @@ body:has(#screen-inicio.is-active) .app-header__menu {
   margin: 0 0 0.5rem;
 }
 
-.ficha-estatus {
+.ficha-estatus:not([hidden]) {
   display: inline-block;
+}
+.ficha-estatus {
   font-family: var(--font);
   font-size: 0.7rem;
   font-weight: 700;
@@ -1317,16 +1320,6 @@ body:has(#screen-inicio.is-active) .app-header__menu {
 .ficha-estatus--invasora { background: rgba(168,52,42,0.12); color: #a8342a; }
 .ficha-estatus--autoctona { background: rgba(45,106,45,0.12); color: #2d6a2d; }
 .ficha-estatus--exotica { background: rgba(180,140,30,0.14); color: #8a6a10; }
-
-.ficha-aviso-externa {
-  font-family: var(--font);
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  background: var(--seleccion);
-  border-radius: 10px;
-  padding: 0.6rem 0.8rem;
-  margin: 0 0 1.1rem;
-}
 
 /* ── Secciones de la ficha (Cómo reconocerla, Características...) ── */
 .ficha-seccion {
@@ -1544,15 +1537,6 @@ body:has(#screen-inicio.is-active) .app-header__menu {
   color: var(--text);
   margin: 0 0 0.4rem;
 }
-.identificar-resultado__estado {
-  font-family: var(--font);
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin: 0 0 0.3rem;
-}
-.identificar-resultado__estado--invasora { color: #a8342a; }
-.identificar-resultado__estado--autoctona { color: #2d6a2d; }
-.identificar-resultado__estado--desconocido { color: var(--text-muted); }
 .identificar-resultado__no-incluida {
   font-family: var(--font);
   font-size: 0.78rem;

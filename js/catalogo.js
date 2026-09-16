@@ -21,6 +21,7 @@ import { goToStepAndEnter } from './app.js';
 const PAGINA = 12;
 
 let ESPECIES = [];
+let ESTATUS_EXTERNO = []; // data/estatus-flora.json — ver data/README.md
 let filtroActivo = 'todas';
 let consulta = '';
 let visibles = PAGINA;
@@ -33,11 +34,23 @@ let fotoActual = 0;
 // vacío o con un formato inesperado, esto evita mostrar basura como una
 // única letra suelta en vez de "no rellenar automáticamente con un valor
 // genérico" tal y como se pidió.
+const FUENTE_PLAN_CANTABRIA = {
+  label: 'Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)',
+  url: 'https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf',
+};
+const FUENTE_CEEEI = {
+  label: 'Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO',
+  url: 'https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html',
+};
+
 function normalizarEspecie(e) {
+  const fuentes = [FUENTE_PLAN_CANTABRIA];
+  if (e.enCatalogoNacionalCEEEI) fuentes.push(FUENTE_CEEEI);
   return {
     ...e,
     comunes: Array.isArray(e.comunes) ? e.comunes.filter(Boolean) : (e.comunes ? [e.comunes] : []),
     fotos: Array.isArray(e.fotos) ? e.fotos.filter(f => f && f.image) : [],
+    fuentes,
   };
 }
 
@@ -51,6 +64,16 @@ export async function cargarDatos() {
     if (!resp.ok) return [];
     const data = await resp.json();
     return data.map(normalizarEspecie);
+  } catch (err) {
+    return [];
+  }
+}
+
+async function cargarEstatusExterno() {
+  try {
+    const resp = await fetch('data/estatus-flora.json', { cache: 'no-store' });
+    if (!resp.ok) return [];
+    return await resp.json();
   } catch (err) {
     return [];
   }
@@ -201,6 +224,13 @@ function listaOrVacio(items) {
   return (items && items.length) ? items : null;
 }
 
+// Ficha botánica única: recibe siempre el mismo tipo de registro
+// (cientifico, comunes, fotos, estatus, y opcionalmente familia,
+// biotipo, comoReconocerla, habitat, medidasControl, fuentes...),
+// tanto si procede de las fichas propias como de una identificación de
+// Pl@ntNet resuelta por resolverEspecie(). No sabe ni le importa de
+// dónde viene cada dato: cada sección se muestra si hay contenido y se
+// oculta si no lo hay, nunca con un aviso de "no disponible".
 function abrirFicha(entry) {
   fichaActual = entry;
   fotoActual = 0;
@@ -224,11 +254,6 @@ function abrirFicha(entry) {
       estatusEl.hidden = true;
     }
   }
-
-  // Aviso para especies identificadas por Pl@ntNet que todavía no
-  // forman parte de nuestra guía botánica (sin ficha propia).
-  const avisoExterna = document.getElementById('ficha-aviso-externa');
-  if (avisoExterna) avisoExterna.hidden = !entry.fuenteExterna;
 
   // ¿Cómo reconocerla?
   const seccionReconocer = document.getElementById('ficha-seccion-reconocer');
@@ -264,42 +289,48 @@ function abrirFicha(entry) {
     seccionDonde.hidden = true;
   }
 
-  // ¿Es una especie invasora?
-  const seccionInvasora = document.getElementById('ficha-seccion-invasora');
-  if (entry.fuenteExterna) {
-    document.getElementById('ficha-invasora').textContent = 'Todavía no forma parte de nuestra guía botánica: no disponemos de información propia sobre su estatus (autóctona, exótica o invasora) ni de medidas de control.';
-    seccionInvasora.hidden = false;
-  } else {
-    const invasoraPartes = [];
+  // ¿Es una especie invasora? — solo se muestra si hay contenido real
+  // sobre su situación legal o medidas de control; si no lo hay, la
+  // sección se oculta igual que el resto (nunca un aviso genérico).
+  const invasoraPartes = [];
+  if (entry.estatus === 'invasora') {
     invasoraPartes.push(entry.enCatalogoNacionalCEEEI
       ? 'Está incluida en el Catálogo Español de Especies Exóticas Invasoras (CEEEI) de ámbito estatal.'
       : 'No figura en el Catálogo Español de Especies Exóticas Invasoras (CEEEI) de ámbito estatal, pero sí está identificada como especie objetivo en el Plan Estratégico Regional de Cantabria.');
-    if (entry.erradicacionCantabria) {
-      invasoraPartes.push(`Posibilidad de erradicación en Cantabria: ${entry.erradicacionCantabria.toLowerCase()}.`);
-    }
-    if (entry.medidasControl) {
-      invasoraPartes.push(entry.medidasControl);
-    }
+  }
+  if (entry.erradicacionCantabria) {
+    invasoraPartes.push(`Posibilidad de erradicación en Cantabria: ${entry.erradicacionCantabria.toLowerCase()}.`);
+  }
+  if (entry.medidasControl) {
+    invasoraPartes.push(entry.medidasControl);
+  }
+  const seccionInvasora = document.getElementById('ficha-seccion-invasora');
+  if (invasoraPartes.length) {
     document.getElementById('ficha-invasora').textContent = invasoraPartes.join(' ');
     seccionInvasora.hidden = false;
+  } else {
+    seccionInvasora.hidden = true;
   }
 
-  // Fuentes
+  // Fuentes — siempre construidas a partir de entry.fuentes (lista
+  // explícita que prepara resolverEspecie/normalizarEspecie), nunca
+  // señalando si el origen es "externo" o propio.
   const fuentes = [];
-  if (entry.fuenteExterna) {
-    fuentes.push('<li>Identificación automática por <a href="https://my.plantnet.org/" target="_blank" rel="noopener">Pl@ntNet</a></li>');
-  } else {
-    fuentes.push('<li><a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> — Gobierno de Cantabria (2017)</li>');
-    if (entry.enCatalogoNacionalCEEEI) {
-      fuentes.push('<li><a href="https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html" target="_blank" rel="noopener">Catálogo Español de Especies Exóticas Invasoras (CEEEI)</a> — MITECO</li>');
-    }
-  }
+  (entry.fuentes || []).forEach(f => {
+    fuentes.push(`<li><a href="${f.url}" target="_blank" rel="noopener">${f.label}</a></li>`);
+  });
   (entry.fotos || []).forEach(f => {
     if (f.imageSourceUrl && f.imageSource) {
       fuentes.push(`<li><a href="${f.imageSourceUrl}" target="_blank" rel="noopener">${f.imageSource}</a> — fotografía (${(f.imageAuthor || '').replace(/^\(c\)\s*/, '')})</li>`);
     }
   });
-  document.getElementById('ficha-fuentes').innerHTML = fuentes.join('');
+  const seccionFuentes = document.getElementById('ficha-seccion-fuentes');
+  if (fuentes.length) {
+    document.getElementById('ficha-fuentes').innerHTML = fuentes.join('');
+    seccionFuentes.hidden = false;
+  } else {
+    seccionFuentes.hidden = true;
+  }
 
   // Botón ficha oficial (solo si existe una, del catálogo nacional)
   const oficialBtn = document.getElementById('ficha-btn-oficial');
@@ -435,29 +466,49 @@ function initZoom() {
   });
 }
 
-// Permite a otros módulos (identificar.js) abrir la misma ficha rica de
-// una especie ya cargada, a partir de su nombre científico.
-export function abrirFichaPorCientifico(cientifico) {
-  const nc = normalizar(cientifico);
-  const entry = ESPECIES.find(e => normalizar(e.cientifico) === nc);
-  if (entry) abrirFicha(entry);
-  return entry || null;
-}
+// Resuelve el registro de especie que verá la ficha, combinando fuentes
+// en cascada, sin que el componente de ficha necesite saber de dónde
+// viene cada dato:
+//   1. Nuestras 76 fichas (match exacto o por género "spp."): datos completos.
+//   2. data/estatus-flora.json: solo estatus fiable para especies que
+//      todavía no tienen ficha completa (ver data/README.md).
+//   3. Lo que haya aportado la identificación (nombre común, foto).
+// Si no hay nada fiable en 1 o 2, el estatus queda sin determinar y
+// esa sección simplemente no aparece — nunca se infiere ni se inventa.
+export function resolverEspecie({ cientifico, comunes, fotoDataUrl }) {
+  const match = buscarPorCientifico(cientifico, ESPECIES);
+  if (match) return match;
 
-// Abre una ficha "mínima" para una especie identificada por Pl@ntNet
-// que todavía no está en nuestra guía botánica (las 76 fichas actuales).
-// Reutiliza el mismo panel de ficha, con solo los datos que tenemos:
-// nombre científico/común de Pl@ntNet y la fotografía que ha hecho la
-// persona usuaria. No se inventa estatus, familia ni medidas de control.
-export function abrirFichaExterna({ cientifico, comunes, fotoDataUrl }) {
-  const entry = {
+  const nc = normalizar(cientifico);
+  const estatusExterno = ESTATUS_EXTERNO.find(e => normalizar(e.cientifico) === nc);
+
+  return {
     cientifico,
     comunes: Array.isArray(comunes) ? comunes.filter(Boolean) : [],
     fotos: fotoDataUrl ? [{ image: fotoDataUrl }] : [],
-    estatus: null,
-    fuenteExterna: true,
+    estatus: estatusExterno ? estatusExterno.estatus : null,
+    fuentes: estatusExterno ? [estatusExterno.fuente] : [],
   };
-  abrirFicha(entry);
+}
+
+function buscarPorCientifico(cientifico, especies) {
+  const nc = normalizar(cientifico);
+  let match = especies.find(e => normalizar(e.cientifico) === nc);
+  if (match) return match;
+
+  const genero = nc.split(' ')[0];
+  match = especies.find(e => {
+    const ec = normalizar(e.cientifico);
+    return ec.endsWith(' spp.') && ec.split(' ')[0] === genero;
+  });
+  return match || null;
+}
+
+// Punto de entrada único desde identificar.js: siempre abre la misma
+// ficha botánica, tanto si la especie ya está en la guía como si es la
+// primera vez que aparece por una identificación de Pl@ntNet.
+export function abrirFichaDesdeIdentificacion({ cientifico, comunes, fotoDataUrl }) {
+  abrirFicha(resolverEspecie({ cientifico, comunes, fotoDataUrl }));
 }
 
 export function getEspecies() {
@@ -471,7 +522,7 @@ export async function initCatalogo() {
   initFicha();
   initZoom();
 
-  ESPECIES = await cargarDatos();
+  [ESPECIES, ESTATUS_EXTERNO] = await Promise.all([cargarDatos(), cargarEstatusExterno()]);
   renderDestacadas();
   renderCatalogo();
 }
