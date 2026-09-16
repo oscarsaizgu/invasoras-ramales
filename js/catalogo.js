@@ -214,6 +214,30 @@ function renderCatalogo() {
 }
 
 // ── Ficha con carrusel de fotografías ──
+// Galería: [FOTO PRINCIPAL] ← 1/N → con una tira de miniaturas debajo
+// para saltar directamente a cualquier fotografía. Misma experiencia
+// para cualquier especie, tenga 1 o 5 fotografías.
+function renderMiniaturas() {
+  const fotos = (fichaActual && fichaActual.fotos) || [];
+  const cont = document.getElementById('ficha-miniaturas');
+  cont.innerHTML = '';
+  cont.hidden = fotos.length < 2;
+  if (fotos.length < 2) return;
+
+  fotos.forEach((foto, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ficha-miniatura-btn' + (i === fotoActual ? ' is-activa' : '');
+    btn.style.backgroundImage = `url('${foto.image}')`;
+    btn.setAttribute('aria-label', `Ver fotografía ${i + 1} de ${fotos.length}`);
+    btn.addEventListener('click', () => {
+      fotoActual = i;
+      actualizarFoto();
+    });
+    cont.appendChild(btn);
+  });
+}
+
 function actualizarFoto() {
   const fotos = (fichaActual && fichaActual.fotos) || [];
   const img = document.getElementById('ficha-carrusel-img');
@@ -229,6 +253,7 @@ function actualizarFoto() {
     credito.hidden = true;
     prevBtn.hidden = true;
     nextBtn.hidden = true;
+    renderMiniaturas();
     return;
   }
 
@@ -248,6 +273,15 @@ function actualizarFoto() {
     credito.hidden = false;
   } else {
     credito.hidden = true;
+  }
+
+  // Actualiza solo la miniatura activa si la tira ya está construida
+  // para esta ficha; si no (primera vez o cambio de especie), la crea.
+  const cont = document.getElementById('ficha-miniaturas');
+  if (cont.children.length !== fotos.length) {
+    renderMiniaturas();
+  } else {
+    [...cont.children].forEach((btn, i) => btn.classList.toggle('is-activa', i === fotoActual));
   }
 }
 

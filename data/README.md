@@ -25,6 +25,28 @@ ciudadano que envió el reporte. Si el reporte contiene información
 sensible, la coordenada pública debe redondearse para no señalar un
 punto exacto.
 
+# Fotografías de las especies (`assets/especies/`)
+
+Cada especie de `cantabria-flora.json` tiene un array `fotos` con (como
+objetivo) 3–5 fotografías útiles para reconocerla en el campo — no son
+decorativas: se prioriza que muestren porte, hojas, flores y frutos
+cuando existen imágenes así de calidad y con licencia reutilizable.
+
+Fuente: iNaturalist (API pública `api.inaturalist.org`), filtrando
+observaciones `quality_grade=research` (identificación validada por la
+comunidad) y solo fotos con licencia abierta individual
+(`cc0`/`cc-by`/`cc-by-nc`/`cc-by-sa`/`cc-by-nc-sa`), ordenadas por votos
+para priorizar las más útiles. Cada foto guarda `imageAuthor`,
+`imageSource`, `imageSourceUrl` (ficha del taxón o de la observación
+concreta) e `imageLicense` — nunca se inventa una atribución. La misma
+información se duplica en `assets/especies/credits.json` para los
+créditos de la aplicación.
+
+Si una especie no tiene suficientes fotos con licencia abierta
+disponibles en iNaturalist, se guardan las que haya (pueden ser menos
+de 3) en lugar de forzar el número con imágenes dudosas o de baja
+calidad identificativa.
+
 # Guía Botánica (`cantabria-flora.json`)
 
 Catálogo botánico de especies de flora documentadas en Cantabria (no solo
