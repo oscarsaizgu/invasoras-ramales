@@ -25,7 +25,9 @@
 
 <header class="app-header" id="app-header">
   <button type="button" class="app-header__back" id="header-back" aria-label="Volver atrás" hidden>←</button>
-  <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <button type="button" class="app-header__logo-btn" data-goto="inicio" aria-label="Ir al inicio">
+    <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  </button>
   <div class="app-header__text">
     <h1>Invasoras</h1>
     <p>Ramales Natural</p>
@@ -43,12 +45,20 @@
       <button type="button" class="menu-close" id="menu-close" aria-label="Cerrar menú">✕</button>
     </div>
     <ul class="menu-list">
-      <li><button type="button" class="menu-link" data-goto="sobre-proyecto">Sobre el proyecto</button></li>
-      <li><button type="button" class="menu-link" data-goto="especies-info">Especies invasoras</button></li>
+      <li><button type="button" class="menu-link" data-goto="inicio">Inicio</button></li>
+      <li><button type="button" class="menu-link js-abrir-identificar">📷 Identificar planta</button></li>
+      <li><button type="button" class="menu-link" data-goto="especies-info">🌿 Guía de especies</button></li>
+      <li><span class="menu-link menu-link--disabled" aria-disabled="true">🗺️ Mapa de observaciones <span class="menu-tag">Próximamente</span></span></li>
+      <li><button type="button" class="menu-link" data-goto="sobre-proyecto">ℹ️ Sobre el proyecto</button></li>
       <li><button type="button" class="menu-link" data-goto="como-reportar">Cómo hacer un buen reporte</button></li>
-      <li><span class="menu-link menu-link--disabled" aria-disabled="true">Ver mapa <span class="menu-tag">Próximamente</span></span></li>
     </ul>
     <button type="button" class="btn btn-accent menu-panel__cta" data-goto="especie">+ Hacer un reporte</button>
+    <nav class="menu-legal" aria-label="Información legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </nav>
     <p class="menu-panel__social">Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
   </nav>
 </div>
@@ -72,27 +82,29 @@
       <h1 id="inicio-titulo" tabindex="-1">Descubre la biodiversidad de Ramales</h1>
       <p>Conoce, protege, actúa.</p>
 
-      <!-- Acción principal: identificación por fotografía -->
-      <div class="id-card">
-        <img class="id-card__foto" src="images/plumero.jpg" alt="Ejemplo de planta del catálogo de especies de Ramales">
-        <div class="id-card__contenido">
-          <p class="id-card__eyebrow">¿Qué planta es?</p>
-          <p class="id-card__texto">Haz una foto y te ayudamos a identificarla.</p>
-          <ul class="id-card__lista">
-            <li>🌿 Identificación con IA</li>
-            <li>📖 Información de la especie</li>
-            <li>⚠️ Te avisamos si es invasora</li>
-          </ul>
-          <button type="button" class="btn btn-primary id-card__btn js-abrir-identificar" id="btn-identificar-home">📷 Hacer una foto →</button>
-          <p class="id-card__nota">No necesitas saber qué especie es.</p>
+      <div class="home-cards">
+        <!-- Acción principal: identificación por fotografía -->
+        <div class="id-card">
+          <img class="id-card__foto" src="images/plumero.jpg" alt="Ejemplo de planta del catálogo de especies de Ramales">
+          <div class="id-card__contenido">
+            <p class="id-card__eyebrow">¿Qué planta es?</p>
+            <p class="id-card__texto">Haz una foto y te ayudamos a identificarla.</p>
+            <ul class="id-card__lista">
+              <li>🌿 Identificación con IA</li>
+              <li>📖 Información de la especie</li>
+              <li>⚠️ Te avisamos si es invasora</li>
+            </ul>
+            <button type="button" class="btn btn-primary id-card__btn js-abrir-identificar" id="btn-identificar-home">📷 Hacer una foto →</button>
+            <p class="id-card__nota">No necesitas saber qué especie es.</p>
+          </div>
         </div>
-      </div>
 
-      <!-- Acción secundaria: reporte directo -->
-      <div class="report-card">
-        <p class="report-card__eyebrow">🌿 ¿Ya sabes qué es?</p>
-        <p class="report-card__texto">Envía un reporte con la especie, el lugar y, si quieres, una fotografía.</p>
-        <button type="button" class="btn btn-secondary report-card__btn" id="btn-empezar">+ Hacer un reporte →</button>
+        <!-- Acción secundaria: reporte directo -->
+        <div class="report-card">
+          <p class="report-card__eyebrow">🌿 ¿Ya sabes qué es?</p>
+          <p class="report-card__texto">Envía un reporte con la especie, el lugar y, si quieres, una fotografía.</p>
+          <button type="button" class="btn btn-secondary report-card__btn" id="btn-empezar">+ Hacer un reporte →</button>
+        </div>
       </div>
 
       <!-- Enlaces secundarios -->
@@ -100,17 +112,17 @@
         <button type="button" class="home-link" data-goto="especies-info">
           <span class="home-link__icon" aria-hidden="true">🌿</span>
           <span class="home-link__titulo">Guía de especies</span>
-          <span class="home-link__texto">Conoce las plantas invasoras y la flora de Ramales.</span>
+          <span class="home-link__texto visually-hidden">Conoce las plantas invasoras y la flora de Ramales.</span>
         </button>
         <span class="home-link home-link--disabled" aria-disabled="true">
           <span class="home-link__icon" aria-hidden="true">🗺️</span>
           <span class="home-link__titulo">Mapa de observaciones <span class="menu-tag">Próximamente</span></span>
-          <span class="home-link__texto">Consulta dónde se han visto especies invasoras.</span>
+          <span class="home-link__texto visually-hidden">Consulta dónde se han visto especies invasoras.</span>
         </span>
         <button type="button" class="home-link" data-goto="sobre-proyecto">
           <span class="home-link__icon" aria-hidden="true">ℹ️</span>
           <span class="home-link__titulo">Sobre el proyecto</span>
-          <span class="home-link__texto">Descubre el objetivo de esta iniciativa.</span>
+          <span class="home-link__texto visually-hidden">Descubre el objetivo de esta iniciativa.</span>
         </button>
       </div>
     </div>

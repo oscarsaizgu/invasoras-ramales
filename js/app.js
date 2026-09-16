@@ -134,6 +134,10 @@ function init() {
     });
   });
 
+  document.querySelectorAll('.js-abrir-identificar').forEach(el => {
+    el.addEventListener('click', closeMenu);
+  });
+
   document.querySelectorAll('[data-edit-step]').forEach(el => {
     el.addEventListener('click', () => goToStepAndEnter(el.dataset.editStep));
   });

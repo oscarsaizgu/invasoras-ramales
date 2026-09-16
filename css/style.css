@@ -103,13 +103,25 @@ select:focus-visible, textarea:focus-visible,
    CABECERA — estilo editorial (fondo verde, etiqueta + título)
    ================================================================ */
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
   background: var(--verde);
   padding: 1.1rem 1.2rem;
   display: flex;
   align-items: center;
   gap: 0.85rem;
   border-bottom: 1px solid rgba(245, 234, 216, 0.12);
+  transition: background-color 0.2s, border-color 0.2s;
 }
+
+.app-header__logo-btn {
+  flex-shrink: 0;
+  background: none; border: none; padding: 0; margin: 0;
+  line-height: 0; cursor: pointer;
+  border-radius: 8px;
+}
+.app-header__logo-btn:focus-visible { outline: 2px solid var(--crema); outline-offset: 3px; }
 
 .app-header__logo { height: 40px; width: auto; flex-shrink: 0; opacity: 0.95; }
 
@@ -145,20 +157,24 @@ select:focus-visible, textarea:focus-visible,
 }
 .app-header__back:hover { opacity: 1; background: rgba(245,234,216,0.1); }
 
-/* Botón de menú (hamburguesa) */
+/* Botón de menú (hamburguesa) — pastilla de cristal, siempre visible */
 .app-header__menu {
   flex-shrink: 0;
   margin-left: auto;
-  width: 36px; height: 36px;
-  border: none; background: none; cursor: pointer;
+  width: 38px; height: 38px;
+  border: 1px solid rgba(245,234,216,0.28);
+  background: rgba(20,26,20,0.28);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 4px;
   border-radius: 50%;
   transition: background-color 0.2s;
 }
-.app-header__menu:hover { background: rgba(245,234,216,0.1); }
+.app-header__menu:hover { background: rgba(20,26,20,0.42); }
 .app-header__menu span {
-  display: block; width: 18px; height: 1.5px;
+  display: block; width: 16px; height: 1.5px;
   background: var(--crema); border-radius: 2px;
 }
 
@@ -231,6 +247,19 @@ select:focus-visible, textarea:focus-visible,
 }
 
 .menu-panel__cta { width: 100%; margin-top: auto; }
+.menu-legal {
+  margin: 0.9rem 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem 0.9rem;
+}
+.menu-legal a {
+  color: rgba(245,234,216,0.5);
+  font-family: var(--font);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.menu-legal a:hover { color: var(--crema); }
 .menu-panel__social {
   margin-top: 1rem;
   text-align: center;
@@ -678,20 +707,24 @@ textarea { resize: vertical; min-height: 90px; }
 
 .home-hero {
   position: relative;
-  height: clamp(220px, 42vh, 400px);
+  z-index: 1;
+  height: clamp(260px, 48vh, 440px);
   overflow: hidden;
+  margin-top: -74px;
 }
 .home-hero__photo {
   width: 100%; height: 100%;
   object-fit: cover;
   filter: saturate(0.92) brightness(0.94);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 88%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 88%);
 }
 .home-hero__overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(34,57,44,0.05) 0%, rgba(34,57,44,0.02) 45%, var(--bg) 96%);
+  background: linear-gradient(to bottom, rgba(20,26,20,0.28) 0%, rgba(20,26,20,0.05) 30%, transparent 55%);
 }
 
-.home-body { padding: 1.6rem 1.2rem 0; }
+.home-body { padding: 0.6rem 1.2rem 0; position: relative; z-index: 1; }
 
 .home__art { display: none; }
 
@@ -705,7 +738,7 @@ textarea { resize: vertical; min-height: 90px; }
 .home p {
   font-family: var(--font);
   font-size: 1rem; color: var(--text-muted); line-height: 1.65;
-  max-width: 440px; margin: 0 auto 1.7rem;
+  max-width: 440px; margin: 0 auto 0.9rem;
 }
 
 .home__cta {
@@ -776,18 +809,22 @@ textarea { resize: vertical; min-height: 90px; }
 
 /* Cabecera transparente superpuesta a la foto de portada */
 body:has(#screen-inicio.is-active) .app-header {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 5;
-  background: linear-gradient(to bottom, rgba(20,26,20,0.5), rgba(20,26,20,0));
+  background: rgba(20,26,20,0.3);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
   border-bottom: none;
-  padding: 1rem 1.1rem;
 }
 body:has(#screen-inicio.is-active) .app-header__text { display: none; }
+body:has(#screen-inicio.is-active) .app-header__menu {
+  background: rgba(245,234,216,0.16);
+}
+
+/* Contenedor de las dos tarjetas principales */
+.home-cards { display: flex; flex-direction: column; }
 
 /* Tarjeta principal "¿Qué planta es?" — identificación por foto */
 .id-card {
-  margin: 1.6rem 0 1rem;
+  margin: 0.4rem 0 0.7rem;
   background: var(--card);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
@@ -836,7 +873,7 @@ body:has(#screen-inicio.is-active) .app-header__text { display: none; }
 
 /* Tarjeta secundaria "¿Ya sabes qué es?" — reporte directo */
 .report-card {
-  margin: 0 0 1.8rem;
+  margin: 0 0 0.9rem;
   padding: 1.3rem 1.3rem 1.4rem;
   background: var(--seleccion);
   border: 1px solid var(--borde);
@@ -857,33 +894,41 @@ body:has(#screen-inicio.is-active) .app-header__text { display: none; }
 }
 .report-card__btn { width: 100%; display: block; }
 
-/* Enlaces secundarios de portada */
+/* Enlaces secundarios de portada — fila compacta de 3 accesos */
 .home-links {
-  display: flex; flex-direction: column; gap: 0.6rem;
-  margin: 0 0 1.6rem;
-  text-align: left;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  margin: 0 0 1rem;
 }
 .home-link {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.7rem;
-  row-gap: 0.1rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  gap: 0.3rem;
   width: 100%;
   background: var(--card);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
-  padding: 0.9rem 1rem;
+  padding: 0.75rem 0.4rem;
   cursor: pointer;
   font-family: var(--font);
-  text-align: left;
+  text-align: center;
 }
-.home-link__icon { grid-row: 1 / 3; font-size: 1.25rem; }
+.home-link__icon { font-size: 1.2rem; }
 .home-link__titulo {
   font-family: var(--font-titulo);
-  font-size: 0.95rem; font-weight: 400; letter-spacing: 0.01em;
+  font-size: 0.7rem; font-weight: 400; letter-spacing: 0.01em;
   color: var(--verde);
-  display: flex; align-items: center; gap: 0.5rem;
+  line-height: 1.25;
+}
+.home-link__titulo .menu-tag {
+  display: block;
+  margin: 0.3rem auto 0;
+  width: fit-content;
+  font-size: 0.5rem;
+  padding: 0.1rem 0.4rem;
 }
 .home-link__texto {
   font-size: 0.78rem;
@@ -892,18 +937,40 @@ body:has(#screen-inicio.is-active) .app-header__text { display: none; }
 }
 .home-link--disabled {
   cursor: default;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 .home-link--disabled .home-link__titulo .menu-tag {
   color: var(--tierra);
   border-color: rgba(168,88,42,0.35);
 }
 
+@media (min-width: 640px) {
+  .home-link { padding: 1rem 0.8rem; }
+  .home-link__icon { font-size: 1.5rem; }
+  .home-link__titulo { font-size: 0.85rem; }
+  .home-link__texto {
+    position: static; width: auto; height: auto; padding: 0; margin: 0;
+    overflow: visible; clip: auto; white-space: normal;
+  }
+}
+
+@media (min-width: 760px) {
+  .home-cards {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .id-card { flex: 3; margin-bottom: 0; }
+  .report-card { flex: 2; margin-bottom: 0; display: flex; flex-direction: column; }
+  .report-card .report-card__btn { margin-top: auto; }
+}
+
 /* Silueta decorativa de montañas al pie de la portada */
 .home-silueta {
   display: block;
   width: 100%;
-  height: 48px;
+  height: 40px;
+  margin-top: 0.4rem;
 }
 
 /* ================================================================
