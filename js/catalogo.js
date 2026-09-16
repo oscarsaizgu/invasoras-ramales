@@ -14,6 +14,30 @@ ESPECIES_RAMALES.forEach(e => {
   if (e.catalogoId) FOTOS_LOCALES[e.catalogoId] = e.imagen;
 });
 
+// Fotografías del catálogo completo obtenidas de iNaturalist (solo con
+// licencia reutilizable) — ver assets/especies/credits.json. Se cargan
+// en tiempo de ejecución, igual que el resto de datos estáticos de la
+// aplicación (p. ej. data/reportes-publicos.json).
+let CREDITOS_FOTOS = {};
+
+async function cargarCreditosFotos() {
+  try {
+    const resp = await fetch('assets/especies/credits.json', { cache: 'no-store' });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    data.forEach(c => { CREDITOS_FOTOS[c.id] = c; });
+  } catch (err) {
+    // Sin conexión o archivo no disponible: las tarjetas usan el estado
+    // visual neutro definido para especies sin fotografía.
+  }
+}
+
+function fotoDe(id) {
+  if (FOTOS_LOCALES[id]) return { url: FOTOS_LOCALES[id], credito: null };
+  const credito = CREDITOS_FOTOS[id];
+  return credito ? { url: credito.image, credito } : { url: null, credito: null };
+}
+
 function normalizar(txt) {
   return (txt || '')
     .toString()
@@ -44,7 +68,7 @@ function ambitoTexto(ambito) {
 
 // ── Tarjeta de especie (catálogo completo) ──
 function crearTarjeta(entry) {
-  const foto = FOTOS_LOCALES[entry.id];
+  const { url: foto } = fotoDe(entry.id);
   const nombreComun = entry.comunes && entry.comunes[0] ? entry.comunes[0] : entry.cientifico;
 
   const card = document.createElement('button');
@@ -110,7 +134,7 @@ function renderDestacadas() {
 }
 
 // ── Ficha visual ──
-function abrirFichaBase({ nombreComun, cientifico, foto, ambitoHtml, descripcionHtml, notaHtml, fichaUrl, onReportar }) {
+function abrirFichaBase({ nombreComun, cientifico, foto, credito, ambitoHtml, descripcionHtml, notaHtml, fichaUrl, onReportar }) {
   const overlay = document.getElementById('ficha-overlay');
   const fotoEl = document.getElementById('ficha-foto');
   const comunEl = document.getElementById('ficha-comun');
@@ -121,9 +145,18 @@ function abrirFichaBase({ nombreComun, cientifico, foto, ambitoHtml, descripcion
   const oficialBtn = document.getElementById('ficha-btn-oficial');
   const reportarBtn = document.getElementById('ficha-btn-reportar');
 
-  fotoEl.innerHTML = foto
-    ? `<img src="${foto}" alt="${nombreComun}">`
-    : `<span class="ficha-foto__neutra" aria-hidden="true">🌿</span>`;
+  let fotoHtml = `<span class="ficha-foto__neutra" aria-hidden="true">🌿</span>`;
+  if (foto) {
+    fotoHtml = `<img src="${foto}" alt="${nombreComun}">`;
+    if (credito) {
+      const licenciaLegible = (credito.imageLicense || '').toUpperCase().replace(/-/g, ' ');
+      fotoHtml += `
+        <a class="ficha-foto__credito" href="${credito.imageSourceUrl}" target="_blank" rel="noopener">
+          Foto: ${credito.imageAuthor || 'iNaturalist'} · ${credito.imageSource} (${licenciaLegible})
+        </a>`;
+    }
+  }
+  fotoEl.innerHTML = fotoHtml;
   comunEl.textContent = nombreComun;
   cientificoEl.textContent = cientifico;
   ambitoEl.innerHTML = ambitoHtml || '';
@@ -163,10 +196,13 @@ function abrirFichaCatalogo(entry) {
     descripcionHtml = `<p class="ficha-fuente">El MITECO no publica aquí más descripción que la ficha oficial en PDF. Consúltala para conocer sus características, impactos y distribución.</p>`;
   }
 
+  const { url: foto, credito } = fotoDe(entry.id);
+
   abrirFichaBase({
     nombreComun,
     cientifico: entry.cientifico,
-    foto: FOTOS_LOCALES[entry.id],
+    foto,
+    credito,
     ambitoHtml: `<strong>Ámbito de aplicación:</strong> ${ambitoTexto(entry.ambito)}`,
     descripcionHtml,
     fichaUrl: entry.ficha,
@@ -272,11 +308,16 @@ function initFicha() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarFicha(); });
 }
 
-export function initCatalogo() {
+export async function initCatalogo() {
   renderDestacadas();
   renderCatalogo();
   initBuscador();
   initFiltros();
   initCargarMas();
   initFicha();
+
+  // Las fotos del catálogo completo llegan de un JSON estático; en
+  // cuanto están disponibles se vuelve a pintar la rejilla ya visible.
+  await cargarCreditosFotos();
+  renderCatalogo();
 }
