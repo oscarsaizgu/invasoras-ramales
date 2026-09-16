@@ -1,5 +1,5 @@
 import { PLANTNET_API_KEY } from './identificar-config.js';
-import { getEspecies, cargarDatos, abrirFichaPorCientifico, seleccionarEspecieParaReportar } from './catalogo.js';
+import { getEspecies, cargarDatos, abrirFichaPorCientifico, abrirFichaExterna, seleccionarEspecieParaReportar } from './catalogo.js';
 
 // ================================================================
 // Identificación de plantas con Pl@ntNet — llamada directa desde el
@@ -69,7 +69,7 @@ function estadoDeEspecie(match) {
   return { nivel: 'desconocido', etiqueta: '⚪ Información no disponible' };
 }
 
-function crearTarjetaResultado(resultado, especies) {
+function crearTarjetaResultado(resultado, especies, fotoDataUrl) {
   const match = buscarEnCatalogo(resultado.scientificName, especies);
   const estado = estadoDeEspecie(match);
   const porcentaje = resultado.score != null ? Math.round(resultado.score * 100) : null;
@@ -86,17 +86,26 @@ function crearTarjetaResultado(resultado, especies) {
     <p class="identificar-resultado__cientifico">${resultado.scientificName}</p>
     ${porcentaje != null ? `<p class="identificar-resultado__score">${porcentaje}% de coincidencia (Pl@ntNet)</p>` : ''}
     <p class="identificar-resultado__estado identificar-resultado__estado--${estado.nivel}">${estado.etiqueta}</p>
-    ${!match ? '<p class="identificar-resultado__no-incluida">Especie no incluida en nuestra guía de Cantabria.</p>' : ''}
+    ${!match ? '<p class="identificar-resultado__no-incluida">Especie no incluida todavía en nuestra guía botánica.</p>' : ''}
     <div class="identificar-resultado__acciones">
-      ${match ? '<button type="button" class="btn btn-secondary identificar-btn-conocer">Conocer esta especie</button>' : ''}
+      <button type="button" class="btn btn-secondary identificar-btn-conocer">Conocer esta especie</button>
       ${match ? '<button type="button" class="btn btn-primary identificar-btn-reportar">📍 Mandar registro</button>' : ''}
     </div>`;
 
-  if (match) {
-    div.querySelector('.identificar-btn-conocer').addEventListener('click', () => {
-      cerrarIdentificar();
+  div.querySelector('.identificar-btn-conocer').addEventListener('click', () => {
+    cerrarIdentificar();
+    if (match) {
       abrirFichaPorCientifico(match.cientifico);
-    });
+    } else {
+      abrirFichaExterna({
+        cientifico: resultado.scientificName,
+        comunes: resultado.commonNames,
+        fotoDataUrl,
+      });
+    }
+  });
+
+  if (match) {
     div.querySelector('.identificar-btn-reportar').addEventListener('click', () => {
       cerrarIdentificar();
       seleccionarEspecieParaReportar(match.cientifico);
@@ -139,7 +148,7 @@ async function mostrarResultados(resultados, fotoDataUrl) {
   if (!resultados.length) {
     lista.innerHTML = '<p class="identificar-resultado__no-incluida">Pl@ntNet no ha devuelto ninguna especie para esta fotografía.</p>';
   } else {
-    resultados.forEach(r => lista.appendChild(crearTarjetaResultado(r, especies)));
+    resultados.forEach(r => lista.appendChild(crearTarjetaResultado(r, especies, fotoDataUrl)));
   }
 
   document.getElementById('identificar-btn-mandar-duda').onclick = () => {

@@ -68,9 +68,9 @@ function coincide(entry, q) {
 }
 
 function pasaFiltro(entry) {
-  if (filtroActivo === 'ramales') return entry.destacadaRamales;
   if (filtroActivo === 'todas') return true;
-  return entry.categoria === filtroActivo;
+  if (filtroActivo === 'destacadas') return !!entry.destacadaRamales;
+  return entry.estatus === filtroActivo;
 }
 
 const ETIQUETA_CATEGORIA = {
@@ -78,6 +78,20 @@ const ETIQUETA_CATEGORIA = {
   arbusto: 'Arbusto',
   arbol: 'Árbol',
   acuatica: 'Acuática',
+};
+
+const ETIQUETA_ESTATUS = {
+  autoctona: { texto: 'Autóctona', clase: 'autoctona' },
+  exotica: { texto: 'Exótica', clase: 'exotica' },
+  invasora: { texto: 'Invasora', clase: 'invasora' },
+};
+
+// Mensaje del estado vacío: distinto según si la categoría todavía no
+// tiene especies cargadas (autóctonas/exóticas, pendientes de fase 2) o
+// si simplemente no hay resultados para la búsqueda/filtro actual.
+const MENSAJE_VACIO_CATEGORIA = {
+  autoctona: 'Todavía no hemos incorporado especies autóctonas a la guía. Iremos ampliándola progresivamente.',
+  exotica: 'Todavía no hemos incorporado especies exóticas no invasoras a la guía. Iremos ampliándola progresivamente.',
 };
 
 // ── Tarjetas ──
@@ -91,6 +105,7 @@ function crearTarjeta(entry, destacada) {
   card.setAttribute('aria-label', 'Ver la especie: ' + nombreComun);
 
   const etiquetaCategoria = ETIQUETA_CATEGORIA[entry.categoria] || '';
+  const estatus = ETIQUETA_ESTATUS[entry.estatus] || null;
 
   card.innerHTML = `
     ${foto
@@ -99,7 +114,7 @@ function crearTarjeta(entry, destacada) {
     <span class="especie-card__cuerpo">
       <span class="especie-card__comun">${nombreComun}</span>
       <span class="especie-card__cientifico">${entry.cientifico}</span>
-      ${!destacada && etiquetaCategoria ? `<span class="especie-card__ambito">${etiquetaCategoria}</span>` : ''}
+      ${!destacada && etiquetaCategoria ? `<span class="especie-card__ambito">${etiquetaCategoria}${estatus ? ' · ' + estatus.texto : ''}</span>` : ''}
       <span class="especie-card__ver">Ver la especie →</span>
     </span>`;
 
@@ -128,8 +143,11 @@ function renderCatalogo() {
   resultado.slice(0, visibles).forEach(entry => grid.appendChild(crearTarjeta(entry, false)));
 
   vacio.hidden = resultado.length > 0;
+  vacio.textContent = (!consulta && MENSAJE_VACIO_CATEGORIA[filtroActivo])
+    ? MENSAJE_VACIO_CATEGORIA[filtroActivo]
+    : 'No hemos encontrado ninguna especie con ese nombre.';
   info.textContent = resultado.length
-    ? `${resultado.length} especie${resultado.length === 1 ? '' : 's'} de la guía de Cantabria`
+    ? `${resultado.length} especie${resultado.length === 1 ? '' : 's'} en la guía`
     : '';
   btnMas.hidden = resultado.length <= visibles;
 }
@@ -192,6 +210,26 @@ function abrirFicha(entry) {
   document.getElementById('ficha-cientifico').textContent = entry.cientifico;
   actualizarFoto();
 
+  // Estatus (autóctona / exótica / invasora) — solo se muestra cuando
+  // tenemos una clasificación fiable; no se inventa para especies sin
+  // esa información todavía.
+  const estatusEl = document.getElementById('ficha-estatus');
+  const estatus = ETIQUETA_ESTATUS[entry.estatus];
+  if (estatusEl) {
+    if (estatus) {
+      estatusEl.textContent = estatus.texto;
+      estatusEl.className = 'ficha-estatus ficha-estatus--' + estatus.clase;
+      estatusEl.hidden = false;
+    } else {
+      estatusEl.hidden = true;
+    }
+  }
+
+  // Aviso para especies identificadas por Pl@ntNet que todavía no
+  // forman parte de nuestra guía botánica (sin ficha propia).
+  const avisoExterna = document.getElementById('ficha-aviso-externa');
+  if (avisoExterna) avisoExterna.hidden = !entry.fuenteExterna;
+
   // ¿Cómo reconocerla?
   const seccionReconocer = document.getElementById('ficha-seccion-reconocer');
   if (entry.comoReconocerla) {
@@ -227,24 +265,34 @@ function abrirFicha(entry) {
   }
 
   // ¿Es una especie invasora?
-  const invasoraPartes = [];
-  invasoraPartes.push(entry.enCatalogoNacionalCEEEI
-    ? 'Está incluida en el Catálogo Español de Especies Exóticas Invasoras (CEEEI) de ámbito estatal.'
-    : 'No figura en el Catálogo Español de Especies Exóticas Invasoras (CEEEI) de ámbito estatal, pero sí está identificada como especie objetivo en el Plan Estratégico Regional de Cantabria.');
-  if (entry.erradicacionCantabria) {
-    invasoraPartes.push(`Posibilidad de erradicación en Cantabria: ${entry.erradicacionCantabria.toLowerCase()}.`);
+  const seccionInvasora = document.getElementById('ficha-seccion-invasora');
+  if (entry.fuenteExterna) {
+    document.getElementById('ficha-invasora').textContent = 'Todavía no forma parte de nuestra guía botánica: no disponemos de información propia sobre su estatus (autóctona, exótica o invasora) ni de medidas de control.';
+    seccionInvasora.hidden = false;
+  } else {
+    const invasoraPartes = [];
+    invasoraPartes.push(entry.enCatalogoNacionalCEEEI
+      ? 'Está incluida en el Catálogo Español de Especies Exóticas Invasoras (CEEEI) de ámbito estatal.'
+      : 'No figura en el Catálogo Español de Especies Exóticas Invasoras (CEEEI) de ámbito estatal, pero sí está identificada como especie objetivo en el Plan Estratégico Regional de Cantabria.');
+    if (entry.erradicacionCantabria) {
+      invasoraPartes.push(`Posibilidad de erradicación en Cantabria: ${entry.erradicacionCantabria.toLowerCase()}.`);
+    }
+    if (entry.medidasControl) {
+      invasoraPartes.push(entry.medidasControl);
+    }
+    document.getElementById('ficha-invasora').textContent = invasoraPartes.join(' ');
+    seccionInvasora.hidden = false;
   }
-  if (entry.medidasControl) {
-    invasoraPartes.push(entry.medidasControl);
-  }
-  document.getElementById('ficha-invasora').textContent = invasoraPartes.join(' ');
-  document.getElementById('ficha-seccion-invasora').hidden = false;
 
   // Fuentes
   const fuentes = [];
-  fuentes.push('<li><a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> — Gobierno de Cantabria (2017)</li>');
-  if (entry.enCatalogoNacionalCEEEI) {
-    fuentes.push('<li><a href="https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html" target="_blank" rel="noopener">Catálogo Español de Especies Exóticas Invasoras (CEEEI)</a> — MITECO</li>');
+  if (entry.fuenteExterna) {
+    fuentes.push('<li>Identificación automática por <a href="https://my.plantnet.org/" target="_blank" rel="noopener">Pl@ntNet</a></li>');
+  } else {
+    fuentes.push('<li><a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> — Gobierno de Cantabria (2017)</li>');
+    if (entry.enCatalogoNacionalCEEEI) {
+      fuentes.push('<li><a href="https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html" target="_blank" rel="noopener">Catálogo Español de Especies Exóticas Invasoras (CEEEI)</a> — MITECO</li>');
+    }
   }
   (entry.fotos || []).forEach(f => {
     if (f.imageSourceUrl && f.imageSource) {
@@ -394,6 +442,22 @@ export function abrirFichaPorCientifico(cientifico) {
   const entry = ESPECIES.find(e => normalizar(e.cientifico) === nc);
   if (entry) abrirFicha(entry);
   return entry || null;
+}
+
+// Abre una ficha "mínima" para una especie identificada por Pl@ntNet
+// que todavía no está en nuestra guía botánica (las 76 fichas actuales).
+// Reutiliza el mismo panel de ficha, con solo los datos que tenemos:
+// nombre científico/común de Pl@ntNet y la fotografía que ha hecho la
+// persona usuaria. No se inventa estatus, familia ni medidas de control.
+export function abrirFichaExterna({ cientifico, comunes, fotoDataUrl }) {
+  const entry = {
+    cientifico,
+    comunes: Array.isArray(comunes) ? comunes.filter(Boolean) : [],
+    fotos: fotoDataUrl ? [{ image: fotoDataUrl }] : [],
+    estatus: null,
+    fuenteExterna: true,
+  };
+  abrirFicha(entry);
 }
 
 export function getEspecies() {

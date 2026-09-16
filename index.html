@@ -47,7 +47,7 @@
     <ul class="menu-list">
       <li><button type="button" class="menu-link" data-goto="inicio">Inicio</button></li>
       <li><button type="button" class="menu-link js-abrir-identificar">📷 Identificar planta</button></li>
-      <li><button type="button" class="menu-link" data-goto="especies-info">🌿 Guía de especies</button></li>
+      <li><button type="button" class="menu-link" data-goto="especies-info">🌿 Guía botánica</button></li>
       <li><span class="menu-link menu-link--disabled" aria-disabled="true">🗺️ Mapa de observaciones <span class="menu-tag">Próximamente</span></span></li>
       <li><button type="button" class="menu-link" data-goto="sobre-proyecto">ℹ️ Sobre el proyecto</button></li>
       <li><button type="button" class="menu-link" data-goto="como-reportar">Cómo hacer un buen reporte</button></li>
@@ -111,8 +111,8 @@
       <div class="home-links">
         <button type="button" class="home-link" data-goto="especies-info">
           <span class="home-link__icon" aria-hidden="true">🌿</span>
-          <span class="home-link__titulo">Guía de especies</span>
-          <span class="home-link__texto visually-hidden">Conoce las plantas invasoras y la flora de Ramales.</span>
+          <span class="home-link__titulo">Guía botánica</span>
+          <span class="home-link__texto visually-hidden">Descubre las especies que crecen en nuestro entorno.</span>
         </button>
         <span class="home-link home-link--disabled" aria-disabled="true">
           <span class="home-link__icon" aria-hidden="true">🗺️</span>
@@ -164,11 +164,11 @@
     </div>
   </section>
 
-  <!-- ESPECIES INVASORAS (informativa) -->
+  <!-- GUÍA BOTÁNICA (informativa) -->
   <section id="screen-especies-info" class="screen content-page" aria-labelledby="especies-info-titulo">
     <p class="content-label">Ramales Natural</p>
-    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">Especies invasoras</h1>
-    <p class="content-lead">Una pequeña guía visual para reconocer la flora invasora de Cantabria. Búscala, compárala con fotografías y hazte una idea de qué has visto. Si no estás seguro, no pasa nada: te ayudamos a identificarla.</p>
+    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">🌿 Guía botánica</h1>
+    <p class="content-lead">Descubre las especies que crecen en nuestro entorno. Búscalas, compáralas con fotografías y hazte una idea de qué has visto. Si no estás seguro, no pasa nada: te ayudamos a identificarla.</p>
 
     <div class="catalogo-buscador">
       <span class="catalogo-buscador__icon" aria-hidden="true">🔎</span>
@@ -176,7 +176,7 @@
     </div>
 
     <div class="catalogo-seccion">
-      <h2 class="catalogo-seccion__titulo">Las más relevantes en Ramales</h2>
+      <h2 class="catalogo-seccion__titulo">Destacadas de Ramales</h2>
       <div class="catalogo-grid catalogo-grid--destacadas" id="catalogo-destacadas"></div>
     </div>
 
@@ -187,18 +187,17 @@
       <button type="button" class="btn btn-accent identificar-cta__btn" id="btn-identificar">📷 Ayúdame a identificarla</button>
     </div>
 
-    <div class="catalogo-filtros" id="catalogo-filtros" role="group" aria-label="Filtrar guía de especies">
+    <div class="catalogo-filtros" id="catalogo-filtros" role="group" aria-label="Filtrar guía botánica">
       <button type="button" class="catalogo-filtro is-active" data-filtro="todas">Todas</button>
-      <button type="button" class="catalogo-filtro" data-filtro="ramales">Más relevantes en Ramales</button>
-      <button type="button" class="catalogo-filtro" data-filtro="herbacea">Herbáceas</button>
-      <button type="button" class="catalogo-filtro" data-filtro="arbusto">Arbustos</button>
-      <button type="button" class="catalogo-filtro" data-filtro="arbol">Árboles</button>
-      <button type="button" class="catalogo-filtro" data-filtro="acuatica">Acuáticas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="autoctona">Autóctonas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="exotica">Exóticas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="invasora">Invasoras</button>
+      <button type="button" class="catalogo-filtro" data-filtro="destacadas">Destacadas de Ramales</button>
     </div>
 
     <div class="catalogo-seccion">
-      <h2 class="catalogo-seccion__titulo">Guía de especies invasoras de Cantabria</h2>
-      <p class="catalogo-fuente">Fuente oficial: <a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> (Gobierno de Cantabria, 2017)</p>
+      <h2 class="catalogo-seccion__titulo">Especies documentadas</h2>
+      <p class="catalogo-fuente">Fuente oficial (especies invasoras): <a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> (Gobierno de Cantabria, 2017)</p>
       <p class="catalogo-resultados" id="catalogo-resultados-info" aria-live="polite"></p>
       <div class="catalogo-grid" id="catalogo-grid"></div>
       <p class="catalogo-vacio" id="catalogo-vacio" hidden>No hemos encontrado ninguna especie con ese nombre.</p>
@@ -230,6 +229,8 @@
       <div class="ficha-cuerpo">
         <p class="ficha-comun" id="ficha-comun"></p>
         <p class="ficha-cientifico" id="ficha-cientifico"></p>
+        <span class="ficha-estatus" id="ficha-estatus" hidden></span>
+        <p class="ficha-aviso-externa" id="ficha-aviso-externa" hidden>🌱 Identificada por Pl@ntNet. Todavía no forma parte de nuestra guía botánica de Ramales.</p>
 
         <div class="ficha-seccion" id="ficha-seccion-reconocer">
           <h3>¿Cómo reconocerla?</h3>
