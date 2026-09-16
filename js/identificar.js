@@ -289,11 +289,11 @@ function cerrarIdentificar() {
 }
 
 export function initIdentificar() {
-  const btnAbrir = document.getElementById('btn-identificar');
+  const botonesAbrir = document.querySelectorAll('#btn-identificar, .js-abrir-identificar');
   const overlay = document.getElementById('identificar-overlay');
-  if (!btnAbrir || !overlay) return;
+  if (!botonesAbrir.length || !overlay) return;
 
-  btnAbrir.addEventListener('click', abrirIdentificar);
+  botonesAbrir.forEach(btn => btn.addEventListener('click', abrirIdentificar));
   document.getElementById('identificar-cerrar').addEventListener('click', cerrarIdentificar);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrarIdentificar(); });
   document.addEventListener('keydown', (e) => { if (!overlay.hidden && e.key === 'Escape') cerrarIdentificar(); });

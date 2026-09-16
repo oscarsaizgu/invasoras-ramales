@@ -63,25 +63,62 @@
   <!-- PORTADA -->
   <section id="screen-inicio" class="screen home" aria-labelledby="inicio-titulo">
     <div class="home-hero">
-      <img class="home-hero__photo" src="images/paisajes/hero-ramales.jpg" alt="Vista de las montañas y el valle de Ramales de la Victoria">
+      <img class="home-hero__photo" src="images/paisajes/rio-ramales.jpg" alt="Río y valle de Ramales de la Victoria">
       <div class="home-hero__overlay" aria-hidden="true"></div>
     </div>
 
     <div class="home-body">
       <p class="home__label">Ramales Natural · Invasoras</p>
-      <h1 id="inicio-titulo" tabindex="-1">¿Has visto una<br>planta invasora?</h1>
-      <p>Ayúdanos a localizarla y a conocer su presencia en nuestro entorno.</p>
-      <button type="button" class="btn btn-primary home__cta" id="btn-empezar">+ Hacer un reporte</button>
-      <p class="home__note">No necesitas saber identificar la especie.</p>
+      <h1 id="inicio-titulo" tabindex="-1">Descubre la biodiversidad de Ramales</h1>
+      <p>Conoce, protege, actúa.</p>
 
-      <div class="home-card">
-        <span class="home-card__leaf" aria-hidden="true">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 5C48 11 56 27 49 42 44 53 34 59 32 60 30 59 20 53 15 42 8 27 16 11 32 5Z" fill="currentColor"/><path d="M32 12V54" stroke="var(--verde)" stroke-width="1.6" opacity="0.35"/></svg>
+      <!-- Acción principal: identificación por fotografía -->
+      <div class="id-card">
+        <img class="id-card__foto" src="images/plumero.jpg" alt="Ejemplo de planta del catálogo de especies de Ramales">
+        <div class="id-card__contenido">
+          <p class="id-card__eyebrow">¿Qué planta es?</p>
+          <p class="id-card__texto">Haz una foto y te ayudamos a identificarla.</p>
+          <ul class="id-card__lista">
+            <li>🌿 Identificación con IA</li>
+            <li>📖 Información de la especie</li>
+            <li>⚠️ Te avisamos si es invasora</li>
+          </ul>
+          <button type="button" class="btn btn-primary id-card__btn js-abrir-identificar" id="btn-identificar-home">📷 Hacer una foto →</button>
+          <p class="id-card__nota">No necesitas saber qué especie es.</p>
+        </div>
+      </div>
+
+      <!-- Acción secundaria: reporte directo -->
+      <div class="report-card">
+        <p class="report-card__eyebrow">🌿 ¿Ya sabes qué es?</p>
+        <p class="report-card__texto">Envía un reporte con la especie, el lugar y, si quieres, una fotografía.</p>
+        <button type="button" class="btn btn-secondary report-card__btn" id="btn-empezar">+ Hacer un reporte →</button>
+      </div>
+
+      <!-- Enlaces secundarios -->
+      <div class="home-links">
+        <button type="button" class="home-link" data-goto="especies-info">
+          <span class="home-link__icon" aria-hidden="true">🌿</span>
+          <span class="home-link__titulo">Guía de especies</span>
+          <span class="home-link__texto">Conoce las plantas invasoras y la flora de Ramales.</span>
+        </button>
+        <span class="home-link home-link--disabled" aria-disabled="true">
+          <span class="home-link__icon" aria-hidden="true">🗺️</span>
+          <span class="home-link__titulo">Mapa de observaciones <span class="menu-tag">Próximamente</span></span>
+          <span class="home-link__texto">Consulta dónde se han visto especies invasoras.</span>
         </span>
-        <p class="home-card__title">Juntos por un entorno más natural</p>
-        <p class="home-card__text">La ciencia ciudadana también protege la biodiversidad.</p>
+        <button type="button" class="home-link" data-goto="sobre-proyecto">
+          <span class="home-link__icon" aria-hidden="true">ℹ️</span>
+          <span class="home-link__titulo">Sobre el proyecto</span>
+          <span class="home-link__texto">Descubre el objetivo de esta iniciativa.</span>
+        </button>
       </div>
     </div>
+
+    <svg class="home-silueta" viewBox="0 0 640 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 90 L0 55 60 30 130 60 200 20 270 55 340 15 420 58 490 32 560 60 640 40 640 90Z" fill="var(--verde)" opacity="0.08"/>
+      <path d="M0 90 L0 70 90 48 170 72 250 42 330 68 410 40 500 66 580 46 640 64 640 90Z" fill="var(--verde)" opacity="0.14"/>
+    </svg>
   </section>
 
   <!-- SOBRE EL PROYECTO -->
