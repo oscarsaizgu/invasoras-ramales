@@ -7278,5 +7278,2322 @@
                 "url": "https://www.gbif.org/species/search?q=Platanus%20x%20hispanica"
             }
         ]
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Chopo",
+            "Álamo negro"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "populus-nigra",
+                "image": "assets/especies/populus-nigra.jpg",
+                "imageAuthor": "(c) \n\nAyotte, Gilles, 1948-, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/47565",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "populus-nigra-2",
+                "image": "assets/especies/populus-nigra-2.jpg",
+                "imageAuthor": "(c) Elena Kapitokhina, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/162752950",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "populus-nigra-3",
+                "image": "assets/especies/populus-nigra-3.jpg",
+                "imageAuthor": "(c) Корепанова Татьяна, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/70354254",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "populus-nigra-4",
+                "image": "assets/especies/populus-nigra-4.jpg",
+                "imageAuthor": "(c) Ryan E. Gray, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/200093293",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "populus-nigra-5",
+                "image": "assets/especies/populus-nigra-5.jpg",
+                "imageAuthor": "(c) martapar, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/212825292",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Populus nigra",
+        "familia": "Salicaceae",
+        "biotipo": "Macrofanerófito (árbol caducifolio)",
+        "categoria": "arbol",
+        "origen": "Europa y Asia occidental",
+        "estatus": "autoctona",
+        "queEs": "Árbol caducifolio de ribera, de los más característicos de las choperas naturales a lo largo de ríos y arroyos.",
+        "comoReconocerla": "Porte esbelto, corteza muy agrietada en ejemplares viejos. Hojas romboidales o triangulares, con el pecíolo aplanado lateralmente, lo que hace temblar el follaje con el viento.",
+        "hojas": "Romboidal-triangulares, de borde finamente dentado, pecíolo aplanado.",
+        "flores": "Amentos colgantes, unisexuales, antes de la brotación de las hojas.",
+        "frutosSemillas": "Cápsulas con semillas diminutas rodeadas de pelos algodonosos, dispersadas por el viento.",
+        "floracion": "Finales de invierno, antes de la foliación.",
+        "habitat": "Riberas de ríos y arroyos, choperas y saucedas de vega.",
+        "distribucionGeneralidades": "Ampliamente distribuido por la Península Ibérica en cursos de agua de baja y media altitud, incluida Cantabria.",
+        "interesEcologico": "Estabiliza las orillas de los ríos y sostiene fauna asociada al bosque de ribera.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Populus nigra)",
+                "url": "https://www.gbif.org/species/search?q=Populus%20nigra"
+            }
+        ],
+        "id": "populus-nigra"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Sauce cabruno",
+            "Salguera"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "salix-caprea",
+                "image": "assets/especies/salix-caprea.jpg",
+                "imageAuthor": "(c) Janne Uusitalo, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/54441751",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "salix-caprea-2",
+                "image": "assets/especies/salix-caprea-2.jpg",
+                "imageAuthor": "(c) thobertelmann, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/101204463",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "salix-caprea-3",
+                "image": "assets/especies/salix-caprea-3.jpg",
+                "imageAuthor": "(c) Maria A. Vereshchagina, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/314159265",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "salix-caprea-4",
+                "image": "assets/especies/salix-caprea-4.jpg",
+                "imageAuthor": "(c) JasminkaVampovac, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/340828352",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "salix-caprea-5",
+                "image": "assets/especies/salix-caprea-5.jpg",
+                "imageAuthor": "(c) Екатерина Гущина, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/374433566",
+                "imageLicense": "cc-by"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Salix caprea",
+        "familia": "Salicaceae",
+        "biotipo": "Mesofanerófito (árbol o arbusto caducifolio)",
+        "categoria": "arbol",
+        "origen": "Europa y Asia templada",
+        "estatus": "autoctona",
+        "queEs": "Sauce de hoja ancha, uno de los primeros arbustos en florecer al final del invierno, con sus característicos amentos plateados ('gatillos').",
+        "comoReconocerla": "Hojas anchas, ovaladas, más redondeadas que las de otros sauces (no lineares). Amentos vellosos, plateados, muy vistosos antes de la brotación foliar.",
+        "hojas": "Anchamente ovaladas u obovadas, de haz rugoso y envés grisáceo-tomentoso.",
+        "flores": "Amentos unisexuales sobre pies distintos (dioica); los masculinos amarillos por el polen, muy vistosos.",
+        "floracion": "Finales de invierno, antes de la foliación.",
+        "habitat": "Claros de bosque, setos, orlas forestales y zonas húmedas, sin exigir cercanía inmediata al agua a diferencia de otros sauces.",
+        "distribucionGeneralidades": "Frecuente en el norte peninsular, incluida la región atlántica cantábrica.",
+        "interesEcologico": "Fuente de polen y néctar tempranos para polinizadores al final del invierno.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Salix caprea)",
+                "url": "https://www.gbif.org/species/search?q=Salix%20caprea"
+            }
+        ],
+        "id": "salix-caprea"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Durillo"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "viburnum-tinus",
+                "image": "assets/especies/viburnum-tinus.jpg",
+                "imageAuthor": "(c) Cassiopée2010, some rights reserved (CC BY-NC-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/82666",
+                "imageLicense": "cc-by-nc-sa"
+            },
+            {
+                "id": "viburnum-tinus-2",
+                "image": "assets/especies/viburnum-tinus-2.jpg",
+                "imageAuthor": "(c) zebedeugalinha, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/396228265",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "viburnum-tinus-3",
+                "image": "assets/especies/viburnum-tinus-3.jpg",
+                "imageAuthor": "(c) Jack Warden, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/52328765",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "viburnum-tinus-4",
+                "image": "assets/especies/viburnum-tinus-4.jpg",
+                "imageAuthor": "(c) Γιώργος Παντάκης, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/135642054",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "viburnum-tinus-5",
+                "image": "assets/especies/viburnum-tinus-5.jpg",
+                "imageAuthor": "(c) berengerekusiak, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/239756338",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Viburnum tinus",
+        "familia": "Adoxaceae/Caprifoliaceae",
+        "biotipo": "Nanofanerófito (arbusto perennifolio)",
+        "categoria": "arbusto",
+        "origen": "Región mediterránea y atlántica",
+        "estatus": "autoctona",
+        "queEs": "Arbusto perennifolio de sotobosque, con floración invernal muy vistosa y frutos azul-negruzcos metálicos.",
+        "comoReconocerla": "Hojas perennes, opuestas, ovaladas, de borde entero y algo coriáceas. Flores blancas o rosadas en corimbos densos.",
+        "hojas": "Perennes, opuestas, ovado-lanceoladas, verde oscuro brillante en el haz.",
+        "flores": "Blancas o rosadas, en corimbos terminales densos.",
+        "frutosSemillas": "Drupas ovoides que maduran de un azul metálico a negro.",
+        "floracion": "Invierno a primavera.",
+        "habitat": "Sotobosque de bosques atlánticos y mediterráneos, setos y orlas forestales.",
+        "distribucionGeneralidades": "Frecuente en el sotobosque de robledales y encinares del norte de España, incluida Cantabria.",
+        "interesEcologico": "Floración invernal que aporta recurso a polinizadores en época de escasez; frutos consumidos por aves.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Viburnum tinus)",
+                "url": "https://www.gbif.org/species/search?q=Viburnum%20tinus"
+            }
+        ],
+        "id": "viburnum-tinus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Arraclán",
+            "Aliso negro"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "frangula-alnus",
+                "image": "assets/especies/frangula-alnus.jpg",
+                "imageAuthor": "(c) magnaturalist, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/121148166",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "frangula-alnus-2",
+                "image": "assets/especies/frangula-alnus-2.jpg",
+                "imageAuthor": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/212562079",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "frangula-alnus-3",
+                "image": "assets/especies/frangula-alnus-3.jpg",
+                "imageAuthor": "(c) ehilley, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/377449402",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "frangula-alnus-4",
+                "image": "assets/especies/frangula-alnus-4.jpg",
+                "imageAuthor": "(c) Karro Frost, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/51754511",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "frangula-alnus-5",
+                "image": "assets/especies/frangula-alnus-5.jpg",
+                "imageAuthor": "(c) David Matevosian, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/300492400",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Frangula alnus",
+        "familia": "Rhamnaceae",
+        "biotipo": "Nanofanerófito (arbusto o arbolillo caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa",
+        "estatus": "autoctona",
+        "queEs": "Arbusto caducifolio de zonas húmedas y turberas, de corteza tradicionalmente usada en la industria de la pólvora vegetal (carbón vegetal ligero) y en farmacopea.",
+        "comoReconocerla": "Hojas alternas, ovaladas, de nerviación muy marcada y paralela. Corteza con lenticelas blanquecinas alargadas.",
+        "hojas": "Alternas, elípticas, con 7-9 pares de nervios secundarios paralelos muy visibles.",
+        "frutosSemillas": "Drupas que pasan de rojas a negras al madurar, tóxicas para el ser humano.",
+        "floracion": "Primavera-verano.",
+        "habitat": "Bordes de turberas, bosques húmedos y riberas sobre suelos encharcados.",
+        "distribucionGeneralidades": "Presente de forma dispersa en la España atlántica, en enclaves húmedos y turberas de Cantabria.",
+        "interesEcologico": "Componente característico de la vegetación de turbera y bosque húmedo, hábitats escasos y de interés de conservación.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Frangula alnus)",
+                "url": "https://www.gbif.org/species/search?q=Frangula%20alnus"
+            }
+        ],
+        "id": "frangula-alnus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Rosal silvestre",
+            "Escaramujo"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "rosa-canina",
+                "image": "assets/especies/rosa-canina.jpg",
+                "imageAuthor": "(c) Athina, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/83815333",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rosa-canina-2",
+                "image": "assets/especies/rosa-canina-2.jpg",
+                "imageAuthor": "(c) Ken Potter, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/68523462",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rosa-canina-3",
+                "image": "assets/especies/rosa-canina-3.jpg",
+                "imageAuthor": "(c) Antje, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/367759616",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rosa-canina-4",
+                "image": "assets/especies/rosa-canina-4.jpg",
+                "imageAuthor": "(c) Papageorgiou Nikolaos, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/77931587",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rosa-canina-5",
+                "image": "assets/especies/rosa-canina-5.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/214376724",
+                "imageLicense": "cc0"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Rosa canina",
+        "familia": "Rosaceae",
+        "biotipo": "Nanofanerófito (arbusto caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa, Asia occidental y norte de África",
+        "estatus": "autoctona",
+        "queEs": "El rosal silvestre más común de setos y linderos, cuyos frutos rojos (escaramujos) son muy ricos en vitamina C.",
+        "comoReconocerla": "Arbusto trepador-arqueado con aguijones curvados. Hojas compuestas por 5-7 folíolos dentados. Flores rosadas o blancas de 5 pétalos.",
+        "hojas": "Compuestas, imparipinnadas, con 5-7 folíolos dentados.",
+        "flores": "Rosadas o blancas, de 5 pétalos, solitarias o en pequeños grupos.",
+        "frutosSemillas": "Falso fruto (cinorrodón) ovoide, rojo brillante al madurar, muy usado en mermeladas e infusiones.",
+        "floracion": "Finales de primavera-verano.",
+        "fructificacion": "Otoño.",
+        "habitat": "Setos, linderos, orlas de bosque y matorrales, en general en zonas más soleadas que el interior del bosque cerrado.",
+        "distribucionGeneralidades": "Una de las rosas silvestres más extendidas por toda la Península, presente en Cantabria en setos y bordes de camino.",
+        "interesEcologico": "Sus frutos son un recurso alimenticio importante para aves en invierno.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Rosa canina)",
+                "url": "https://www.gbif.org/species/search?q=Rosa%20canina"
+            }
+        ],
+        "id": "rosa-canina"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Madreselva"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "lonicera-periclymenum",
+                "image": "assets/especies/lonicera-periclymenum.jpg",
+                "imageAuthor": "(c) Derek Winterburn, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/119913813",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "lonicera-periclymenum-2",
+                "image": "assets/especies/lonicera-periclymenum-2.jpg",
+                "imageAuthor": "(c) Kai-Philipp Schablewski, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/53521736",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "lonicera-periclymenum-3",
+                "image": "assets/especies/lonicera-periclymenum-3.jpg",
+                "imageAuthor": "(c) Melinda Creech, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/9318103",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "lonicera-periclymenum-4",
+                "image": "assets/especies/lonicera-periclymenum-4.jpg",
+                "imageAuthor": "(c) Joan Faiola, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/28940123",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "lonicera-periclymenum-5",
+                "image": "assets/especies/lonicera-periclymenum-5.jpg",
+                "imageAuthor": "(c) Katherine Wright, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/29093151",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Lonicera periclymenum",
+        "familia": "Caprifoliaceae",
+        "biotipo": "Liana/arbusto trepador caducifolio",
+        "categoria": "arbusto",
+        "origen": "Europa occidental",
+        "estatus": "autoctona",
+        "queEs": "Madreselva silvestre, trepadora nativa de setos y linderos de bosque, de flores muy perfumadas al atardecer (distinta de la especie asiática Lonicera japonica, que sí es exótica).",
+        "comoReconocerla": "Trepadora leñosa que se enrosca en sentido horario sobre otros arbustos. Hojas opuestas ovaladas. Flores tubulares bicolores (blanco-amarillento y rosado-púrpura por fuera), muy aromáticas de noche.",
+        "hojas": "Opuestas, ovaladas, de borde entero, sin fusionarse en la base (a diferencia de otras loniceras).",
+        "flores": "Tubulares, bilabiadas, blanco-crema por dentro y teñidas de púrpura por fuera, muy perfumadas al anochecer.",
+        "frutosSemillas": "Bayas rojas agrupadas, tóxicas para el consumo humano.",
+        "floracion": "Verano.",
+        "habitat": "Setos, orlas de bosque caducifolio y matorrales, trepando sobre otros arbustos.",
+        "distribucionGeneralidades": "Muy frecuente en toda la España atlántica, incluida Cantabria, en setos y bordes de bosque.",
+        "interesEcologico": "Flores polinizadas principalmente por polillas nocturnas, atraídas por su intenso aroma vespertino.",
+        "curiosidades": "No debe confundirse con Lonicera japonica, especie asiática invasora presente también en esta guía: la nativa nunca fusiona la base de sus hojas superiores en torno al tallo.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Lonicera periclymenum)",
+                "url": "https://www.gbif.org/species/search?q=Lonicera%20periclymenum"
+            }
+        ],
+        "id": "lonicera-periclymenum"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Arándano"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "vaccinium-myrtillus",
+                "image": "assets/especies/vaccinium-myrtillus.jpg",
+                "imageAuthor": "(c) Дмитрий Власов, some rights reserved (CC BY-NC), uploaded by Дмитрий Власов",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/127029",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "vaccinium-myrtillus-2",
+                "image": "assets/especies/vaccinium-myrtillus-2.jpg",
+                "imageAuthor": "(c) Valentin Hamon, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/153224714",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "vaccinium-myrtillus-3",
+                "image": "assets/especies/vaccinium-myrtillus-3.jpg",
+                "imageAuthor": "(c) Matthias Buck, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/332247733",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "vaccinium-myrtillus-4",
+                "image": "assets/especies/vaccinium-myrtillus-4.jpg",
+                "imageAuthor": "(c) Filipi Miranda Soares, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/168048452",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "vaccinium-myrtillus-5",
+                "image": "assets/especies/vaccinium-myrtillus-5.jpg",
+                "imageAuthor": "(c) Pertti Suomi, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/282688993",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Vaccinium myrtillus",
+        "familia": "Ericaceae",
+        "biotipo": "Camaefito (subarbusto caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa y Asia templada",
+        "estatus": "autoctona",
+        "queEs": "Pequeño arbusto de montaña, de tallos angulosos verdes y frutos azul-negruzcos comestibles, propio de brezales y bosques de montaña.",
+        "comoReconocerla": "Subarbusto bajo de tallos verdes angulosos. Hojas pequeñas, ovaladas, caducas. Frutos globosos azul-negruzcos con pruina.",
+        "hojas": "Pequeñas, ovadas, de borde finamente aserrado, caducas.",
+        "frutosSemillas": "Bayas globosas azul-negruzcas, con pruina cerosa, comestibles.",
+        "floracion": "Primavera.",
+        "fructificacion": "Verano.",
+        "habitat": "Brezales y claros de bosque de montaña, sobre suelos ácidos.",
+        "distribucionGeneralidades": "Presente en las zonas de montaña del norte de España, incluidas las sierras del sur de Cantabria.",
+        "interesEcologico": "Sus frutos son un recurso alimenticio relevante para aves y mamíferos de montaña.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Vaccinium myrtillus)",
+                "url": "https://www.gbif.org/species/search?q=Vaccinium%20myrtillus"
+            }
+        ],
+        "id": "vaccinium-myrtillus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Aladierno"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "rhamnus-alaternus",
+                "image": "assets/especies/rhamnus-alaternus.jpg",
+                "imageAuthor": "(c) jirau, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/82856",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "rhamnus-alaternus-2",
+                "image": "assets/especies/rhamnus-alaternus-2.jpg",
+                "imageAuthor": "(c) Carmen Acedo, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/73551168",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rhamnus-alaternus-3",
+                "image": "assets/especies/rhamnus-alaternus-3.jpg",
+                "imageAuthor": "(c) bobasil, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/65688976",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rhamnus-alaternus-4",
+                "image": "assets/especies/rhamnus-alaternus-4.jpg",
+                "imageAuthor": "(c) jimclark, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/184873106",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rhamnus-alaternus-5",
+                "image": "assets/especies/rhamnus-alaternus-5.jpg",
+                "imageAuthor": "(c) David Claro, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/284079365",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Rhamnus alaternus",
+        "familia": "Rhamnaceae",
+        "biotipo": "Nanofanerófito (arbusto perennifolio)",
+        "categoria": "arbusto",
+        "origen": "Región mediterránea y atlántica",
+        "estatus": "autoctona",
+        "queEs": "Arbusto perennifolio de hoja coriácea, habitual en setos y matorrales, con floración discreta pero muy melífera.",
+        "comoReconocerla": "Hojas perennes, alternas, coriáceas, de borde a veces finamente dentado. Flores pequeñas verdosas poco vistosas.",
+        "hojas": "Perennes, ovado-elípticas, coriáceas, verde oscuro brillante.",
+        "flores": "Pequeñas, verdosas, poco vistosas, muy visitadas por insectos.",
+        "frutosSemillas": "Drupas globosas que pasan de rojas a negras.",
+        "floracion": "Primavera.",
+        "habitat": "Matorrales, setos y orlas de bosque, tanto en ambientes mediterráneos como en enclaves más secos de la región atlántica.",
+        "distribucionGeneralidades": "Presente de forma dispersa en Cantabria, sobre todo en laderas soleadas y afloramientos calizos.",
+        "interesEcologico": "Planta melífera apreciada por insectos polinizadores; frutos consumidos por aves.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Rhamnus alaternus)",
+                "url": "https://www.gbif.org/species/search?q=Rhamnus%20alaternus"
+            }
+        ],
+        "id": "rhamnus-alaternus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Boj"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "buxus-sempervirens",
+                "image": "assets/especies/buxus-sempervirens.jpg",
+                "imageAuthor": "(c) Attila Rigó, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/201699709",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "buxus-sempervirens-2",
+                "image": "assets/especies/buxus-sempervirens-2.jpg",
+                "imageAuthor": "(c) Platon Kleanthidis, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/178433221",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "buxus-sempervirens-3",
+                "image": "assets/especies/buxus-sempervirens-3.jpg",
+                "imageAuthor": "(c) Соколков Юрий Павлович, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/75055399",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "buxus-sempervirens-4",
+                "image": "assets/especies/buxus-sempervirens-4.jpg",
+                "imageAuthor": "(c) Instante Natural, some rights reserved (CC BY-NC-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/126702531",
+                "imageLicense": "cc-by-nc-sa"
+            },
+            {
+                "id": "buxus-sempervirens-5",
+                "image": "assets/especies/buxus-sempervirens-5.jpg",
+                "imageAuthor": "(c) Elaina Pecher, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/198425178",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Buxus sempervirens",
+        "familia": "Buxaceae",
+        "biotipo": "Nanofanerófito (arbusto o arbolillo perennifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa, norte de África y Asia occidental",
+        "estatus": "autoctona",
+        "queEs": "Arbusto perennifolio de crecimiento muy lento y madera dura, presente de forma natural en laderas calizas, además de ampliamente cultivado como seto ornamental.",
+        "comoReconocerla": "Hojas pequeñas, opuestas, coriáceas, ovaladas y de borde entero, de un verde oscuro característico.",
+        "hojas": "Pequeñas, opuestas, coriáceas, elípticas, de borde entero y algo enrolladas.",
+        "flores": "Pequeñas, verdosas, poco vistosas, agrupadas en las axilas.",
+        "floracion": "Finales de invierno-inicio de primavera.",
+        "habitat": "Laderas rocosas calizas y bosques abiertos; también muy cultivado en jardinería como seto.",
+        "distribucionGeneralidades": "Distribución fragmentada ligada a afloramientos calizos en el norte de España; presencia natural puntual en Cantabria además de la muy extendida como planta cultivada.",
+        "interesEcologico": "Formaciones naturales de boj (bujedos) son un hábitat de interés de conservación.",
+        "curiosidades": "Las poblaciones europeas de boj están sufriendo un fuerte declive por la oruga del boj (Cydalima perspectalis), una polilla exótica invasora.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Buxus sempervirens)",
+                "url": "https://www.gbif.org/species/search?q=Buxus%20sempervirens"
+            }
+        ],
+        "id": "buxus-sempervirens"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Arce blanco",
+            "Falso plátano"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "acer-pseudoplatanus",
+                "image": "assets/especies/acer-pseudoplatanus.jpg",
+                "imageAuthor": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/108175961",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "acer-pseudoplatanus-2",
+                "image": "assets/especies/acer-pseudoplatanus-2.jpg",
+                "imageAuthor": "(c) nina-houssais, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/64431321",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "acer-pseudoplatanus-3",
+                "image": "assets/especies/acer-pseudoplatanus-3.jpg",
+                "imageAuthor": "(c) Ninon Peyrat, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/64964232",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "acer-pseudoplatanus-4",
+                "image": "assets/especies/acer-pseudoplatanus-4.jpg",
+                "imageAuthor": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/35419885",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "acer-pseudoplatanus-5",
+                "image": "assets/especies/acer-pseudoplatanus-5.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/115701496",
+                "imageLicense": "cc0"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Acer pseudoplatanus",
+        "familia": "Sapindaceae",
+        "biotipo": "Macrofanerófito (árbol caducifolio)",
+        "categoria": "arbol",
+        "origen": "Europa central y meridional",
+        "estatus": "autoctona",
+        "queEs": "Árbol caducifolio de los bosques de montaña y barrancos frescos, con hojas palmeadas y frutos alados característicos (sámaras dobles).",
+        "comoReconocerla": "Hojas opuestas, palmeadas, con 5 lóbulos de borde dentado. Frutos en pares de sámaras aladas dispuestas en ángulo.",
+        "hojas": "Opuestas, palmeado-lobuladas (5 lóbulos), de borde dentado, largamente pecioladas.",
+        "flores": "Pequeñas, verde-amarillentas, en racimos colgantes.",
+        "frutosSemillas": "Sámaras dobles aladas ('helicópteros'), dispersadas por el viento.",
+        "floracion": "Primavera.",
+        "fructificacion": "Otoño.",
+        "habitat": "Bosques de barranco, laderas frescas de montaña y orlas de hayedos y robledales.",
+        "distribucionGeneralidades": "Presente en zonas de montaña y barrancos frescos del norte de España, incluida Cantabria.",
+        "interesEcologico": "Forma parte de los bosques mixtos de barranco, un hábitat de gran diversidad estructural.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Acer pseudoplatanus)",
+                "url": "https://www.gbif.org/species/search?q=Acer%20pseudoplatanus"
+            }
+        ],
+        "id": "acer-pseudoplatanus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Tilo"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "tilia-platyphyllos",
+                "image": "assets/especies/tilia-platyphyllos.jpg",
+                "imageAuthor": "(c) Andy Slater, some rights reserved (CC BY), uploaded by Andy Slater",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/169761",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "tilia-platyphyllos-2",
+                "image": "assets/especies/tilia-platyphyllos-2.jpg",
+                "imageAuthor": "(c) Antje, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/386411734",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "tilia-platyphyllos-3",
+                "image": "assets/especies/tilia-platyphyllos-3.jpg",
+                "imageAuthor": "(c) josefwirth, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/87742141",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "tilia-platyphyllos-4",
+                "image": "assets/especies/tilia-platyphyllos-4.jpg",
+                "imageAuthor": "(c) Dmitriy Bochkov, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/80714379",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "tilia-platyphyllos-5",
+                "image": "assets/especies/tilia-platyphyllos-5.jpg",
+                "imageAuthor": "(c) luca_naomi, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/47772135",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Tilia platyphyllos",
+        "familia": "Malvaceae/Tiliaceae",
+        "biotipo": "Macrofanerófito (árbol caducifolio)",
+        "categoria": "arbol",
+        "origen": "Europa",
+        "estatus": "autoctona",
+        "queEs": "Árbol caducifolio de gran porte y copa densa, muy longevo, de flores aromáticas tradicionalmente usadas en infusión.",
+        "comoReconocerla": "Hojas alternas, acorazonadas, asimétricas en la base, de borde dentado. Flores amarillentas colgantes, unidas a una bráctea alargada característica.",
+        "hojas": "Alternas, acorazonadas, asimétricas en la base, de borde aserrado.",
+        "flores": "Amarillentas, muy aromáticas, colgantes, con una bráctea membranosa alargada asociada al pedúnculo.",
+        "frutosSemillas": "Núculas pequeñas y tomentosas, unidas a la bráctea que actúa de ala en la dispersión.",
+        "floracion": "Verano (junio-julio).",
+        "habitat": "Bosques de barranco y laderas frescas de montaña, y muy plantado como árbol ornamental y de sombra.",
+        "distribucionGeneralidades": "Presente de forma natural en zonas de montaña del norte peninsular; en Cantabria también frecuente como árbol plantado en plazas y caminos.",
+        "interesEcologico": "Planta muy melífera, de gran importancia para la apicultura durante su floración estival.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Tilia platyphyllos)",
+                "url": "https://www.gbif.org/species/search?q=Tilia%20platyphyllos"
+            }
+        ],
+        "id": "tilia-platyphyllos"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Castaño"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "castanea-sativa",
+                "image": "assets/especies/castanea-sativa.jpg",
+                "imageAuthor": "(c) takomatic, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/54698692",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "castanea-sativa-2",
+                "image": "assets/especies/castanea-sativa-2.jpg",
+                "imageAuthor": "(c) Richard Paglione, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/38127753",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "castanea-sativa-3",
+                "image": "assets/especies/castanea-sativa-3.jpg",
+                "imageAuthor": "(c) soemoon, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/60707368",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "castanea-sativa-4",
+                "image": "assets/especies/castanea-sativa-4.jpg",
+                "imageAuthor": "(c) feyfriend, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/97287146",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "castanea-sativa-5",
+                "image": "assets/especies/castanea-sativa-5.jpg",
+                "imageAuthor": "(c) Alexander Baransky, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/98701188",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Castanea sativa",
+        "familia": "Fagaceae",
+        "biotipo": "Macrofanerófito (árbol caducifolio)",
+        "categoria": "arbol",
+        "origen": "Europa meridional y Asia Menor",
+        "estatus": "autoctona",
+        "queEs": "Árbol caducifolio de gran porte, cultivado y naturalizado desde época romana por su fruto (la castaña), formando bosques (castañares) muy característicos del paisaje cantábrico.",
+        "comoReconocerla": "Hojas alternas, alargadas, de borde fuertemente aserrado. Flores en largos amentos erectos amarillentos. Frutos (castañas) protegidos por un erizo espinoso.",
+        "hojas": "Alternas, oblongo-lanceoladas, de borde aserrado con dientes terminados en una pequeña punta.",
+        "flores": "Amentos erectos, amarillentos y muy vistosos, de olor penetrante.",
+        "frutosSemillas": "Castañas comestibles envueltas en un erizo espinoso (cúpula).",
+        "floracion": "Verano (junio-julio).",
+        "fructificacion": "Otoño.",
+        "habitat": "Castañares, muchas veces de origen antrópico pero naturalizados desde hace siglos; bosques y sotos tradicionales.",
+        "distribucionGeneralidades": "Los castañares son un elemento tradicional muy extendido del paisaje forestal de Cantabria.",
+        "importanciaCantabria": "El aprovechamiento de la castaña ha sido tradicionalmente relevante en la economía rural cántabra, y los castañares forman parte característica del paisaje de muchos valles.",
+        "interesEcologico": "Sostiene una comunidad específica de hongos, insectos xilófagos y fauna que se alimenta de castañas.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Castanea sativa)",
+                "url": "https://www.gbif.org/species/search?q=Castanea%20sativa"
+            }
+        ],
+        "id": "castanea-sativa"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Saúco"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "sambucus-nigra",
+                "image": "assets/especies/sambucus-nigra.jpg",
+                "imageAuthor": "(c) Attila Oláh, some rights reserved (CC BY), uploaded by Attila Oláh",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/765394",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "sambucus-nigra-2",
+                "image": "assets/especies/sambucus-nigra-2.jpg",
+                "imageAuthor": "(c) Rea Orthner, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/84253948",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "sambucus-nigra-3",
+                "image": "assets/especies/sambucus-nigra-3.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/95671167",
+                "imageLicense": "cc0"
+            },
+            {
+                "id": "sambucus-nigra-4",
+                "image": "assets/especies/sambucus-nigra-4.jpg",
+                "imageAuthor": "(c) markpillar, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/219728851",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "sambucus-nigra-5",
+                "image": "assets/especies/sambucus-nigra-5.jpg",
+                "imageAuthor": "(c) Nadezhda Zelenova, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/24899993",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Sambucus nigra",
+        "familia": "Adoxaceae/Caprifoliaceae",
+        "biotipo": "Nanofanerófito (arbusto o arbolillo caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa, norte de África y Asia occidental",
+        "estatus": "autoctona",
+        "queEs": "Arbusto de crecimiento rápido y madera con médula blanda, muy común en setos, linderos y zonas nitrificadas, con flores e infrutescencias tradicionalmente usadas en gastronomía popular.",
+        "comoReconocerla": "Hojas compuestas por 5-7 folíolos dentados de olor característico al frotarlas. Flores blanco-cremosas en grandes corimbos planos. Frutos en racimos colgantes negro-violáceos.",
+        "hojas": "Compuestas, imparipinnadas, con 5-7 folíolos dentados y olor penetrante al triturarlas.",
+        "flores": "Blanco-cremosas, pequeñas, muy numerosas, en corimbos planos terminales.",
+        "frutosSemillas": "Bayas pequeñas negro-violáceas en racimos colgantes; comestibles cocinadas, no en crudo.",
+        "floracion": "Primavera-verano.",
+        "fructificacion": "Verano-otoño.",
+        "habitat": "Setos, linderos, orlas de bosque, taludes y zonas nitrificadas cerca de caminos y núcleos rurales.",
+        "distribucionGeneralidades": "Muy común en toda la España atlántica, incluida Cantabria.",
+        "interesEcologico": "Sus frutos son un recurso alimenticio importante para numerosas aves en otoño.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Sambucus nigra)",
+                "url": "https://www.gbif.org/species/search?q=Sambucus%20nigra"
+            }
+        ],
+        "id": "sambucus-nigra"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Violeta de los bosques"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "viola-riviniana",
+                "image": "assets/especies/viola-riviniana.jpg",
+                "imageAuthor": "(c) Fabien Piednoir, some rights reserved (CC BY-SA), uploaded by Fabien Piednoir",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/61481",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "viola-riviniana-2",
+                "image": "assets/especies/viola-riviniana-2.jpg",
+                "imageAuthor": "(c) Александр Опалев, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/63685338",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "viola-riviniana-3",
+                "image": "assets/especies/viola-riviniana-3.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/212935867",
+                "imageLicense": "cc0"
+            },
+            {
+                "id": "viola-riviniana-4",
+                "image": "assets/especies/viola-riviniana-4.jpg",
+                "imageAuthor": "(c) Mehdi Chetibi, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/109447692",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "viola-riviniana-5",
+                "image": "assets/especies/viola-riviniana-5.jpg",
+                "imageAuthor": "(c) Robert Lawrence, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/199450402",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Viola riviniana",
+        "familia": "Violaceae",
+        "biotipo": "Hemicriptófito (herbácea perenne)",
+        "categoria": "herbacea",
+        "origen": "Europa",
+        "estatus": "autoctona",
+        "queEs": "Pequeña violeta perenne muy común en el sotobosque, de flores violáceas con espolón, una de las primeras señales de la primavera en bosques y setos.",
+        "comoReconocerla": "Hojas acorazonadas en roseta basal. Flores solitarias violáceas de 5 pétalos, con un espolón pálido en la parte posterior.",
+        "hojas": "Acorazonadas, en roseta basal, de borde festoneado.",
+        "flores": "Solitarias, violáceas, de 5 pétalos asimétricos y espolón claro.",
+        "floracion": "Primavera.",
+        "habitat": "Sotobosque de bosques caducifolios, setos y prados sombreados.",
+        "distribucionGeneralidades": "Muy extendida por toda la España atlántica, incluida Cantabria.",
+        "interesEcologico": "Planta nutricia de varias especies de mariposas del género Fritillaria/Boloria.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Viola riviniana)",
+                "url": "https://www.gbif.org/species/search?q=Viola%20riviniana"
+            }
+        ],
+        "id": "viola-riviniana"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Dedalera"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "digitalis-purpurea",
+                "image": "assets/especies/digitalis-purpurea.jpg",
+                "imageAuthor": "(c) z7nikon, some rights reserved (CC BY-NC), uploaded by z7nikon",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/53983",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "digitalis-purpurea-2",
+                "image": "assets/especies/digitalis-purpurea-2.jpg",
+                "imageAuthor": "(c) Emily Scherer, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/367651867",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "digitalis-purpurea-3",
+                "image": "assets/especies/digitalis-purpurea-3.jpg",
+                "imageAuthor": "(c) telemark, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/26686415",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "digitalis-purpurea-4",
+                "image": "assets/especies/digitalis-purpurea-4.jpg",
+                "imageAuthor": "(c) Aleksandr_Levon, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/51728038",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "digitalis-purpurea-5",
+                "image": "assets/especies/digitalis-purpurea-5.jpg",
+                "imageAuthor": "(c) zebedeugalinha, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/252093108",
+                "imageLicense": "cc-by"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Digitalis purpurea",
+        "familia": "Plantaginaceae/Scrophulariaceae",
+        "biotipo": "Hemicriptófito bienal (herbácea)",
+        "categoria": "herbacea",
+        "origen": "Europa occidental",
+        "estatus": "autoctona",
+        "queEs": "Herbácea bienal de gran porte, con una vistosa espiga de flores tubulares rosa-púrpura, muy característica de claros de bosque y bordes de camino en la España atlántica. Toda la planta es tóxica.",
+        "comoReconocerla": "Roseta basal de hojas grandes y vellosas el primer año; el segundo año desarrolla un tallo florido de hasta 1,5 m con flores tubulares colgantes, rosa-púrpura con manchas oscuras en el interior.",
+        "hojas": "Grandes, ovado-lanceoladas, vellosas, en roseta basal el primer año.",
+        "flores": "Tubulares, colgantes, rosa-púrpura con manchas oscuras en el interior de la garganta, en una larga espiga terminal.",
+        "frutosSemillas": "Cápsulas con numerosas semillas diminutas.",
+        "floracion": "Primavera-verano, el segundo año de vida de la planta.",
+        "habitat": "Claros y orlas de bosque, taludes, bordes de camino y zonas taladas, sobre todo en suelos ácidos.",
+        "distribucionGeneralidades": "Muy abundante en toda la España atlántica, incluida Cantabria, especialmente en claros de monte y bordes de pista forestal.",
+        "interesEcologico": "Planta melífera muy visitada por abejorros. Es tóxica para el ser humano y el ganado (contiene glucósidos cardiotónicos).",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Digitalis purpurea)",
+                "url": "https://www.gbif.org/species/search?q=Digitalis%20purpurea"
+            }
+        ],
+        "id": "digitalis-purpurea"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Primavera"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "primula-vulgaris",
+                "image": "assets/especies/primula-vulgaris.jpg",
+                "imageAuthor": "(c) grinnin, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/175424099",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "primula-vulgaris-2",
+                "image": "assets/especies/primula-vulgaris-2.jpg",
+                "imageAuthor": "(c) trenkova, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/1536946",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "primula-vulgaris-3",
+                "image": "assets/especies/primula-vulgaris-3.jpg",
+                "imageAuthor": "(c) Tena Sobodić, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/340188595",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "primula-vulgaris-4",
+                "image": "assets/especies/primula-vulgaris-4.jpg",
+                "imageAuthor": "(c) Szymon Czyżewski, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/149717473",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "primula-vulgaris-5",
+                "image": "assets/especies/primula-vulgaris-5.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/342102042",
+                "imageLicense": "cc0"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Primula vulgaris",
+        "familia": "Primulaceae",
+        "biotipo": "Hemicriptófito (herbácea perenne)",
+        "categoria": "herbacea",
+        "origen": "Europa occidental y meridional",
+        "estatus": "autoctona",
+        "queEs": "Una de las flores silvestres más reconocibles del final del invierno, de pétalos amarillo pálido, típica de bosques húmedos y taludes de la España atlántica.",
+        "comoReconocerla": "Roseta basal de hojas arrugadas, oblongas. Flores solitarias sobre largos pedúnculos, amarillo pálido con el centro más intenso.",
+        "hojas": "En roseta basal, oblongo-obovadas, de superficie rugosa y nerviación marcada.",
+        "flores": "Solitarias, sobre pedúnculos individuales, amarillo pálido con centro amarillo más intenso.",
+        "floracion": "Finales de invierno-primavera.",
+        "habitat": "Bosques húmedos, taludes, setos y prados con cierta sombra.",
+        "distribucionGeneralidades": "Muy común en toda la cornisa cantábrica, incluida Cantabria.",
+        "interesEcologico": "Una de las primeras fuentes de néctar disponibles para insectos al final del invierno.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Primula vulgaris)",
+                "url": "https://www.gbif.org/species/search?q=Primula%20vulgaris"
+            }
+        ],
+        "id": "primula-vulgaris"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Ortiga mayor",
+            "Ortiga"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "urtica-dioica",
+                "image": "assets/especies/urtica-dioica.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/27143896",
+                "imageLicense": "cc0"
+            },
+            {
+                "id": "urtica-dioica-2",
+                "image": "assets/especies/urtica-dioica-2.jpg",
+                "imageAuthor": "(c) Nathan, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/357126898",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "urtica-dioica-3",
+                "image": "assets/especies/urtica-dioica-3.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/349799114",
+                "imageLicense": "cc0"
+            },
+            {
+                "id": "urtica-dioica-4",
+                "image": "assets/especies/urtica-dioica-4.jpg",
+                "imageAuthor": "(c) Flavien Saboureau, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/236994426",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "urtica-dioica-5",
+                "image": "assets/especies/urtica-dioica-5.jpg",
+                "imageAuthor": "(c) Pavel Komkov, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/50448429",
+                "imageLicense": "cc-by"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Urtica dioica",
+        "familia": "Urticaceae",
+        "biotipo": "Hemicriptófito (herbácea perenne)",
+        "categoria": "herbacea",
+        "origen": "Eurasia",
+        "estatus": "autoctona",
+        "queEs": "La ortiga común, herbácea perenne cubierta de pelos urticantes, muy extendida en suelos ricos en nitrógeno cerca de zonas habitadas, cursos de agua y bordes de camino.",
+        "comoReconocerla": "Hojas opuestas, ovado-lanceoladas, de borde dentado, cubiertas de pelos urticantes que producen escozor al contacto.",
+        "hojas": "Opuestas, ovado-lanceoladas, de borde aserrado, cubiertas de pelos urticantes.",
+        "flores": "Muy pequeñas, verdosas, en racimos colgantes desde las axilas de las hojas.",
+        "floracion": "Primavera-verano.",
+        "habitat": "Suelos nitrificados cerca de núcleos habitados, orillas de ríos, setos y bordes de camino.",
+        "distribucionGeneralidades": "Extremadamente común en toda España, incluida Cantabria.",
+        "interesEcologico": "Planta nutricia de varias especies de mariposas (como la vanesa de los cardos y la mariposa pavo real).",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Urtica dioica)",
+                "url": "https://www.gbif.org/species/search?q=Urtica%20dioica"
+            }
+        ],
+        "id": "urtica-dioica"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Lengua de ciervo"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "asplenium-scolopendrium",
+                "image": "assets/especies/asplenium-scolopendrium.jpg",
+                "imageAuthor": "(c) Jacob Toldi, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/144365224",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "asplenium-scolopendrium-2",
+                "image": "assets/especies/asplenium-scolopendrium-2.jpg",
+                "imageAuthor": "(c) Günter Schwendinger, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/40175879",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "asplenium-scolopendrium-3",
+                "image": "assets/especies/asplenium-scolopendrium-3.jpg",
+                "imageAuthor": "(c) Chris Hoess, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/148716386",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "asplenium-scolopendrium-4",
+                "image": "assets/especies/asplenium-scolopendrium-4.jpg",
+                "imageAuthor": "(c) Владимир Дворкин, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/267840706",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "asplenium-scolopendrium-5",
+                "image": "assets/especies/asplenium-scolopendrium-5.jpg",
+                "imageAuthor": "(c) athall, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/227425456",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Asplenium scolopendrium",
+        "familia": "Aspleniaceae",
+        "biotipo": "Hemicriptófito (helecho perenne)",
+        "categoria": "herbacea",
+        "origen": "Europa, Asia y Norteamérica",
+        "estatus": "autoctona",
+        "queEs": "Helecho fácilmente reconocible por tener la fronde entera (no dividida como la mayoría de los helechos), en forma de lengua alargada.",
+        "comoReconocerla": "Frondes enteras, no divididas, en forma de lengua alargada de borde ondulado, de color verde brillante. Soros en líneas paralelas oblicuas en el envés.",
+        "hojas": "Frondes (frondas) enteras, no divididas, lanceoladas, de borde ondulado.",
+        "habitat": "Grietas y paredes rocosas húmedas y sombrías, muros viejos y fondos de barrancos.",
+        "distribucionGeneralidades": "Frecuente en ambientes húmedos y sombríos del norte de España, incluida Cantabria.",
+        "interesEcologico": "Indicador de ambientes con humedad estable y poca insolación directa.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Asplenium scolopendrium)",
+                "url": "https://www.gbif.org/species/search?q=Asplenium%20scolopendrium"
+            }
+        ],
+        "id": "asplenium-scolopendrium"
+    },
+    {
+        "sinonimos": [
+            "Struthiopteris spicant"
+        ],
+        "comunes": [
+            "Helecho de monte"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "blechnum-spicant",
+                "image": "assets/especies/blechnum-spicant.jpg",
+                "imageAuthor": "(c) Harsi S. Parker, some rights reserved (CC BY-NC), uploaded by Harsi S. Parker",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/774894",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "blechnum-spicant-2",
+                "image": "assets/especies/blechnum-spicant-2.jpg",
+                "imageAuthor": "(c) Anneliese Wilson, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/38048585",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "blechnum-spicant-3",
+                "image": "assets/especies/blechnum-spicant-3.jpg",
+                "imageAuthor": "(c) Alan Rockefeller, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/112684091",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "blechnum-spicant-4",
+                "image": "assets/especies/blechnum-spicant-4.jpg",
+                "imageAuthor": "(c) Vojtěch Zavadil, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/299637572",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "blechnum-spicant-5",
+                "image": "assets/especies/blechnum-spicant-5.jpg",
+                "imageAuthor": "(c) Lauren Glevanik, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/28883884",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Blechnum spicant",
+        "familia": "Blechnaceae",
+        "biotipo": "Hemicriptófito (helecho perenne)",
+        "categoria": "herbacea",
+        "origen": "Europa y Asia templada",
+        "estatus": "autoctona",
+        "queEs": "Helecho característico del sotobosque atlántico, con dos tipos de frondes claramente distintos: unas estériles, tendidas, y otras fértiles, erguidas, más estrechas.",
+        "comoReconocerla": "Presenta dimorfismo entre frondes estériles (tendidas, de pinnas más anchas) y frondes fértiles (erguidas, de pinnas muy estrechas, con los soros en el envés).",
+        "hojas": "Frondes estériles pinnadas, tendidas en roseta; frondes fértiles erguidas, más estrechas y con soros lineales en el envés.",
+        "habitat": "Sotobosque de bosques atlánticos húmedos y brezales-tojales sobre suelos ácidos.",
+        "distribucionGeneralidades": "Muy común en el sotobosque de robledales y hayedos de la Cantabria atlántica.",
+        "interesEcologico": "Especie indicadora de bosques atlánticos bien conservados sobre suelos ácidos.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Blechnum spicant)",
+                "url": "https://www.gbif.org/species/search?q=Blechnum%20spicant"
+            }
+        ],
+        "id": "blechnum-spicant"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Polipodio"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "polypodium-vulgare",
+                "image": "assets/especies/polypodium-vulgare.jpg",
+                "imageAuthor": "(c) Norbert Sauberer, some rights reserved (CC BY-NC), uploaded by Norbert Sauberer",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/127079",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "polypodium-vulgare-2",
+                "image": "assets/especies/polypodium-vulgare-2.jpg",
+                "imageAuthor": "(c) Thomas Gyselinck, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/88584962",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "polypodium-vulgare-3",
+                "image": "assets/especies/polypodium-vulgare-3.jpg",
+                "imageAuthor": "(c) James, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/135253663",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "polypodium-vulgare-4",
+                "image": "assets/especies/polypodium-vulgare-4.jpg",
+                "imageAuthor": "(c) rempson, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/42113248",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "polypodium-vulgare-5",
+                "image": "assets/especies/polypodium-vulgare-5.jpg",
+                "imageAuthor": "(c) Thomas Gyselinck, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/144236282",
+                "imageLicense": "cc-by"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Polypodium vulgare",
+        "familia": "Polypodiaceae",
+        "biotipo": "Camaefito (helecho perenne)",
+        "categoria": "herbacea",
+        "origen": "Europa, Asia y Norteamérica",
+        "estatus": "autoctona",
+        "queEs": "Pequeño helecho epifito/rupícola, frecuente sobre troncos musgosos, muros de piedra y peñascos sombríos.",
+        "comoReconocerla": "Frondes pinnatisectas (divididas casi hasta el nervio central) de contorno alargado, que nacen de un rizoma rastrero cubierto de escamas pardas. Soros redondeados y desnudos en el envés.",
+        "hojas": "Frondes pinnatisectas, de contorno lanceolado, sobre un rizoma rastrero escamoso.",
+        "habitat": "Troncos musgosos, muros de piedra, taludes y peñascos sombríos y húmedos.",
+        "distribucionGeneralidades": "Muy común en la España atlántica sobre sustratos rocosos o troncos, incluida Cantabria.",
+        "interesEcologico": "Componente habitual de las comunidades epifíticas de los bosques atlánticos húmedos.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Polypodium vulgare)",
+                "url": "https://www.gbif.org/species/search?q=Polypodium%20vulgare"
+            }
+        ],
+        "id": "polypodium-vulgare"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Helecho real"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "osmunda-regalis",
+                "image": "assets/especies/osmunda-regalis.jpg",
+                "imageAuthor": "(c) Jan Doležal, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/126219396",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "osmunda-regalis-2",
+                "image": "assets/especies/osmunda-regalis-2.jpg",
+                "imageAuthor": "(c) jennybernstrom, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/83827676",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "osmunda-regalis-3",
+                "image": "assets/especies/osmunda-regalis-3.jpg",
+                "imageAuthor": "(c) Yury Kvach, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/152035759",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "osmunda-regalis-4",
+                "image": "assets/especies/osmunda-regalis-4.jpg",
+                "imageAuthor": "(c) Miguel Ángel Bermejo Roa, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/218640837",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "osmunda-regalis-5",
+                "image": "assets/especies/osmunda-regalis-5.jpg",
+                "imageAuthor": "(c) Alexander Baransky, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/229102650",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Osmunda regalis",
+        "familia": "Osmundaceae",
+        "biotipo": "Hemicriptófito (helecho perenne de gran porte)",
+        "categoria": "herbacea",
+        "origen": "Distribución subcosmopolita",
+        "estatus": "autoctona",
+        "queEs": "El helecho más corpulento de la flora europea, típico de zonas encharcadas y riberas, con frondes fértiles muy diferenciadas de aspecto plumoso pardo-dorado.",
+        "comoReconocerla": "Frondes grandes (hasta 2 m), bipinnadas; las fértiles, de porción apical transformada en una estructura densa pardo-dorada con los esporangios, muy distinta del resto de la fronde.",
+        "hojas": "Frondes bipinnadas de gran tamaño, con la porción fértil transformada en una espiga plumosa pardo-dorada.",
+        "habitat": "Bordes de ríos, turberas, bosques de ribera encharcados y zonas húmedas permanentes.",
+        "distribucionGeneralidades": "Presente de forma dispersa en zonas húmedas del norte de España, incluida Cantabria, aunque en regresión por la degradación de humedales.",
+        "interesEcologico": "Especie indicadora de zonas húmedas bien conservadas; sus poblaciones están amenazadas por la alteración de humedales.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Osmunda regalis)",
+                "url": "https://www.gbif.org/species/search?q=Osmunda%20regalis"
+            }
+        ],
+        "id": "osmunda-regalis"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Ranúnculo rastrero",
+            "Botón de oro"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "ranunculus-repens",
+                "image": "assets/especies/ranunculus-repens.jpg",
+                "imageAuthor": "(c) Reiner Richter, some rights reserved (CC BY-NC-SA), uploaded by Reiner Richter",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/48229",
+                "imageLicense": "cc-by-nc-sa"
+            },
+            {
+                "id": "ranunculus-repens-2",
+                "image": "assets/especies/ranunculus-repens-2.jpg",
+                "imageAuthor": "(c) Gavin Slater, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/166524074",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "ranunculus-repens-3",
+                "image": "assets/especies/ranunculus-repens-3.jpg",
+                "imageAuthor": "(c) Jordan Badilla, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/2482179",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "ranunculus-repens-4",
+                "image": "assets/especies/ranunculus-repens-4.jpg",
+                "imageAuthor": "(c) Елена Левкина, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/372158640",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "ranunculus-repens-5",
+                "image": "assets/especies/ranunculus-repens-5.jpg",
+                "imageAuthor": "(c) Alissa De Laere, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/286319093",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Ranunculus repens",
+        "familia": "Ranunculaceae",
+        "biotipo": "Hemicriptófito (herbácea perenne estolonífera)",
+        "categoria": "herbacea",
+        "origen": "Europa y Asia",
+        "estatus": "autoctona",
+        "queEs": "Herbácea perenne de flores amarillas brillantes y estolones rastreros, muy común en prados húmedos y bordes de camino.",
+        "comoReconocerla": "Hojas divididas en 3 segmentos con manchas claras frecuentes. Flores amarillas brillantes de 5 pétalos lustrosos. Se extiende mediante estolones que enraízan en los nudos.",
+        "hojas": "Trisectas, con segmentos a menudo lobulados y con manchas pálidas.",
+        "flores": "Amarillas, brillantes, de 5 pétalos con aspecto lustroso (ceroso).",
+        "floracion": "Primavera-verano.",
+        "habitat": "Prados húmedos, bordes de camino, cunetas y zonas encharcadizas.",
+        "distribucionGeneralidades": "Extremadamente común en toda la España atlántica, incluida Cantabria.",
+        "interesEcologico": "Planta melífera visitada por numerosos insectos polinizadores generalistas.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Ranunculus repens)",
+                "url": "https://www.gbif.org/species/search?q=Ranunculus%20repens"
+            }
+        ],
+        "id": "ranunculus-repens"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Nomeolvides"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "myosotis-scorpioides",
+                "image": "assets/especies/myosotis-scorpioides.jpg",
+                "imageAuthor": "(c) Mike Abel, some rights reserved (CC BY-NC), uploaded by Mike Abel",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/49130",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "myosotis-scorpioides-2",
+                "image": "assets/especies/myosotis-scorpioides-2.jpg",
+                "imageAuthor": "(c) Norbert Sauberer, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/319568290",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "myosotis-scorpioides-3",
+                "image": "assets/especies/myosotis-scorpioides-3.jpg",
+                "imageAuthor": "(c) Jacques Turner-Moss, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/235795355",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "myosotis-scorpioides-4",
+                "image": "assets/especies/myosotis-scorpioides-4.jpg",
+                "imageAuthor": "(c) halc, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/33226366",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "myosotis-scorpioides-5",
+                "image": "assets/especies/myosotis-scorpioides-5.jpg",
+                "imageAuthor": "(c) Patrick Hacker, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/144792965",
+                "imageLicense": "cc-by"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Myosotis scorpioides",
+        "familia": "Boraginaceae",
+        "biotipo": "Hemicriptófito (herbácea perenne)",
+        "categoria": "herbacea",
+        "origen": "Europa y Asia",
+        "estatus": "autoctona",
+        "queEs": "Pequeña herbácea de zonas húmedas, de flores azules con el centro amarillo, popularmente conocida como nomeolvides.",
+        "comoReconocerla": "Tallos algo decumbentes. Hojas alternas, oblongas. Flores pequeñas azules de 5 pétalos con el centro amarillo, en cimas escorpioides características.",
+        "hojas": "Alternas, oblongo-lanceoladas.",
+        "flores": "Pequeñas, azules, con centro amarillo, agrupadas en cimas enrolladas (escorpioides).",
+        "floracion": "Primavera-verano.",
+        "habitat": "Orillas de ríos y arroyos, zonas encharcadizas y prados húmedos.",
+        "distribucionGeneralidades": "Presente en cursos de agua y zonas húmedas del norte de España, incluida Cantabria.",
+        "interesEcologico": "Componente habitual de la vegetación de ribera herbácea.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Myosotis scorpioides)",
+                "url": "https://www.gbif.org/species/search?q=Myosotis%20scorpioides"
+            }
+        ],
+        "id": "myosotis-scorpioides"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Lirio amarillo",
+            "Espadaña amarilla"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "iris-pseudacorus-5",
+                "image": "assets/especies/iris-pseudacorus-5.jpg",
+                "imageAuthor": "(c) fotis-samaritakis, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/69055529",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "iris-pseudacorus-2",
+                "image": "assets/especies/iris-pseudacorus-2.jpg",
+                "imageAuthor": "(c) olegglushenkov, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/122167494",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "iris-pseudacorus-3",
+                "image": "assets/especies/iris-pseudacorus-3.jpg",
+                "imageAuthor": "(c) Katertotz, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/42836224",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "iris-pseudacorus-4",
+                "image": "assets/especies/iris-pseudacorus-4.jpg",
+                "imageAuthor": "(c) renataandrews, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/161981131",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "iris-pseudacorus",
+                "image": "assets/especies/iris-pseudacorus.jpg",
+                "imageAuthor": "(c) Andriy Kovalchuk, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/145323616",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Iris pseudacorus",
+        "familia": "Iridaceae",
+        "biotipo": "Geófito (herbácea perenne rizomatosa)",
+        "categoria": "herbacea",
+        "origen": "Europa, norte de África y Asia occidental",
+        "estatus": "autoctona",
+        "queEs": "Lirio silvestre de zonas encharcadas, con grandes flores amarillas y hojas ensiformes (en forma de espada), muy característico de las orillas de ríos y charcas.",
+        "comoReconocerla": "Hojas largas, planas y erguidas, en forma de espada. Flores amarillas grandes, con los tres sépalos externos mucho más desarrollados que los pétalos internos.",
+        "hojas": "Ensiformes (en forma de espada), largas, planas, dispuestas en abanico.",
+        "flores": "Grandes, amarillas, con sépalos externos muy desarrollados y pétalos internos pequeños.",
+        "floracion": "Primavera-verano.",
+        "habitat": "Orillas de ríos, charcas, marismas y zonas encharcadas permanentemente.",
+        "distribucionGeneralidades": "Frecuente en cursos de agua y humedales de toda España, incluida Cantabria.",
+        "interesEcologico": "Ayuda a fijar las orillas y ofrece refugio a fauna acuática; planta melífera.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Iris pseudacorus)",
+                "url": "https://www.gbif.org/species/search?q=Iris%20pseudacorus"
+            }
+        ],
+        "id": "iris-pseudacorus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Espadaña",
+            "Enea"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "typha-latifolia",
+                "image": "assets/especies/typha-latifolia.jpg",
+                "imageAuthor": "(c) cgbb2004, some rights reserved (CC BY-NC), uploaded by cgbb2004",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/48685",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "typha-latifolia-2",
+                "image": "assets/especies/typha-latifolia-2.jpg",
+                "imageAuthor": "(c) Mokievskiy Nicolas, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/100385019",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "typha-latifolia-3",
+                "image": "assets/especies/typha-latifolia-3.jpg",
+                "imageAuthor": "no rights reserved",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/397319584",
+                "imageLicense": "cc0"
+            },
+            {
+                "id": "typha-latifolia-4",
+                "image": "assets/especies/typha-latifolia-4.jpg",
+                "imageAuthor": "(c) Ирина Моисеева-Журба, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/337234484",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "typha-latifolia-5",
+                "image": "assets/especies/typha-latifolia-5.jpg",
+                "imageAuthor": "(c) Carroll Perkins, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/335300749",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Typha latifolia",
+        "familia": "Typhaceae",
+        "biotipo": "Geófito (herbácea perenne rizomatosa)",
+        "categoria": "acuatica",
+        "origen": "Distribución subcosmopolita",
+        "estatus": "autoctona",
+        "queEs": "Planta palustre de gran porte con su característica espiga cilíndrica marrón ('puro'), formando densos carrizales en orillas de charcas y zonas encharcadas.",
+        "comoReconocerla": "Hojas largas, planas, erguidas, de sección semicircular en la base. Inflorescencia en forma de cilindro compacto marrón oscuro (la parte femenina) sobre el tallo.",
+        "hojas": "Largas, lineares, planas, erguidas.",
+        "flores": "Inflorescencia cilíndrica compacta, con la porción femenina (marrón, la más vistosa) debajo de la masculina, más fina.",
+        "floracion": "Verano.",
+        "habitat": "Orillas de charcas, lagunas y zonas encharcadas de aguas estancadas o de curso lento.",
+        "distribucionGeneralidades": "Frecuente en humedales de toda España, incluida Cantabria.",
+        "interesEcologico": "Forma masas densas (espadañales) de gran valor como refugio y zona de cría para aves acuáticas.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Typha latifolia)",
+                "url": "https://www.gbif.org/species/search?q=Typha%20latifolia"
+            }
+        ],
+        "id": "typha-latifolia"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Carrizo"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "phragmites-australis",
+                "image": "assets/especies/phragmites-australis.jpg",
+                "imageAuthor": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/32894320",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "phragmites-australis-2",
+                "image": "assets/especies/phragmites-australis-2.jpg",
+                "imageAuthor": "(c) Nate Marchessault, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/103990091",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "phragmites-australis-3",
+                "image": "assets/especies/phragmites-australis-3.jpg",
+                "imageAuthor": "(c) Deon van Eeden, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/78055197",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "phragmites-australis-4",
+                "image": "assets/especies/phragmites-australis-4.jpg",
+                "imageAuthor": "(c) Felipe Castilla Lattke, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/104729831",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "phragmites-australis-5",
+                "image": "assets/especies/phragmites-australis-5.jpg",
+                "imageAuthor": "(c) Manuel Raab, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/335749400",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Phragmites australis",
+        "familia": "Poaceae",
+        "biotipo": "Geófito (gramínea perenne rizomatosa)",
+        "categoria": "acuatica",
+        "origen": "Distribución subcosmopolita",
+        "estatus": "autoctona",
+        "queEs": "Gramínea de gran porte que forma extensos carrizales en orillas de ríos, marismas y zonas encharcadas, con su característica panícula plumosa terminal.",
+        "comoReconocerla": "Cañas erguidas de hasta 3-4 m. Hojas planas, largas. Inflorescencia en panícula terminal plumosa, primero violácea y luego parda-dorada.",
+        "hojas": "Planas, largas, de color verde-grisáceo, dispuestas a lo largo de la caña.",
+        "flores": "Panícula terminal plumosa, densa, de color violáceo que se vuelve dorado-pardo al madurar.",
+        "floracion": "Verano-otoño.",
+        "habitat": "Orillas de ríos, marismas, estuarios y zonas encharcadas, tolerando cierta salinidad.",
+        "distribucionGeneralidades": "Muy frecuente en humedales y marismas de toda España, incluidas las marismas costeras de Cantabria.",
+        "interesEcologico": "Los carrizales son un hábitat clave para numerosas aves acuáticas, tanto nidificantes como en paso migratorio.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Phragmites australis)",
+                "url": "https://www.gbif.org/species/search?q=Phragmites%20australis"
+            }
+        ],
+        "id": "phragmites-australis"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Cornejo"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "cornus-sanguinea",
+                "image": "assets/especies/cornus-sanguinea.jpg",
+                "imageAuthor": "(c) Ирина, some rights reserved (CC BY-NC), uploaded by Ирина",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/155124",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "cornus-sanguinea-2",
+                "image": "assets/especies/cornus-sanguinea-2.jpg",
+                "imageAuthor": "(c) mickgyver, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/90905938",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "cornus-sanguinea-3",
+                "image": "assets/especies/cornus-sanguinea-3.jpg",
+                "imageAuthor": "(c) luckychris, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/358688618",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "cornus-sanguinea-4",
+                "image": "assets/especies/cornus-sanguinea-4.jpg",
+                "imageAuthor": "(c) snc-10a-bio, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/315749143",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "cornus-sanguinea-5",
+                "image": "assets/especies/cornus-sanguinea-5.jpg",
+                "imageAuthor": "(c) mathilde-bezin, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/61421570",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Cornus sanguinea",
+        "familia": "Cornaceae",
+        "biotipo": "Nanofanerófito (arbusto caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa y Asia occidental",
+        "estatus": "autoctona",
+        "queEs": "Arbusto de seto muy reconocible en invierno por sus ramas jóvenes de color rojo intenso, y en verano por sus frutos negros en racimos.",
+        "comoReconocerla": "Hojas opuestas, ovaladas, con nervios curvados siguiendo el borde de la hoja. Ramas jóvenes de color rojo vivo, muy visibles en invierno.",
+        "hojas": "Opuestas, ovaladas, con 3-4 pares de nervios secundarios curvados hacia el ápice.",
+        "flores": "Blancas, pequeñas, en corimbos terminales.",
+        "frutosSemillas": "Drupas globosas negras en racimos, no comestibles para el ser humano.",
+        "floracion": "Primavera-verano.",
+        "habitat": "Setos, orlas de bosque y matorrales sobre suelos frescos.",
+        "distribucionGeneralidades": "Frecuente en setos y linderos de la España atlántica, incluida Cantabria.",
+        "interesEcologico": "Sus frutos son recurso alimenticio para numerosas aves en otoño; sus ramas rojas son un valor ornamental invernal reconocido.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Cornus sanguinea)",
+                "url": "https://www.gbif.org/species/search?q=Cornus%20sanguinea"
+            }
+        ],
+        "id": "cornus-sanguinea"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Bonetero"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "euonymus-europaeus",
+                "image": "assets/especies/euonymus-europaeus.jpg",
+                "imageAuthor": "(c) Ricarda Bergen, some rights reserved (CC BY-NC), uploaded by Ricarda Bergen",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/55847",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "euonymus-europaeus-2",
+                "image": "assets/especies/euonymus-europaeus-2.jpg",
+                "imageAuthor": "(c) wp-polzin, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/170620589",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "euonymus-europaeus-3",
+                "image": "assets/especies/euonymus-europaeus-3.jpg",
+                "imageAuthor": "(c) Patrick Hacker, some rights reserved (CC BY)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/101087629",
+                "imageLicense": "cc-by"
+            },
+            {
+                "id": "euonymus-europaeus-4",
+                "image": "assets/especies/euonymus-europaeus-4.jpg",
+                "imageAuthor": "(c) Julia V. Shner, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/19830991",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "euonymus-europaeus-5",
+                "image": "assets/especies/euonymus-europaeus-5.jpg",
+                "imageAuthor": "(c) jltasset, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/326930199",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Euonymus europaeus",
+        "familia": "Celastraceae",
+        "biotipo": "Nanofanerófito (arbusto o arbolillo caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa",
+        "estatus": "autoctona",
+        "queEs": "Arbusto de seto reconocible en otoño por sus llamativos frutos rosados en forma de gorro de cuatro picos, que se abren mostrando semillas de un naranja intenso.",
+        "comoReconocerla": "Hojas opuestas, elípticas, de borde finamente dentado. Ramas jóvenes de sección algo angulosa. Frutos capsulares rosados de 4 lóbulos, muy vistosos al abrirse en otoño.",
+        "hojas": "Opuestas, elíptico-lanceoladas, de borde finamente aserrado.",
+        "flores": "Pequeñas, verdosas, poco vistosas, en pequeños grupos axilares.",
+        "frutosSemillas": "Cápsulas rosadas de 4 lóbulos que se abren mostrando semillas naranjas, muy vistosas y tóxicas si se ingieren.",
+        "floracion": "Primavera.",
+        "fructificacion": "Otoño.",
+        "habitat": "Setos, orlas de bosque y matorrales sobre suelos ricos en bases.",
+        "distribucionGeneralidades": "Presente de forma dispersa en la España atlántica, incluida Cantabria, en setos y orlas forestales.",
+        "interesEcologico": "Sus frutos, muy vistosos, son consumidos por aves que dispersan las semillas.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Euonymus europaeus)",
+                "url": "https://www.gbif.org/species/search?q=Euonymus%20europaeus"
+            }
+        ],
+        "id": "euonymus-europaeus"
+    },
+    {
+        "sinonimos": [],
+        "comunes": [
+            "Frambueso silvestre"
+        ],
+        "destacadaRamales": false,
+        "enCatalogoNacionalCEEEI": false,
+        "fichaNacionalUrl": null,
+        "fichaCompleta": true,
+        "fotos": [
+            {
+                "id": "rubus-idaeus",
+                "image": "assets/especies/rubus-idaeus.jpg",
+                "imageAuthor": "(c) Ole Husby, some rights reserved (CC BY-SA)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/taxa/54436",
+                "imageLicense": "cc-by-sa"
+            },
+            {
+                "id": "rubus-idaeus-2",
+                "image": "assets/especies/rubus-idaeus-2.jpg",
+                "imageAuthor": "(c) Aleksandr V. Lebedev, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/128256602",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rubus-idaeus-3",
+                "image": "assets/especies/rubus-idaeus-3.jpg",
+                "imageAuthor": "(c) blueflor99, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/301903069",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rubus-idaeus-4",
+                "image": "assets/especies/rubus-idaeus-4.jpg",
+                "imageAuthor": "(c) Else Mikkelsen, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/124984147",
+                "imageLicense": "cc-by-nc"
+            },
+            {
+                "id": "rubus-idaeus-5",
+                "image": "assets/especies/rubus-idaeus-5.jpg",
+                "imageAuthor": "(c) Bill, some rights reserved (CC BY-NC)",
+                "imageSource": "iNaturalist",
+                "imageSourceUrl": "https://www.inaturalist.org/observations/17591586",
+                "imageLicense": "cc-by-nc"
+            }
+        ],
+        "medidasControl": null,
+        "erradicacionCantabria": null,
+        "cientifico": "Rubus idaeus",
+        "familia": "Rosaceae",
+        "biotipo": "Nanofanerófito (arbusto caducifolio)",
+        "categoria": "arbusto",
+        "origen": "Europa y Asia templada",
+        "estatus": "autoctona",
+        "queEs": "Pariente silvestre del frambueso cultivado, de tallos con aguijones finos y frutos rojos comestibles, propio de claros de bosque de montaña.",
+        "comoReconocerla": "Tallos (cañas) bienales con aguijones finos y rectos. Hojas compuestas, con el envés claramente blanquecino-tomentoso. Frutos compuestos rojos, que se separan fácilmente del receptáculo.",
+        "hojas": "Compuestas, con 3-5 folíolos, envés blanquecino-tomentoso, contraste marcado con el haz verde.",
+        "flores": "Pequeñas, blancas, poco vistosas, con pétalos más cortos que los sépalos.",
+        "frutosSemillas": "Polidrupas rojas comestibles, que se desprenden enteras del receptáculo (a diferencia de la zarzamora).",
+        "floracion": "Primavera-verano.",
+        "fructificacion": "Verano.",
+        "habitat": "Claros y orlas de bosques de montaña, taludes y zonas taladas, preferentemente en altitud media.",
+        "distribucionGeneralidades": "Presente en zonas de montaña del norte de España; en Cantabria ligado sobre todo a áreas de mayor altitud del sur de la región.",
+        "interesEcologico": "Sus frutos son un recurso alimenticio apreciado por aves y mamíferos silvestres.",
+        "fuentes": [
+            {
+                "label": "Flora iberica (Real Jardín Botánico — CSIC), consenso taxonómico y descriptivo estándar",
+                "url": "https://www.floraiberica.es/"
+            },
+            {
+                "label": "GBIF — registros de ocurrencia confirmados en el área de Cantabria (búsqueda: Rubus idaeus)",
+                "url": "https://www.gbif.org/species/search?q=Rubus%20idaeus"
+            }
+        ],
+        "id": "rubus-idaeus"
     }
 ]

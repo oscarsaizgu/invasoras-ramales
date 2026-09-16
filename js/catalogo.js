@@ -214,14 +214,18 @@ function renderCatalogo() {
 }
 
 // ── Ficha con carrusel de fotografías ──
-// Galería: [FOTO PRINCIPAL] ← 1/N → con una tira de miniaturas debajo
-// para saltar directamente a cualquier fotografía. Misma experiencia
-// para cualquier especie, tenga 1 o 5 fotografías.
+// Galería: [FOTO PRINCIPAL] ← 1/N → con una tira de miniaturas debajo,
+// ambas leyendo SIEMPRE del mismo array `fichaActual.fotos` por el
+// mismo índice — no hay una lista separada para las miniaturas, así
+// que no pueden desincronizarse entre sí.
+let miniaturasDe = null; // referencia al array `fotos` ya pintado en la tira
+
 function renderMiniaturas() {
   const fotos = (fichaActual && fichaActual.fotos) || [];
   const cont = document.getElementById('ficha-miniaturas');
   cont.innerHTML = '';
   cont.hidden = fotos.length < 2;
+  miniaturasDe = fotos;
   if (fotos.length < 2) return;
 
   fotos.forEach((foto, i) => {
@@ -275,10 +279,12 @@ function actualizarFoto() {
     credito.hidden = true;
   }
 
-  // Actualiza solo la miniatura activa si la tira ya está construida
-  // para esta ficha; si no (primera vez o cambio de especie), la crea.
+  // Solo reconstruye la tira de miniaturas si ha cambiado de especie
+  // (comparando el propio array, no su longitud: dos especies distintas
+  // pueden tener el mismo número de fotos). Si es la misma especie,
+  // basta con mover el resalte a la miniatura activa.
   const cont = document.getElementById('ficha-miniaturas');
-  if (cont.children.length !== fotos.length) {
+  if (miniaturasDe !== fotos) {
     renderMiniaturas();
   } else {
     [...cont.children].forEach((btn, i) => btn.classList.toggle('is-activa', i === fotoActual));
