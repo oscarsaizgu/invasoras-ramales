@@ -1,74 +1,9 @@
-import { state, goTo, goBack, currentStep, setNextEnabled } from './wizard.js';
-import { renderEspecies, especieDescripcionInput } from './especies.js';
-import { renderFotoSlots } from './fotos.js';
-import { initUbicacionStep } from './mapa.js';
-import {
-  renderTamanyos, initObservacionesStep, initContactoStep,
-  renderRevision, enviarReporte, resetAll,
-} from './formulario.js';
-import { initCatalogo } from './catalogo.js';
-import { initIdentificar } from './identificar.js';
+// Navegación compartida por TODAS las páginas: menú de hamburguesa.
+// Cada página es un HTML independiente con enlaces <a href="..."> normales
+// (no hay router ni SPA), así que este script ya no necesita saber nada
+// del wizard de reporte, del catálogo ni de la identificación: solo abre
+// y cierra el panel del menú.
 
-function isStepValid(step) {
-  switch (step) {
-    case 'especie':
-      if (!state.especie) return false;
-      return true;
-    case 'foto':
-      return true; // la foto es recomendable pero no obligatoria
-    case 'ubicacion':
-      return !!(state.lat && state.lon);
-    case 'cantidad':
-      return !!state.tamanyo;
-    case 'observaciones':
-    case 'contacto':
-      return true;
-    default:
-      return true;
-  }
-}
-
-function enterStep(step) {
-  if (step === 'revision') renderRevision();
-  setNextEnabled(isStepValid(step));
-
-  const nextBtn = document.getElementById('btn-siguiente');
-  nextBtn.textContent = step === 'revision' ? 'Enviar reporte' : 'Continuar';
-}
-
-async function handleSiguiente() {
-  const step = currentStep();
-
-  if (step === 'especie') {
-    state.especieDescripcion = especieDescripcionInput().value.trim();
-  }
-
-  if (step === 'revision') {
-    const ok = await enviarReporte();
-    if (ok) {
-      goTo('exito', { record: false });
-    }
-    return;
-  }
-
-  const order = ['especie', 'foto', 'ubicacion', 'cantidad', 'observaciones', 'contacto', 'revision'];
-  const idx = order.indexOf(step);
-  const next = order[idx + 1];
-  if (next) {
-    goTo(next);
-    enterStep(next);
-  }
-}
-
-export function goToStepAndEnter(step) {
-  goTo(step);
-  enterStep(step);
-}
-
-// ── Menú de navegación (hamburguesa) ──
-// Da acceso a las pantallas de contenido (Sobre el proyecto, Especies
-// invasoras, Cómo hacer un buen reporte); no interviene en el flujo de
-// reporte ni en su lógica de envío.
 let menuHideTimer = null;
 
 function openMenu() {
@@ -107,47 +42,9 @@ function initMenu() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
   });
+  // Los enlaces del menú son <a href> normales: solo hace falta cerrar
+  // el panel antes de que el navegador navegue a la página destino.
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 }
 
-function init() {
-  renderEspecies();
-  renderFotoSlots();
-  renderTamanyos();
-  initUbicacionStep();
-  initObservacionesStep();
-  initContactoStep();
-  initMenu();
-  initCatalogo();
-  initIdentificar();
-
-  document.getElementById('btn-empezar').addEventListener('click', () => goToStepAndEnter('especie'));
-  document.getElementById('header-back').addEventListener('click', () => {
-    goBack();
-    enterStep(currentStep());
-  });
-  document.getElementById('btn-siguiente').addEventListener('click', handleSiguiente);
-
-  document.querySelectorAll('[data-goto]').forEach(el => {
-    el.addEventListener('click', () => {
-      closeMenu();
-      goToStepAndEnter(el.dataset.goto);
-    });
-  });
-
-  document.querySelectorAll('.js-abrir-identificar').forEach(el => {
-    el.addEventListener('click', closeMenu);
-  });
-
-  document.querySelectorAll('[data-edit-step]').forEach(el => {
-    el.addEventListener('click', () => goToStepAndEnter(el.dataset.editStep));
-  });
-
-  document.getElementById('btn-reportar-otro').addEventListener('click', () => {
-    resetAll();
-    goTo('inicio', { record: false });
-  });
-
-  goTo('inicio', { record: false });
-}
-
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', initMenu);

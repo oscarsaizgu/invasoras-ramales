@@ -116,9 +116,10 @@ select:focus-visible, textarea:focus-visible,
 }
 
 .app-header__logo-btn {
+  display: inline-block;
   flex-shrink: 0;
   background: none; border: none; padding: 0; margin: 0;
-  line-height: 0; cursor: pointer;
+  line-height: 0; cursor: pointer; text-decoration: none;
   border-radius: 8px;
 }
 .app-header__logo-btn:focus-visible { outline: 2px solid var(--crema); outline-offset: 3px; }
@@ -222,7 +223,7 @@ select:focus-visible, textarea:focus-visible,
   display: flex; align-items: center; gap: 0.5rem;
   width: 100%;
   background: none; border: none; cursor: pointer;
-  text-align: left;
+  text-align: left; text-decoration: none;
   font-family: var(--font-titulo);
   font-weight: 400;
   font-size: 1.05rem;
@@ -657,14 +658,16 @@ textarea { resize: vertical; min-height: 90px; }
 }
 
 .btn {
+  display: inline-block;
   font-family: var(--font);
   font-size: 0.95rem; font-weight: 700;
   letter-spacing: 0.03em;
   border-radius: 30px;
   padding: 0.95rem 1.3rem;
-  border: none; cursor: pointer;
+  border: none; cursor: pointer; text-decoration: none;
   transition: background 0.15s, transform 0.1s, opacity 0.15s;
   min-height: 52px;
+  box-sizing: border-box;
 }
 .btn:active { transform: scale(0.98); }
 
@@ -807,15 +810,16 @@ textarea { resize: vertical; min-height: 90px; }
   margin: 0;
 }
 
-/* Cabecera transparente superpuesta a la foto de portada */
-body:has(#screen-inicio.is-active) .app-header {
+/* Cabecera transparente superpuesta a la foto de portada.
+   body.pagina-inicio se pone solo en index.html (ver esa página). */
+body.pagina-inicio .app-header {
   background: rgba(20,26,20,0.3);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
   border-bottom: none;
 }
-body:has(#screen-inicio.is-active) .app-header__text { display: none; }
-body:has(#screen-inicio.is-active) .app-header__menu {
+body.pagina-inicio .app-header__text { display: none; }
+body.pagina-inicio .app-header__menu {
   background: rgba(245,234,216,0.16);
 }
 
@@ -908,11 +912,12 @@ body:has(#screen-inicio.is-active) .app-header__menu {
   justify-content: flex-start;
   gap: 0.3rem;
   width: 100%;
+  box-sizing: border-box;
   background: var(--card);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   padding: 0.75rem 0.4rem;
-  cursor: pointer;
+  cursor: pointer; text-decoration: none;
   font-family: var(--font);
   text-align: center;
 }
@@ -1400,6 +1405,32 @@ body:has(#screen-inicio.is-active) .app-header__menu {
   .identificar-overlay { align-items: center; padding: 1.5rem; }
   .identificar-panel { max-width: 480px; border-radius: 20px; max-height: 88vh; }
 }
+
+/* En identificar.html la identificación ya no es un modal flotante sobre
+   otra pantalla: es el contenido normal de la página. Se reutiliza el
+   mismo HTML/JS (identificar.js no cambia), solo se anula aquí el
+   envoltorio de modal (fijo, con fondo oscuro) para que se vea como una
+   sección más de la página. */
+.identificar-overlay--pagina {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  background: none;
+  opacity: 1;
+  display: block;
+  padding: 0;
+}
+.identificar-overlay--pagina .identificar-panel {
+  width: auto;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  transform: none;
+}
+.identificar-overlay--pagina .ficha-cerrar { display: none; }
 
 .identificar-estado h2 {
   font-family: var(--font-titulo);

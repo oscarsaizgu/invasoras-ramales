@@ -2,21 +2,26 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accesibilidad | Ramales Natural</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cómo hacer un buen reporte | Ramales Natural</title>
+<meta name="description" content="Cinco pasos sencillos para ayudarnos a identificar y localizar mejor cada planta invasora que reportes.">
 <meta name="theme-color" content="#22392c">
 <link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
-<meta name="robots" content="noindex">
+<link rel="apple-touch-icon" href="images/logo-rn-blanco.png">
+<link rel="canonical" href="https://reporteinvasoras.ramalesnatural.org/como-reportar.html">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="legal-page">
+<body>
+
+<a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
+
 <header class="app-header" id="app-header">
   <a class="app-header__logo-btn" href="index.html" aria-label="Ir al inicio">
     <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
   </a>
   <div class="app-header__text">
-    <h1 style="font-size:0.95rem;">Ramales Natural</h1>
-    <p>Reporte de especies invasoras</p>
+    <h1>Cómo reportar</h1>
+    <p>Ramales Natural</p>
   </div>
   <button type="button" class="app-header__menu" id="header-menu" aria-label="Abrir menú" aria-haspopup="true">
     <span></span><span></span><span></span>
@@ -49,47 +54,28 @@
   </nav>
 </div>
 
-<main class="container">
-  <a class="back-link" href="index.html">← Volver a la aplicación</a>
-  <h1>Declaración de accesibilidad</h1>
-  <p class="legal-updated">Última actualización: septiembre de 2026</p>
+<main id="main-content" class="container">
 
-  <h2>1. Compromiso</h2>
-  <p>
-    Ramales Natural se compromete a que esta aplicación pueda ser utilizada
-    por el mayor número posible de personas, incluidas aquellas que usan
-    tecnologías de asistencia (lectores de pantalla, navegación por teclado,
-    control por voz, etc.).
-  </p>
+  <!-- CÓMO HACER UN BUEN REPORTE -->
+  <section class="content-page" aria-labelledby="como-reportar-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="como-reportar-titulo" class="content-titulo" tabindex="-1">Cómo hacer un buen reporte</h1>
+    <p class="content-lead">Con estos cinco pasos nos ayudas a identificar y localizar mejor cada planta.</p>
 
-  <h2>2. Medidas aplicadas</h2>
-  <ul>
-    <li>Contraste de color revisado entre texto y fondo.</li>
-    <li>Foco visible en todos los elementos interactivos al navegar con teclado.</li>
-    <li>Etiquetas (<code>label</code>) asociadas a todos los campos del formulario.</li>
-    <li>Textos alternativos en las imágenes con significado.</li>
-    <li>Botones y campos con un tamaño cómodo para su uso táctil en móvil.</li>
-    <li>Mensajes de error y confirmación anunciados a lectores de pantalla mediante regiones dinámicas (<code>aria-live</code>, <code>role="status"</code>).</li>
-    <li>Ningún estado (seleccionado, error) se comunica únicamente mediante el color.</li>
-  </ul>
+    <ol class="steps-list">
+      <li class="steps-item"><span class="steps-num">01</span><p>Fotografía la planta completa.</p></li>
+      <li class="steps-item"><span class="steps-num">02</span><p>Si puedes, fotografía también hojas, flores o frutos.</p></li>
+      <li class="steps-item"><span class="steps-num">03</span><p>Indica dónde la has encontrado.</p></li>
+      <li class="steps-item"><span class="steps-num">04</span><p>Cuéntanos aproximadamente cuántas plantas hay.</p></li>
+      <li class="steps-item"><span class="steps-num">05</span><p>Envía el reporte.</p></li>
+    </ol>
 
-  <h2>3. Limitaciones conocidas</h2>
-  <p>
-    El mapa interactivo (basado en la librería Leaflet y en OpenStreetMap) es
-    un componente de terceros cuya accesibilidad completa por teclado puede
-    ser limitada. Por ello, la aplicación permite indicar la ubicación
-    manualmente y siempre puede continuarse el reporte aunque no se use el
-    mapa con precisión total.
-  </p>
+    <a href="reportar.html" class="btn btn-primary steps-cta">+ Hacer un reporte</a>
+  </section>
 
-  <h2>4. Cómo comunicar un problema de accesibilidad</h2>
-  <p>
-    Si detectas alguna barrera de accesibilidad al usar esta aplicación,
-    puedes comunicarlo a
-    <a href="mailto:info@ramalesnatural.org">info@ramalesnatural.org</a>.
-  </p>
 </main>
-<footer class="app-footer">
+
+<footer class="app-footer" id="app-footer">
   <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
   <p class="app-footer__brand">Ayuntamiento de Ramales de la Victoria</p>
   <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
@@ -101,6 +87,7 @@
   </nav>
   <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
 </footer>
+
 <script type="module" src="js/app.js"></script>
 </body>
 </html>

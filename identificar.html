@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Identificar planta | Ramales Natural</title>
+<meta name="description" content="Haz una fotografía de la planta y te ayudamos a identificarla con Pl@ntNet. Si es una especie invasora en Cantabria, te lo decimos y puedes reportarla.">
+<meta name="theme-color" content="#22392c">
+<link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo-rn-blanco.png">
+<link rel="canonical" href="https://reporteinvasoras.ramalesnatural.org/identificar.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
+
+<header class="app-header" id="app-header">
+  <a class="app-header__logo-btn" href="index.html" aria-label="Ir al inicio">
+    <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  </a>
+  <div class="app-header__text">
+    <h1>Identificar</h1>
+    <p>Ramales Natural</p>
+  </div>
+  <button type="button" class="app-header__menu" id="header-menu" aria-label="Abrir menú" aria-haspopup="true">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MENÚ PRINCIPAL -->
+<div class="menu-overlay" id="menu-overlay" hidden>
+  <nav class="menu-panel" aria-label="Menú principal">
+    <div class="menu-panel__head">
+      <img src="images/logo-rn-blanco.png" alt="Ramales Natural" class="menu-panel__logo">
+      <button type="button" class="menu-close" id="menu-close" aria-label="Cerrar menú">✕</button>
+    </div>
+    <ul class="menu-list">
+      <li><a class="menu-link" href="index.html">Inicio</a></li>
+      <li><a class="menu-link" href="identificar.html">📷 Identificar planta</a></li>
+      <li><a class="menu-link" href="guia-botanica.html">🌿 Guía botánica</a></li>
+      <li><span class="menu-link menu-link--disabled" aria-disabled="true">🗺️ Mapa de observaciones <span class="menu-tag">Próximamente</span></span></li>
+      <li><a class="menu-link" href="sobre-el-proyecto.html">ℹ️ Sobre el proyecto</a></li>
+      <li><a class="menu-link" href="como-reportar.html">Cómo hacer un buen reporte</a></li>
+    </ul>
+    <a class="btn btn-accent menu-panel__cta" href="reportar.html">+ Hacer un reporte</a>
+    <nav class="menu-legal" aria-label="Información legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </nav>
+    <p class="menu-panel__social">Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  </nav>
+</div>
+
+<main id="main-content" class="container">
+
+  <p class="content-label">Ramales Natural</p>
+  <h1 class="content-titulo" tabindex="-1">Identificar planta</h1>
+  <p class="content-lead">Haz una fotografía y te decimos qué planta es. Si es una especie invasora en Cantabria, te avisamos y puedes reportarla directamente.</p>
+
+  <!-- IDENTIFICAR PLANTA (Pl@ntNet) -->
+  <div class="identificar-overlay identificar-overlay--pagina" id="identificar-overlay">
+    <div class="identificar-panel" role="region" aria-labelledby="identificar-titulo-activo">
+      <button type="button" class="ficha-cerrar" id="identificar-cerrar" aria-label="Cerrar">✕</button>
+
+      <!-- Estado 1: elegir foto(s) -->
+      <div class="identificar-estado" id="identificar-estado-inicio">
+        <span class="identificar-icono" aria-hidden="true">📷</span>
+        <h2 id="identificar-titulo-activo">Identificar planta</h2>
+        <p>Haz una o varias fotografías de la misma planta (hasta 5). Cuantas más partes se vean —hoja, flor, planta completa—, mejor será el resultado.</p>
+
+        <div class="identificar-miniaturas" id="identificar-miniaturas" hidden></div>
+
+        <label class="btn btn-primary identificar-input-btn">
+          📷 Hacer una fotografía
+          <input type="file" accept="image/*" capture="environment" id="identificar-input-camara">
+        </label>
+        <label class="btn btn-secondary identificar-input-btn">
+          🖼️ Elegir de la galería
+          <input type="file" accept="image/*" multiple id="identificar-input-galeria">
+        </label>
+        <button type="button" class="btn btn-accent identificar-btn-analizar" id="identificar-btn-analizar" disabled>🔎 Identificar planta</button>
+        <p class="identificar-credito">Identificación por <a href="https://my.plantnet.org/" target="_blank" rel="noopener">Pl@ntNet</a></p>
+      </div>
+
+      <!-- Estado 2: cargando -->
+      <div class="identificar-estado" id="identificar-estado-cargando" hidden>
+        <span class="identificar-spinner" aria-hidden="true"></span>
+        <h2>Identificando tu foto…</h2>
+        <p>Puede tardar unos segundos.</p>
+      </div>
+
+      <!-- Estado 3: resultados -->
+      <div class="identificar-estado identificar-estado--resultados" id="identificar-estado-resultados" hidden>
+        <img class="identificar-foto-enviada" id="identificar-foto-enviada" alt="Fotografía enviada">
+        <h2 id="identificar-resultados-titulo">Podría ser…</h2>
+        <p id="identificar-resultados-intro" hidden>Estas son las especies que más se parecen a tu fotografía.</p>
+        <div class="identificar-resultados-lista" id="identificar-resultados-lista"></div>
+        <div class="identificar-duda" id="identificar-duda" hidden>
+          <p>Si no estás seguro de qué planta es, también puedes enviarnos la fotografía para que podamos revisarla.</p>
+          <button type="button" class="btn btn-accent" id="identificar-btn-mandar-duda">📍 Mandar registro</button>
+        </div>
+        <button type="button" class="btn btn-ghost identificar-otra-foto" id="identificar-otra-foto">Probar con otra foto</button>
+      </div>
+
+      <!-- Estado 4: error / no configurado -->
+      <div class="identificar-estado" id="identificar-estado-error" hidden>
+        <span class="identificar-icono" aria-hidden="true">⚠️</span>
+        <h2>No hemos podido identificarla</h2>
+        <p id="identificar-error-mensaje">Ha ocurrido un problema al conectar con el servicio de identificación.</p>
+        <p>Puedes intentarlo de nuevo o enviarnos directamente la fotografía para que la revisemos.</p>
+        <p class="identificar-error-tecnico" id="identificar-error-tecnico" hidden></p>
+        <button type="button" class="btn btn-secondary" id="identificar-reintentar">Volver a intentarlo</button>
+        <button type="button" class="btn btn-accent" id="identificar-btn-mandar-error">📍 Mandar registro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FICHA DE ESPECIE (guía de Cantabria) — para "Conocer esta especie" -->
+  <div class="ficha-overlay" id="ficha-overlay" hidden>
+    <div class="ficha-panel" role="dialog" aria-modal="true" aria-labelledby="ficha-comun">
+      <button type="button" class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">✕</button>
+
+      <div class="ficha-carrusel" id="ficha-carrusel">
+        <img class="ficha-carrusel__img" id="ficha-carrusel-img" alt="">
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--prev" id="ficha-prev" aria-label="Fotografía anterior">←</button>
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--next" id="ficha-next" aria-label="Fotografía siguiente">→</button>
+        <span class="ficha-carrusel__contador" id="ficha-contador"></span>
+        <a class="ficha-carrusel__credito" id="ficha-carrusel-credito" href="#" target="_blank" rel="noopener" hidden></a>
+      </div>
+
+      <div class="ficha-cuerpo">
+        <p class="ficha-comun" id="ficha-comun"></p>
+        <p class="ficha-cientifico" id="ficha-cientifico"></p>
+
+        <div class="ficha-seccion" id="ficha-seccion-reconocer">
+          <h3>¿Cómo reconocerla?</h3>
+          <p id="ficha-reconocer"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
+          <h3>Características</h3>
+          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-donde">
+          <h3>¿Dónde aparece?</h3>
+          <p id="ficha-donde"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-invasora">
+          <h3>¿Es una especie invasora?</h3>
+          <p id="ficha-invasora"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-fuentes">
+          <h3>Fuentes</h3>
+          <ul class="ficha-fuentes" id="ficha-fuentes"></ul>
+        </div>
+
+        <div class="ficha-acciones">
+          <a href="#" target="_blank" rel="noopener" class="btn btn-secondary ficha-btn-oficial" id="ficha-btn-oficial">Consultar ficha oficial</a>
+          <button type="button" class="btn btn-primary ficha-btn-reportar" id="ficha-btn-reportar">+ Reportar esta especie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM DE FOTOGRAFÍA -->
+  <div class="zoom-overlay" id="zoom-overlay" hidden>
+    <img class="zoom-overlay__img" id="zoom-overlay-img" alt="">
+  </div>
+
+</main>
+
+<footer class="app-footer" id="app-footer">
+  <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <p class="app-footer__brand">Ayuntamiento de Ramales de la Victoria</p>
+  <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  <nav class="app-footer__legal" aria-label="Información legal">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accesibilidad.html">Accesibilidad</a>
+  </nav>
+  <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+<script type="module">
+  import { initIdentificar, abrirIdentificar } from './js/identificar.js';
+  import { initCatalogo } from './js/catalogo.js';
+
+  initCatalogo();
+  initIdentificar();
+  abrirIdentificar();
+</script>
+</body>
+</html>

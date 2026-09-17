@@ -10,13 +10,45 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="legal-page">
-<header class="app-header">
-  <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+<header class="app-header" id="app-header">
+  <a class="app-header__logo-btn" href="index.html" aria-label="Ir al inicio">
+    <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  </a>
   <div class="app-header__text">
     <h1 style="font-size:0.95rem;">Ramales Natural</h1>
     <p>Reporte de especies invasoras</p>
   </div>
+  <button type="button" class="app-header__menu" id="header-menu" aria-label="Abrir menú" aria-haspopup="true">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<!-- MENÚ PRINCIPAL -->
+<div class="menu-overlay" id="menu-overlay" hidden>
+  <nav class="menu-panel" aria-label="Menú principal">
+    <div class="menu-panel__head">
+      <img src="images/logo-rn-blanco.png" alt="Ramales Natural" class="menu-panel__logo">
+      <button type="button" class="menu-close" id="menu-close" aria-label="Cerrar menú">✕</button>
+    </div>
+    <ul class="menu-list">
+      <li><a class="menu-link" href="index.html">Inicio</a></li>
+      <li><a class="menu-link" href="identificar.html">📷 Identificar planta</a></li>
+      <li><a class="menu-link" href="guia-botanica.html">🌿 Guía botánica</a></li>
+      <li><span class="menu-link menu-link--disabled" aria-disabled="true">🗺️ Mapa de observaciones <span class="menu-tag">Próximamente</span></span></li>
+      <li><a class="menu-link" href="sobre-el-proyecto.html">ℹ️ Sobre el proyecto</a></li>
+      <li><a class="menu-link" href="como-reportar.html">Cómo hacer un buen reporte</a></li>
+    </ul>
+    <a class="btn btn-accent menu-panel__cta" href="reportar.html">+ Hacer un reporte</a>
+    <nav class="menu-legal" aria-label="Información legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </nav>
+    <p class="menu-panel__social">Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  </nav>
+</div>
+
 <main class="container">
   <a class="back-link" href="index.html">← Volver a la aplicación</a>
   <h1>Política de privacidad</h1>
@@ -131,5 +163,6 @@
   </nav>
   <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
 </footer>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Hacer un reporte | Ramales Natural</title>
+<meta name="description" content="Envía un reporte de una especie invasora en Ramales de la Victoria: especie, ubicación y, si quieres, una fotografía.">
+<meta name="theme-color" content="#22392c">
+<link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo-rn-blanco.png">
+<link rel="canonical" href="https://reporteinvasoras.ramalesnatural.org/reportar.html">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
+
+<header class="app-header" id="app-header">
+  <button type="button" class="app-header__back" id="header-back" aria-label="Volver atrás" hidden>←</button>
+  <a class="app-header__logo-btn" href="index.html" aria-label="Ir al inicio">
+    <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  </a>
+  <div class="app-header__text">
+    <h1>Reportar</h1>
+    <p>Ramales Natural</p>
+  </div>
+  <button type="button" class="app-header__menu" id="header-menu" aria-label="Abrir menú" aria-haspopup="true">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MENÚ PRINCIPAL -->
+<div class="menu-overlay" id="menu-overlay" hidden>
+  <nav class="menu-panel" aria-label="Menú principal">
+    <div class="menu-panel__head">
+      <img src="images/logo-rn-blanco.png" alt="Ramales Natural" class="menu-panel__logo">
+      <button type="button" class="menu-close" id="menu-close" aria-label="Cerrar menú">✕</button>
+    </div>
+    <ul class="menu-list">
+      <li><a class="menu-link" href="index.html">Inicio</a></li>
+      <li><a class="menu-link" href="identificar.html">📷 Identificar planta</a></li>
+      <li><a class="menu-link" href="guia-botanica.html">🌿 Guía botánica</a></li>
+      <li><span class="menu-link menu-link--disabled" aria-disabled="true">🗺️ Mapa de observaciones <span class="menu-tag">Próximamente</span></span></li>
+      <li><a class="menu-link" href="sobre-el-proyecto.html">ℹ️ Sobre el proyecto</a></li>
+      <li><a class="menu-link" href="como-reportar.html">Cómo hacer un buen reporte</a></li>
+    </ul>
+    <a class="btn btn-accent menu-panel__cta" href="reportar.html">+ Hacer un reporte</a>
+    <nav class="menu-legal" aria-label="Información legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </nav>
+    <p class="menu-panel__social">Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  </nav>
+</div>
+
+<div class="progress-track" id="progress-wrap" hidden>
+  <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+</div>
+<p class="progress-label" id="progress-label"></p>
+
+<main id="main-content" class="container">
+
+  <!-- PASO 1: ESPECIE -->
+  <section id="screen-especie" class="screen" aria-labelledby="especie-titulo">
+    <h2 id="especie-titulo" class="step-question" tabindex="-1">¿Qué planta has visto?</h2>
+    <p class="step-hint">Elige la que más se parezca. Si no la reconoces, no pasa nada.</p>
+    <div class="species-grid" id="species-grid" role="group" aria-label="Selección de especie"></div>
+    <div class="other-help" id="other-help" hidden>
+      <p><strong>¿No sabes qué planta es?</strong> Tranquilo. Haz una fotografía y nosotros podremos revisarla.</p>
+      <div class="field" style="margin-top:10px; margin-bottom:0">
+        <label for="otra-descripcion">¿Cómo la describirías? <span class="label-optional">(opcional)</span></label>
+        <input type="text" id="otra-descripcion" placeholder="Ej: una planta alta con flores moradas">
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 2: FOTO -->
+  <section id="screen-foto" class="screen" aria-labelledby="foto-titulo">
+    <h2 id="foto-titulo" class="step-question" tabindex="-1">Haz una foto</h2>
+    <p class="step-hint">Puedes añadir hasta 3 fotografías. La foto es opcional, pero nos ayuda mucho a identificar la planta.</p>
+    <div class="photo-grid" id="photo-grid" role="group" aria-label="Fotografías de la planta"></div>
+    <p id="photo-count" aria-live="polite" style="font-size:0.82rem;color:var(--verde-suave);font-weight:700;margin-bottom:10px;"></p>
+    <p id="foto-error" class="error-text" style="display:none"></p>
+    <div class="tip">
+      <span class="tip__icon" aria-hidden="true">💡</span>
+      <span>Si puedes, fotografía la planta completa y algún detalle de sus hojas o flores.</span>
+    </div>
+  </section>
+
+  <!-- PASO 3: UBICACIÓN -->
+  <section id="screen-ubicacion" class="screen" aria-labelledby="ubicacion-titulo">
+    <h2 id="ubicacion-titulo" class="step-question" tabindex="-1">¿Dónde la has visto?</h2>
+    <p class="step-hint">Intentaremos detectar tu ubicación automáticamente. También puedes marcarla tú a mano en el mapa.</p>
+    <button type="button" class="loc-open-btn" id="btn-abrir-mapa">📍 Indicar ubicación en el mapa</button>
+    <p class="loc-status" id="loc-result" role="status"></p>
+    <div class="field" style="margin-top:16px; margin-bottom:0">
+      <label for="lugar-desc">Descripción del lugar <span class="label-optional">(opcional)</span></label>
+      <input type="text" id="lugar-desc" placeholder="Ej: junto al río, detrás del puente">
+    </div>
+  </section>
+
+  <!-- PASO 4: CANTIDAD -->
+  <section id="screen-cantidad" class="screen" aria-labelledby="cantidad-titulo">
+    <h2 id="cantidad-titulo" class="step-question" tabindex="-1">¿Cuánto hay?</h2>
+    <p class="step-hint">Una estimación aproximada es suficiente.</p>
+    <div class="option-grid" id="tamanyo-grid" role="group" aria-label="Cantidad aproximada"></div>
+  </section>
+
+  <!-- PASO 5: OBSERVACIONES -->
+  <section id="screen-observaciones" class="screen" aria-labelledby="observaciones-titulo">
+    <h2 id="observaciones-titulo" class="step-question" tabindex="-1">¿Quieres añadir algo más?</h2>
+    <p class="step-hint">Es opcional. Por ejemplo: "está junto a un camino" o "hay muchas plantas cerca".</p>
+    <div class="field">
+      <label for="observaciones-input" class="label-optional">Observaciones (opcional)</label>
+      <textarea id="observaciones-input" rows="4" placeholder="Escribe aquí si quieres contarnos algo más..."></textarea>
+    </div>
+  </section>
+
+  <!-- PASO 6: CONTACTO -->
+  <section id="screen-contacto" class="screen" aria-labelledby="contacto-titulo">
+    <h2 id="contacto-titulo" class="step-question" tabindex="-1">¿Quieres que podamos contactarte?</h2>
+    <p class="step-hint">Estos datos no son necesarios para enviar el reporte. Puedes dejarlos en blanco.</p>
+    <div class="field">
+      <label for="nombre-input" class="label-optional">Nombre (opcional)</label>
+      <input type="text" id="nombre-input" placeholder="Tu nombre" autocomplete="name">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label for="email-input" class="label-optional">Email (opcional)</label>
+      <input type="email" id="email-input" placeholder="correo@ejemplo.com" autocomplete="email">
+    </div>
+  </section>
+
+  <!-- PASO 7: REVISIÓN -->
+  <section id="screen-revision" class="screen" aria-labelledby="revision-titulo">
+    <h2 id="revision-titulo" class="step-question" tabindex="-1">Revisa tu reporte</h2>
+    <p class="step-hint">Comprueba que todo esté bien antes de enviarlo. Puedes editar cualquier apartado.</p>
+    <div class="card">
+      <div class="review-section">
+        <div><p class="review-section__label">Especie</p><p class="review-section__value" id="revision-especie"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="especie">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Fotografías</p><div class="review-photos" id="revision-fotos"></div></div>
+        <button type="button" class="review-section__edit" data-edit-step="foto">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Ubicación</p><p class="review-section__value" id="revision-ubicacion"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="ubicacion">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Cantidad</p><p class="review-section__value" id="revision-cantidad"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="cantidad">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Observaciones</p><p class="review-section__value" id="revision-observaciones"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="observaciones">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Contacto</p><p class="review-section__value" id="revision-contacto"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="contacto">Editar</button>
+      </div>
+    </div>
+    <p id="envio-error" class="error-text" style="display:none"></p>
+  </section>
+
+  <!-- ÉXITO -->
+  <section id="screen-exito" class="screen success" aria-labelledby="exito-titulo">
+    <div class="success__icon" aria-hidden="true">✓</div>
+    <h2 id="exito-titulo" tabindex="-1">¡Gracias!</h2>
+    <p>Tu observación ha sido enviada correctamente.</p>
+    <p>Cada reporte nos ayuda a conocer mejor y proteger nuestro entorno.</p>
+    <div class="success__actions">
+      <button type="button" class="btn btn-primary" id="btn-reportar-otro">Reportar otra especie</button>
+      <p class="home__secondary"><a href="https://www.ramalesnatural.org/" target="_blank" rel="noopener">Ramales Natural</a></p>
+    </div>
+  </section>
+
+</main>
+
+<nav class="wizard-nav" id="wizard-nav" hidden aria-label="Navegación del asistente">
+  <div class="wizard-nav__inner">
+    <button type="button" class="btn btn-primary" id="btn-siguiente" disabled>Continuar</button>
+  </div>
+</nav>
+
+<footer class="app-footer" id="app-footer">
+  <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <p class="app-footer__brand">Ayuntamiento de Ramales de la Victoria</p>
+  <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  <nav class="app-footer__legal" aria-label="Información legal">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accesibilidad.html">Accesibilidad</a>
+  </nav>
+  <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
+</footer>
+
+<!-- MODAL DE MAPA -->
+<div id="map-modal" role="dialog" aria-modal="true" aria-label="Indicar ubicación">
+  <div id="map-modal-inner">
+    <div id="map-modal-header">
+      <span>📍 Indica la ubicación</span>
+      <button id="map-modal-close" aria-label="Cerrar mapa">✕</button>
+    </div>
+    <div id="map"></div>
+    <div id="map-modal-footer">
+      <div id="map-hint" role="status">🔍 Buscando tu ubicación GPS...</div>
+      <button type="button" id="map-confirm-btn" class="btn btn-primary" disabled>Confirmar ubicación</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/reportar.js"></script>
+</body>
+</html>

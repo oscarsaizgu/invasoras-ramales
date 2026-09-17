@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Guía botánica | Ramales Natural</title>
+<meta name="description" content="Guía visual de las especies de flora invasora de Cantabria: 76 especies, con fotografías, características y medidas de control.">
+<meta name="theme-color" content="#22392c">
+<link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo-rn-blanco.png">
+<link rel="canonical" href="https://reporteinvasoras.ramalesnatural.org/guia-botanica.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
+
+<header class="app-header" id="app-header">
+  <a class="app-header__logo-btn" href="index.html" aria-label="Ir al inicio">
+    <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  </a>
+  <div class="app-header__text">
+    <h1>Guía botánica</h1>
+    <p>Ramales Natural</p>
+  </div>
+  <button type="button" class="app-header__menu" id="header-menu" aria-label="Abrir menú" aria-haspopup="true">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MENÚ PRINCIPAL -->
+<div class="menu-overlay" id="menu-overlay" hidden>
+  <nav class="menu-panel" aria-label="Menú principal">
+    <div class="menu-panel__head">
+      <img src="images/logo-rn-blanco.png" alt="Ramales Natural" class="menu-panel__logo">
+      <button type="button" class="menu-close" id="menu-close" aria-label="Cerrar menú">✕</button>
+    </div>
+    <ul class="menu-list">
+      <li><a class="menu-link" href="index.html">Inicio</a></li>
+      <li><a class="menu-link" href="identificar.html">📷 Identificar planta</a></li>
+      <li><a class="menu-link" href="guia-botanica.html">🌿 Guía botánica</a></li>
+      <li><span class="menu-link menu-link--disabled" aria-disabled="true">🗺️ Mapa de observaciones <span class="menu-tag">Próximamente</span></span></li>
+      <li><a class="menu-link" href="sobre-el-proyecto.html">ℹ️ Sobre el proyecto</a></li>
+      <li><a class="menu-link" href="como-reportar.html">Cómo hacer un buen reporte</a></li>
+    </ul>
+    <a class="btn btn-accent menu-panel__cta" href="reportar.html">+ Hacer un reporte</a>
+    <nav class="menu-legal" aria-label="Información legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="accesibilidad.html">Accesibilidad</a>
+    </nav>
+    <p class="menu-panel__social">Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  </nav>
+</div>
+
+<main id="main-content" class="container">
+
+  <!-- GUÍA BOTÁNICA -->
+  <section class="content-page" aria-labelledby="especies-info-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">Guía botánica</h1>
+    <p class="content-lead">Una pequeña guía visual para reconocer la flora invasora de Cantabria. Búscala, compárala con fotografías y hazte una idea de qué has visto. Si no estás seguro, no pasa nada: te ayudamos a identificarla.</p>
+
+    <div class="catalogo-buscador">
+      <span class="catalogo-buscador__icon" aria-hidden="true">🔎</span>
+      <input type="search" id="catalogo-buscar" placeholder="Buscar una especie..." aria-label="Buscar una especie por nombre común o científico">
+    </div>
+
+    <div class="catalogo-seccion">
+      <h2 class="catalogo-seccion__titulo">Las más relevantes en Ramales</h2>
+      <div class="catalogo-grid catalogo-grid--destacadas" id="catalogo-destacadas"></div>
+    </div>
+
+    <div class="identificar-cta">
+      <span class="identificar-cta__icon" aria-hidden="true">📷</span>
+      <h2 class="identificar-cta__titulo">¿No sabes qué planta es?</h2>
+      <p class="identificar-cta__texto">No pasa nada. Haz una fotografía y te ayudaremos a identificarla.</p>
+      <a href="identificar.html" class="btn btn-accent identificar-cta__btn">📷 Ayúdame a identificarla</a>
+    </div>
+
+    <div class="catalogo-filtros" id="catalogo-filtros" role="group" aria-label="Filtrar guía de especies">
+      <button type="button" class="catalogo-filtro is-active" data-filtro="todas">Todas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="ramales">Más relevantes en Ramales</button>
+      <button type="button" class="catalogo-filtro" data-filtro="herbacea">Herbáceas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="arbusto">Arbustos</button>
+      <button type="button" class="catalogo-filtro" data-filtro="arbol">Árboles</button>
+      <button type="button" class="catalogo-filtro" data-filtro="acuatica">Acuáticas</button>
+    </div>
+
+    <div class="catalogo-seccion">
+      <h2 class="catalogo-seccion__titulo">Guía de especies invasoras de Cantabria</h2>
+      <p class="catalogo-fuente">Fuente oficial: <a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> (Gobierno de Cantabria, 2017)</p>
+      <p class="catalogo-resultados" id="catalogo-resultados-info" aria-live="polite"></p>
+      <div class="catalogo-grid" id="catalogo-grid"></div>
+      <p class="catalogo-vacio" id="catalogo-vacio" hidden>No hemos encontrado ninguna especie con ese nombre.</p>
+      <button type="button" class="btn btn-secondary catalogo-cargar-mas" id="catalogo-cargar-mas" hidden>Ver más especies</button>
+    </div>
+
+    <div class="paisaje-montanas" aria-hidden="true">
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 90 L40 55 L75 80 L110 40 L150 85 L190 50 L230 88 L270 45 L310 82 L350 58 L400 90 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.10"/>
+        <path d="M0 100 L60 70 L100 95 L150 60 L200 100 L250 65 L300 98 L350 72 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.18"/>
+        <path d="M0 112 L50 92 L120 110 L180 85 L240 112 L300 90 L360 110 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- FICHA DE ESPECIE (guía de Cantabria) -->
+  <div class="ficha-overlay" id="ficha-overlay" hidden>
+    <div class="ficha-panel" role="dialog" aria-modal="true" aria-labelledby="ficha-comun">
+      <button type="button" class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">✕</button>
+
+      <div class="ficha-carrusel" id="ficha-carrusel">
+        <img class="ficha-carrusel__img" id="ficha-carrusel-img" alt="">
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--prev" id="ficha-prev" aria-label="Fotografía anterior">←</button>
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--next" id="ficha-next" aria-label="Fotografía siguiente">→</button>
+        <span class="ficha-carrusel__contador" id="ficha-contador"></span>
+        <a class="ficha-carrusel__credito" id="ficha-carrusel-credito" href="#" target="_blank" rel="noopener" hidden></a>
+      </div>
+
+      <div class="ficha-cuerpo">
+        <p class="ficha-comun" id="ficha-comun"></p>
+        <p class="ficha-cientifico" id="ficha-cientifico"></p>
+
+        <div class="ficha-seccion" id="ficha-seccion-reconocer">
+          <h3>¿Cómo reconocerla?</h3>
+          <p id="ficha-reconocer"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
+          <h3>Características</h3>
+          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-donde">
+          <h3>¿Dónde aparece?</h3>
+          <p id="ficha-donde"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-invasora">
+          <h3>¿Es una especie invasora?</h3>
+          <p id="ficha-invasora"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-fuentes">
+          <h3>Fuentes</h3>
+          <ul class="ficha-fuentes" id="ficha-fuentes"></ul>
+        </div>
+
+        <div class="ficha-acciones">
+          <a href="#" target="_blank" rel="noopener" class="btn btn-secondary ficha-btn-oficial" id="ficha-btn-oficial">Consultar ficha oficial</a>
+          <button type="button" class="btn btn-primary ficha-btn-reportar" id="ficha-btn-reportar">+ Reportar esta especie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM DE FOTOGRAFÍA -->
+  <div class="zoom-overlay" id="zoom-overlay" hidden>
+    <img class="zoom-overlay__img" id="zoom-overlay-img" alt="">
+  </div>
+
+</main>
+
+<footer class="app-footer" id="app-footer">
+  <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
+  <p class="app-footer__brand">Ayuntamiento de Ramales de la Victoria</p>
+  <p>Instagram: <a href="https://www.instagram.com/ramalesnatural/" target="_blank" rel="noopener">@ramalesnatural</a></p>
+  <nav class="app-footer__legal" aria-label="Información legal">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accesibilidad.html">Accesibilidad</a>
+  </nav>
+  <p class="app-footer__credit">Diseño y Desarrollo: Óscar Saiz Gutierrez</p>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+<script type="module">
+  import { initCatalogo } from './js/catalogo.js';
+  initCatalogo();
+</script>
+</body>
+</html>

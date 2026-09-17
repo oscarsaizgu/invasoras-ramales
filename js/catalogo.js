@@ -1,5 +1,3 @@
-import { goToStepAndEnter } from './app.js';
-
 // ================================================================
 // Guía de especies invasoras de Cantabria
 //
@@ -301,22 +299,13 @@ function cerrarZoom() {
 }
 
 // ── Conexión con el flujo de reporte existente ──
-// Reutiliza tal cual los botones y el estado ya existentes del asistente
-// (especies.js / wizard.js / app.js): no se toca su lógica, solo se simula
-// la misma selección que haría la persona usuaria a mano. Se exporta para
-// que identificar.js (resultados de Pl@ntNet) pueda arrancar el mismo
-// reporte con la especie identificada ya seleccionada.
+// El asistente de reporte vive en su propia página (reportar.html), así
+// que arrancar un reporte desde aquí (o desde identificar.js) es una
+// navegación normal, pasando la especie por la URL. reportar.js lee ese
+// parámetro al cargar y preselecciona la especie exactamente igual que
+// antes se simulaba con un clic.
 export function seleccionarEspecieParaReportar(cientifico) {
-  const boton = document.querySelector(`.species-btn[data-especie="${CSS.escape(cientifico)}"]`);
-  if (boton) {
-    boton.click();
-  } else {
-    const otraBtn = document.querySelector('.species-btn--other');
-    const otraInput = document.getElementById('otra-descripcion');
-    if (otraBtn) otraBtn.click();
-    if (otraInput) otraInput.value = cientifico;
-  }
-  goToStepAndEnter('especie');
+  window.location.href = 'reportar.html?especie=' + encodeURIComponent(cientifico);
 }
 
 function reportarEspecie(cientifico) {

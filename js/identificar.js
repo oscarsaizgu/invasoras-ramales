@@ -334,7 +334,10 @@ function reiniciarSeleccion() {
   if (inputGaleria) inputGaleria.value = '';
 }
 
-function abrirIdentificar() {
+// Se exporta para que identificar.html pueda mostrar la interfaz
+// directamente al cargar la página (ya no hay un botón "Hacer una foto"
+// en esta página que la abra: la página ES la interfaz de identificar).
+export function abrirIdentificar() {
   reiniciarSeleccion();
   mostrarEstado('inicio');
   const overlay = document.getElementById('identificar-overlay');
@@ -355,11 +358,15 @@ function cerrarIdentificar() {
 }
 
 export function initIdentificar() {
-  const botonesAbrir = document.querySelectorAll('#btn-identificar, .js-abrir-identificar');
   const overlay = document.getElementById('identificar-overlay');
-  if (!botonesAbrir.length || !overlay) return;
+  if (!overlay) return;
 
-  botonesAbrir.forEach(btn => btn.addEventListener('click', abrirIdentificar));
+  // Ya no hay botones "Hacer una foto" en otras páginas (ahora enlazan
+  // directamente a identificar.html), pero se mantiene por si alguna
+  // pantalla decide reabrir la identificación sin recargar la página.
+  document.querySelectorAll('#btn-identificar, .js-abrir-identificar').forEach(btn => {
+    btn.addEventListener('click', abrirIdentificar);
+  });
   document.getElementById('identificar-cerrar').addEventListener('click', cerrarIdentificar);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrarIdentificar(); });
   document.addEventListener('keydown', (e) => { if (!overlay.hidden && e.key === 'Escape') cerrarIdentificar(); });
