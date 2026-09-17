@@ -1768,6 +1768,43 @@ body.pagina-inicio .home {
    ================================================================ */
 .map-page { padding-top: 0.3rem; }
 
+/* Buscador y chips en una sola fila, misma altura, sin scroll — se
+   encogen si hace falta. Solo en el mapa; no se tocan las reglas base de
+   .catalogo-buscador/.catalogo-filtro que también usa la guía botánica. */
+.map-controles {
+  display: flex; align-items: stretch; flex-wrap: nowrap;
+  gap: 0.3rem;
+  margin-bottom: 2rem;
+}
+.map-controles .catalogo-buscador {
+  flex: 0 1 34px; min-width: 34px;
+  height: 40px; padding: 0 0.55rem;
+  margin-bottom: 0;
+  gap: 0.3rem;
+  transition: flex-basis 0.15s ease;
+}
+.map-controles .catalogo-buscador.is-activo { flex-basis: 130px; }
+.map-controles .catalogo-buscador input {
+  font-size: 0.78rem; min-width: 0;
+  opacity: 0; transition: opacity 0.1s ease;
+}
+.map-controles .catalogo-buscador.is-activo input,
+.map-controles .catalogo-buscador input:not(:placeholder-shown) { opacity: 1; }
+.map-controles .catalogo-buscador__icon { font-size: 0.82rem; }
+.map-controles .catalogo-filtros {
+  flex: 1 1 auto; flex-wrap: nowrap;
+  min-width: 0;
+  margin-bottom: 0;
+  gap: 0.28rem;
+}
+.map-controles .catalogo-filtro {
+  flex: 1 1 auto; min-width: 0;
+  height: 40px; padding: 0 0.4rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.66rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
 .map-hero {
   position: relative;
   text-align: center;
@@ -1795,16 +1832,37 @@ body.pagina-inicio .home {
 }
 
 .map-card {
+  position: relative;
   border-radius: var(--radio-grande);
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid var(--borde);
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
 }
 .map-card #public-map { height: clamp(360px, 62vh, 560px); }
-.public-map-empty {
-  text-align: center; padding: 3.5rem 1.4rem; color: var(--text-muted); font-family: var(--font);
+
+/* Mensaje "esperando observaciones" — tarjeta flotante que deja ver el
+   mapa detrás, no un panel que lo tapa. */
+.map-vacio {
+  position: absolute; left: 50%; bottom: 1rem; z-index: 500;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem); max-width: 320px;
+  display: flex; flex-direction: column; gap: 0.35rem;
+  text-align: center; padding: 1rem 1.2rem;
+  background: rgba(255, 253, 248, 0.94);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--shadow);
+  pointer-events: none;
 }
+.map-vacio__titulo {
+  font-family: var(--font-titulo); font-weight: 400; letter-spacing: 0.02em;
+  font-size: 0.95rem; color: var(--verde); margin: 0;
+}
+.map-vacio__texto {
+  font-family: var(--font); font-size: 0.8rem; line-height: 1.5;
+  color: var(--text-muted); margin: 0;
+}
+.map-vacio[hidden] { display: none; }
 
 .map-popup { font-family: var(--font); line-height: 1.5; min-width: 140px; }
 .map-popup__comun { display: block; font-size: 0.95rem; margin-bottom: 0.1rem; }
@@ -1823,23 +1881,22 @@ body.pagina-inicio .home {
   color: #fff; font-family: var(--font); font-weight: 700; font-size: 0.78rem;
 }
 
-/* Franja de datos bajo el mapa */
-.map-stats {
-  display: flex; flex-direction: column; gap: 1.1rem;
-  background: var(--card); border-radius: var(--radio-grande);
-  box-shadow: var(--shadow);
-  padding: 1.3rem 1.2rem;
-  margin-bottom: 1.8rem;
+/* Control para mostrar/ocultar la capa histórica de QGIS, oculta por
+   defecto — el mapa se centra en los reportes ciudadanos. */
+.map-historico {
+  text-align: center;
+  margin: 0 0 1.8rem;
 }
-.map-stat { display: flex; align-items: center; gap: 0.8rem; text-align: left; }
-.map-stat__icono { font-size: 1.4rem; flex-shrink: 0; }
-.map-stat__texto { display: flex; flex-direction: column; gap: 0.15rem; }
-.map-stat__valor { font-family: var(--font-titulo); font-size: 1rem; color: var(--verde); font-weight: 400; display: block; }
-.map-stat__label { font-family: var(--font); font-size: 0.78rem; color: var(--text-muted); line-height: 1.35; display: block; }
-@media (min-width: 640px) {
-  .map-stats { flex-direction: row; }
-  .map-stat { flex: 1; flex-direction: column; text-align: center; gap: 0.5rem; }
-  .map-stat__texto { align-items: center; }
+.map-historico__btn {
+  font-family: var(--font); font-size: 0.8rem; font-weight: 700;
+  color: var(--verde); background: var(--card);
+  border: 1.5px solid var(--borde); border-radius: 999px;
+  padding: 0.55rem 1.2rem; cursor: pointer;
+}
+.map-historico__btn.is-active { background: var(--verde); color: var(--crema); border-color: var(--verde); }
+.map-historico__nota {
+  font-family: var(--font); font-size: 0.72rem; color: var(--text-muted);
+  margin: 0.55rem 0 0;
 }
 
 /* Bloque participativo */

@@ -1,16 +1,15 @@
 import { CONFIG } from './config.js';
 
 // ---------------------------------------------------------------------------
-// Fuentes de datos
+// Fuentes de datos — "mapa vivo": reportes ciudadanos (capa principal, aún
+// sin backend) + histórico de QGIS (capa secundaria, oculta por defecto).
 //
-// Hoy el mapa solo pinta el histórico de QGIS. Cada observación, venga de
-// donde venga, se normaliza a esta forma común antes de llegar al resto del
-// código: { especie, nombreComun, lat, lon }. El día que se conecten los
-// reportes ciudadanos de reportar.html, basta con añadir un adaptador
-// equivalente (p.ej. adaptarReporteCiudadano) y combinar ambos arrays en
-// cargarObservaciones() — el resto del mapa (color, agrupamiento, filtros,
-// popup, estadísticas) no necesita cambiar. Esa es la idea de fondo:
-// datos históricos + futuros reportes de la gente = mapa vivo.
+// Cada observación, venga de donde venga, se normaliza a esta forma común:
+// { especie, nombreComun, lat, lon, fuente }, con fuente = 'reportes' |
+// 'historico'. Todo lo demás (color, agrupamiento, filtros, popup) trabaja
+// solo con esa forma normalizada y no le importa el origen real. El día que
+// haya un backend para reportar.html, cargarReportesCiudadanos() es la
+// única función que hay que reescribir para que deje de devolver [].
 // ---------------------------------------------------------------------------
 
 function adaptarFeatureQGIS(feature) {
@@ -18,11 +17,13 @@ function adaptarFeatureQGIS(feature) {
   const [lon, lat] = feature.geometry.coordinates;
   if (typeof lat !== 'number' || typeof lon !== 'number') return null;
   const props = feature.properties || {};
+  if (!props.ESPECIE) return null;
   return {
-    especie: props.ESPECIE || null,
+    especie: props.ESPECIE,
     nombreComun: props.NOMBRE_COM ? props.NOMBRE_COM.trim().toLowerCase() : null,
     lat,
     lon,
+    fuente: 'historico',
   };
 }
 
@@ -32,24 +33,46 @@ async function cargarHistoricoQGIS() {
     if (!resp.ok) return [];
     const data = await resp.json();
     const features = Array.isArray(data.features) ? data.features : [];
-    return features.map(adaptarFeatureQGIS).filter(Boolean).filter(o => o.especie);
+    return features.map(adaptarFeatureQGIS).filter(Boolean);
   } catch (err) {
     return [];
   }
 }
 
-async function cargarObservaciones() {
-  // Fase futura: fusionar aquí el histórico con los reportes ciudadanos
-  // ya aceptados (data/reportes-publicos.json), una vez tengan coordenadas
-  // y especie confirmadas.
-  return cargarHistoricoQGIS();
+// data/reportes-publicos.json está vacío a propósito (no hay backend
+// todavía): esta función siempre devolverá [] hasta que exista uno. El
+// formato de cada reporte aceptado documentado en data/README.md todavía no
+// incluye el nombre científico, así que de momento solo se aceptan entradas
+// que ya lo traigan explícito — no se inventa a partir del nombre común.
+function adaptarReporteCiudadano(reporte) {
+  if (!reporte || typeof reporte.lat !== 'number' || typeof reporte.lon !== 'number') return null;
+  if (!reporte.especieCientifica) return null;
+  return {
+    especie: reporte.especieCientifica,
+    nombreComun: reporte.especie ? String(reporte.especie).trim().toLowerCase() : null,
+    lat: reporte.lat,
+    lon: reporte.lon,
+    fuente: 'reportes',
+  };
+}
+
+async function cargarReportesCiudadanos() {
+  try {
+    const resp = await fetch('data/reportes-publicos.json', { cache: 'no-store' });
+    if (!resp.ok) return [];
+    const data = await resp.json();
+    const lista = Array.isArray(data) ? data : [];
+    return lista.map(adaptarReporteCiudadano).filter(Boolean);
+  } catch (err) {
+    return [];
+  }
 }
 
 // Categoría (herbácea/arbusto/árbol/acuática) para los chips de filtro: se
 // reutiliza el campo "categoria" ya existente en la guía botánica, no se
-// inventa una clasificación nueva. Si una especie del histórico de QGIS no
-// está todavía documentada allí, simplemente no aparece al filtrar por tipo
-// (sigue visible en "Todas").
+// inventa una clasificación nueva. Si una especie no está todavía
+// documentada allí, simplemente no aparece al filtrar por tipo (sigue
+// visible en "Todas").
 async function cargarCategoriasPorEspecie() {
   try {
     const resp = await fetch('data/cantabria-flora.json', { cache: 'no-store' });
@@ -69,12 +92,11 @@ async function cargarCategoriasPorEspecie() {
 }
 
 // ---------------------------------------------------------------------------
-// Paleta natural por especie
+// Paleta natural por especie — estable entre fuentes: se construye una sola
+// vez a partir de todas las especies combinadas (reportes + histórico), así
+// que una especie usa siempre el mismo color venga de donde venga.
 // ---------------------------------------------------------------------------
 
-// Tonos coherentes con la identidad de Ramales Natural: verdes, verdes
-// oscuros, ocres, tierras, marrones suaves y algún rojizo/rosado para
-// diferenciar. Nada de colores fluorescentes ni saturados.
 const HUES_NATURALES = [96, 150, 40, 25, 60, 200, 350, 120, 15, 70, 330, 170];
 
 function construirPaleta(especies) {
@@ -96,15 +118,18 @@ let map = null;
 let coloresPorEspecie = new Map();
 let categoriasPorEspecie = new Map();
 let nombresComunesPorEspecie = new Map();
-let gruposPorEspecie = new Map(); // especie -> L.markerClusterGroup
-let observacionesPorEspecie = new Map(); // especie -> array normalizado
+// fuente -> especie -> L.markerClusterGroup, para poder mostrar/ocultar el
+// histórico entero sin tocar la capa de reportes ciudadanos.
+let gruposPorFuente = { reportes: new Map(), historico: new Map() };
 let activeCategoria = '';
 let activeTexto = '';
+let historicoVisible = false;
 
 function initMap() {
   map = L.map('public-map').setView(CONFIG.mapaCenter, CONFIG.mapaZoom);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
+  // Vista satélite (Esri World Imagery, gratuita y sin clave de API).
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community',
     maxZoom: 19,
   }).addTo(map);
 }
@@ -155,14 +180,17 @@ function popupHtml(especie, nombreComun) {
   `;
 }
 
-function construirGrupos(observaciones) {
-  const especies = [...new Set(observaciones.map(o => o.especie))].sort((a, b) => a.localeCompare(b, 'es'));
-  coloresPorEspecie = construirPaleta(especies);
+// Construye, para una fuente concreta, un grupo de clúster por especie.
+// Los grupos se guardan pero NO se añaden al mapa aquí: quién está visible
+// lo decide siempre aplicarFiltro().
+function construirGruposDeFuente(observaciones, fuente) {
+  const porEspecie = new Map();
+  observaciones.forEach(o => {
+    if (!porEspecie.has(o.especie)) porEspecie.set(o.especie, []);
+    porEspecie.get(o.especie).push(o);
+  });
 
-  especies.forEach(especie => {
-    const propias = observaciones.filter(o => o.especie === especie);
-    observacionesPorEspecie.set(especie, propias);
-
+  porEspecie.forEach((propias, especie) => {
     const color = coloresPorEspecie.get(especie);
     const grupo = L.markerClusterGroup({
       chunkedLoading: true,
@@ -172,23 +200,15 @@ function construirGrupos(observaciones) {
       iconCreateFunction: iconoClusterHtml(color),
     });
 
-    // El nombre común se toma del valor más frecuente para la especie, no del
-    // registro individual: el campo NOMBRE_COM del GeoPackage es texto libre
-    // por observación y a menudo contiene anotaciones de campo ("sin flor",
-    // "fin del area continua"...) en vez de un nombre común real.
-    const nombreComun = nombreComunCanonico(propias);
-    nombresComunesPorEspecie.set(especie, nombreComun);
-
+    const nombreComun = nombresComunesPorEspecie.get(especie) || '';
     propias.forEach(o => {
       const marker = L.marker([o.lat, o.lon], { icon: iconoPuntoHtml(color) });
       marker.bindPopup(popupHtml(especie, nombreComun));
       grupo.addLayer(marker);
     });
 
-    gruposPorEspecie.set(especie, grupo);
+    gruposPorFuente[fuente].set(especie, grupo);
   });
-
-  return especies;
 }
 
 function especieCoincide(especie) {
@@ -200,18 +220,47 @@ function especieCoincide(especie) {
   return cientifico.includes(activeTexto) || comun.includes(activeTexto);
 }
 
+function contarMarcadoresVisibles() {
+  let total = 0;
+  map.eachLayer(layer => {
+    if (layer.getLayers && typeof layer.getLayers === 'function') {
+      total += layer.getLayers().length;
+    }
+  });
+  return total;
+}
+
+function actualizarVacio() {
+  const overlay = document.getElementById('map-vacio');
+  if (!overlay) return;
+  overlay.hidden = contarMarcadoresVisibles() > 0;
+}
+
 function aplicarFiltro() {
-  gruposPorEspecie.forEach((grupo, especie) => {
+  gruposPorFuente.reportes.forEach((grupo, especie) => {
     const debeMostrarse = especieCoincide(especie);
     const yaEnMapa = map.hasLayer(grupo);
     if (debeMostrarse && !yaEnMapa) map.addLayer(grupo);
     if (!debeMostrarse && yaEnMapa) map.removeLayer(grupo);
   });
+  gruposPorFuente.historico.forEach((grupo, especie) => {
+    const debeMostrarse = historicoVisible && especieCoincide(especie);
+    const yaEnMapa = map.hasLayer(grupo);
+    if (debeMostrarse && !yaEnMapa) map.addLayer(grupo);
+    if (!debeMostrarse && yaEnMapa) map.removeLayer(grupo);
+  });
+  actualizarVacio();
 }
 
 function initBuscador() {
+  const contenedor = document.querySelector('.map-controles .catalogo-buscador');
   const input = document.getElementById('map-buscador');
-  if (!input) return;
+  if (!input || !contenedor) return;
+
+  input.addEventListener('focus', () => contenedor.classList.add('is-activo'));
+  input.addEventListener('blur', () => {
+    if (!input.value) contenedor.classList.remove('is-activo');
+  });
   input.addEventListener('input', () => {
     activeTexto = input.value.trim().toLowerCase();
     aplicarFiltro();
@@ -232,29 +281,42 @@ function initChips() {
   });
 }
 
-function actualizarEstadisticas(numEspecies) {
-  const el = document.getElementById('map-stat-especies');
-  if (el) el.textContent = String(numEspecies);
+function initToggleHistorico() {
+  const boton = document.getElementById('map-toggle-historico');
+  if (!boton) return;
+  boton.addEventListener('click', () => {
+    historicoVisible = !historicoVisible;
+    boton.textContent = historicoVisible ? '− Ocultar datos históricos' : '+ Mostrar datos históricos';
+    boton.classList.toggle('is-active', historicoVisible);
+    boton.setAttribute('aria-pressed', String(historicoVisible));
+    aplicarFiltro();
+  });
 }
 
 async function init() {
   initMap();
-  const [observaciones, categorias] = await Promise.all([
-    cargarObservaciones(),
+  const [reportes, historico, categorias] = await Promise.all([
+    cargarReportesCiudadanos(),
+    cargarHistoricoQGIS(),
     cargarCategoriasPorEspecie(),
   ]);
   categoriasPorEspecie = categorias;
 
-  const emptyState = document.getElementById('public-map-empty');
-  if (!observaciones.length) {
-    emptyState.hidden = false;
-    return;
-  }
+  const todas = [...reportes, ...historico];
+  const especies = [...new Set(todas.map(o => o.especie))].sort((a, b) => a.localeCompare(b, 'es'));
+  coloresPorEspecie = construirPaleta(especies);
 
-  const especies = construirGrupos(observaciones);
-  actualizarEstadisticas(especies.length);
+  especies.forEach(especie => {
+    const propias = todas.filter(o => o.especie === especie);
+    nombresComunesPorEspecie.set(especie, nombreComunCanonico(propias));
+  });
+
+  construirGruposDeFuente(reportes, 'reportes');
+  construirGruposDeFuente(historico, 'historico');
+
   initBuscador();
   initChips();
+  initToggleHistorico();
   aplicarFiltro();
 }
 
