@@ -59,17 +59,13 @@
   <!-- GUÍA BOTÁNICA -->
   <section class="content-page" aria-labelledby="especies-info-titulo">
     <p class="content-label">Ramales Natural</p>
-    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">Guía botánica</h1>
-    <p class="content-lead">Una pequeña guía visual para reconocer la flora invasora de Cantabria. Búscala, compárala con fotografías y hazte una idea de qué has visto. Si no estás seguro, no pasa nada: te ayudamos a identificarla.</p>
+    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">🌿 Guía botánica</h1>
+    <p class="content-lead">Conoce las especies invasoras de Ramales y Cantabria.</p>
+    <p>Explora, identifica y aprende sobre las especies de flora exótica invasora presentes en nuestro entorno.</p>
 
     <div class="catalogo-buscador">
-      <span class="catalogo-buscador__icon" aria-hidden="true">🔎</span>
-      <input type="search" id="catalogo-buscar" placeholder="Buscar una especie..." aria-label="Buscar una especie por nombre común o científico">
-    </div>
-
-    <div class="catalogo-seccion">
-      <h2 class="catalogo-seccion__titulo">Las más relevantes en Ramales</h2>
-      <div class="catalogo-grid catalogo-grid--destacadas" id="catalogo-destacadas"></div>
+      <span class="catalogo-buscador__icon" aria-hidden="true">🔍</span>
+      <input type="search" id="catalogo-buscar" placeholder="Buscar una especie por nombre común o científico..." aria-label="Buscar una especie por nombre común o científico">
     </div>
 
     <div class="identificar-cta">
@@ -81,15 +77,14 @@
 
     <div class="catalogo-filtros" id="catalogo-filtros" role="group" aria-label="Filtrar guía de especies">
       <button type="button" class="catalogo-filtro is-active" data-filtro="todas">Todas</button>
-      <button type="button" class="catalogo-filtro" data-filtro="ramales">Más relevantes en Ramales</button>
-      <button type="button" class="catalogo-filtro" data-filtro="herbacea">Herbáceas</button>
-      <button type="button" class="catalogo-filtro" data-filtro="arbusto">Arbustos</button>
-      <button type="button" class="catalogo-filtro" data-filtro="arbol">Árboles</button>
-      <button type="button" class="catalogo-filtro" data-filtro="acuatica">Acuáticas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="herbacea">🌱 Herbáceas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="arbusto">🌿 Arbustos</button>
+      <button type="button" class="catalogo-filtro" data-filtro="arbol">🌳 Árboles</button>
+      <button type="button" class="catalogo-filtro" data-filtro="acuatica">💧 Acuáticas</button>
     </div>
 
     <div class="catalogo-seccion">
-      <h2 class="catalogo-seccion__titulo">Guía de especies invasoras de Cantabria</h2>
+      <h2 class="catalogo-seccion__titulo">Especies invasoras del catálogo</h2>
       <p class="catalogo-fuente">Fuente oficial: <a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> (Gobierno de Cantabria, 2017)</p>
       <p class="catalogo-resultados" id="catalogo-resultados-info" aria-live="polite"></p>
       <div class="catalogo-grid" id="catalogo-grid"></div>
@@ -125,8 +120,9 @@
         <p class="ficha-cientifico" id="ficha-cientifico"></p>
         <span class="ficha-estatus" id="ficha-estatus" hidden></span>
 
-        <div class="ficha-seccion" id="ficha-seccion-quees">
-          <p id="ficha-quees"></p>
+        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
+          <h3>Características</h3>
+          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-reconocer">
@@ -134,43 +130,18 @@
           <p id="ficha-reconocer"></p>
         </div>
 
-        <div class="ficha-seccion" id="ficha-seccion-partes">
-          <h3>Hojas, flores y frutos</h3>
-          <ul class="ficha-caracteristicas" id="ficha-partes"></ul>
-        </div>
-
-        <div class="ficha-seccion" id="ficha-seccion-ciclo">
-          <h3>Floración y fructificación</h3>
-          <ul class="ficha-caracteristicas" id="ficha-ciclo"></ul>
-        </div>
-
-        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
-          <h3>Características</h3>
-          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
-        </div>
-
         <div class="ficha-seccion" id="ficha-seccion-donde">
-          <h3>¿Dónde vive?</h3>
+          <h3>Hábitat</h3>
           <p id="ficha-donde"></p>
         </div>
 
-        <div class="ficha-seccion" id="ficha-seccion-ecologico">
-          <h3>Interés ecológico</h3>
-          <p id="ficha-ecologico"></p>
-        </div>
-
-        <div class="ficha-seccion" id="ficha-seccion-cantabria">
-          <h3>Importancia en Cantabria</h3>
-          <p id="ficha-cantabria"></p>
-        </div>
-
-        <div class="ficha-seccion" id="ficha-seccion-curiosidades">
-          <h3>Curiosidades</h3>
-          <p id="ficha-curiosidades"></p>
+        <div class="ficha-seccion" id="ficha-seccion-distribucion">
+          <h3>Distribución en Cantabria</h3>
+          <p id="ficha-distribucion"></p>
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-invasora">
-          <h3 id="ficha-invasora-titulo">¿Es una especie invasora?</h3>
+          <h3 id="ficha-invasora-titulo">¿Por qué es invasora?</h3>
           <p id="ficha-invasora"></p>
         </div>
 

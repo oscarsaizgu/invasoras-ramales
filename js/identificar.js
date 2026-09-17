@@ -332,12 +332,6 @@ export function initIdentificar() {
   const overlay = document.getElementById('identificar-overlay');
   if (!overlay) return;
 
-  // Ya no hay botones "Hacer una foto" en otras páginas (ahora enlazan
-  // directamente a identificar.html), pero se mantiene por si alguna
-  // pantalla decide reabrir la identificación sin recargar la página.
-  document.querySelectorAll('#btn-identificar, .js-abrir-identificar').forEach(btn => {
-    btn.addEventListener('click', abrirIdentificar);
-  });
   document.getElementById('identificar-cerrar').addEventListener('click', cerrarIdentificar);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrarIdentificar(); });
   document.addEventListener('keydown', (e) => { if (!overlay.hidden && e.key === 'Escape') cerrarIdentificar(); });

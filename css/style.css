@@ -744,21 +744,6 @@ textarea { resize: vertical; min-height: 90px; }
   max-width: 440px; margin: 0 auto 0.9rem;
 }
 
-.home__cta {
-  width: 100%; max-width: 360px;
-  margin: 0 auto; display: block;
-  padding: 1.1rem 1.2rem; font-size: 1rem;
-}
-
-.home__note {
-  margin-top: 1rem;
-  font-family: var(--font);
-  font-size: 0.82rem;
-  letter-spacing: 0.02em;
-  color: var(--verde-suave);
-  font-weight: 700;
-}
-
 .home__secondary {
   margin-top: 1.75rem;
 }
@@ -776,38 +761,6 @@ textarea { resize: vertical; min-height: 90px; }
   color: var(--verde);
   opacity: 0.5;
   margin: 0 0 0.9rem;
-}
-
-/* Tarjeta "Juntos por un entorno más natural" */
-.home-card {
-  margin: 2.2rem 0 0.4rem;
-  padding: 1.6rem 1.4rem;
-  background: var(--verde);
-  border-radius: var(--radio-grande);
-  color: var(--crema);
-  text-align: center;
-}
-.home-card__leaf {
-  display: inline-flex; width: 26px; height: 26px;
-  color: rgba(245,234,216,0.75);
-  margin-bottom: 0.7rem;
-}
-.home-card__leaf svg { width: 100%; height: 100%; }
-.home-card p.home-card__title {
-  font-family: var(--font-titulo);
-  font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em;
-  color: var(--crema);
-  line-height: 1.3;
-  max-width: none;
-  margin: 0 0 0.4rem;
-}
-.home-card p.home-card__text {
-  font-family: var(--font);
-  font-size: 0.85rem;
-  color: rgba(245,234,216,0.65);
-  line-height: 1.5;
-  max-width: none;
-  margin: 0;
 }
 
 /* Cabecera transparente superpuesta a la foto de portada.
@@ -1153,8 +1106,6 @@ body.pagina-inicio .app-header__menu {
   grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
 }
-.catalogo-grid--destacadas .especie-card { border-color: var(--verde); }
-
 .especie-card {
   background: var(--card);
   border: 1px solid var(--borde);
@@ -1197,23 +1148,14 @@ body.pagina-inicio .app-header__menu {
 .especie-card__cientifico {
   font-size: 0.72rem; font-style: italic; color: var(--text-muted);
 }
-.especie-card__ambito {
-  font-size: 0.65rem;
-  letter-spacing: 0.03em;
-  color: var(--verde-suave);
-  margin-top: 0.15rem;
+.especie-card__badge {
+  display: inline-flex; align-items: center; gap: 0.2rem;
+  width: fit-content;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.02em;
+  color: #a8342a; background: rgba(168,52,42,0.12);
+  padding: 0.15rem 0.5rem; border-radius: 20px;
+  margin-top: 0.25rem;
 }
-
-.especie-card--destacada {
-  flex-direction: row;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.6rem 0.8rem 0.6rem 0.6rem;
-}
-.especie-card--destacada .especie-card__foto {
-  width: 58px; height: 58px; border-radius: var(--radio-sm, 8px); flex-shrink: 0;
-}
-.especie-card--destacada .especie-card__cuerpo { padding: 0; }
 
 /* ================================================================
    FICHA DE ESPECIE (overlay)

@@ -53,8 +53,6 @@ export function setNextEnabled(enabled) {
   if (btn) btn.disabled = !enabled;
 }
 
-export const STEPS = STEP_ORDER;
-
 function pad2(n) {
   return String(n).padStart(2, '0');
 }

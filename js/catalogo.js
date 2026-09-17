@@ -26,6 +26,16 @@ const PAGINA = 12;
 let ESPECIES = [];
 let CATALOGO_INVASORAS = []; // data/catalogo-invasoras.json — fuente independiente
 let ESTATUS_EXTERNO = []; // data/estatus-flora.json — ver data/README.md
+
+// La página Guía Botánica (guia-botanica.html), en esta primera fase,
+// solo muestra las especies invasoras que ya tenían ficha completa en
+// el catálogo original (entry.estatus === 'invasora' en ESPECIES). Se
+// guarda en un array APARTE en vez de filtrar ESPECIES directamente
+// porque identificar.js sigue necesitando el catálogo completo (133
+// especies) para poder reconocer también autóctonas y exóticas no
+// invasoras al identificar una foto con Pl@ntNet.
+let ESPECIES_GUIA = [];
+
 let filtroActivo = 'todas';
 let consulta = '';
 let visibles = PAGINA;
@@ -113,58 +123,34 @@ function coincide(entry, q) {
   return campos.some(c => normalizar(c).includes(nq));
 }
 
+// Filtra por categoría/biotipo (herbacea/arbusto/arbol/acuatica), el
+// mismo campo `categoria` que ya trae cada especie en cantabria-flora.json
+// — no se inventa ninguna categoría nueva.
 function pasaFiltro(entry) {
   if (filtroActivo === 'todas') return true;
-  if (filtroActivo === 'destacadas') return !!entry.destacadaRamales;
-  if (filtroActivo === 'exotica') return entry.estatus === 'exotica';
-  return entry.estatus === filtroActivo;
+  return entry.categoria === filtroActivo;
 }
-
-const ETIQUETA_CATEGORIA = {
-  herbacea: 'Herbácea',
-  arbusto: 'Arbusto',
-  arbol: 'Árbol',
-  acuatica: 'Acuática',
-};
-
-// Estatus botánico general (guía) — usado en las tarjetas/fichas de la
-// guía. NO decide por sí solo si algo es invasora a efectos de reporte;
-// para eso está resolverNivelInvasion().
-const ETIQUETA_ESTATUS = {
-  autoctona: { texto: 'Autóctona', clase: 'autoctona' },
-  exotica: { texto: 'No invasora', clase: 'exotica' },
-  invasora: { texto: 'Invasora', clase: 'invasora' },
-};
 
 // Los tres estados visuales que puede ver la persona usuaria tras una
 // identificación (independientemente del detalle interno que se guarde):
 // 🔴 invasora / 🟢 autoctona / ⚪ exotica_no_invasora / (desconocida → sin etiqueta)
 const ETIQUETA_NIVEL = {
-  invasora: { texto: 'Invasora', clase: 'invasora', emoji: '🔴' },
+  invasora: { texto: 'Exótica invasora', clase: 'invasora', emoji: '🔴' },
   autoctona: { texto: 'Autóctona', clase: 'autoctona', emoji: '🟢' },
   exotica_no_invasora: { texto: 'No invasora', clase: 'exotica', emoji: '⚪' },
 };
 
-// Mensaje del estado vacío: distinto según si la categoría todavía no
-// tiene muchas especies cargadas o si simplemente no hay resultados
-// para la búsqueda/filtro actual.
-const MENSAJE_VACIO_CATEGORIA = {
-  autoctona: 'Todavía estamos ampliando las especies autóctonas de la guía.',
-  exotica: 'Todavía estamos ampliando las especies exóticas no invasoras de la guía.',
-};
-
 // ── Tarjetas ──
-function crearTarjeta(entry, destacada) {
+// Todas las tarjetas de esta guía son de especies invasoras (ver
+// ESPECIES_GUIA), así que el indicador rojo se muestra siempre.
+function crearTarjeta(entry) {
   const nombreComun = nombreComunDe(entry);
   const foto = entry.fotos && entry.fotos[0] ? entry.fotos[0].image : null;
 
   const card = document.createElement('button');
   card.type = 'button';
-  card.className = 'especie-card' + (destacada ? ' especie-card--destacada' : '') + (foto ? '' : ' especie-card--neutra');
+  card.className = 'especie-card' + (foto ? '' : ' especie-card--neutra');
   card.setAttribute('aria-label', 'Ver la especie: ' + nombreComun);
-
-  const etiquetaCategoria = ETIQUETA_CATEGORIA[entry.categoria] || '';
-  const estatus = ETIQUETA_ESTATUS[entry.estatus] || null;
 
   card.innerHTML = `
     ${foto
@@ -173,20 +159,12 @@ function crearTarjeta(entry, destacada) {
     <span class="especie-card__cuerpo">
       <span class="especie-card__comun">${nombreComun}</span>
       <span class="especie-card__cientifico">${entry.cientifico}</span>
-      ${!destacada && etiquetaCategoria ? `<span class="especie-card__ambito">${etiquetaCategoria}${estatus ? ' · ' + estatus.texto : ''}</span>` : ''}
+      <span class="especie-card__badge">🔴 Exótica invasora</span>
       <span class="especie-card__ver">Ver la especie →</span>
     </span>`;
 
   card.addEventListener('click', () => abrirFicha(entry));
   return card;
-}
-
-function renderDestacadas() {
-  const cont = document.getElementById('catalogo-destacadas');
-  if (!cont) return;
-  const destacadas = ESPECIES.filter(e => e.destacadaRamales);
-  cont.innerHTML = '';
-  destacadas.forEach(e => cont.appendChild(crearTarjeta(e, true)));
 }
 
 function renderCatalogo() {
@@ -196,17 +174,15 @@ function renderCatalogo() {
   const btnMas = document.getElementById('catalogo-cargar-mas');
   if (!grid) return;
 
-  const resultado = ESPECIES.filter(e => pasaFiltro(e) && coincide(e, consulta));
+  const resultado = ESPECIES_GUIA.filter(e => pasaFiltro(e) && coincide(e, consulta));
 
   grid.innerHTML = '';
-  resultado.slice(0, visibles).forEach(entry => grid.appendChild(crearTarjeta(entry, false)));
+  resultado.slice(0, visibles).forEach(entry => grid.appendChild(crearTarjeta(entry)));
 
   vacio.hidden = resultado.length > 0;
-  vacio.textContent = (!consulta && MENSAJE_VACIO_CATEGORIA[filtroActivo])
-    ? MENSAJE_VACIO_CATEGORIA[filtroActivo]
-    : 'No hemos encontrado ninguna especie con ese nombre.';
+  vacio.textContent = 'No hemos encontrado ninguna especie con ese nombre.';
   info.textContent = resultado.length
-    ? `${resultado.length} especie${resultado.length === 1 ? '' : 's'} en la guía`
+    ? `${resultado.length} especie${resultado.length === 1 ? '' : 's'} invasora${resultado.length === 1 ? '' : 's'}`
     : '';
   btnMas.hidden = resultado.length <= visibles;
 }
@@ -299,8 +275,14 @@ function moverFoto(delta) {
 // Helpers genéricos para mostrar/ocultar una sección de la ficha según
 // si hay contenido real — el mismo patrón para cualquier campo nuevo
 // que se añada a una especie, sin tener que tocar la estructura visual.
+// No todas las páginas incluyen todas las secciones de la ficha (por
+// ejemplo, guia-botanica.html solo muestra invasoras y omite secciones
+// como "¿Qué es?" o "Curiosidades" que aquí nunca tienen contenido) —
+// por eso ambas funciones comprueban que el elemento exista antes de
+// tocarlo, en vez de asumir que siempre está presente.
 function rellenarParrafo(seccionId, textoId, valor) {
   const seccion = document.getElementById(seccionId);
+  if (!seccion) return;
   if (valor) {
     document.getElementById(textoId).textContent = valor;
     seccion.hidden = false;
@@ -311,6 +293,7 @@ function rellenarParrafo(seccionId, textoId, valor) {
 
 function rellenarLista(seccionId, listaId, items) {
   const seccion = document.getElementById(seccionId);
+  if (!seccion) return;
   if (items && items.length) {
     document.getElementById(listaId).innerHTML = items.join('');
     seccion.hidden = false;
@@ -366,34 +349,38 @@ function abrirFicha(entry) {
   if (entry.fructificacion) ciclo.push(`<li><strong>Fructificación:</strong> ${entry.fructificacion}</li>`);
   rellenarLista('ficha-seccion-ciclo', 'ficha-ciclo', ciclo);
 
-  // Características (familia, biotipo, origen)
+  // Características (familia, biotipo, origen, estado en Cantabria)
   const caracteristicas = [];
   if (entry.familia) caracteristicas.push(`<li><strong>Familia:</strong> ${entry.familia}</li>`);
   if (entry.biotipo) caracteristicas.push(`<li><strong>Tipo de planta:</strong> ${entry.biotipo}</li>`);
   if (entry.origen) caracteristicas.push(`<li><strong>Origen:</strong> ${entry.origen}</li>`);
+  if (entry.erradicacionCantabria) {
+    caracteristicas.push(`<li><strong>Estado en Cantabria:</strong> posibilidad de erradicación ${entry.erradicacionCantabria.toLowerCase()}</li>`);
+  }
   rellenarLista('ficha-seccion-caracteristicas', 'ficha-caracteristicas', caracteristicas);
 
-  // ¿Dónde vive?
-  const dondePartes = [entry.habitat, entry.distribucionGeneralidades].filter(Boolean);
-  rellenarParrafo('ficha-seccion-donde', 'ficha-donde', dondePartes.join(' ') || null);
+  // Hábitat y distribución en Cantabria — dos secciones separadas
+  // (antes iban juntas en "¿Dónde vive?").
+  rellenarParrafo('ficha-seccion-donde', 'ficha-donde', entry.habitat);
+  rellenarParrafo('ficha-seccion-distribucion', 'ficha-distribucion', entry.distribucionGeneralidades);
 
   rellenarParrafo('ficha-seccion-ecologico', 'ficha-ecologico', entry.interesEcologico);
   rellenarParrafo('ficha-seccion-cantabria', 'ficha-cantabria', entry.importanciaCantabria);
   rellenarParrafo('ficha-seccion-curiosidades', 'ficha-curiosidades', entry.curiosidades);
 
-  // ¿Es una especie invasora? — el estatus legal/de control solo se
+  // ¿Por qué es invasora? — el estatus legal/de control solo se
   // muestra cuando nivelInvasion (independiente) confirma que lo es;
   // si hay medidas de control conocidas se añaden, si no, basta con la
-  // referencia a la fuente que la reconoce como invasora.
+  // referencia a la fuente que la reconoce como invasora. La posibilidad
+  // de erradicación ya se muestra en Características, así que aquí no
+  // se repite.
   const invasoraPartes = [];
   if (nivel === 'invasora') {
-    const ambitoNacional = (entry.fuentesInvasion || []).some(f => /CEEEI|MITECO/i.test(f.label || ''));
+    const ambitoNacional = entry.enCatalogoNacionalCEEEI
+      || (entry.fuentesInvasion || []).some(f => /CEEEI|MITECO/i.test(f.label || ''));
     invasoraPartes.push(ambitoNacional
       ? 'Está reconocida como especie exótica invasora en el Catálogo Español de Especies Exóticas Invasoras (CEEEI), de ámbito estatal.'
       : 'Está identificada como especie objetivo en el Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria.');
-    if (entry.erradicacionCantabria) {
-      invasoraPartes.push(`Posibilidad de erradicación en Cantabria: ${entry.erradicacionCantabria.toLowerCase()}.`);
-    }
     if (entry.medidasControl) invasoraPartes.push(entry.medidasControl);
   }
   rellenarParrafo('ficha-seccion-invasora', 'ficha-invasora', invasoraPartes.join(' ') || null);
@@ -635,10 +622,6 @@ export function abrirFichaDesdeIdentificacion({ cientifico, comunes, fotoDataUrl
 
 export { ETIQUETA_NIVEL };
 
-export function getEspecies() {
-  return ESPECIES;
-}
-
 export async function initCatalogo() {
   initBuscador();
   initFiltros();
@@ -651,6 +634,13 @@ export async function initCatalogo() {
     cargarCatalogoInvasoras(),
     cargarEstatusExterno(),
   ]);
-  renderDestacadas();
+
+  // Guía Botánica (esta primera fase): solo las especies ya marcadas
+  // como invasora en el catálogo original. Se calcula aquí, no se
+  // reescriben los datos: ESPECIES sigue completo para identificar.js.
+  ESPECIES_GUIA = ESPECIES
+    .filter(e => e.estatus === 'invasora')
+    .map(e => ({ ...e, nivelInvasion: 'invasora' }));
+
   renderCatalogo();
 }
