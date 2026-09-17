@@ -194,6 +194,7 @@ select:focus-visible, textarea:focus-visible,
 .menu-panel {
   width: min(340px, 84vw);
   height: 100%;
+  overflow-y: auto;
   background: var(--verde);
   color: var(--crema);
   display: flex; flex-direction: column;
@@ -803,6 +804,12 @@ body.pagina-inicio .app-header__text { display: none; }
 body.pagina-inicio .app-header__menu {
   background: rgba(245,234,216,0.16);
 }
+/* El padding inferior de .container reserva sitio para la barra fija
+   del asistente (wizard-nav), que no existe en la portada — sin este
+   ajuste queda un hueco grande entre la silueta y el pie de página. */
+body.pagina-inicio .container {
+  padding-bottom: 1.4rem;
+}
 
 /* Contenedor de las dos tarjetas principales */
 .home-cards { display: flex; flex-direction: column; }
@@ -955,6 +962,11 @@ body.pagina-inicio .app-header__menu {
   font-size: 0.78rem;
   color: var(--text-muted);
   line-height: 1.4;
+  /* Visible también en móvil (antes solo se veía a partir de 640px):
+     esta regla, al ir después de .visually-hidden en la hoja de
+     estilos, gana el empate de especificidad y anula su ocultación. */
+  position: static; width: auto; height: auto; padding: 0; margin: 0;
+  overflow: visible; clip: auto; white-space: normal;
 }
 .home-link--disabled {
   cursor: default;
@@ -969,10 +981,6 @@ body.pagina-inicio .app-header__menu {
   .home-link { padding: 1rem 0.8rem; }
   .home-link__icon { font-size: 1.5rem; }
   .home-link__titulo { font-size: 0.85rem; }
-  .home-link__texto {
-    position: static; width: auto; height: auto; padding: 0; margin: 0;
-    overflow: visible; clip: auto; white-space: normal;
-  }
 }
 
 /* Silueta decorativa de montañas al pie de la portada */
@@ -980,6 +988,8 @@ body.pagina-inicio .app-header__menu {
   display: block;
   width: 100%;
   height: 40px;
+  object-fit: cover;
+  object-position: bottom;
   margin-top: 0.4rem;
 }
 

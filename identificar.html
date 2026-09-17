@@ -16,6 +16,7 @@
 <a class="visually-hidden" href="#main-content">Ir al contenido principal</a>
 
 <header class="app-header" id="app-header">
+  <a class="app-header__back" href="index.html" aria-label="Volver al inicio" style="text-decoration:none;">←</a>
   <a class="app-header__logo-btn" href="index.html" aria-label="Ir al inicio">
     <img class="app-header__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
   </a>
@@ -232,6 +233,11 @@
   initCatalogo();
   initIdentificar();
   abrirIdentificar();
+  // abrirIdentificar() bloquea el scroll del fondo porque normalmente se
+  // usa como modal sobre otra pantalla; aquí la identificación ES la
+  // página entera, así que no hay "fondo" que proteger y hay que
+  // permitir el scroll normal de la página.
+  document.body.style.overflow = '';
 </script>
 </body>
 </html>
