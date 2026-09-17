@@ -1,5 +1,5 @@
 import { PLANTNET_API_KEY } from './identificar-config.js';
-import { getEspecies, cargarDatos, abrirFichaPorCientifico, seleccionarEspecieParaReportar } from './catalogo.js';
+import { resolverEspecie, abrirFichaDesdeIdentificacion, seleccionarEspecieParaReportar, ETIQUETA_NIVEL } from './catalogo.js';
 
 // ================================================================
 // Identificación de plantas con Pl@ntNet — llamada directa desde el
@@ -8,11 +8,13 @@ import { getEspecies, cargarDatos, abrirFichaPorCientifico, seleccionarEspeciePa
 // "Expose my API key" + "Authorized domains" en my.plantnet.org.
 // Ver instrucciones completas en js/identificar-config.js.
 //
-// MUY IMPORTANTE: Pl@ntNet identifica el NOMBRE CIENTÍFICO de la
-// planta; no dice si es invasora. El estado (🔴/🟢/⚪) siempre se
-// calcula aquí, cruzando ese nombre contra nuestra guía oficial de
-// Cantabria (data/cantabria-flora.json) — nunca se toma de Pl@ntNet
-// directamente ni se inventa.
+// El recorrido es siempre el mismo, tanto si la especie ya está en
+// nuestra guía como si es la primera vez que aparece:
+//   FOTO → IDENTIFICACIÓN (Pl@ntNet: nombre + % de coincidencia)
+//        → FICHA BOTÁNICA (catalogo.js: resolverEspecie + abrirFicha)
+// Pl@ntNet solo aporta el nombre científico y el % de coincidencia;
+// el estatus (autóctona/exótica/invasora) y el resto de datos
+// botánicos los resuelve siempre catalogo.js, nunca se inventan aquí.
 // ================================================================
 
 const PLANTNET_ENDPOINT = 'https://my-api.plantnet.org/v2/identify/all';
@@ -24,82 +26,52 @@ const MAX_FOTOS = 5;
 // "no estamos seguros").
 const CONFIANZA_MINIMA = 0.20;
 
-let especiesCache = [];
 let fotosSeleccionadas = [];
 let ultimaFotoDataUrl = '';
 
-async function especiesDisponibles() {
-  if (especiesCache.length) return especiesCache;
-  const yaCargadas = getEspecies();
-  especiesCache = (yaCargadas && yaCargadas.length) ? yaCargadas : await cargarDatos();
-  return especiesCache;
-}
-
-function normalizar(txt) {
-  return (txt || '').toString().normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-}
-
-// Cruza el nombre científico devuelto por Pl@ntNet contra nuestra guía.
-// Primero busca coincidencia exacta; si no la hay, prueba a nivel de
-// género para las entradas de nuestro catálogo que son genéricas
-// ("Azolla spp.", "Cortaderia spp."...), ya que Pl@ntNet siempre da una
-// especie concreta dentro de ese género.
-function buscarEnCatalogo(nombreCientifico, especies) {
-  const nc = normalizar(nombreCientifico);
-  let match = especies.find(e => normalizar(e.cientifico) === nc);
-  if (match) return match;
-
-  const genero = nc.split(' ')[0];
-  match = especies.find(e => {
-    const ec = normalizar(e.cientifico);
-    return ec.endsWith(' spp.') && ec.split(' ')[0] === genero;
+// Tarjeta de identificación: nombre, científico, % de coincidencia
+// (Pl@ntNet) y el estatus resuelto de forma independiente por
+// catalogo.js — siempre uno de los tres estados 🔴/🟢/⚪, o ninguno si
+// de verdad no se puede determinar con una fuente fiable. El botón
+// "Conocer esta especie" abre siempre la misma ficha botánica, exista
+// o no ya una ficha propia para esa especie. "Mandar registro" solo se
+// ofrece cuando el estatus resuelto es realmente INVASORA.
+function crearTarjetaResultado(resultado, fotoDataUrl) {
+  const registro = resolverEspecie({
+    cientifico: resultado.scientificName,
+    comunes: resultado.commonNames,
+    fotoDataUrl,
   });
-  return match || null;
-}
-
-function estadoDeEspecie(match) {
-  // No inventamos el estado: solo lo determinamos si el cruce con
-  // nuestra guía nos da una base real. Todas las especies incluidas en
-  // ella son, por definición del propio Plan de Cantabria, especies
-  // objetivo/invasoras — no tenemos ninguna fuente propia de especies
-  // autóctonas, así que ese estado (🟢) no se usa todavía en la
-  // práctica; se deja preparado por si en el futuro se añade esa
-  // información con una fuente fiable.
-  if (match) return { nivel: 'invasora', etiqueta: '🔴 Especie invasora en Cantabria' };
-  return { nivel: 'desconocido', etiqueta: '⚪ Información no disponible' };
-}
-
-function crearTarjetaResultado(resultado, especies) {
-  const match = buscarEnCatalogo(resultado.scientificName, especies);
-  const estado = estadoDeEspecie(match);
   const porcentaje = resultado.score != null ? Math.round(resultado.score * 100) : null;
-  const nombreComunPropio = match && match.comunes && match.comunes[0];
-  const nombreComunPlantnet = resultado.commonNames && resultado.commonNames[0];
+  const nombreMostrado = (registro.comunes && registro.comunes[0]) || resultado.scientificName;
+  const esInvasora = registro.nivelInvasion === 'invasora';
+  const etiquetaNivel = ETIQUETA_NIVEL[registro.nivelInvasion];
 
   const div = document.createElement('div');
   div.className = 'identificar-resultado';
-
-  const nombreMostrado = nombreComunPropio || nombreComunPlantnet || resultado.scientificName;
 
   div.innerHTML = `
     <p class="identificar-resultado__comun">${nombreMostrado}</p>
     <p class="identificar-resultado__cientifico">${resultado.scientificName}</p>
     ${porcentaje != null ? `<p class="identificar-resultado__score">${porcentaje}% de coincidencia (Pl@ntNet)</p>` : ''}
-    <p class="identificar-resultado__estado identificar-resultado__estado--${estado.nivel}">${estado.etiqueta}</p>
-    ${!match ? '<p class="identificar-resultado__no-incluida">Especie no incluida en nuestra guía de Cantabria.</p>' : ''}
+    ${etiquetaNivel ? `<p class="identificar-resultado__estado identificar-resultado__estado--${etiquetaNivel.clase}">${etiquetaNivel.emoji} ${etiquetaNivel.texto}</p>` : ''}
     <div class="identificar-resultado__acciones">
-      ${match ? '<button type="button" class="btn btn-secondary identificar-btn-conocer">Conocer esta especie</button>' : ''}
-      ${match ? '<button type="button" class="btn btn-primary identificar-btn-reportar">📍 Mandar registro</button>' : ''}
+      <button type="button" class="btn btn-secondary identificar-btn-conocer">Conocer esta especie</button>
+      ${esInvasora ? '<button type="button" class="btn btn-primary identificar-btn-reportar">📍 Mandar registro</button>' : ''}
     </div>`;
 
-  if (match) {
-    div.querySelector('.identificar-btn-conocer').addEventListener('click', () => {
-      cerrarIdentificar();
-      abrirFichaPorCientifico(match.cientifico);
+  div.querySelector('.identificar-btn-conocer').addEventListener('click', () => {
+    cerrarIdentificar();
+    abrirFichaDesdeIdentificacion({
+      cientifico: resultado.scientificName,
+      comunes: resultado.commonNames,
+      fotoDataUrl,
     });
+  });
+  if (esInvasora) {
     div.querySelector('.identificar-btn-reportar').addEventListener('click', () => {
       cerrarIdentificar();
-      seleccionarEspecieParaReportar(match.cientifico);
+      seleccionarEspecieParaReportar(resultado.scientificName);
     });
   }
 
@@ -113,7 +85,6 @@ function mostrarEstado(nombre) {
 }
 
 async function mostrarResultados(resultados, fotoDataUrl) {
-  const especies = await especiesDisponibles();
   const lista = document.getElementById('identificar-resultados-lista');
   const intro = document.getElementById('identificar-resultados-intro');
   const titulo = document.getElementById('identificar-resultados-titulo');
@@ -139,7 +110,7 @@ async function mostrarResultados(resultados, fotoDataUrl) {
   if (!resultados.length) {
     lista.innerHTML = '<p class="identificar-resultado__no-incluida">Pl@ntNet no ha devuelto ninguna especie para esta fotografía.</p>';
   } else {
-    resultados.forEach(r => lista.appendChild(crearTarjetaResultado(r, especies)));
+    resultados.forEach(r => lista.appendChild(crearTarjetaResultado(r, fotoDataUrl)));
   }
 
   document.getElementById('identificar-btn-mandar-duda').onclick = () => {

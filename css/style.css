@@ -1125,7 +1125,8 @@ body.pagina-inicio .app-header__menu {
   text-align: center;
   padding: 1.5rem 0;
 }
-.catalogo-cargar-mas { width: 100%; max-width: 320px; margin: 0.4rem auto 0; display: block; }
+.catalogo-cargar-mas { width: 100%; max-width: 320px; margin: 0.4rem auto 0; }
+.catalogo-cargar-mas:not([hidden]) { display: block; }
 
 /* ── Filtros ── */
 .catalogo-filtros {
@@ -1267,8 +1268,9 @@ body.pagina-inicio .app-header__menu {
   width: 34px; height: 34px; border-radius: 50%;
   background: rgba(20,26,20,0.55); color: #fff;
   border: none; cursor: pointer; font-size: 1rem;
-  display: flex; align-items: center; justify-content: center;
+  align-items: center; justify-content: center;
 }
+.ficha-carrusel__flecha:not([hidden]) { display: flex; }
 .ficha-carrusel__flecha--prev { left: 0.6rem; }
 .ficha-carrusel__flecha--next { right: 0.6rem; }
 .ficha-carrusel__flecha:hover { background: rgba(20,26,20,0.75); }
@@ -1290,6 +1292,35 @@ body.pagina-inicio .app-header__menu {
 }
 .ficha-carrusel__credito:hover { color: #fff; text-decoration: underline; }
 
+/* ── Miniaturas de la galería (debajo de la foto principal) ── */
+.ficha-miniaturas {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding: 0.6rem 1.1rem;
+  background: var(--bg);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ficha-miniaturas::-webkit-scrollbar { display: none; }
+.ficha-miniaturas[hidden] { display: none; }
+.ficha-miniatura-btn {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6;
+  transition: opacity 0.15s, border-color 0.15s;
+}
+.ficha-miniatura-btn.is-activa {
+  opacity: 1;
+  border-color: var(--verde);
+}
+
 .ficha-cuerpo { padding: 1.4rem 1.4rem calc(1.6rem + var(--safe-bottom)); }
 
 .ficha-comun {
@@ -1305,15 +1336,37 @@ body.pagina-inicio .app-header__menu {
   font-size: 0.9rem;
   font-style: italic;
   color: var(--text-muted);
-  margin: 0 0 1.1rem;
+  margin: 0 0 0.5rem;
 }
 
-/* ── Secciones de la ficha (Cómo reconocerla, Características...) ── */
+.ficha-estatus:not([hidden]) {
+  display: inline-block;
+}
+.ficha-estatus {
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  margin: 0 0 0.9rem;
+}
+.ficha-estatus--invasora { background: rgba(168,52,42,0.12); color: #a8342a; }
+.ficha-estatus--autoctona { background: rgba(45,106,45,0.12); color: #2d6a2d; }
+.ficha-estatus--exotica { background: rgba(180,140,30,0.14); color: #8a6a10; }
+
+/* ── Secciones de la ficha (Cómo reconocerla, Características...) ──
+   Como ahora hay más secciones opcionales y varían según la especie,
+   el borde superior se aplica solo a partir de la segunda sección
+   REALMENTE visible (no de la primera del DOM, que puede estar oculta
+   por falta de datos) mediante el combinador de hermanos generales. */
 .ficha-seccion {
+  padding: 0;
+}
+.ficha-seccion:not([hidden]) ~ .ficha-seccion:not([hidden]) {
   padding: 0.9rem 0;
   border-top: 1px solid var(--borde);
 }
-.ficha-seccion:first-of-type { border-top: none; padding-top: 0; }
 .ficha-seccion h3 {
   font-family: var(--font-titulo);
   font-size: 0.86rem;
@@ -1552,13 +1605,13 @@ body.pagina-inicio .app-header__menu {
 }
 .identificar-resultado__estado {
   font-family: var(--font);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.5rem;
 }
 .identificar-resultado__estado--invasora { color: #a8342a; }
 .identificar-resultado__estado--autoctona { color: #2d6a2d; }
-.identificar-resultado__estado--desconocido { color: var(--text-muted); }
+.identificar-resultado__estado--exotica { color: #8a6a10; }
 .identificar-resultado__no-incluida {
   font-family: var(--font);
   font-size: 0.78rem;

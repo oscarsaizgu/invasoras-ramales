@@ -126,6 +126,362 @@
     </svg>
   </section>
 
+  <!-- SOBRE EL PROYECTO -->
+  <section id="screen-sobre-proyecto" class="screen content-page" aria-labelledby="sobre-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="sobre-titulo" class="content-titulo" tabindex="-1">Sobre el proyecto</h1>
+    <p class="content-lead">Reporte Invasoras es una iniciativa de Ramales Natural para localizar y conocer la presencia de especies de flora invasora en Ramales de la Victoria.</p>
+
+    <div class="content-photo">
+      <img src="images/paisajes/rio-ramales.jpg" alt="Río y bosque de ribera en el entorno de Ramales de la Victoria">
+    </div>
+
+    <div class="content-block">
+      <h2>La colaboración ciudadana importa</h2>
+      <p>Cada persona que camina por nuestros montes, ríos y caminos puede ayudar a detectar antes la presencia de especies invasoras. Cuantos más ojos observan el entorno, antes se puede actuar para proteger la biodiversidad local.</p>
+    </div>
+
+    <div class="content-highlight">
+      <span class="content-highlight__leaf" aria-hidden="true">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 5C48 11 56 27 49 42 44 53 34 59 32 60 30 59 20 53 15 42 8 27 16 11 32 5Z" fill="currentColor"/><path d="M32 12V54" stroke="var(--verde)" stroke-width="1.6" opacity="0.35"/></svg>
+      </span>
+      <p class="content-highlight__text">Pequeños gestos,<br>grandes cambios.</p>
+    </div>
+
+    <div class="paisaje-montanas" aria-hidden="true">
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 90 L40 55 L75 80 L110 40 L150 85 L190 50 L230 88 L270 45 L310 82 L350 58 L400 90 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.10"/>
+        <path d="M0 100 L60 70 L100 95 L150 60 L200 100 L250 65 L300 98 L350 72 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.18"/>
+        <path d="M0 112 L50 92 L120 110 L180 85 L240 112 L300 90 L360 110 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- GUÍA BOTÁNICA (informativa) -->
+  <section id="screen-especies-info" class="screen content-page" aria-labelledby="especies-info-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">🌿 Guía botánica</h1>
+    <p class="content-lead">Descubre las especies que crecen en nuestro entorno. Búscalas, compáralas con fotografías y hazte una idea de qué has visto. Si no estás seguro, no pasa nada: te ayudamos a identificarla.</p>
+
+    <div class="catalogo-buscador">
+      <span class="catalogo-buscador__icon" aria-hidden="true">🔎</span>
+      <input type="search" id="catalogo-buscar" placeholder="Buscar una especie..." aria-label="Buscar una especie por nombre común o científico">
+    </div>
+
+    <div class="catalogo-seccion">
+      <h2 class="catalogo-seccion__titulo">Destacadas de Ramales</h2>
+      <div class="catalogo-grid catalogo-grid--destacadas" id="catalogo-destacadas"></div>
+    </div>
+
+    <div class="identificar-cta">
+      <span class="identificar-cta__icon" aria-hidden="true">📷</span>
+      <h2 class="identificar-cta__titulo">¿No sabes qué planta es?</h2>
+      <p class="identificar-cta__texto">No pasa nada. Haz una fotografía y te ayudaremos a identificarla.</p>
+      <button type="button" class="btn btn-accent identificar-cta__btn" id="btn-identificar">📷 Ayúdame a identificarla</button>
+    </div>
+
+    <div class="catalogo-filtros" id="catalogo-filtros" role="group" aria-label="Filtrar guía botánica">
+      <button type="button" class="catalogo-filtro is-active" data-filtro="todas">Todas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="autoctona">Autóctonas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="exotica">Exóticas</button>
+      <button type="button" class="catalogo-filtro" data-filtro="invasora">Invasoras</button>
+      <button type="button" class="catalogo-filtro" data-filtro="destacadas">Destacadas de Ramales</button>
+    </div>
+
+    <div class="catalogo-seccion">
+      <h2 class="catalogo-seccion__titulo">Especies documentadas</h2>
+      <p class="catalogo-fuente">Fuente oficial (especies invasoras): <a href="https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> (Gobierno de Cantabria, 2017)</p>
+      <p class="catalogo-resultados" id="catalogo-resultados-info" aria-live="polite"></p>
+      <div class="catalogo-grid" id="catalogo-grid"></div>
+      <p class="catalogo-vacio" id="catalogo-vacio" hidden>No hemos encontrado ninguna especie con ese nombre.</p>
+      <button type="button" class="btn btn-secondary catalogo-cargar-mas" id="catalogo-cargar-mas" hidden>Ver más especies</button>
+    </div>
+
+    <div class="paisaje-montanas" aria-hidden="true">
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 90 L40 55 L75 80 L110 40 L150 85 L190 50 L230 88 L270 45 L310 82 L350 58 L400 90 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.10"/>
+        <path d="M0 100 L60 70 L100 95 L150 60 L200 100 L250 65 L300 98 L350 72 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.18"/>
+        <path d="M0 112 L50 92 L120 110 L180 85 L240 112 L300 90 L360 110 L400 100 L400 120 L0 120 Z" fill="var(--verde)" opacity="0.3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- FICHA DE ESPECIE (guía de Cantabria) -->
+  <div class="ficha-overlay" id="ficha-overlay" hidden>
+    <div class="ficha-panel" role="dialog" aria-modal="true" aria-labelledby="ficha-comun">
+      <button type="button" class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">✕</button>
+
+      <div class="ficha-carrusel" id="ficha-carrusel">
+        <img class="ficha-carrusel__img" id="ficha-carrusel-img" alt="">
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--prev" id="ficha-prev" aria-label="Fotografía anterior">←</button>
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--next" id="ficha-next" aria-label="Fotografía siguiente">→</button>
+        <span class="ficha-carrusel__contador" id="ficha-contador"></span>
+        <a class="ficha-carrusel__credito" id="ficha-carrusel-credito" href="#" target="_blank" rel="noopener" hidden></a>
+      </div>
+      <div class="ficha-miniaturas" id="ficha-miniaturas" hidden></div>
+
+      <div class="ficha-cuerpo">
+        <p class="ficha-comun" id="ficha-comun"></p>
+        <p class="ficha-cientifico" id="ficha-cientifico"></p>
+        <span class="ficha-estatus" id="ficha-estatus" hidden></span>
+
+        <div class="ficha-seccion" id="ficha-seccion-quees">
+          <p id="ficha-quees"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-reconocer">
+          <h3>¿Cómo reconocerla?</h3>
+          <p id="ficha-reconocer"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-partes">
+          <h3>Hojas, flores y frutos</h3>
+          <ul class="ficha-caracteristicas" id="ficha-partes"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-ciclo">
+          <h3>Floración y fructificación</h3>
+          <ul class="ficha-caracteristicas" id="ficha-ciclo"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
+          <h3>Características</h3>
+          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-donde">
+          <h3>¿Dónde vive?</h3>
+          <p id="ficha-donde"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-ecologico">
+          <h3>Interés ecológico</h3>
+          <p id="ficha-ecologico"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-cantabria">
+          <h3>Importancia en Cantabria</h3>
+          <p id="ficha-cantabria"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-curiosidades">
+          <h3>Curiosidades</h3>
+          <p id="ficha-curiosidades"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-invasora">
+          <h3 id="ficha-invasora-titulo">¿Es una especie invasora?</h3>
+          <p id="ficha-invasora"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-fuentes">
+          <h3>Fuentes</h3>
+          <ul class="ficha-fuentes" id="ficha-fuentes"></ul>
+        </div>
+
+        <div class="ficha-acciones">
+          <a href="#" target="_blank" rel="noopener" class="btn btn-secondary ficha-btn-oficial" id="ficha-btn-oficial">Consultar ficha oficial</a>
+          <button type="button" class="btn btn-primary ficha-btn-reportar" id="ficha-btn-reportar">+ Reportar esta especie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM DE FOTOGRAFÍA -->
+  <div class="zoom-overlay" id="zoom-overlay" hidden>
+    <img class="zoom-overlay__img" id="zoom-overlay-img" alt="">
+  </div>
+
+  <!-- IDENTIFICAR PLANTA (Pl@ntNet) -->
+  <div class="identificar-overlay" id="identificar-overlay" hidden>
+    <div class="identificar-panel" role="dialog" aria-modal="true" aria-labelledby="identificar-titulo-activo">
+      <button type="button" class="ficha-cerrar" id="identificar-cerrar" aria-label="Cerrar">✕</button>
+
+      <!-- Estado 1: elegir foto(s) -->
+      <div class="identificar-estado" id="identificar-estado-inicio">
+        <span class="identificar-icono" aria-hidden="true">📷</span>
+        <h2 id="identificar-titulo-activo">Identificar planta</h2>
+        <p>Haz una o varias fotografías de la misma planta (hasta 5). Cuantas más partes se vean —hoja, flor, planta completa—, mejor será el resultado.</p>
+
+        <div class="identificar-miniaturas" id="identificar-miniaturas" hidden></div>
+
+        <label class="btn btn-primary identificar-input-btn">
+          📷 Hacer una fotografía
+          <input type="file" accept="image/*" capture="environment" id="identificar-input-camara">
+        </label>
+        <label class="btn btn-secondary identificar-input-btn">
+          🖼️ Elegir de la galería
+          <input type="file" accept="image/*" multiple id="identificar-input-galeria">
+        </label>
+        <button type="button" class="btn btn-accent identificar-btn-analizar" id="identificar-btn-analizar" disabled>🔎 Identificar planta</button>
+        <p class="identificar-credito">Identificación por <a href="https://my.plantnet.org/" target="_blank" rel="noopener">Pl@ntNet</a></p>
+      </div>
+
+      <!-- Estado 2: cargando -->
+      <div class="identificar-estado" id="identificar-estado-cargando" hidden>
+        <span class="identificar-spinner" aria-hidden="true"></span>
+        <h2>Identificando tu foto…</h2>
+        <p>Puede tardar unos segundos.</p>
+      </div>
+
+      <!-- Estado 3: resultados -->
+      <div class="identificar-estado identificar-estado--resultados" id="identificar-estado-resultados" hidden>
+        <img class="identificar-foto-enviada" id="identificar-foto-enviada" alt="Fotografía enviada">
+        <h2 id="identificar-resultados-titulo">Podría ser…</h2>
+        <p id="identificar-resultados-intro" hidden>Estas son las especies que más se parecen a tu fotografía.</p>
+        <div class="identificar-resultados-lista" id="identificar-resultados-lista"></div>
+        <div class="identificar-duda" id="identificar-duda" hidden>
+          <p>Si no estás seguro de qué planta es, también puedes enviarnos la fotografía para que podamos revisarla.</p>
+          <button type="button" class="btn btn-accent" id="identificar-btn-mandar-duda">📍 Mandar registro</button>
+        </div>
+        <button type="button" class="btn btn-ghost identificar-otra-foto" id="identificar-otra-foto">Probar con otra foto</button>
+      </div>
+
+      <!-- Estado 4: error / no configurado -->
+      <div class="identificar-estado" id="identificar-estado-error" hidden>
+        <span class="identificar-icono" aria-hidden="true">⚠️</span>
+        <h2>No hemos podido identificarla</h2>
+        <p id="identificar-error-mensaje">Ha ocurrido un problema al conectar con el servicio de identificación.</p>
+        <p>Puedes intentarlo de nuevo o enviarnos directamente la fotografía para que la revisemos.</p>
+        <p class="identificar-error-tecnico" id="identificar-error-tecnico" hidden></p>
+        <button type="button" class="btn btn-secondary" id="identificar-reintentar">Volver a intentarlo</button>
+        <button type="button" class="btn btn-accent" id="identificar-btn-mandar-error">📍 Mandar registro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÓMO HACER UN BUEN REPORTE -->
+  <section id="screen-como-reportar" class="screen content-page" aria-labelledby="como-reportar-titulo">
+    <p class="content-label">Ramales Natural</p>
+    <h1 id="como-reportar-titulo" class="content-titulo" tabindex="-1">Cómo hacer un buen reporte</h1>
+    <p class="content-lead">Con estos cinco pasos nos ayudas a identificar y localizar mejor cada planta.</p>
+
+    <ol class="steps-list">
+      <li class="steps-item"><span class="steps-num">01</span><p>Fotografía la planta completa.</p></li>
+      <li class="steps-item"><span class="steps-num">02</span><p>Si puedes, fotografía también hojas, flores o frutos.</p></li>
+      <li class="steps-item"><span class="steps-num">03</span><p>Indica dónde la has encontrado.</p></li>
+      <li class="steps-item"><span class="steps-num">04</span><p>Cuéntanos aproximadamente cuántas plantas hay.</p></li>
+      <li class="steps-item"><span class="steps-num">05</span><p>Envía el reporte.</p></li>
+    </ol>
+
+    <button type="button" class="btn btn-primary steps-cta" data-goto="especie">+ Hacer un reporte</button>
+  </section>
+
+  <!-- PASO 1: ESPECIE -->
+  <section id="screen-especie" class="screen" aria-labelledby="especie-titulo">
+    <h2 id="especie-titulo" class="step-question" tabindex="-1">¿Qué planta has visto?</h2>
+    <p class="step-hint">Elige la que más se parezca. Si no la reconoces, no pasa nada.</p>
+    <div class="species-grid" id="species-grid" role="group" aria-label="Selección de especie"></div>
+    <div class="other-help" id="other-help" hidden>
+      <p><strong>¿No sabes qué planta es?</strong> Tranquilo. Haz una fotografía y nosotros podremos revisarla.</p>
+      <div class="field" style="margin-top:10px; margin-bottom:0">
+        <label for="otra-descripcion">¿Cómo la describirías? <span class="label-optional">(opcional)</span></label>
+        <input type="text" id="otra-descripcion" placeholder="Ej: una planta alta con flores moradas">
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 2: FOTO -->
+  <section id="screen-foto" class="screen" aria-labelledby="foto-titulo">
+    <h2 id="foto-titulo" class="step-question" tabindex="-1">Haz una foto</h2>
+    <p class="step-hint">Puedes añadir hasta 3 fotografías. La foto es opcional, pero nos ayuda mucho a identificar la planta.</p>
+    <div class="photo-grid" id="photo-grid" role="group" aria-label="Fotografías de la planta"></div>
+    <p id="photo-count" aria-live="polite" style="font-size:0.82rem;color:var(--verde-suave);font-weight:700;margin-bottom:10px;"></p>
+    <p id="foto-error" class="error-text" style="display:none"></p>
+    <div class="tip">
+      <span class="tip__icon" aria-hidden="true">💡</span>
+      <span>Si puedes, fotografía la planta completa y algún detalle de sus hojas o flores.</span>
+    </div>
+  </section>
+
+  <!-- PASO 3: UBICACIÓN -->
+  <section id="screen-ubicacion" class="screen" aria-labelledby="ubicacion-titulo">
+    <h2 id="ubicacion-titulo" class="step-question" tabindex="-1">¿Dónde la has visto?</h2>
+    <p class="step-hint">Intentaremos detectar tu ubicación automáticamente. También puedes marcarla tú a mano en el mapa.</p>
+    <button type="button" class="loc-open-btn" id="btn-abrir-mapa">📍 Indicar ubicación en el mapa</button>
+    <p class="loc-status" id="loc-result" role="status"></p>
+    <div class="field" style="margin-top:16px; margin-bottom:0">
+      <label for="lugar-desc">Descripción del lugar <span class="label-optional">(opcional)</span></label>
+      <input type="text" id="lugar-desc" placeholder="Ej: junto al río, detrás del puente">
+    </div>
+  </section>
+
+  <!-- PASO 4: CANTIDAD -->
+  <section id="screen-cantidad" class="screen" aria-labelledby="cantidad-titulo">
+    <h2 id="cantidad-titulo" class="step-question" tabindex="-1">¿Cuánto hay?</h2>
+    <p class="step-hint">Una estimación aproximada es suficiente.</p>
+    <div class="option-grid" id="tamanyo-grid" role="group" aria-label="Cantidad aproximada"></div>
+  </section>
+
+  <!-- PASO 5: OBSERVACIONES -->
+  <section id="screen-observaciones" class="screen" aria-labelledby="observaciones-titulo">
+    <h2 id="observaciones-titulo" class="step-question" tabindex="-1">¿Quieres añadir algo más?</h2>
+    <p class="step-hint">Es opcional. Por ejemplo: "está junto a un camino" o "hay muchas plantas cerca".</p>
+    <div class="field">
+      <label for="observaciones-input" class="label-optional">Observaciones (opcional)</label>
+      <textarea id="observaciones-input" rows="4" placeholder="Escribe aquí si quieres contarnos algo más..."></textarea>
+    </div>
+  </section>
+
+  <!-- PASO 6: CONTACTO -->
+  <section id="screen-contacto" class="screen" aria-labelledby="contacto-titulo">
+    <h2 id="contacto-titulo" class="step-question" tabindex="-1">¿Quieres que podamos contactarte?</h2>
+    <p class="step-hint">Estos datos no son necesarios para enviar el reporte. Puedes dejarlos en blanco.</p>
+    <div class="field">
+      <label for="nombre-input" class="label-optional">Nombre (opcional)</label>
+      <input type="text" id="nombre-input" placeholder="Tu nombre" autocomplete="name">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label for="email-input" class="label-optional">Email (opcional)</label>
+      <input type="email" id="email-input" placeholder="correo@ejemplo.com" autocomplete="email">
+    </div>
+  </section>
+
+  <!-- PASO 7: REVISIÓN -->
+  <section id="screen-revision" class="screen" aria-labelledby="revision-titulo">
+    <h2 id="revision-titulo" class="step-question" tabindex="-1">Revisa tu reporte</h2>
+    <p class="step-hint">Comprueba que todo esté bien antes de enviarlo. Puedes editar cualquier apartado.</p>
+    <div class="card">
+      <div class="review-section">
+        <div><p class="review-section__label">Especie</p><p class="review-section__value" id="revision-especie"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="especie">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Fotografías</p><div class="review-photos" id="revision-fotos"></div></div>
+        <button type="button" class="review-section__edit" data-edit-step="foto">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Ubicación</p><p class="review-section__value" id="revision-ubicacion"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="ubicacion">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Cantidad</p><p class="review-section__value" id="revision-cantidad"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="cantidad">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Observaciones</p><p class="review-section__value" id="revision-observaciones"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="observaciones">Editar</button>
+      </div>
+      <div class="review-section">
+        <div><p class="review-section__label">Contacto</p><p class="review-section__value" id="revision-contacto"></p></div>
+        <button type="button" class="review-section__edit" data-edit-step="contacto">Editar</button>
+      </div>
+    </div>
+    <p id="envio-error" class="error-text" style="display:none"></p>
+  </section>
+
+  <!-- ÉXITO -->
+  <section id="screen-exito" class="screen success" aria-labelledby="exito-titulo">
+    <div class="success__icon" aria-hidden="true">✓</div>
+    <h2 id="exito-titulo" tabindex="-1">¡Gracias!</h2>
+    <p>Tu observación ha sido enviada correctamente.</p>
+    <p>Cada reporte nos ayuda a conocer mejor y proteger nuestro entorno.</p>
+    <div class="success__actions">
+      <button type="button" class="btn btn-primary" id="btn-reportar-otro">Reportar otra especie</button>
+      <p class="home__secondary"><a href="https://www.ramalesnatural.org/" target="_blank" rel="noopener">Ramales Natural</a></p>
+    </div>
+  </section>
+
 </main>
 
 <footer class="app-footer" id="app-footer">
