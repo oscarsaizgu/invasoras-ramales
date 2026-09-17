@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#22392c">
 <link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="public-map-page">
@@ -53,11 +54,12 @@
 </div>
 
 <div class="map-filters" role="group" aria-label="Filtrar por especie">
-  <button type="button" class="map-filter-chip selected">Todas</button>
-  <button type="button" class="map-filter-chip">Plumero</button>
-  <button type="button" class="map-filter-chip">Bambú japonés</button>
-  <button type="button" class="map-filter-chip">Amor de hombre</button>
-  <button type="button" class="map-filter-chip">Vara de San José</button>
+  <label for="map-species-select" class="map-filters__label">Especie:</label>
+  <span id="map-species-swatch" class="map-species-swatch" hidden aria-hidden="true"></span>
+  <select id="map-species-select" class="map-species-select">
+    <option value="">Todas las especies</option>
+  </select>
+  <span id="map-counter" class="map-counter"></span>
 </div>
 
 <div id="public-map"></div>
@@ -81,6 +83,7 @@
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script type="module" src="js/app.js"></script>
 <script type="module" src="js/mapa-publico.js"></script>
 </body>

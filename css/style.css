@@ -806,9 +806,14 @@ body.pagina-inicio .app-header__menu {
 }
 /* El padding inferior de .container reserva sitio para la barra fija
    del asistente (wizard-nav), que no existe en la portada — sin este
-   ajuste queda un hueco grande entre la silueta y el pie de página. */
+   ajuste queda un hueco grande entre la silueta y el pie de página.
+   .home también añade su propio padding inferior, así que hay que
+   quitar los dos para que la silueta quede pegada al pie. */
 body.pagina-inicio .container {
-  padding-bottom: 1.4rem;
+  padding-bottom: 0;
+}
+body.pagina-inicio .home {
+  padding-bottom: 0;
 }
 
 /* Contenedor de las dos tarjetas principales */
@@ -987,10 +992,10 @@ body.pagina-inicio .container {
 .home-silueta {
   display: block;
   width: 100%;
-  height: 40px;
+  height: 60px;
   object-fit: cover;
   object-position: bottom;
-  margin-top: 0.4rem;
+  margin-top: -0.6rem;
 }
 
 /* ================================================================
@@ -1766,16 +1771,43 @@ body.pagina-inicio .container {
   text-align: center; padding: 3.5rem 1.4rem; color: var(--text-muted); font-family: var(--font);
 }
 .map-filters {
-  display: flex; gap: 0.5rem; padding: 0.65rem 0.9rem; overflow-x: auto;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
   background: var(--card); border-bottom: 1px solid var(--borde);
 }
-.map-filter-chip {
-  flex-shrink: 0; padding: 0.5rem 0.9rem; border-radius: 999px;
+.map-filters__label {
+  font-size: 0.78rem; font-weight: 700; color: var(--verde); font-family: var(--font);
+}
+.map-species-select {
+  flex: 1 1 200px; min-width: 160px; max-width: 100%;
+  padding: 0.5rem 0.7rem; border-radius: 999px;
   border: 1.5px solid var(--borde); background: var(--bg);
-  font-size: 0.78rem; font-weight: 700; cursor: pointer; font-family: var(--font);
+  font-size: 0.82rem; font-weight: 600; font-family: var(--font);
   color: var(--verde);
 }
-.map-filter-chip.selected { background: var(--verde); color: var(--crema); border-color: var(--verde); }
+.map-counter {
+  font-size: 0.78rem; font-weight: 600; color: var(--text-muted); font-family: var(--font);
+  white-space: nowrap;
+}
+.map-species-swatch {
+  flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.7); box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+}
+.map-popup { font-family: var(--font); line-height: 1.5; min-width: 140px; }
+.map-popup__comun { display: block; font-size: 0.95rem; margin-bottom: 0.1rem; }
+.map-popup__cientifico { display: block; font-style: italic; opacity: 0.9; font-size: 0.85rem; }
+
+/* Puntos y agrupaciones del mapa por especie — divIcons coloreados a mano */
+.map-marker-dot {
+  border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+}
+.map-cluster-icon {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  color: #fff; font-family: var(--font); font-weight: 700; font-size: 0.78rem;
+}
 
 /* ================================================================
    PIE DE PÁGINA — estilo editorial (Camina y Descubre)

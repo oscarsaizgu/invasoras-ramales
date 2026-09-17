@@ -1,11 +1,53 @@
 # Datos del mapa público
 
-`reportes-publicos.json` alimenta el mapa público (`mapa.html`). Está vacío
+El mapa público (`mapa.html`) usa dos fuentes de datos, todavía sin conectar
+entre sí:
+
+## Registros históricos de QGIS (`observaciones-qgis.geojson`)
+
+`js/mapa-publico.js` es hoy el que carga y pinta este archivo. Se generó a
+partir de `EEI_Ramales_2026.gpkg` (GeoPackage de QGIS, en este mismo
+directorio), que contiene 44 capas: 43 especies + `PostesLuz` (0 registros,
+no es una observación y se excluyó). Conversión: `ogrinfo`/`ogr2ogr` de GDAL
+(bundlados con la instalación de QGIS del proyecto) con una consulta SQL
+`UNION ALL` de las 43 capas de especies, exportado a GeoJSON en EPSG:4326
+(`urn:ogc:def:crs:OGC:1.3:CRS84`).
+
+Total: 4484 observaciones. De ellas, 26 no tienen geometría en el
+GeoPackage de origen (`geometry: null` en el GeoJSON) — no se inventaron
+coordenadas para esos registros, así que no aparecen en el mapa; siguen en
+el archivo por si se completan más adelante. Además hay 1 registro
+(`Lonicera japonica`, código `LJ77`) cuya longitud tiene el signo positivo
+en el GeoPackage original (debería casi con toda seguridad ser negativa, a
+juzgar por los registros vecinos) — se ha dejado tal cual venía en QGIS en
+vez de corregirlo sin confirmación; conviene revisarlo/corregirlo en QGIS y
+regenerar el GeoJSON.
+
+Campos conservados por observación (todos los que existían en el
+GeoPackage, ninguno inventado): `ID`, `ESPECIE` (nombre científico = nombre
+de la capa), `NOMBRE_COM` (nombre común, sin normalizar mayúsculas/minúsculas
+del original), `FECHA_HORA`, `ALTITUD`, `OBSERVACIO` (a menudo vacío) y
+`CODIGO`. 57 registros tenían `FECHA_HORA` corrupto en el GeoPackage
+(`PyQt5.QtCore.QDate(...)`, un error de exportación previo desde QGIS); se
+reformateó ese valor a `AAAA-MM-DD` porque los tres números ya estaban
+presentes en el propio texto corrupto — no se rellenó ninguna fecha que no
+estuviera ya en el dato original.
+
+Para regenerar este archivo tras corregir el GeoPackage en QGIS: usar
+`ogr2ogr` (incluido en `C:\Program Files\QGIS 3.30.2\bin\`) con una consulta
+`-dialect sqlite -sql "SELECT ID, ESPECIE, NOMBRE_COM, FECHA_HORA, ALTITUD,
+OBSERVACIO, CODIGO, geom FROM \"Capa1\" UNION ALL SELECT ... FROM \"Capa2\"
+..."` sobre las 43 capas de especies (excluyendo `PostesLuz`), exportando a
+`-f GeoJSON`.
+
+## Reportes enviados desde la app (`reportes-publicos.json`)
+
+Todavía **no está conectado** al mapa (fase 2, pendiente). Está vacío
 a propósito: todavía no existe una base de datos real conectada, y el mapa
 no debe mostrar puntos inventados.
 
-Cuando exista un backend (ver más abajo), este archivo se sustituye por una
-llamada a la API real. Formato esperado por `js/mapa-publico.js`, un array de:
+Cuando exista un backend, este archivo se sustituye por una llamada a la
+API real. Formato esperado, un array de:
 
 ```json
 {
