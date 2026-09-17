@@ -79,30 +79,32 @@
       <div class="home-cards">
         <!-- Acción principal: identificación por fotografía -->
         <div class="id-card">
-          <img class="id-card__foto" src="images/plumero.jpg" alt="Ejemplo de planta del catálogo de especies de Ramales">
-          <p class="id-card__eyebrow">
-            <span class="id-card__eyebrow-leaf" aria-hidden="true">
-              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 5C48 11 56 27 49 42 44 53 34 59 32 60 30 59 20 53 15 42 8 27 16 11 32 5Z" fill="currentColor"/><path d="M32 12V54" stroke="var(--card)" stroke-width="2" opacity="0.5"/></svg>
-            </span>
-            ¿Qué planta es?
-          </p>
-          <p class="id-card__texto">Haz una foto y te ayudamos a identificarla.</p>
-          <div class="id-card__ventajas">
-            <div class="id-card__ventaja">
-              <span class="id-card__ventaja-icono" aria-hidden="true">🌿</span>
-              <span>Identificación con IA</span>
-            </div>
-            <div class="id-card__ventaja">
-              <span class="id-card__ventaja-icono" aria-hidden="true">📖</span>
-              <span>Conoce la especie</span>
-            </div>
-            <div class="id-card__ventaja">
-              <span class="id-card__ventaja-icono" aria-hidden="true">⚠️</span>
-              <span>Aviso si es invasora</span>
-            </div>
+          <div class="id-card__visual">
+            <img class="id-card__captura" src="images/captura.svg" alt="">
+            <div class="id-card__visual-fade" aria-hidden="true"></div>
           </div>
-          <a href="identificar.html" class="btn btn-primary id-card__btn">📷 Hacer una foto →</a>
-          <p class="id-card__nota">No necesitas saber qué especie es.</p>
+          <div class="id-card__contenido">
+            <p class="id-card__eyebrow">¿Qué planta es?</p>
+            <div class="id-card__ventajas">
+              <div class="id-card__ventaja">
+                <img class="id-card__ventaja-icono" src="images/hoja.svg" alt="">
+                <span>Identificación con IA</span>
+              </div>
+              <div class="id-card__ventaja">
+                <img class="id-card__ventaja-icono" src="images/libro.svg" alt="">
+                <span>Conoce la especie</span>
+              </div>
+              <div class="id-card__ventaja">
+                <img class="id-card__ventaja-icono" src="images/peligro.svg" alt="">
+                <span>Te avisamos si es invasora</span>
+              </div>
+            </div>
+            <a href="identificar.html" class="btn btn-primary id-card__btn">
+              <img class="id-card__btn-icono" src="images/camara.svg" alt="">
+              Hacer una foto →
+            </a>
+            <p class="id-card__nota">No necesitas saber qué especie es.</p>
+          </div>
         </div>
 
         <!-- Acción secundaria: reporte directo -->

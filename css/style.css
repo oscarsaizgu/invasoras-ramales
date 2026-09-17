@@ -808,69 +808,84 @@ body.pagina-inicio .app-header__menu {
 .home-cards { display: flex; flex-direction: column; }
 
 /* Tarjeta principal "¿Qué planta es?" — identificación por foto.
-   Pieza editorial centrada: pequeña fotografía a modo de medallón,
-   título protagonista, tres ventajas como iconos (no como lista) y el
-   botón como único elemento de acción. */
+   La proporción de captura.svg manda: la imagen se muestra a su tamaño
+   natural (sin recortarla ni encogerla para que quepa texto) y el
+   contenido de la derecha se simplifica y ajusta al hueco resultante,
+   fundiéndose con degradado en vez de una línea vertical. */
 .id-card {
   margin: 0.4rem 0 0.7rem;
   background: var(--card);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
-  text-align: center;
-  padding: 1.9rem 1.4rem 1.6rem;
+  text-align: left;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
 }
-.id-card__foto {
+.id-card__visual {
+  position: relative;
+  flex: 0 0 46%;
+  overflow: hidden;
+}
+.id-card__captura {
   display: block;
-  width: 68px; height: 68px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: 0 auto 1.1rem;
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 0 1px var(--borde);
+  width: 100%;
+  height: auto;
+}
+.id-card__visual-fade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 45%, var(--card) 96%);
+}
+.id-card__contenido {
+  flex: 1;
+  min-width: 0;
+  padding: 0.9rem 0.9rem 1rem 0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .id-card__eyebrow {
-  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
   font-family: var(--font-titulo);
-  font-size: 1.5rem; font-weight: 400; letter-spacing: 0.02em;
+  font-size: 1.1rem; font-weight: 400; letter-spacing: 0.01em;
   color: var(--verde);
-  line-height: 1.2;
-  margin: 0 0 0.6rem;
-}
-.id-card__eyebrow-leaf {
-  display: inline-flex; width: 22px; height: 22px;
-  color: var(--verde-suave);
-  flex-shrink: 0;
-}
-.id-card__eyebrow-leaf svg { width: 100%; height: 100%; }
-.id-card__texto {
-  font-family: var(--font);
-  font-size: 0.92rem; color: var(--text-muted); line-height: 1.5;
-  max-width: 280px;
-  margin: 0 auto 1.5rem;
+  line-height: 1.15;
+  margin: 0 0 0.55rem;
 }
 .id-card__ventajas {
   display: flex;
-  gap: 0.4rem;
-  margin: 0 0 1.6rem;
+  gap: 0.2rem;
+  margin: 0 0 0.7rem;
 }
 .id-card__ventaja {
   flex: 1;
-  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  min-width: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+  text-align: center;
 }
-.id-card__ventaja-icono { font-size: 1.25rem; }
+.id-card__ventaja-icono { width: 18px; height: 18px; flex-shrink: 0; }
 .id-card__ventaja span:last-child {
   font-family: var(--font);
-  font-size: 0.68rem;
+  font-size: 0.56rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   color: var(--verde-medio);
-  line-height: 1.3;
+  line-height: 1.15;
 }
-.id-card__btn { width: 100%; display: block; margin-bottom: 1rem; }
-.id-card__nota {
+.id-card__btn {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+  padding: 0.6rem 0.7rem;
+  font-size: 0.82rem;
+  min-height: auto;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+}
+.id-card__btn-icono { width: 15px; height: 15px; flex-shrink: 0; }
+.id-card .id-card__nota {
   margin: 0;
+  text-align: center;
   font-family: var(--font);
-  font-size: 0.78rem;
+  font-size: 0.58rem;
   color: var(--verde-suave);
   font-weight: 700;
   max-width: none;
@@ -958,17 +973,6 @@ body.pagina-inicio .app-header__menu {
     position: static; width: auto; height: auto; padding: 0; margin: 0;
     overflow: visible; clip: auto; white-space: normal;
   }
-}
-
-@media (min-width: 760px) {
-  .home-cards {
-    flex-direction: row;
-    align-items: stretch;
-    gap: 1rem;
-  }
-  .id-card { flex: 3; margin-bottom: 0; }
-  .report-card { flex: 2; margin-bottom: 0; display: flex; flex-direction: column; }
-  .report-card .report-card__btn { margin-top: auto; }
 }
 
 /* Silueta decorativa de montañas al pie de la portada */
