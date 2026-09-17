@@ -1,7 +1,16 @@
 # Datos del mapa público
 
-El mapa público (`mapa.html`) usa dos fuentes de datos, todavía sin conectar
-entre sí:
+El mapa público (`mapa.html`) usa dos fuentes de observaciones, todavía sin
+conectar entre sí, más una tercera fuente auxiliar solo para clasificar:
+
+- Los chips de filtro por tipo (herbáceas/arbustos/árboles/acuáticas) no
+  añaden una clasificación nueva: reutilizan el campo `categoria` que ya
+  existe en `cantabria-flora.json` (el mismo que usan los filtros de
+  `guia-botanica.html`). Si una especie del histórico de QGIS todavía no
+  tiene ficha en `cantabria-flora.json` (o su nombre es de género, tipo
+  `Conyza spp`), no tiene categoría asignada y por tanto no aparece al
+  filtrar por tipo — sigue visible en "Todas". No se ha inventado ninguna
+  categoría para completar ese hueco.
 
 ## Registros históricos de QGIS (`observaciones-qgis.geojson`)
 

@@ -8,8 +8,9 @@ import { CONFIG } from './config.js';
 // código: { especie, nombreComun, lat, lon }. El día que se conecten los
 // reportes ciudadanos de reportar.html, basta con añadir un adaptador
 // equivalente (p.ej. adaptarReporteCiudadano) y combinar ambos arrays en
-// cargarObservaciones() — el resto del mapa (color, agrupamiento, filtro,
-// popup) no necesita cambiar.
+// cargarObservaciones() — el resto del mapa (color, agrupamiento, filtros,
+// popup, estadísticas) no necesita cambiar. Esa es la idea de fondo:
+// datos históricos + futuros reportes de la gente = mapa vivo.
 // ---------------------------------------------------------------------------
 
 function adaptarFeatureQGIS(feature) {
@@ -44,6 +45,29 @@ async function cargarObservaciones() {
   return cargarHistoricoQGIS();
 }
 
+// Categoría (herbácea/arbusto/árbol/acuática) para los chips de filtro: se
+// reutiliza el campo "categoria" ya existente en la guía botánica, no se
+// inventa una clasificación nueva. Si una especie del histórico de QGIS no
+// está todavía documentada allí, simplemente no aparece al filtrar por tipo
+// (sigue visible en "Todas").
+async function cargarCategoriasPorEspecie() {
+  try {
+    const resp = await fetch('data/cantabria-flora.json', { cache: 'no-store' });
+    if (!resp.ok) return new Map();
+    const data = await resp.json();
+    const lista = Array.isArray(data) ? data : Object.values(data).flat();
+    const mapa = new Map();
+    lista.forEach(entry => {
+      if (entry && entry.cientifico && entry.categoria) {
+        mapa.set(entry.cientifico, entry.categoria);
+      }
+    });
+    return mapa;
+  } catch (err) {
+    return new Map();
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Paleta natural por especie
 // ---------------------------------------------------------------------------
@@ -70,9 +94,12 @@ function construirPaleta(especies) {
 
 let map = null;
 let coloresPorEspecie = new Map();
+let categoriasPorEspecie = new Map();
+let nombresComunesPorEspecie = new Map();
 let gruposPorEspecie = new Map(); // especie -> L.markerClusterGroup
 let observacionesPorEspecie = new Map(); // especie -> array normalizado
-let activeSpecies = '';
+let activeCategoria = '';
+let activeTexto = '';
 
 function initMap() {
   map = L.map('public-map').setView(CONFIG.mapaCenter, CONFIG.mapaZoom);
@@ -118,10 +145,12 @@ function iconoClusterHtml(color) {
 }
 
 function popupHtml(especie, nombreComun) {
+  const enlaceFicha = `guia-botanica.html?especie=${encodeURIComponent(especie)}`;
   return `
     <div class="map-popup">
       ${nombreComun ? `<strong class="map-popup__comun">${nombreComun}</strong>` : ''}
       <em class="map-popup__cientifico">${especie}</em>
+      <a class="map-popup__ficha" href="${enlaceFicha}">Ver ficha en la guía →</a>
     </div>
   `;
 }
@@ -148,6 +177,8 @@ function construirGrupos(observaciones) {
     // por observación y a menudo contiene anotaciones de campo ("sin flor",
     // "fin del area continua"...) en vez de un nombre común real.
     const nombreComun = nombreComunCanonico(propias);
+    nombresComunesPorEspecie.set(especie, nombreComun);
+
     propias.forEach(o => {
       const marker = L.marker([o.lat, o.lon], { icon: iconoPuntoHtml(color) });
       marker.bindPopup(popupHtml(especie, nombreComun));
@@ -160,63 +191,59 @@ function construirGrupos(observaciones) {
   return especies;
 }
 
-function actualizarContador() {
-  const contador = document.getElementById('map-counter');
-  if (!contador) return;
-  const numEspecies = observacionesPorEspecie.size;
-
-  if (activeSpecies) {
-    const n = (observacionesPorEspecie.get(activeSpecies) || []).length;
-    contador.textContent = `${n} observaciones`;
-  } else {
-    let total = 0;
-    observacionesPorEspecie.forEach(arr => { total += arr.length; });
-    contador.textContent = `${numEspecies} especies · ${total} observaciones`;
-  }
-}
-
-function actualizarSwatch() {
-  const swatch = document.getElementById('map-species-swatch');
-  if (!swatch) return;
-  if (activeSpecies) {
-    swatch.style.background = coloresPorEspecie.get(activeSpecies) || 'transparent';
-    swatch.hidden = false;
-  } else {
-    swatch.hidden = true;
-  }
+function especieCoincide(especie) {
+  const coincideCategoria = !activeCategoria || categoriasPorEspecie.get(especie) === activeCategoria;
+  if (!coincideCategoria) return false;
+  if (!activeTexto) return true;
+  const cientifico = especie.toLowerCase();
+  const comun = (nombresComunesPorEspecie.get(especie) || '').toLowerCase();
+  return cientifico.includes(activeTexto) || comun.includes(activeTexto);
 }
 
 function aplicarFiltro() {
   gruposPorEspecie.forEach((grupo, especie) => {
-    const debeMostrarse = !activeSpecies || especie === activeSpecies;
+    const debeMostrarse = especieCoincide(especie);
     const yaEnMapa = map.hasLayer(grupo);
     if (debeMostrarse && !yaEnMapa) map.addLayer(grupo);
     if (!debeMostrarse && yaEnMapa) map.removeLayer(grupo);
   });
-  actualizarContador();
-  actualizarSwatch();
 }
 
-function initFiltro(especies) {
-  const select = document.getElementById('map-species-select');
-  if (!select) return;
-
-  especies.forEach(especie => {
-    const option = document.createElement('option');
-    option.value = especie;
-    option.textContent = especie;
-    select.appendChild(option);
-  });
-
-  select.addEventListener('change', () => {
-    activeSpecies = select.value;
+function initBuscador() {
+  const input = document.getElementById('map-buscador');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    activeTexto = input.value.trim().toLowerCase();
     aplicarFiltro();
   });
 }
 
+function initChips() {
+  const contenedor = document.getElementById('map-chips');
+  if (!contenedor) return;
+  const chips = [...contenedor.querySelectorAll('.catalogo-filtro')];
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      activeCategoria = chip.dataset.categoria || '';
+      aplicarFiltro();
+    });
+  });
+}
+
+function actualizarEstadisticas(numEspecies) {
+  const el = document.getElementById('map-stat-especies');
+  if (el) el.textContent = String(numEspecies);
+}
+
 async function init() {
   initMap();
-  const observaciones = await cargarObservaciones();
+  const [observaciones, categorias] = await Promise.all([
+    cargarObservaciones(),
+    cargarCategoriasPorEspecie(),
+  ]);
+  categoriasPorEspecie = categorias;
 
   const emptyState = document.getElementById('public-map-empty');
   if (!observaciones.length) {
@@ -225,7 +252,9 @@ async function init() {
   }
 
   const especies = construirGrupos(observaciones);
-  initFiltro(especies);
+  actualizarEstadisticas(especies.length);
+  initBuscador();
+  initChips();
   aplicarFiltro();
 }
 

@@ -53,21 +53,77 @@
   </nav>
 </div>
 
-<div class="map-filters" role="group" aria-label="Filtrar por especie">
-  <label for="map-species-select" class="map-filters__label">Especie:</label>
-  <span id="map-species-swatch" class="map-species-swatch" hidden aria-hidden="true"></span>
-  <select id="map-species-select" class="map-species-select">
-    <option value="">Todas las especies</option>
-  </select>
-  <span id="map-counter" class="map-counter"></span>
-</div>
+<main id="main-content" class="container map-page">
 
-<div id="public-map"></div>
+  <section class="map-hero">
+    <img class="map-hero__botanico" src="images/adorno.svg" alt="" aria-hidden="true">
+    <p class="content-label">Especies exóticas invasoras</p>
+    <h1 class="content-titulo">Mapa de especies invasoras</h1>
+    <p class="map-hero__subtitulo">Descubre dónde las hemos encontrado<br>y ayúdanos a localizar nuevas.</p>
+    <p class="map-hero__decor">“Conocemos el territorio.<br>Entre todos lo seguimos descubriendo.”</p>
+  </section>
 
-<div id="public-map-empty" class="public-map-empty" hidden>
-  <p><strong>Todavía no hay avistamientos públicos que mostrar.</strong></p>
-  <p>En cuanto se confirmen los primeros reportes, aparecerán aquí.</p>
-</div>
+  <div class="catalogo-buscador">
+    <span class="catalogo-buscador__icon" aria-hidden="true">🔍</span>
+    <input type="search" id="map-buscador" placeholder="Buscar una especie..." aria-label="Buscar una especie">
+  </div>
+
+  <div class="catalogo-filtros" id="map-chips" role="group" aria-label="Filtrar por tipo de especie">
+    <button type="button" class="catalogo-filtro is-active" data-categoria="">Todas</button>
+    <button type="button" class="catalogo-filtro" data-categoria="herbacea">🌱 Herbáceas</button>
+    <button type="button" class="catalogo-filtro" data-categoria="arbusto">🌿 Arbustos</button>
+    <button type="button" class="catalogo-filtro" data-categoria="arbol">🌳 Árboles</button>
+  </div>
+
+  <div class="map-card">
+    <div id="public-map"></div>
+    <div id="public-map-empty" class="public-map-empty" hidden>
+      <p><strong>Todavía no hay avistamientos públicos que mostrar.</strong></p>
+      <p>En cuanto se confirmen los primeros reportes, aparecerán aquí.</p>
+    </div>
+  </div>
+
+  <div class="map-stats">
+    <div class="map-stat">
+      <span class="map-stat__icono" aria-hidden="true">🌿</span>
+      <span class="map-stat__texto">
+        <span class="map-stat__valor"><span id="map-stat-especies">–</span> especies</span>
+        <span class="map-stat__label">registradas</span>
+      </span>
+    </div>
+    <div class="map-stat">
+      <span class="map-stat__icono" aria-hidden="true">📍</span>
+      <span class="map-stat__texto">
+        <span class="map-stat__valor">Zonas de presencia</span>
+        <span class="map-stat__label">(datos agrupados)</span>
+      </span>
+    </div>
+    <div class="map-stat">
+      <span class="map-stat__icono" aria-hidden="true">👥</span>
+      <span class="map-stat__texto">
+        <span class="map-stat__valor">Datos históricos</span>
+        <span class="map-stat__label">de Ramales y, pronto, tus propios reportes</span>
+      </span>
+    </div>
+  </div>
+
+  <section class="map-participa">
+    <div class="map-participa__texto">
+      <h2 class="map-participa__titulo">Ayúdanos a completar el mapa</h2>
+      <p>¿Has encontrado una especie invasora en Ramales? Hazle una foto y envíanos tu observación.</p>
+      <a href="reportar.html" class="btn btn-accent map-participa__btn">📷 Enviar un reporte</a>
+      <p class="map-participa__nota">Cada nuevo reporte nos ayuda a conocer mejor nuestro entorno.</p>
+    </div>
+    <div class="map-pasos" aria-hidden="true">
+      <div class="map-paso"><img src="images/prismaticos.svg" alt=""><span>Observa</span></div>
+      <span class="map-paso__flecha">→</span>
+      <div class="map-paso"><img src="images/camara.svg" alt=""><span>Haz una foto</span></div>
+      <span class="map-paso__flecha">→</span>
+      <div class="map-paso"><img src="images/avion.svg" alt=""><span>Envíanos tu reporte</span></div>
+    </div>
+  </section>
+
+</main>
 
 <footer class="app-footer">
   <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">

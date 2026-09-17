@@ -1764,38 +1764,52 @@ body.pagina-inicio .home {
 .success__actions .btn { width: 100%; max-width: 320px; }
 
 /* ================================================================
-   MAPA PÚBLICO
+   MAPA PÚBLICO — editorial, natural, mapa como protagonista
    ================================================================ */
-.public-map-page #public-map { height: calc(100vh - 132px); min-height: 320px; }
+.map-page { padding-top: 0.3rem; }
+
+.map-hero {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1.6rem;
+  overflow: hidden;
+}
+.map-hero__botanico {
+  position: absolute; top: -1.2rem; right: -1.4rem;
+  width: 110px; height: 110px;
+  opacity: 0.06; pointer-events: none;
+  transform: rotate(12deg);
+}
+.map-hero .content-label,
+.map-hero .content-titulo { position: relative; }
+.map-hero__subtitulo {
+  position: relative;
+  font-family: var(--font); font-size: 0.94rem; line-height: 1.6;
+  color: var(--text-muted); max-width: 420px; margin: 0 auto;
+}
+.map-hero__decor {
+  position: relative;
+  font-family: var(--font); font-style: italic; font-size: 0.78rem; line-height: 1.55;
+  color: var(--text-muted); opacity: 0.75;
+  max-width: 260px; margin: 1.1rem auto 0;
+}
+
+.map-card {
+  border-radius: var(--radio-grande);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--borde);
+  margin-bottom: 1.6rem;
+}
+.map-card #public-map { height: clamp(360px, 62vh, 560px); }
 .public-map-empty {
   text-align: center; padding: 3.5rem 1.4rem; color: var(--text-muted); font-family: var(--font);
 }
-.map-filters {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem;
-  padding: 0.65rem 0.9rem;
-  background: var(--card); border-bottom: 1px solid var(--borde);
-}
-.map-filters__label {
-  font-size: 0.78rem; font-weight: 700; color: var(--verde); font-family: var(--font);
-}
-.map-species-select {
-  flex: 1 1 200px; min-width: 160px; max-width: 100%;
-  padding: 0.5rem 0.7rem; border-radius: 999px;
-  border: 1.5px solid var(--borde); background: var(--bg);
-  font-size: 0.82rem; font-weight: 600; font-family: var(--font);
-  color: var(--verde);
-}
-.map-counter {
-  font-size: 0.78rem; font-weight: 600; color: var(--text-muted); font-family: var(--font);
-  white-space: nowrap;
-}
-.map-species-swatch {
-  flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.7); box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
-}
+
 .map-popup { font-family: var(--font); line-height: 1.5; min-width: 140px; }
 .map-popup__comun { display: block; font-size: 0.95rem; margin-bottom: 0.1rem; }
-.map-popup__cientifico { display: block; font-style: italic; opacity: 0.9; font-size: 0.85rem; }
+.map-popup__cientifico { display: block; font-style: italic; opacity: 0.9; font-size: 0.85rem; margin-bottom: 0.4rem; }
+.map-popup__ficha { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--crema); text-decoration: underline; }
 
 /* Puntos y agrupaciones del mapa por especie — divIcons coloreados a mano */
 .map-marker-dot {
@@ -1807,6 +1821,59 @@ body.pagina-inicio .home {
   border-radius: 50%; border: 2px solid rgba(255,255,255,0.8);
   box-shadow: 0 1px 4px rgba(0,0,0,0.35);
   color: #fff; font-family: var(--font); font-weight: 700; font-size: 0.78rem;
+}
+
+/* Franja de datos bajo el mapa */
+.map-stats {
+  display: flex; flex-direction: column; gap: 1.1rem;
+  background: var(--card); border-radius: var(--radio-grande);
+  box-shadow: var(--shadow);
+  padding: 1.3rem 1.2rem;
+  margin-bottom: 1.8rem;
+}
+.map-stat { display: flex; align-items: center; gap: 0.8rem; text-align: left; }
+.map-stat__icono { font-size: 1.4rem; flex-shrink: 0; }
+.map-stat__texto { display: flex; flex-direction: column; gap: 0.15rem; }
+.map-stat__valor { font-family: var(--font-titulo); font-size: 1rem; color: var(--verde); font-weight: 400; display: block; }
+.map-stat__label { font-family: var(--font); font-size: 0.78rem; color: var(--text-muted); line-height: 1.35; display: block; }
+@media (min-width: 640px) {
+  .map-stats { flex-direction: row; }
+  .map-stat { flex: 1; flex-direction: column; text-align: center; gap: 0.5rem; }
+  .map-stat__texto { align-items: center; }
+}
+
+/* Bloque participativo */
+.map-participa {
+  background: rgba(167, 192, 160, 0.22);
+  border-radius: var(--radio-grande);
+  padding: 1.9rem 1.4rem;
+  margin-bottom: 1.6rem;
+  display: flex; flex-direction: column; gap: 1.6rem;
+}
+.map-participa__titulo {
+  font-family: var(--font-titulo); font-size: 1.05rem; font-weight: 400;
+  letter-spacing: 0.03em; text-transform: uppercase;
+  color: var(--verde); margin: 0 0 0.6rem;
+}
+.map-participa__texto p {
+  font-family: var(--font); font-size: 0.9rem; line-height: 1.6;
+  color: var(--text); margin: 0 0 1.1rem; max-width: 420px;
+}
+.map-participa__btn { display: inline-flex; }
+.map-participa__nota {
+  font-family: var(--font); font-size: 0.74rem; color: var(--text-muted);
+  margin: 0.9rem 0 0;
+}
+.map-pasos { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+.map-paso { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.map-paso img { width: 26px; height: 26px; }
+.map-paso span {
+  font-family: var(--font); font-size: 0.7rem; font-weight: 700;
+  color: var(--verde); text-align: center; max-width: 74px;
+}
+.map-paso__flecha { color: var(--text-muted); font-size: 1.1rem; }
+@media (min-width: 700px) {
+  .map-participa { flex-direction: row; align-items: center; justify-content: space-between; }
 }
 
 /* ================================================================
