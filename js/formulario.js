@@ -3,6 +3,69 @@ import { state, resetWizard, setNextEnabled } from './wizard.js';
 import { dataUrlToBlob, renderFotoSlots } from './fotos.js';
 import { resetUbicacion } from './mapa.js';
 
+function dataUrlABase64(dataUrl) {
+  return dataUrl.split(',')[1] || '';
+}
+
+// Envío al backend de gestión (Google Apps Script → Drive + Sheets), EN
+// PARALELO al email de FormSubmit de más abajo, no en su lugar — FormSubmit
+// se mantiene como respaldo mientras se valida este nuevo circuito. El
+// resultado de Pl@ntNet (si lo hay) ya está en state.plantnetScientific /
+// state.plantnetConfidence / state.plantnetResults, capturado por
+// reportar.js al cargar la página (ver catalogo.js → seleccionarEspecieParaReportar).
+// Apps Script NO vuelve a llamar a Pl@ntNet: se fía de este valor tal como
+// lo vio el navegador (ver apps-script/Endpoints.gs para la limitación de
+// seguridad que eso implica, documentada allí).
+//
+// Mientras CONFIG.reportesApiUrl esté vacío (no desplegado todavía), esta
+// función no hace ninguna petición — el envío por FormSubmit sigue
+// funcionando exactamente igual que antes.
+async function enviarReporteAppsScript(especieComun) {
+  if (!CONFIG.reportesApiUrl) return;
+
+  try {
+    const cuerpo = {
+      nombreComun: especieComun,
+      nombreCientifico: state.especieEsOtra ? '' : state.especie,
+      plantnetScientific: state.plantnetScientific || '',
+      plantnetConfidence: state.plantnetConfidence,
+      plantnetResults: state.plantnetResults || '',
+      // state.lat/state.lon son siempre string (mapa.js los genera con
+      // .toFixed(6)); Apps Script exige lat/lon numéricos en doPost, así
+      // que se convierten aquí, solo para este payload — no se toca
+      // mapa.js ni el envío por FormSubmit, que sigue usando state.lat/lon
+      // tal cual (como texto, igual que siempre).
+      lat: Number(state.lat),
+      lon: Number(state.lon),
+      cantidad: state.tamanyo || '',
+      lugarDescripcion: state.lugarDesc || '',
+      observaciones: state.observaciones || '',
+      nombreReportante: state.nombre || '',
+      emailReportante: state.email || '',
+      fotos: state.fotos.map(foto => ({
+        base64: dataUrlABase64(foto.dataUrl),
+        mime: 'image/jpeg',
+      })),
+    };
+
+    // Sin cabecera Content-Type a propósito: si se declara
+    // "application/json" el navegador manda antes una petición OPTIONS de
+    // preflight CORS, y los Web Apps de Apps Script no la gestionan bien
+    // (la petición real nunca llega). Enviándolo como texto plano (el
+    // valor por defecto de fetch para un body string) se evita el
+    // preflight; Apps Script igualmente parsea e.postData.contents como
+    // JSON sin mirar la cabecera.
+    await fetch(CONFIG.reportesApiUrl, {
+      method: 'POST',
+      body: JSON.stringify(cuerpo),
+    });
+  } catch (err) {
+    // Best-effort: un fallo aquí (red, Apps Script caído, etc.) NUNCA debe
+    // impedir que el reporte por email (FormSubmit) se considere enviado.
+    console.warn('No se ha podido enviar el reporte a Apps Script (se mantiene el envío por email):', err);
+  }
+}
+
 export function renderTamanyos() {
   const grid = document.getElementById('tamanyo-grid');
   grid.innerHTML = '';
@@ -120,6 +183,8 @@ export async function enviarReporte() {
       body: data,
     });
     if (!resp.ok) throw new Error('Respuesta no válida del servidor');
+
+    await enviarReporteAppsScript(especieComun);
 
     return true;
   } catch (err) {

@@ -466,7 +466,30 @@ function cerrarZoom() {
 // navegación normal, pasando la especie por la URL. reportar.js lee ese
 // parámetro al cargar y preselecciona la especie exactamente igual que
 // antes se simulaba con un clic.
-export function seleccionarEspecieParaReportar(cientifico) {
+//
+// Clave usada para pasar el resultado de Pl@ntNet a reportar.html sin
+// tocar la URL (el resumen de 3 especies no cabe bien en un query param).
+// reportar.js la lee una sola vez al cargar y la borra inmediatamente
+// (sessionStorage.removeItem), así que nunca sobrevive a un reporte
+// enviado ni contamina una visita posterior sin identificación.
+export const CLAVE_PLANTNET_SESSION = 'rn_plantnet_resultado';
+
+// `plantnet` es opcional: { scientific, confidence, resultsText }. Solo se
+// rellena cuando venimos de una identificación real (ver identificar.js);
+// si no se pasa, se borra cualquier resto de una identificación anterior
+// para que reportar.html arranque sin datos de Pl@ntNet, tal como debe
+// pasar si se entra directo a "Otra especie" o desde la guía botánica.
+export function seleccionarEspecieParaReportar(cientifico, plantnet) {
+  try {
+    if (plantnet) {
+      sessionStorage.setItem(CLAVE_PLANTNET_SESSION, JSON.stringify(plantnet));
+    } else {
+      sessionStorage.removeItem(CLAVE_PLANTNET_SESSION);
+    }
+  } catch (err) {
+    // sessionStorage puede fallar en navegación privada estricta; no debe
+    // impedir nunca que el reporte se pueda enviar.
+  }
   window.location.href = 'reportar.html?especie=' + encodeURIComponent(cientifico);
 }
 

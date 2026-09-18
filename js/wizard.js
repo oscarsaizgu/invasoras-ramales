@@ -17,6 +17,13 @@ export const state = {
   observaciones: '',
   nombre: '',
   email: '',
+  // Resultado de Pl@ntNet, si el reporte viene de una identificación real
+  // en identificar.html (ver catalogo.js → seleccionarEspecieParaReportar
+  // y reportar.js → leerIdentificacionPlantNet). Vacíos si se entra
+  // directo a reportar.html: el reporte se envía igual, sin estos datos.
+  plantnetScientific: '',
+  plantnetConfidence: null,
+  plantnetResults: '',
 };
 
 let currentScreen = 'inicio';
@@ -102,5 +109,8 @@ export function resetWizard() {
   state.observaciones = '';
   state.nombre = '';
   state.email = '';
+  state.plantnetScientific = '';
+  state.plantnetConfidence = null;
+  state.plantnetResults = '';
   history.length = 0;
 }

@@ -3,6 +3,7 @@
 // propia página ya no hace falta que conviva con el menú, el catálogo ni
 // la identificación.
 import { state, goTo, goBack, currentStep, setNextEnabled } from './wizard.js';
+import { CLAVE_PLANTNET_SESSION } from './catalogo.js';
 import { renderEspecies, especieDescripcionInput } from './especies.js';
 import { renderFotoSlots } from './fotos.js';
 import { initUbicacionStep } from './mapa.js';
@@ -87,6 +88,32 @@ function preseleccionarEspecieDesdeUrl() {
   }
 }
 
+// Recupera el resultado de Pl@ntNet dejado por identificar.js (ver
+// catalogo.js → seleccionarEspecieParaReportar). Se lee UNA sola vez y se
+// borra inmediatamente: si el usuario recarga la página o vuelve más
+// tarde a reportar.html sin pasar de nuevo por una identificación, el
+// reporte se envía sin datos de Pl@ntNet (estado inicial Pendiente), como
+// debe ser.
+function leerIdentificacionPlantNet() {
+  let bruto = null;
+  try {
+    bruto = sessionStorage.getItem(CLAVE_PLANTNET_SESSION);
+    sessionStorage.removeItem(CLAVE_PLANTNET_SESSION);
+  } catch (err) {
+    return; // sessionStorage no disponible: el reporte sigue funcionando sin estos datos
+  }
+  if (!bruto) return;
+
+  try {
+    const datos = JSON.parse(bruto);
+    state.plantnetScientific = datos.scientific || '';
+    state.plantnetConfidence = typeof datos.confidence === 'number' ? datos.confidence : null;
+    state.plantnetResults = datos.resultsText || '';
+  } catch (err) {
+    // JSON corrupto o manipulado: se ignora, el reporte se envía sin estos datos.
+  }
+}
+
 function init() {
   renderEspecies();
   renderFotoSlots();
@@ -96,6 +123,7 @@ function init() {
   initContactoStep();
 
   preseleccionarEspecieDesdeUrl();
+  leerIdentificacionPlantNet();
 
   document.getElementById('header-back').addEventListener('click', () => {
     goBack();

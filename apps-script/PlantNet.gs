@@ -1,93 +1,42 @@
 /**
- * Identificación con Pl@ntNet, llamada desde el servidor (Apps Script),
- * NO desde el navegador — a diferencia de js/identificar.js, que llama a
- * Pl@ntNet directamente desde el cliente para la identificación
- * interactiva de identificar.html (eso sigue funcionando igual, no se
- * toca). Esta llamada server-side es la que decide automáticamente el
- * estado de un reporte, así que se hace siempre, exista o no una
- * identificación previa del navegador.
+ * ⚠️ OBSOLETO — este módulo YA NO llama a Pl@ntNet.
  *
- * Mismo endpoint y misma forma de payload que el cliente (ver
- * js/identificar.js), para mantener resultados coherentes.
+ * Motivo: Pl@ntNet devuelve HTTP 403 "remote IP not allowed" cuando la
+ * petición llega desde los servidores de Google Apps Script (la clave
+ * está configurada para "Authorized domains" de navegador, no para IPs de
+ * servidor, y añadir las IPs de Apps Script no es viable: son compartidas
+ * y cambiantes). Sin introducir otro backend/proxy —decisión expresa del
+ * proyecto—, la única llamada a Pl@ntNet que puede funcionar es la que ya
+ * hace el navegador en identificar.html.
+ *
+ * Arquitectura actual (ver Endpoints.gs):
+ *   navegador → Pl@ntNet (igual que siempre, sin cambios)
+ *             → el navegador manda el resultado (especie + confianza +
+ *               resumen) junto con el resto del reporte
+ *             → Apps Script NO vuelve a identificar, solo comprueba ese
+ *               resultado contra el catálogo de invasoras y aplica el
+ *               umbral de Config!B1.
+ *
+ * Esto implica una limitación de seguridad real, documentada explícitamente
+ * en Endpoints.gs: el resultado de Pl@ntNet que llega aquí viene del
+ * cliente, así que en teoría alguien podría manipularlo antes de enviarlo.
+ * No se ha añadido ninguna verificación criptográfica para esto (añadiría
+ * la complejidad de backend que el proyecto quiere evitar); se acepta como
+ * limitación conocida porque el daño posible es acotado (como mucho, un
+ * reporte falso quedaría "Aprobado" en una hoja de gestión privada — nunca
+ * expone datos de nadie, y sigue siendo revisable/revertible a mano en
+ * Sheets en cualquier momento).
+ *
+ * Se conserva este archivo (en vez de borrarlo) por si en el futuro se
+ * decide reintroducir una llamada server-side con otra estrategia (por
+ * ejemplo, si Pl@ntNet ofrece algún día autenticación por servidor sin
+ * restricción de IP). No lo usa ninguna otra función del proyecto.
  */
 
-var PLANTNET_ENDPOINT = 'https://my-api.plantnet.org/v2/identify/all';
-
-/**
- * @param {Array<{base64:string, mime:string}>} fotos
- * @return {{
- *   mejorCientifico: string|null,
- *   mejorConfianza: number|null,   // 0-100
- *   resultadosTexto: string,       // resumen legible de los 3 primeros, para la columna J
- *   error: string|null
- * }}
- */
-function identificarConPlantNet_(fotos) {
-  if (!fotos || !fotos.length) {
-    return { mejorCientifico: null, mejorConfianza: null, resultadosTexto: '', error: 'Sin fotografías: no se puede identificar.' };
-  }
-
-  var url = PLANTNET_ENDPOINT
-    + '?api-key=' + encodeURIComponent(clavePlantNet_())
-    + '&lang=es&nb-results=3&include-related-images=false';
-
-  var imagenes = [];
-  var organos = [];
-  for (var i = 0; i < fotos.length; i++) {
-    var foto = fotos[i];
-    var bytes = Utilities.base64Decode(foto.base64);
-    var blob = Utilities.newBlob(bytes, foto.mime || 'image/jpeg', 'foto_' + (i + 1) + '.jpg');
-    imagenes.push(blob);
-    organos.push('auto');
-  }
-
-  // UrlFetchApp serializa un objeto de payload como multipart/form-data
-  // automáticamente; un valor array bajo la misma clave genera varias
-  // partes con ese mismo nombre (equivalente a los varios
-  // formData.append('images', file) del cliente).
-  var payload = { images: imagenes, organs: organos };
-
-  try {
-    var resp = UrlFetchApp.fetch(url, {
-      method: 'post',
-      payload: payload,
-      muteHttpExceptions: true,
-    });
-
-    var codigo = resp.getResponseCode();
-    if (codigo === 429) {
-      return { mejorCientifico: null, mejorConfianza: null, resultadosTexto: '', error: 'Límite diario de Pl@ntNet alcanzado (HTTP 429).' };
-    }
-    if (codigo !== 200) {
-      var cuerpo = resp.getContentText().slice(0, 300);
-      return { mejorCientifico: null, mejorConfianza: null, resultadosTexto: '', error: 'Pl@ntNet respondió HTTP ' + codigo + ': ' + cuerpo };
-    }
-
-    var data = JSON.parse(resp.getContentText());
-    var resultados = (data.results || []).slice(0, 3).map(function (r) {
-      return {
-        cientifico: r.species && r.species.scientificNameWithoutAuthor ? r.species.scientificNameWithoutAuthor : null,
-        score: typeof r.score === 'number' ? r.score : null,
-      };
-    }).filter(function (r) { return r.cientifico; });
-
-    if (!resultados.length) {
-      return { mejorCientifico: null, mejorConfianza: null, resultadosTexto: 'Pl@ntNet no devolvió ninguna especie.', error: null };
-    }
-
-    var mejor = resultados[0];
-    var resumen = resultados.map(function (r) {
-      var pct = r.score != null ? Math.round(r.score * 100) + '%' : '?%';
-      return r.cientifico + ' (' + pct + ')';
-    }).join(' · ');
-
-    return {
-      mejorCientifico: mejor.cientifico,
-      mejorConfianza: mejor.score != null ? Math.round(mejor.score * 100) : null,
-      resultadosTexto: resumen,
-      error: null,
-    };
-  } catch (err) {
-    return { mejorCientifico: null, mejorConfianza: null, resultadosTexto: '', error: 'Error de red llamando a Pl@ntNet: ' + err };
-  }
+function plantNetLlamadaServerSideDeshabilitada_() {
+  throw new Error(
+    'PlantNet.gs está deshabilitado: Pl@ntNet bloquea las IPs de Apps Script (HTTP 403). ' +
+    'La identificación se hace en el navegador (identificar.html) y viaja con el reporte; ' +
+    'ver Endpoints.gs.'
+  );
 }

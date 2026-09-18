@@ -9,6 +9,11 @@ export const CONFIG = {
   // activación necesario la primera vez.
   submitUrl: 'https://formsubmit.co/ajax/invasorasenramales@gmail.com',
   emailAsunto: '🌿 Nuevo reporte de especie invasora',
+  // URL del Web App de Google Apps Script (apps-script/Endpoints.gs),
+  // rellenar tras desplegarlo. Mientras esté vacía, enviarReporte() sigue
+  // mandando el email por FormSubmit exactamente igual que hasta ahora, y
+  // simplemente NO intenta la llamada a Apps Script (no rompe el envío).
+  reportesApiUrl: 'https://script.google.com/macros/s/AKfycbzjKvpBJDhBamzITWhSXLHDLyA_nIq1ySdk-SeFavES2vKSnGLtLePev168EgIbqUsa/exec',
   maxFotos: 3,
   // Lado máximo (px) al que se redimensionan las fotos antes de enviarlas.
   fotoMaxLado: 1600,

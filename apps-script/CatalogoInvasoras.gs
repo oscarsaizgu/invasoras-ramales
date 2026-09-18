@@ -70,14 +70,24 @@ function coincideNombreInvasora_(nombreBuscado, entry) {
  * Busca un nombre científico en el catálogo de invasoras: coincidencia
  * exacta, por sinónimo, o —como último recurso— por género si el
  * catálogo tiene una entrada "Genero spp." / "Genero sp.".
- * Devuelve la entrada encontrada, o null si la especie no está reconocida
- * como invasora.
+ *
+ * Devuelve { entry, tipo } donde tipo es 'exacta' (nombre exacto o
+ * sinónimo — misma fiabilidad que usa catalogo.js para "invasora") o
+ * 'genero' (coincidencia débil, solo por género), o null si la especie no
+ * está reconocida como invasora en absoluto.
+ *
+ * El "tipo" es lo que permite que Endpoints.gs nunca auto-apruebe una
+ * coincidencia solo por género (p.ej. Pl@ntNet dice "Conyza bonariensis" y
+ * el catálogo solo tiene "Conyza sp."): es informativo para el humano que
+ * revisa Sheets, pero no es una identificación firme.
  */
 function buscarEnCatalogoInvasoras_(cientifico, catalogo) {
   if (!cientifico) return null;
 
   for (var i = 0; i < catalogo.length; i++) {
-    if (coincideNombreInvasora_(cientifico, catalogo[i])) return catalogo[i];
+    if (coincideNombreInvasora_(cientifico, catalogo[i])) {
+      return { entry: catalogo[i], tipo: 'exacta' };
+    }
   }
 
   // Apps Script usa el runtime V8 (ES6+), igual que catalogo.js: se porta
@@ -86,7 +96,7 @@ function buscarEnCatalogoInvasoras_(cientifico, catalogo) {
   for (var j = 0; j < catalogo.length; j++) {
     var ec = normalizarTexto_(catalogo[j].cientifico);
     if ((ec.endsWith(' spp.') || ec.endsWith(' sp.')) && ec.split(' ')[0] === genero) {
-      return catalogo[j];
+      return { entry: catalogo[j], tipo: 'genero' };
     }
   }
 

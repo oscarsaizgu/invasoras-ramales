@@ -36,7 +36,18 @@ let ultimaFotoDataUrl = '';
 // "Conocer esta especie" abre siempre la misma ficha botánica, exista
 // o no ya una ficha propia para esa especie. "Mandar registro" solo se
 // ofrece cuando el estatus resuelto es realmente INVASORA.
-function crearTarjetaResultado(resultado, fotoDataUrl) {
+// Resumen legible de los resultados de Pl@ntNet ("Especie (85%) · Especie2
+// (40%)..."), en el mismo formato que iba a generar Apps Script cuando
+// llamaba a Pl@ntNet directamente. Ahora se genera aquí, una sola vez, y
+// viaja con el reporte hasta la hoja de cálculo (columna "Resultado
+// Pl@ntNet") sin que el backend tenga que volver a llamar a Pl@ntNet.
+function resumenResultadosPlantNet(resultados) {
+  return resultados
+    .map(r => `${r.scientificName} (${r.score != null ? Math.round(r.score * 100) + '%' : '?%'})`)
+    .join(' · ');
+}
+
+function crearTarjetaResultado(resultado, fotoDataUrl, resultados) {
   const registro = resolverEspecie({
     cientifico: resultado.scientificName,
     comunes: resultado.commonNames,
@@ -71,7 +82,11 @@ function crearTarjetaResultado(resultado, fotoDataUrl) {
   if (esInvasora) {
     div.querySelector('.identificar-btn-reportar').addEventListener('click', () => {
       cerrarIdentificar();
-      seleccionarEspecieParaReportar(resultado.scientificName);
+      seleccionarEspecieParaReportar(resultado.scientificName, {
+        scientific: resultado.scientificName,
+        confidence: porcentaje, // 0-100 o null, ya calculado arriba
+        resultsText: resumenResultadosPlantNet(resultados),
+      });
     });
   }
 
@@ -110,7 +125,7 @@ async function mostrarResultados(resultados, fotoDataUrl) {
   if (!resultados.length) {
     lista.innerHTML = '<p class="identificar-resultado__no-incluida">Pl@ntNet no ha devuelto ninguna especie para esta fotografía.</p>';
   } else {
-    resultados.forEach(r => lista.appendChild(crearTarjetaResultado(r, fotoDataUrl)));
+    resultados.forEach(r => lista.appendChild(crearTarjetaResultado(r, fotoDataUrl, resultados)));
   }
 
   document.getElementById('identificar-btn-mandar-duda').onclick = () => {
