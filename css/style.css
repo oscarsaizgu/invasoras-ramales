@@ -1068,11 +1068,13 @@ body.pagina-inicio .home {
   border-bottom: 1px solid var(--borde);
 }
 .content-highlight__leaf {
-  display: inline-flex; width: 30px; height: 30px;
-  color: var(--verde); opacity: 0.7;
-  margin-bottom: 0.7rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px;
+  opacity: 0.85;
+  margin: 0 auto 0.7rem;
 }
-.content-highlight__leaf svg { width: 100%; height: 100%; }
+.content-highlight__leaf svg,
+.content-highlight__leaf img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .content-highlight__text {
   font-family: var(--font-titulo);
   font-size: 1.25rem;
@@ -1083,14 +1085,17 @@ body.pagina-inicio .home {
   margin: 0;
 }
 
-/* Silueta de montañas — decoración de cierre de pantalla */
-.paisaje-montanas {
-  width: calc(100% + 2.4rem);
-  margin: 1.6rem -1.2rem -1.4rem;
-  height: 96px;
-  overflow: hidden;
+/* Crédito de autoría dentro del contenido — discreto a propósito, mismo
+   tono que el resto de texto secundario de la página, sin destacar. */
+.content-credito {
+  font-family: var(--font);
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin: 1.6rem 0 0;
 }
-.paisaje-montanas svg { width: 100%; height: 100%; display: block; }
 
 /* ================================================================
    CATÁLOGO DE ESPECIES INVASORAS (CEEEI · MITECO)

@@ -152,7 +152,7 @@ function init() {
 
   document.getElementById('btn-reportar-otro').addEventListener('click', () => {
     resetAll();
-    window.location.href = 'index.html';
+    window.location.href = 'reportar.html';
   });
 
   // Se usa goTo (sin registrar historial) en vez de goToStepAndEnter:

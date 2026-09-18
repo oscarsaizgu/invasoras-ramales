@@ -50,7 +50,7 @@ let fotoActual = 0;
 // genérico" tal y como se pidió.
 const FUENTE_PLAN_CANTABRIA = {
   label: 'Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)',
-  url: 'https://www.cantabria.es/documents/16835/6017188/Fichas_Sp_Objetivo_Flora_Rev01.pdf',
+  url: 'https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320',
 };
 const FUENTE_CEEEI = {
   label: 'Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO',
@@ -385,20 +385,18 @@ function abrirFicha(entry) {
   }
   rellenarParrafo('ficha-seccion-invasora', 'ficha-invasora', invasoraPartes.join(' ') || null);
 
-  // Fuentes — construidas a partir de entry.fuentes (datos botánicos) y
-  // entry.fuentesInvasion (estatus invasor, si aplica), nunca señalando
-  // si el origen es "externo" o propio.
+  // Fuentes — solo las científicas/oficiales (entry.fuentes y
+  // entry.fuentesInvasion: Plan de Cantabria, CEEEI/MITECO, Flora
+  // Ibérica...), nunca señalando si el origen es "externo" o propio. Las
+  // fuentes de cada fotografía NO se listan aquí: ya aparecen debajo de
+  // la propia foto (ver actualizarFoto()/credito más abajo), repetirlas
+  // en este listado era redundante.
   const fuentesUrls = new Set();
   const fuentes = [];
   [...(entry.fuentes || []), ...(entry.fuentesInvasion || [])].forEach(f => {
     if (!f || !f.url || fuentesUrls.has(f.url)) return;
     fuentesUrls.add(f.url);
     fuentes.push(`<li><a href="${f.url}" target="_blank" rel="noopener">${f.label}</a></li>`);
-  });
-  (entry.fotos || []).forEach(f => {
-    if (f.imageSourceUrl && f.imageSource) {
-      fuentes.push(`<li><a href="${f.imageSourceUrl}" target="_blank" rel="noopener">${f.imageSource}</a> — fotografía (${(f.imageAuthor || '').replace(/^\(c\)\s*/, '')})</li>`);
-    }
   });
   rellenarLista('ficha-seccion-fuentes', 'ficha-fuentes', fuentes);
 
