@@ -2,6 +2,7 @@ import { CONFIG, TAMANYOS } from './config.js';
 import { state, resetWizard, setNextEnabled } from './wizard.js';
 import { dataUrlToBlob, renderFotoSlots } from './fotos.js';
 import { resetUbicacion } from './mapa.js';
+import { trackEvent } from './consent.js';
 
 function dataUrlABase64(dataUrl) {
   return dataUrl.split(',')[1] || '';
@@ -199,6 +200,13 @@ export async function enviarReporte() {
     if (!resp.ok) throw new Error('Respuesta no válida del servidor');
 
     await enviarReporteAppsScript(especieComun);
+
+    // Reporte completado: solo metadatos no identificativos (nunca
+    // especie/nombre/email/observaciones/coordenadas/fotos).
+    trackEvent('reporte_completado', {
+      especie_conocida: !state.especieEsOtra,
+      con_fotos: state.fotos.length > 0,
+    });
 
     return true;
   } catch (err) {

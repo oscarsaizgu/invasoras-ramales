@@ -63,10 +63,14 @@
 
   <h2>2. Cookies que utiliza esta aplicación</h2>
   <p>
-    Esta aplicación <strong>no instala cookies de analítica, publicidad ni
-    seguimiento</strong>. No usamos Google Analytics ni ningún servicio de
-    publicidad. La aplicación funciona como una herramienta de reporte y no
-    necesita rastrear tu navegación para funcionar.
+    Esta aplicación no instala cookies de publicidad ni de seguimiento
+    publicitario. Sí utiliza, únicamente si das tu consentimiento explícito
+    a través del aviso que aparece en tu primera visita, cookies analíticas
+    de <strong>Google Analytics</strong> para conocer de forma agregada
+    cuántas personas usan la aplicación, qué páginas visitan, desde qué tipo
+    de dispositivo y cómo llegaron hasta aquí. Estas cookies no se activan
+    hasta que aceptas el aviso, y puedes rechazarlas o retirar tu
+    consentimiento cuando quieras (ver punto 5).
   </p>
   <p>
     El alojamiento (GitHub Pages), el envío del formulario por email
@@ -85,7 +89,9 @@
     en la memoria de la página (no en cookies ni en almacenamiento
     persistente del navegador). Si recargas la página antes de enviar el
     reporte, tendrás que empezar de nuevo. Nada se envía a ningún servidor
-    hasta que pulsas "Enviar reporte".
+    hasta que pulsas "Enviar reporte". Tu decisión sobre las cookies
+    analíticas sí se guarda en el almacenamiento local de tu navegador, para
+    no volver a preguntarte en cada visita.
   </p>
 
   <h2>4. Cómo desactivar las cookies</h2>
@@ -95,6 +101,13 @@
     estrictamente necesarias del proveedor de alojamiento podría afectar al
     correcto funcionamiento de la página.
   </p>
+
+  <h2>5. Cambiar tu decisión sobre las cookies analíticas</h2>
+  <p>
+    Puedes aceptar, rechazar o cambiar en cualquier momento tu consentimiento
+    para las cookies analíticas de Google Analytics pulsando este botón:
+  </p>
+  <button type="button" id="btn-preferencias-cookies" class="btn btn-secondary">Cambiar mi elección de cookies</button>
 </main>
 <footer class="app-footer">
   <img class="app-footer__logo" src="images/logo-rn-blanco.png" alt="Ramales Natural">
@@ -109,5 +122,9 @@
   <p class="app-footer__credit">Web desarrollada por Óscar Saiz Gutiérrez · @ramalesnatural</p>
 </footer>
 <script type="module" src="js/app.js"></script>
+<script type="module">
+  import { reabrirPreferencias } from './js/consent.js';
+  document.getElementById('btn-preferencias-cookies').addEventListener('click', reabrirPreferencias);
+</script>
 </body>
 </html>

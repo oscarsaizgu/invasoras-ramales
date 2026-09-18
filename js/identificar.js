@@ -1,6 +1,7 @@
 import { PLANTNET_API_KEY } from './identificar-config.js';
 import { resolverEspecie, abrirFichaDesdeIdentificacion, seleccionarEspecieParaReportar, ETIQUETA_NIVEL } from './catalogo.js';
 import { identificarEspecie, resumenResultadosPlantNet } from './plantnet.js';
+import { trackEvent } from './consent.js';
 
 // ================================================================
 // Identificación de plantas con Pl@ntNet — llamada directa desde el
@@ -249,6 +250,9 @@ async function identificarFotos() {
   }
 
   mostrarEstado('cargando');
+  // "Uso" real de la identificación: se cuenta al lanzar el análisis, no
+  // solo al elegir fotos. Sin datos personales ni la fotografía en sí.
+  trackEvent('identificar_uso', { num_fotos: fotosSeleccionadas.length });
 
   try {
     ultimaFotoDataUrl = await leerComoDataUrl(fotosSeleccionadas[0]);

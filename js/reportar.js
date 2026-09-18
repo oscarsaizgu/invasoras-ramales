@@ -11,6 +11,7 @@ import {
   renderTamanyos, initObservacionesStep, initContactoStep,
   renderRevision, enviarReporte, resetAll,
 } from './formulario.js';
+import { trackEvent } from './consent.js';
 
 function isStepValid(step) {
   switch (step) {
@@ -139,6 +140,9 @@ function init() {
 
   preseleccionarEspecieDesdeUrl();
   leerIdentificacionPlantNet();
+  // Inicio de un reporte: esta página es en sí misma el asistente, así que
+  // cargarla ya cuenta como "empezar" uno. Sin datos personales.
+  trackEvent('reporte_inicio');
 
   document.getElementById('header-back').addEventListener('click', () => {
     goBack();

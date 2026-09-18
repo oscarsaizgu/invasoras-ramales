@@ -1,8 +1,10 @@
-// Navegación compartida por TODAS las páginas: menú de hamburguesa.
-// Cada página es un HTML independiente con enlaces <a href="..."> normales
-// (no hay router ni SPA), así que este script ya no necesita saber nada
-// del wizard de reporte, del catálogo ni de la identificación: solo abre
-// y cierra el panel del menú.
+// Navegación compartida por TODAS las páginas: menú de hamburguesa y aviso
+// de cookies/consentimiento de analítica. Cada página es un HTML
+// independiente con enlaces <a href="..."> normales (no hay router ni
+// SPA), así que este script ya no necesita saber nada del wizard de
+// reporte, del catálogo ni de la identificación: solo abre y cierra el
+// panel del menú, y arranca el consentimiento (ver js/consent.js).
+import { initConsentimiento } from './consent.js';
 
 let menuHideTimer = null;
 
@@ -48,3 +50,4 @@ function initMenu() {
 }
 
 document.addEventListener('DOMContentLoaded', initMenu);
+document.addEventListener('DOMContentLoaded', initConsentimiento);
