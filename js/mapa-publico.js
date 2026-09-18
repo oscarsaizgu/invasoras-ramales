@@ -23,13 +23,17 @@ function adaptarFeatureQGIS(feature) {
     nombreComun: props.NOMBRE_COM ? props.NOMBRE_COM.trim().toLowerCase() : null,
     lat,
     lon,
+    foto: null, // el histórico de QGIS nunca tiene fotografía
     fuente: 'historico',
   };
 }
 
+// Histórico QGIS: se usa el GeoJSON PÚBLICO minimizado (solo ESPECIE,
+// NOMBRE_COM y coordenadas — sin ID/FECHA_HORA/ALTITUD/OBSERVACIO/CODIGO ni
+// ningún dato personal), nunca el original completo. Ver data/README.md.
 async function cargarHistoricoQGIS() {
   try {
-    const resp = await fetch('data/observaciones-qgis.geojson', { cache: 'no-store' });
+    const resp = await fetch('data/observaciones-qgis-publico.geojson', { cache: 'no-store' });
     if (!resp.ok) return [];
     const data = await resp.json();
     const features = Array.isArray(data.features) ? data.features : [];
@@ -39,26 +43,28 @@ async function cargarHistoricoQGIS() {
   }
 }
 
-// data/reportes-publicos.json está vacío a propósito (no hay backend
-// todavía): esta función siempre devolverá [] hasta que exista uno. El
-// formato de cada reporte aceptado documentado en data/README.md todavía no
-// incluye el nombre científico, así que de momento solo se aceptan entradas
-// que ya lo traigan explícito — no se inventa a partir del nombre común.
+// Los reportes ciudadanos se leen del propio backend (Apps Script → doGet),
+// que ya filtra por Estado = Aprobado y ya expone SOLO campos públicos:
+// { id, nombreComun, cientifico, lat, lon, foto }. Nunca nombre/email/
+// observaciones — esos ni siquiera los lee leerReportesAprobados_() en
+// Apps Script, así que no pueden llegar aquí aunque quisiéramos.
 function adaptarReporteCiudadano(reporte) {
   if (!reporte || typeof reporte.lat !== 'number' || typeof reporte.lon !== 'number') return null;
-  if (!reporte.especieCientifica) return null;
+  if (!reporte.cientifico) return null;
   return {
-    especie: reporte.especieCientifica,
-    nombreComun: reporte.especie ? String(reporte.especie).trim().toLowerCase() : null,
+    especie: reporte.cientifico,
+    nombreComun: reporte.nombreComun ? String(reporte.nombreComun).trim().toLowerCase() : null,
     lat: reporte.lat,
     lon: reporte.lon,
+    foto: reporte.foto || null,
     fuente: 'reportes',
   };
 }
 
 async function cargarReportesCiudadanos() {
+  if (!CONFIG.reportesApiUrl) return [];
   try {
-    const resp = await fetch('data/reportes-publicos.json', { cache: 'no-store' });
+    const resp = await fetch(CONFIG.reportesApiUrl, { cache: 'no-store' });
     if (!resp.ok) return [];
     const data = await resp.json();
     const lista = Array.isArray(data) ? data : [];
@@ -68,26 +74,27 @@ async function cargarReportesCiudadanos() {
   }
 }
 
-// Categoría (herbácea/arbusto/árbol/acuática) para los chips de filtro: se
-// reutiliza el campo "categoria" ya existente en la guía botánica, no se
-// inventa una clasificación nueva. Si una especie no está todavía
-// documentada allí, simplemente no aparece al filtrar por tipo (sigue
-// visible en "Todas").
-async function cargarCategoriasPorEspecie() {
+// Categoría (herbácea/arbusto/árbol/acuática) para los chips de filtro, Y
+// qué especies tienen ficha real en la guía botánica (para no ofrecer un
+// enlace "Ver ficha" que no lleve a ningún sitio). Ambas cosas salen de la
+// misma fuente (cantabria-flora.json), así que se calculan en una sola
+// lectura — no se inventa ninguna clasificación nueva.
+async function cargarDatosDeGuia() {
   try {
     const resp = await fetch('data/cantabria-flora.json', { cache: 'no-store' });
-    if (!resp.ok) return new Map();
+    if (!resp.ok) return { categorias: new Map(), especiesConFicha: new Set() };
     const data = await resp.json();
     const lista = Array.isArray(data) ? data : Object.values(data).flat();
-    const mapa = new Map();
+    const categorias = new Map();
+    const especiesConFicha = new Set();
     lista.forEach(entry => {
-      if (entry && entry.cientifico && entry.categoria) {
-        mapa.set(entry.cientifico, entry.categoria);
-      }
+      if (!entry || !entry.cientifico) return;
+      especiesConFicha.add(entry.cientifico);
+      if (entry.categoria) categorias.set(entry.cientifico, entry.categoria);
     });
-    return mapa;
+    return { categorias, especiesConFicha };
   } catch (err) {
-    return new Map();
+    return { categorias: new Map(), especiesConFicha: new Set() };
   }
 }
 
@@ -117,6 +124,7 @@ function construirPaleta(especies) {
 let map = null;
 let coloresPorEspecie = new Map();
 let categoriasPorEspecie = new Map();
+let especiesConFicha = new Set();
 let nombresComunesPorEspecie = new Map();
 // fuente -> especie -> L.markerClusterGroup, para poder mostrar/ocultar el
 // histórico entero sin tocar la capa de reportes ciudadanos.
@@ -169,13 +177,15 @@ function iconoClusterHtml(color) {
   };
 }
 
-function popupHtml(especie, nombreComun) {
+function popupHtml(especie, nombreComun, foto) {
+  const tieneFicha = especiesConFicha.has(especie);
   const enlaceFicha = `guia-botanica.html?especie=${encodeURIComponent(especie)}`;
   return `
     <div class="map-popup">
+      ${foto ? `<img class="map-popup__foto" src="${foto}" alt="">` : ''}
       ${nombreComun ? `<strong class="map-popup__comun">${nombreComun}</strong>` : ''}
       <em class="map-popup__cientifico">${especie}</em>
-      <a class="map-popup__ficha" href="${enlaceFicha}">Ver ficha en la guía →</a>
+      ${tieneFicha ? `<a class="map-popup__ficha" href="${enlaceFicha}">Ver ficha en la guía →</a>` : ''}
     </div>
   `;
 }
@@ -203,7 +213,9 @@ function construirGruposDeFuente(observaciones, fuente) {
     const nombreComun = nombresComunesPorEspecie.get(especie) || '';
     propias.forEach(o => {
       const marker = L.marker([o.lat, o.lon], { icon: iconoPuntoHtml(color) });
-      marker.bindPopup(popupHtml(especie, nombreComun));
+      // La foto es por observación (cada reporte ciudadano trae la suya);
+      // el histórico de QGIS no tiene, o.foto es null y el popup la omite.
+      marker.bindPopup(popupHtml(especie, nombreComun, o.foto));
       grupo.addLayer(marker);
     });
 
@@ -295,12 +307,13 @@ function initToggleHistorico() {
 
 async function init() {
   initMap();
-  const [reportes, historico, categorias] = await Promise.all([
+  const [reportes, historico, datosGuia] = await Promise.all([
     cargarReportesCiudadanos(),
     cargarHistoricoQGIS(),
-    cargarCategoriasPorEspecie(),
+    cargarDatosDeGuia(),
   ]);
-  categoriasPorEspecie = categorias;
+  categoriasPorEspecie = datosGuia.categorias;
+  especiesConFicha = datosGuia.especiesConFicha;
 
   const todas = [...reportes, ...historico];
   const especies = [...new Set(todas.map(o => o.especie))].sort((a, b) => a.localeCompare(b, 'es'));

@@ -49,14 +49,50 @@ OBSERVACIO, CODIGO, geom FROM \"Capa1\" UNION ALL SELECT ... FROM \"Capa2\"
 ..."` sobre las 43 capas de especies (excluyendo `PostesLuz`), exportando a
 `-f GeoJSON`.
 
-## Reportes enviados desde la app (`reportes-publicos.json`)
+**IMPORTANTE — este archivo NO lo usa el mapa público.** Contiene campos que
+no deben ser públicos sin más (`FECHA_HORA` exacta, `CODIGO`, y sobre todo
+`OBSERVACIO`, que en varios registros incluye literalmente el nombre de pila
+de la persona que hizo el trabajo de campo, p. ej. `"BEATRIZ"` /
+`"REGISTROS BEATRIZ"`). Al estar en un repositorio de GitHub público, este
+archivo es descargable por cualquiera igualmente (ocultarlo en la interfaz
+del mapa no lo protege) — se mantiene aquí como fuente de trabajo/histórico
+del proyecto, no como dato a publicar tal cual. El mapa usa en su lugar
+`observaciones-qgis-publico.geojson` (ver abajo).
 
-Todavía **no está conectado** al mapa (fase 2, pendiente). Está vacío
-a propósito: todavía no existe una base de datos real conectada, y el mapa
-no debe mostrar puntos inventados.
+## Histórico QGIS — versión PÚBLICA (`observaciones-qgis-publico.geojson`)
 
-Cuando exista un backend, este archivo se sustituye por una llamada a la
-API real. Formato esperado, un array de:
+Este es el archivo que carga `js/mapa-publico.js` para el histórico. Se
+genera a partir del mismo `EEI_Ramales_2026.gpkg`, con la misma consulta
+`UNION ALL` de las 43 capas de especies, pero seleccionando únicamente
+`ESPECIE, NOMBRE_COM, geom` — sin `ID`, `FECHA_HORA`, `ALTITUD`,
+`OBSERVACIO` ni `CODIGO`. Ningún dato personal, ninguna fecha exacta,
+ningún identificador de registro individual.
+
+```
+-dialect sqlite -sql "SELECT ESPECIE, NOMBRE_COM, geom FROM \"Capa1\"
+UNION ALL SELECT ESPECIE, NOMBRE_COM, geom FROM \"Capa2\" ..."
+```
+
+Mismas 4484 observaciones (26 sin geometría, igual que en el archivo
+completo) — la minimización es de campos, no de registros. Si se regenera
+`observaciones-qgis.geojson` tras una corrección en QGIS, hay que regenerar
+también este archivo con la misma consulta reducida.
+
+## Reportes ciudadanos aprobados (vía Apps Script)
+
+El mapa ya no lee `reportes-publicos.json`: `cargarReportesCiudadanos()` en
+`js/mapa-publico.js` hace `fetch(CONFIG.reportesApiUrl)` (el mismo Web App
+de Apps Script que recibe los reportes nuevos, ver `apps-script/`), que
+responde solo con las filas `Estado = 🟢 Aprobado` y solo los campos
+públicos: `id, nombreComun, cientifico, lat, lon, foto`. Los datos privados
+(nombre, email, observaciones, descripción del lugar) ni siquiera los lee
+`leerReportesAprobados_()` en Apps Script — no es que se filtren después.
+
+## `reportes-publicos.json` (histórico del formato, sin uso actual)
+
+Ya no lo usa el mapa (ver arriba). Se mantiene vacío por si hace falta como
+referencia del formato original o como *fallback* manual en el futuro.
+Formato que tenía, un array de:
 
 ```json
 {

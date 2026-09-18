@@ -1865,6 +1865,7 @@ body.pagina-inicio .home {
 .map-vacio[hidden] { display: none; }
 
 .map-popup { font-family: var(--font); line-height: 1.5; min-width: 140px; }
+.map-popup__foto { display: block; width: 100%; max-width: 200px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 0.4rem; }
 .map-popup__comun { display: block; font-size: 0.95rem; margin-bottom: 0.1rem; }
 .map-popup__cientifico { display: block; font-style: italic; opacity: 0.9; font-size: 0.85rem; margin-bottom: 0.4rem; }
 .map-popup__ficha { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--crema); text-decoration: underline; }
