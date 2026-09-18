@@ -45,7 +45,12 @@ function crearTarjetaResultado(resultado, fotoDataUrl, resultados) {
   });
   const porcentaje = resultado.score != null ? Math.round(resultado.score * 100) : null;
   const nombreMostrado = (registro.comunes && registro.comunes[0]) || resultado.scientificName;
-  const esInvasora = registro.nivelInvasion === 'invasora';
+  // Igual que en la ficha (catalogo.js): solo se ofrece "Mandar registro"
+  // si además de invasora, la especie está en nuestra guía (enGuia). Si
+  // Pl@ntNet identifica una especie que el catálogo independiente marca
+  // como invasora pero que todavía no tiene ficha propia, no se invita a
+  // reportarla desde aquí.
+  const esInvasora = registro.nivelInvasion === 'invasora' && registro.enGuia;
   const etiquetaNivel = ETIQUETA_NIVEL[registro.nivelInvasion];
 
   const div = document.createElement('div');

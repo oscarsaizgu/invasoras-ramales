@@ -400,21 +400,41 @@ function abrirFicha(entry) {
   });
   rellenarLista('ficha-seccion-fuentes', 'ficha-fuentes', fuentes);
 
-  // Botón ficha oficial (solo si existe una, del catálogo nacional)
+  // Botón ficha oficial / información oficial externa.
+  // - Si tenemos ficha propia con URL oficial (del catálogo nacional): la
+  //   usamos, como siempre.
+  // - Si la especie NO está en nuestra guía (entry.enGuia === false, p.ej.
+  //   una identificación de Pl@ntNet de una especie que aún no tiene ficha
+  //   propia): en vez de dejar el botón roto (apuntando a "#"), avisamos y
+  //   enlazamos a una fuente taxonómica de referencia (Plants of the World
+  //   Online, Kew) filtrada por el nombre científico exacto — nunca a su
+  //   portada. No es una ficha inventada: es su propio buscador oficial.
+  // - Si está en la guía pero simplemente no tiene fichaNacionalUrl: se
+  //   mantiene oculto, igual que antes.
   const oficialBtn = document.getElementById('ficha-btn-oficial');
+  const avisoNoGuia = document.getElementById('ficha-no-guia-aviso');
   if (entry.fichaNacionalUrl) {
+    oficialBtn.textContent = 'Consultar ficha oficial';
     oficialBtn.href = entry.fichaNacionalUrl;
     oficialBtn.hidden = false;
+    if (avisoNoGuia) avisoNoGuia.hidden = true;
+  } else if (entry.enGuia === false) {
+    oficialBtn.textContent = 'Consultar información oficial →';
+    oficialBtn.href = 'https://powo.science.kew.org/results?q=' + encodeURIComponent(entry.cientifico);
+    oficialBtn.hidden = false;
+    if (avisoNoGuia) avisoNoGuia.hidden = false;
   } else {
     oficialBtn.hidden = true;
+    if (avisoNoGuia) avisoNoGuia.hidden = true;
   }
 
   // Solo se ofrece generar un registro cuando el estatus resuelto de
-  // forma independiente es realmente "invasora" — nunca por estar
-  // simplemente en la guía botánica, ni para autóctonas ni para
-  // exóticas no invasoras.
+  // forma independiente es realmente "invasora" Y, además, la especie
+  // está en nuestra guía (entry.enGuia) — nunca solo por estar en el
+  // catálogo independiente de invasoras si todavía no tiene ficha propia,
+  // ni por estar simplemente en la guía sin ser invasora.
   const reportarBtn = document.getElementById('ficha-btn-reportar');
-  if (nivel === 'invasora') {
+  if (nivel === 'invasora' && entry.enGuia) {
     reportarBtn.hidden = false;
     reportarBtn.onclick = () => reportarEspecie(entry.cientifico);
   } else {
@@ -620,7 +640,7 @@ export function resolverEspecie({ cientifico, comunes, fotoDataUrl }) {
   const { nivel, fuentesInvasion, fuenteEstatus } = resolverNivelInvasion(cientifico, guia);
 
   if (guia) {
-    return { ...guia, nivelInvasion: nivel, fuentesInvasion };
+    return { ...guia, nivelInvasion: nivel, fuentesInvasion, enGuia: true };
   }
 
   return {
@@ -631,6 +651,7 @@ export function resolverEspecie({ cientifico, comunes, fotoDataUrl }) {
     fuentes: fuenteEstatus ? [fuenteEstatus] : [],
     nivelInvasion: nivel,
     fuentesInvasion,
+    enGuia: false,
   };
 }
 
@@ -661,7 +682,7 @@ export async function initCatalogo() {
   // reescriben los datos: ESPECIES sigue completo para identificar.js.
   ESPECIES_GUIA = ESPECIES
     .filter(e => e.estatus === 'invasora')
-    .map(e => ({ ...e, nivelInvasion: 'invasora' }));
+    .map(e => ({ ...e, nivelInvasion: 'invasora', enGuia: true }));
 
   renderCatalogo();
   abrirFichaDesdeUrlSiCorresponde();

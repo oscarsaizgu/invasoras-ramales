@@ -5,7 +5,8 @@
       "name": "invasoras-static",
       "runtimeExecutable": "powershell",
       "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ".dev/server.ps1"],
-      "port": 8123
+      "port": 8123,
+      "autoPort": true
     }
   ]
 }

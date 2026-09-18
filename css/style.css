@@ -1424,6 +1424,21 @@ body.pagina-inicio .home {
   margin-top: 1.4rem;
 }
 .ficha-acciones .btn { width: 100%; text-align: center; text-decoration: none; }
+/* .btn fija display:inline-block con la misma especificidad que el
+   [hidden] por defecto del navegador; al ser una regla de autor le gana
+   en la cascada y el botón se queda visible aunque JS ponga .hidden=true.
+   Se refuerza aquí explícitamente para estos dos botones concretos. */
+#ficha-btn-oficial[hidden],
+#ficha-btn-reportar[hidden] { display: none; }
+
+.ficha-no-guia-aviso {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+}
+.ficha-no-guia-aviso[hidden] { display: none; }
 
 /* ── Zoom de fotografía ── */
 .zoom-overlay {
