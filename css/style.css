@@ -1436,8 +1436,9 @@ body.pagina-inicio .home {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-align: center;
-  margin: 0;
 }
+.ficha-no-guia-aviso p { margin: 0 0 0.3rem; }
+.ficha-no-guia-aviso p:last-child { margin-bottom: 0; }
 .ficha-no-guia-aviso[hidden] { display: none; }
 
 /* ── Zoom de fotografía ── */

@@ -400,33 +400,20 @@ function abrirFicha(entry) {
   });
   rellenarLista('ficha-seccion-fuentes', 'ficha-fuentes', fuentes);
 
-  // Botón ficha oficial / información oficial externa.
-  // - Si tenemos ficha propia con URL oficial (del catálogo nacional): la
-  //   usamos, como siempre.
-  // - Si la especie NO está en nuestra guía (entry.enGuia === false, p.ej.
-  //   una identificación de Pl@ntNet de una especie que aún no tiene ficha
-  //   propia): en vez de dejar el botón roto (apuntando a "#"), avisamos y
-  //   enlazamos a una fuente taxonómica de referencia (Plants of the World
-  //   Online, Kew) filtrada por el nombre científico exacto — nunca a su
-  //   portada. No es una ficha inventada: es su propio buscador oficial.
-  // - Si está en la guía pero simplemente no tiene fichaNacionalUrl: se
-  //   mantiene oculto, igual que antes.
+  // Botón ficha oficial: solo si tenemos ficha propia con URL oficial (del
+  // catálogo nacional). Si la especie NO está en nuestra guía (p.ej. una
+  // identificación de Pl@ntNet que aún no tiene ficha propia), no se enlaza
+  // a ninguna web externa: toda la experiencia se queda dentro del sitio,
+  // mostrando en su lugar el aviso "todavía no está en nuestro catálogo".
   const oficialBtn = document.getElementById('ficha-btn-oficial');
   const avisoNoGuia = document.getElementById('ficha-no-guia-aviso');
   if (entry.fichaNacionalUrl) {
-    oficialBtn.textContent = 'Consultar ficha oficial';
     oficialBtn.href = entry.fichaNacionalUrl;
     oficialBtn.hidden = false;
-    if (avisoNoGuia) avisoNoGuia.hidden = true;
-  } else if (entry.enGuia === false) {
-    oficialBtn.textContent = 'Consultar información oficial →';
-    oficialBtn.href = 'https://powo.science.kew.org/results?q=' + encodeURIComponent(entry.cientifico);
-    oficialBtn.hidden = false;
-    if (avisoNoGuia) avisoNoGuia.hidden = false;
   } else {
     oficialBtn.hidden = true;
-    if (avisoNoGuia) avisoNoGuia.hidden = true;
   }
+  if (avisoNoGuia) avisoNoGuia.hidden = entry.enGuia !== false;
 
   // Solo se ofrece generar un registro cuando el estatus resuelto de
   // forma independiente es realmente "invasora" Y, además, la especie

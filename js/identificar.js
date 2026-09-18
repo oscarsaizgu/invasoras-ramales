@@ -66,8 +66,11 @@ function crearTarjetaResultado(resultado, fotoDataUrl, resultados) {
       ${esInvasora ? '<button type="button" class="btn btn-primary identificar-btn-reportar">📍 Mandar registro</button>' : ''}
     </div>`;
 
+  // "Conocer esta especie" abre la ficha ENCIMA de esta misma página (no
+  // cierra ni reinicia identificar-overlay): así, al cerrar la ficha, los
+  // resultados de Pl@ntNet siguen exactamente donde estaban y se puede
+  // abrir otra especie de la lista sin repetir la identificación.
   div.querySelector('.identificar-btn-conocer').addEventListener('click', () => {
-    cerrarIdentificar();
     abrirFichaDesdeIdentificacion({
       cientifico: resultado.scientificName,
       comunes: resultado.commonNames,
