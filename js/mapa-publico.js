@@ -43,6 +43,19 @@ async function cargarHistoricoQGIS() {
   }
 }
 
+// La URL que guarda Apps Script (drive.google.com/uc?export=view&id=...)
+// funciona al abrirla directamente, pero falla al usarla como <img src>
+// embebido (naturalWidth/Height = 0 — comprobado). El endpoint de
+// miniaturas de Drive sí funciona embebido, sin tocar Apps Script ni lo
+// que hay guardado en Sheets: solo se reescribe la URL en el momento de
+// pintar el mapa, a partir del mismo id de archivo.
+function urlFotoEmbebible(url) {
+  if (!url) return null;
+  const m = String(url).match(/[?&]id=([^&]+)/);
+  if (!m) return url; // formato inesperado: se deja tal cual en vez de romperlo
+  return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000`;
+}
+
 // Los reportes ciudadanos se leen del propio backend (Apps Script → doGet),
 // que ya filtra por Estado = Aprobado y ya expone SOLO campos públicos:
 // { id, nombreComun, cientifico, lat, lon, foto }. Nunca nombre/email/
@@ -56,7 +69,7 @@ function adaptarReporteCiudadano(reporte) {
     nombreComun: reporte.nombreComun ? String(reporte.nombreComun).trim().toLowerCase() : null,
     lat: reporte.lat,
     lon: reporte.lon,
-    foto: reporte.foto || null,
+    foto: urlFotoEmbebible(reporte.foto),
     fuente: 'reportes',
   };
 }
@@ -106,15 +119,19 @@ async function cargarDatosDeGuia() {
 
 const HUES_NATURALES = [96, 150, 40, 25, 60, 200, 350, 120, 15, 70, 330, 170];
 
-function construirPaleta(especies) {
-  const paleta = new Map();
-  especies.forEach((especie, i) => {
+// Asigna color solo a las especies que todavía no lo tienen (el histórico
+// se colorea más tarde, al cargarse de forma diferida, sin recolorear ni
+// mover el color ya asignado a una especie de reportes ciudadanos).
+function completarPaleta(paleta, especiesNuevas) {
+  let i = paleta.size;
+  especiesNuevas.forEach(especie => {
+    if (paleta.has(especie)) return;
     const hue = HUES_NATURALES[i % HUES_NATURALES.length];
     const vuelta = Math.floor(i / HUES_NATURALES.length);
     const luz = 38 + (vuelta % 3) * 10; // 38%, 48%, 58% para variar repeticiones de matiz
     paleta.set(especie, `hsl(${hue}, 42%, ${luz}%)`);
+    i++;
   });
-  return paleta;
 }
 
 // ---------------------------------------------------------------------------
@@ -132,6 +149,8 @@ let gruposPorFuente = { reportes: new Map(), historico: new Map() };
 let activeCategoria = '';
 let activeTexto = '';
 let historicoVisible = false;
+let historicoPromesaCarga = null; // evita descargar el GeoJSON más de una vez
+let reportesCargados = []; // en caché para recalcular el nombre común combinado al cargar el histórico
 
 function initMap() {
   map = L.map('public-map').setView(CONFIG.mapaCenter, CONFIG.mapaZoom);
@@ -293,39 +312,71 @@ function initChips() {
   });
 }
 
+// Carga diferida: el histórico (miles de puntos) NO se descarga al entrar
+// en el mapa, solo la primera vez que se pulsa "Mostrar datos históricos".
+// A partir de ahí queda en memoria (gruposPorFuente.historico ya
+// construido) — ocultar/mostrar de nuevo solo añade/quita del mapa los
+// grupos ya creados, sin volver a pedir el archivo.
+async function cargarYConstruirHistoricoSiHaceFalta() {
+  if (historicoPromesaCarga) return historicoPromesaCarga; // ya en curso o ya cargado
+
+  historicoPromesaCarga = (async () => {
+    const historico = await cargarHistoricoQGIS();
+
+    const especiesHistorico = [...new Set(historico.map(o => o.especie))].sort((a, b) => a.localeCompare(b, 'es'));
+    completarPaleta(coloresPorEspecie, especiesHistorico);
+
+    // El nombre común combina reportes + histórico para las especies que
+    // aparecen en ambos (mismo criterio que antes, solo que ahora en dos
+    // fases porque el histórico llega más tarde).
+    especiesHistorico.forEach(especie => {
+      const propias = [...reportesCargados, ...historico].filter(o => o.especie === especie);
+      nombresComunesPorEspecie.set(especie, nombreComunCanonico(propias));
+    });
+
+    construirGruposDeFuente(historico, 'historico');
+  })();
+
+  return historicoPromesaCarga;
+}
+
 function initToggleHistorico() {
   const boton = document.getElementById('map-toggle-historico');
   if (!boton) return;
-  boton.addEventListener('click', () => {
+  boton.addEventListener('click', async () => {
     historicoVisible = !historicoVisible;
     boton.textContent = historicoVisible ? '− Ocultar datos históricos' : '+ Mostrar datos históricos';
     boton.classList.toggle('is-active', historicoVisible);
     boton.setAttribute('aria-pressed', String(historicoVisible));
+
+    if (historicoVisible) {
+      boton.disabled = true;
+      await cargarYConstruirHistoricoSiHaceFalta();
+      boton.disabled = false;
+    }
     aplicarFiltro();
   });
 }
 
 async function init() {
   initMap();
-  const [reportes, historico, datosGuia] = await Promise.all([
+  const [reportes, datosGuia] = await Promise.all([
     cargarReportesCiudadanos(),
-    cargarHistoricoQGIS(),
     cargarDatosDeGuia(),
   ]);
   categoriasPorEspecie = datosGuia.categorias;
   especiesConFicha = datosGuia.especiesConFicha;
+  reportesCargados = reportes;
 
-  const todas = [...reportes, ...historico];
-  const especies = [...new Set(todas.map(o => o.especie))].sort((a, b) => a.localeCompare(b, 'es'));
-  coloresPorEspecie = construirPaleta(especies);
+  const especies = [...new Set(reportes.map(o => o.especie))].sort((a, b) => a.localeCompare(b, 'es'));
+  completarPaleta(coloresPorEspecie, especies);
 
   especies.forEach(especie => {
-    const propias = todas.filter(o => o.especie === especie);
+    const propias = reportes.filter(o => o.especie === especie);
     nombresComunesPorEspecie.set(especie, nombreComunCanonico(propias));
   });
 
   construirGruposDeFuente(reportes, 'reportes');
-  construirGruposDeFuente(historico, 'historico');
 
   initBuscador();
   initChips();

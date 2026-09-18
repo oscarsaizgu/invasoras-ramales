@@ -666,4 +666,17 @@ export async function initCatalogo() {
     .map(e => ({ ...e, nivelInvasion: 'invasora' }));
 
   renderCatalogo();
+  abrirFichaDesdeUrlSiCorresponde();
+}
+
+// Si se llega con guia-botanica.html?especie=Nombre+cientifico (desde el
+// popup del mapa público, o desde reportar.js del mismo modo), abre
+// directamente la ficha de esa especie en vez de dejar que el usuario
+// tenga que buscarla a mano. Reutiliza el mismo punto de entrada que ya
+// usa identificar.js — no se inventa un mecanismo nuevo.
+function abrirFichaDesdeUrlSiCorresponde() {
+  const params = new URLSearchParams(window.location.search);
+  const cientifico = params.get('especie');
+  if (!cientifico) return;
+  abrirFichaDesdeIdentificacion({ cientifico });
 }

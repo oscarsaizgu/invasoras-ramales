@@ -1833,12 +1833,19 @@ body.pagina-inicio .home {
 
 .map-card {
   position: relative;
+  z-index: 1; /* aísla el stacking context de Leaflet (controles/popups
+    llegan a z-index 1000) para que nunca compita con .app-header (z-index
+    40) al hacer scroll — sin esto, el mapa podía pintarse por encima. */
   border-radius: var(--radio-grande);
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid var(--borde);
   margin-bottom: 1rem;
 }
+/* Atribución de Leaflet/OSM: se oculta visualmente solo en el mapa
+   público (no afecta al mapa del selector de ubicación de reportar.html,
+   que sigue mostrándola igual). No se toca la fuente de los tiles. */
+.public-map-page .leaflet-control-attribution { display: none; }
 .map-card #public-map { height: clamp(360px, 62vh, 560px); }
 
 /* Mensaje "esperando observaciones" — tarjeta flotante que deja ver el
