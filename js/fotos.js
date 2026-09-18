@@ -80,6 +80,52 @@ function removeFoto(index) {
 // hace falta tocar el envío del reporte para que esto llegue a Sheets.
 let identificacionEnCurso = 0;
 
+// Repinta el mensaje de Pl@ntNet a partir del estado actual, SIN volver a
+// llamar a la API. Se usa tanto justo después de identificar como al
+// reentrar en el paso de foto (p.ej. si el usuario vuelve atrás y cambia
+// la especie elegida a/desde "Otra / No sé" con una foto ya analizada):
+// así el mensaje siempre coincide con la especie actualmente seleccionada.
+export function renderMensajePlantNet() {
+  const el = document.getElementById('foto-plantnet-status');
+  if (!el) return;
+
+  if (!state.fotos.length) {
+    el.textContent = '';
+    el.hidden = true;
+    el.className = 'loc-status';
+    return;
+  }
+
+  if (!state.plantnetScientific) {
+    // O bien no hay identificación (falló/no se ha llamado todavía), o
+    // acabamos de vaciar el mensaje por error — actualizarIdentificacionPlantNet
+    // ya se encarga de mostrar el aviso de "no hemos podido identificar" en
+    // su propio flujo; aquí simplemente no hay nada que mostrar todavía.
+    return;
+  }
+
+  el.hidden = false;
+
+  if (state.especieEsOtra) {
+    // Sugerencia informativa: no cambia la selección del usuario, no cierra
+    // ni resetea el formulario. El enlace abre la ficha en una pestaña
+    // nueva a propósito, para que el formulario en curso nunca se pierda.
+    const enlace = `guia-botanica.html?especie=${encodeURIComponent(state.plantnetScientific)}`;
+    const pct = state.plantnetConfidence != null ? `${state.plantnetConfidence}% de coincidencia` : '';
+    el.innerHTML = `
+      🔍 Creemos que podría ser:<br>
+      <strong>${state.plantnetScientific}</strong><br>
+      ${state.plantnetNombreComun ? `${state.plantnetNombreComun}${pct ? ' · ' + pct : ''}<br>` : (pct ? `${pct}<br>` : '')}
+      <a href="${enlace}" target="_blank" rel="noopener">Ver más información →</a><br>
+      <span style="opacity:0.7;font-size:0.78rem;">Esto es solo una sugerencia informativa.</span>
+    `;
+    el.className = 'loc-status ok';
+  } else {
+    el.textContent = `🔍 Podría ser: ${state.plantnetScientific}${state.plantnetConfidence != null ? ' (' + state.plantnetConfidence + '% de coincidencia)' : ''}`;
+    el.className = 'loc-status ok';
+  }
+}
+
 async function actualizarIdentificacionPlantNet() {
   const el = document.getElementById('foto-plantnet-status');
   const archivos = state.fotos.map(f => f && f.file).filter(Boolean);
@@ -88,6 +134,7 @@ async function actualizarIdentificacionPlantNet() {
     state.plantnetScientific = '';
     state.plantnetConfidence = null;
     state.plantnetResults = '';
+    state.plantnetNombreComun = '';
     if (el) { el.textContent = ''; el.hidden = true; el.className = 'loc-status'; }
     return;
   }
@@ -110,6 +157,7 @@ async function actualizarIdentificacionPlantNet() {
     state.plantnetScientific = '';
     state.plantnetConfidence = null;
     state.plantnetResults = '';
+    state.plantnetNombreComun = '';
     if (el) {
       el.textContent = 'No hemos podido identificar la especie automáticamente. No pasa nada: tu reporte se enviará igualmente y quedará pendiente de revisión.';
       el.className = 'loc-status';
@@ -122,11 +170,9 @@ async function actualizarIdentificacionPlantNet() {
   state.plantnetScientific = mejor.scientificName;
   state.plantnetConfidence = porcentaje;
   state.plantnetResults = resumenResultadosPlantNet(resultados);
+  state.plantnetNombreComun = (mejor.commonNames && mejor.commonNames[0]) || '';
 
-  if (el) {
-    el.textContent = `🔍 Podría ser: ${mejor.scientificName}${porcentaje != null ? ' (' + porcentaje + '% de coincidencia)' : ''}`;
-    el.className = 'loc-status ok';
-  }
+  renderMensajePlantNet();
 }
 
 function showFotoError(msg) {

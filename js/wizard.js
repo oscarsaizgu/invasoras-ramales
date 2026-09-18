@@ -24,6 +24,10 @@ export const state = {
   plantnetScientific: '',
   plantnetConfidence: null,
   plantnetResults: '',
+  // Nombre común que devuelve Pl@ntNet junto al científico (si lo trae).
+  // Solo se usa como sugerencia informativa y, cuando el usuario elige
+  // "Otra / No sé", como el nombre común que se guarda en Sheets.
+  plantnetNombreComun: '',
 };
 
 let currentScreen = 'inicio';
@@ -112,5 +116,6 @@ export function resetWizard() {
   state.plantnetScientific = '';
   state.plantnetConfidence = null;
   state.plantnetResults = '';
+  state.plantnetNombreComun = '';
   history.length = 0;
 }

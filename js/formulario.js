@@ -24,9 +24,23 @@ async function enviarReporteAppsScript(especieComun) {
   if (!CONFIG.reportesApiUrl) return;
 
   try {
+    // Si el usuario eligió "Otra / No sé" pero Pl@ntNet sí identificó algo
+    // con la foto, esa identificación es la que se guarda como especie del
+    // reporte — "Otra / No sé" solo tiene sentido como resultado final si
+    // Pl@ntNet no encontró nada. (El auto-aprobado en Apps Script ya
+    // usaba plantnetScientific con prioridad de todas formas: esto solo
+    // corrige qué "Nombre común" queda escrito en Sheets.)
+    const usarPlantNetComoEspecie = state.especieEsOtra && !!state.plantnetScientific;
+    const nombreComun = usarPlantNetComoEspecie
+      ? (state.plantnetNombreComun || especieComun)
+      : especieComun;
+    const nombreCientifico = usarPlantNetComoEspecie
+      ? state.plantnetScientific
+      : (state.especieEsOtra ? '' : state.especie);
+
     const cuerpo = {
-      nombreComun: especieComun,
-      nombreCientifico: state.especieEsOtra ? '' : state.especie,
+      nombreComun,
+      nombreCientifico,
       plantnetScientific: state.plantnetScientific || '',
       plantnetConfidence: state.plantnetConfidence,
       plantnetResults: state.plantnetResults || '',

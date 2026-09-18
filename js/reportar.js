@@ -5,7 +5,7 @@
 import { state, goTo, goBack, currentStep, setNextEnabled } from './wizard.js';
 import { CLAVE_PLANTNET_SESSION } from './catalogo.js';
 import { renderEspecies, especieDescripcionInput } from './especies.js';
-import { renderFotoSlots } from './fotos.js';
+import { renderFotoSlots, renderMensajePlantNet } from './fotos.js';
 import { initUbicacionStep } from './mapa.js';
 import {
   renderTamanyos, initObservacionesStep, initContactoStep,
@@ -33,6 +33,11 @@ function isStepValid(step) {
 
 function enterStep(step) {
   if (step === 'revision') renderRevision();
+  // Repinta el mensaje de Pl@ntNet (sin volver a llamar a la API) por si
+  // el usuario volvió atrás y cambió la especie elegida a/desde
+  // "Otra / No sé" con una foto ya analizada — así el mensaje siempre
+  // coincide con la especie actualmente seleccionada.
+  if (step === 'foto') renderMensajePlantNet();
   setNextEnabled(isStepValid(step));
 
   const nextBtn = document.getElementById('btn-siguiente');
