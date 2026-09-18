@@ -4,7 +4,7 @@ Aplicación web estática (HTML/CSS/JS, sin build ni backend propio) para que
 cualquier persona pueda comunicar la presencia de flora invasora en Ramales
 de la Victoria.
 
-- Alojamiento: **GitHub Pages**, dominio propio `reporteinvasoras.ramalesnatural.org`
+- Alojamiento: **GitHub Pages**, dominio propio `flora.ramalesnatural.org`
   configurado mediante el archivo `CNAME` de este repositorio.
 - Envío de reportes: **FormSubmit** (ver más abajo). No se usa Netlify ni
   ningún backend propio.

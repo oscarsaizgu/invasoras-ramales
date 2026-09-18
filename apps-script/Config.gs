@@ -42,7 +42,7 @@ var ESTADO = {
 // URL pública del sitio (GitHub Pages) de donde se lee el catálogo de
 // invasoras — así el script usa siempre la MISMA fuente que la web, sin
 // mantener una copia duplicada que se pueda desincronizar.
-var CATALOGO_INVASORAS_URL = 'https://reporteinvasoras.ramalesnatural.org/data/catalogo-invasoras.json';
+var CATALOGO_INVASORAS_URL = 'https://flora.ramalesnatural.org/data/catalogo-invasoras.json';
 
 function hojaReportes_() {
   return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(HOJA_REPORTES);

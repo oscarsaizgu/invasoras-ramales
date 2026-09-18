@@ -14,7 +14,7 @@
 //   2. Genera tu API key privada si aún no tienes una.
 //   3. Activa la opción "Expose my API key".
 //   4. En "Authorized domains" añade exactamente:
-//      reporteinvasoras.ramalesnatural.org
+//      flora.ramalesnatural.org
 //      (y, si haces pruebas en local, añade también esa otra línea,
 //      p. ej. localhost — quítala en producción).
 //   5. Pega tu API key aquí abajo. NO subas este archivo con la clave
