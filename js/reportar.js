@@ -109,6 +109,16 @@ function leerIdentificacionPlantNet() {
     state.plantnetScientific = datos.scientific || '';
     state.plantnetConfidence = typeof datos.confidence === 'number' ? datos.confidence : null;
     state.plantnetResults = datos.resultsText || '';
+
+    // La foto ya usada para identificar viaja con el resultado (ver
+    // identificar.js): se precarga aquí para que el reporte no llegue
+    // "Sin fotografía" solo porque el usuario no la vuelve a subir en el
+    // paso de foto. state.fotos está vacío en este punto (la página
+    // acaba de cargar), así que no hay nada que conservar de antes.
+    if (datos.photo) {
+      state.fotos = [{ file: null, dataUrl: datos.photo }];
+      renderFotoSlots();
+    }
   } catch (err) {
     // JSON corrupto o manipulado: se ignora, el reporte se envía sin estos datos.
   }

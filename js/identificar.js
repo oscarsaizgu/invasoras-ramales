@@ -1,5 +1,6 @@
 import { PLANTNET_API_KEY } from './identificar-config.js';
 import { resolverEspecie, abrirFichaDesdeIdentificacion, seleccionarEspecieParaReportar, ETIQUETA_NIVEL } from './catalogo.js';
+import { identificarEspecie, resumenResultadosPlantNet } from './plantnet.js';
 
 // ================================================================
 // Identificación de plantas con Pl@ntNet — llamada directa desde el
@@ -17,7 +18,6 @@ import { resolverEspecie, abrirFichaDesdeIdentificacion, seleccionarEspecieParaR
 // botánicos los resuelve siempre catalogo.js, nunca se inventan aquí.
 // ================================================================
 
-const PLANTNET_ENDPOINT = 'https://my-api.plantnet.org/v2/identify/all';
 const MAX_FOTOS = 5;
 
 // Umbral orientativo por debajo del cual no confiamos en el resultado
@@ -36,17 +36,6 @@ let ultimaFotoDataUrl = '';
 // "Conocer esta especie" abre siempre la misma ficha botánica, exista
 // o no ya una ficha propia para esa especie. "Mandar registro" solo se
 // ofrece cuando el estatus resuelto es realmente INVASORA.
-// Resumen legible de los resultados de Pl@ntNet ("Especie (85%) · Especie2
-// (40%)..."), en el mismo formato que iba a generar Apps Script cuando
-// llamaba a Pl@ntNet directamente. Ahora se genera aquí, una sola vez, y
-// viaja con el reporte hasta la hoja de cálculo (columna "Resultado
-// Pl@ntNet") sin que el backend tenga que volver a llamar a Pl@ntNet.
-function resumenResultadosPlantNet(resultados) {
-  return resultados
-    .map(r => `${r.scientificName} (${r.score != null ? Math.round(r.score * 100) + '%' : '?%'})`)
-    .join(' · ');
-}
-
 function crearTarjetaResultado(resultado, fotoDataUrl, resultados) {
   const registro = resolverEspecie({
     cientifico: resultado.scientificName,
@@ -86,6 +75,11 @@ function crearTarjetaResultado(resultado, fotoDataUrl, resultados) {
         scientific: resultado.scientificName,
         confidence: porcentaje, // 0-100 o null, ya calculado arriba
         resultsText: resumenResultadosPlantNet(resultados),
+        // La misma foto usada para identificar viaja también al reporte,
+        // para que no se pierda (antes el asistente de reporte no sabía
+        // que ya existía una foto y el reporte llegaba a Sheets como
+        // "Sin fotografía").
+        photo: fotoDataUrl || '',
       });
     });
   }
@@ -262,53 +256,32 @@ async function identificarFotos() {
     ultimaFotoDataUrl = '';
   }
 
-  try {
-    const formData = new FormData();
-    fotosSeleccionadas.forEach(file => {
-      formData.append('images', file, file.name || 'foto.jpg');
-      formData.append('organs', 'auto');
-    });
+  const { resultados, error, status, detalle } = await identificarEspecie(fotosSeleccionadas);
 
-    const url = new URL(PLANTNET_ENDPOINT);
-    url.searchParams.set('api-key', PLANTNET_API_KEY);
-    url.searchParams.set('lang', 'es');
-    url.searchParams.set('nb-results', '3');
-    url.searchParams.set('include-related-images', 'false');
-
-    const resp = await fetch(url.toString(), { method: 'POST', body: formData });
-
-    if (resp.status === 429) {
-      mostrarError('Hemos alcanzado el límite diario de identificaciones de Pl@ntNet. Puedes enviarnos la fotografía directamente y la revisaremos.');
-      return;
-    }
-    if (!resp.ok) {
-      let cuerpo = '';
-      try { cuerpo = (await resp.text()).slice(0, 200); } catch (e) { /* sin cuerpo legible */ }
-      console.error('Pl@ntNet respondió con error', resp.status, cuerpo);
-      mostrarError(
-        'No hemos podido identificar la fotografía. Puedes enviárnosla directamente y la revisaremos.',
-        `Detalle técnico: HTTP ${resp.status}${cuerpo ? ' — ' + cuerpo : ''}`
-      );
-      return;
-    }
-
-    const data = await resp.json();
-    const resultados = (data.results || []).slice(0, 3).map(r => ({
-      scientificName: r.species?.scientificNameWithoutAuthor || null,
-      score: typeof r.score === 'number' ? r.score : null,
-      commonNames: Array.isArray(r.species?.commonNames) ? r.species.commonNames.slice(0, 3) : [],
-    })).filter(r => r.scientificName);
-
-    await mostrarResultados(resultados, ultimaFotoDataUrl);
-  } catch (err) {
+  if (error === 'limite-diario') {
+    mostrarError('Hemos alcanzado el límite diario de identificaciones de Pl@ntNet. Puedes enviarnos la fotografía directamente y la revisaremos.');
+    return;
+  }
+  if (error === 'http') {
+    console.error('Pl@ntNet respondió con error', status, detalle);
+    mostrarError(
+      'No hemos podido identificar la fotografía. Puedes enviárnosla directamente y la revisaremos.',
+      `Detalle técnico: HTTP ${status}${detalle ? ' — ' + detalle : ''}`
+    );
+    return;
+  }
+  if (error === 'red') {
     // Un error de red aquí suele significar que el dominio todavía no
     // está en "Authorized domains" de Pl@ntNet, o que no hay conexión.
-    console.error('Error de red al llamar a Pl@ntNet', err);
+    console.error('Error de red al llamar a Pl@ntNet', detalle);
     mostrarError(
       'No hemos podido conectar con Pl@ntNet. Comprueba tu conexión, o puede que el dominio aún no esté autorizado en la configuración de Pl@ntNet.',
-      `Detalle técnico: ${err && err.message ? err.message : err}`
+      `Detalle técnico: ${detalle}`
     );
+    return;
   }
+
+  await mostrarResultados(resultados, ultimaFotoDataUrl);
 }
 
 function reiniciarSeleccion() {

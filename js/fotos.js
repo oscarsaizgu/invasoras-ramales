@@ -1,5 +1,6 @@
 import { CONFIG } from './config.js';
 import { state } from './wizard.js';
+import { identificarEspecie, resumenResultadosPlantNet } from './plantnet.js';
 
 const TIPOS_VALIDOS = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
 const TAMANYO_MAX_ORIGINAL = 25 * 1024 * 1024; // 25 MB, límite de sanidad antes de comprimir
@@ -57,6 +58,7 @@ async function handleFotoInput(e, index) {
     const dataUrl = await comprimirImagen(file, CONFIG.fotoMaxLado, CONFIG.fotoCalidad);
     state.fotos[index] = { file, dataUrl };
     renderFotoSlots();
+    actualizarIdentificacionPlantNet();
   } catch (err) {
     showFotoError('No se pudo procesar la foto. Prueba con otra.');
   }
@@ -65,6 +67,66 @@ async function handleFotoInput(e, index) {
 function removeFoto(index) {
   state.fotos.splice(index, 1);
   renderFotoSlots();
+  actualizarIdentificacionPlantNet();
+}
+
+// Identifica automáticamente con las fotos que haya en ese momento en el
+// paso de foto del asistente de reporte — así TODOS los reportes con foto
+// pasan por Pl@ntNet, no solo los que vienen de "Identificar planta".
+// Reutiliza identificarEspecie() de plantnet.js: es la misma función (y la
+// misma llamada a Pl@ntNet) que usa identificar.html, no una copia.
+// El resultado se guarda en state.plantnetScientific/Confidence/Results —
+// los mismos campos que ya envía formulario.js a Apps Script — así que no
+// hace falta tocar el envío del reporte para que esto llegue a Sheets.
+let identificacionEnCurso = 0;
+
+async function actualizarIdentificacionPlantNet() {
+  const el = document.getElementById('foto-plantnet-status');
+  const archivos = state.fotos.map(f => f && f.file).filter(Boolean);
+
+  if (!archivos.length) {
+    state.plantnetScientific = '';
+    state.plantnetConfidence = null;
+    state.plantnetResults = '';
+    if (el) { el.textContent = ''; el.hidden = true; el.className = 'loc-status'; }
+    return;
+  }
+
+  const idPeticion = ++identificacionEnCurso;
+  if (el) {
+    el.hidden = false;
+    el.textContent = '🔍 Identificando la especie con Pl@ntNet…';
+    el.className = 'loc-status';
+  }
+
+  const { resultados, error } = await identificarEspecie(archivos);
+
+  // Si el usuario ha añadido/quitado otra foto mientras esta identificación
+  // estaba en curso, esta respuesta ya está obsoleta: se descarta para no
+  // pisar un resultado más reciente.
+  if (idPeticion !== identificacionEnCurso) return;
+
+  if (error || !resultados.length) {
+    state.plantnetScientific = '';
+    state.plantnetConfidence = null;
+    state.plantnetResults = '';
+    if (el) {
+      el.textContent = 'No hemos podido identificar la especie automáticamente. No pasa nada: tu reporte se enviará igualmente y quedará pendiente de revisión.';
+      el.className = 'loc-status';
+    }
+    return;
+  }
+
+  const mejor = resultados[0];
+  const porcentaje = mejor.score != null ? Math.round(mejor.score * 100) : null;
+  state.plantnetScientific = mejor.scientificName;
+  state.plantnetConfidence = porcentaje;
+  state.plantnetResults = resumenResultadosPlantNet(resultados);
+
+  if (el) {
+    el.textContent = `🔍 Podría ser: ${mejor.scientificName}${porcentaje != null ? ' (' + porcentaje + '% de coincidencia)' : ''}`;
+    el.className = 'loc-status ok';
+  }
 }
 
 function showFotoError(msg) {

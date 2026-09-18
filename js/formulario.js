@@ -206,6 +206,8 @@ export function resetAll() {
   });
   document.getElementById('other-help').hidden = true;
   document.getElementById('otra-descripcion').value = '';
+  const plantNetStatus = document.getElementById('foto-plantnet-status');
+  if (plantNetStatus) { plantNetStatus.textContent = ''; plantNetStatus.hidden = true; }
   document.getElementById('observaciones-input').value = '';
   document.getElementById('nombre-input').value = '';
   document.getElementById('email-input').value = '';
