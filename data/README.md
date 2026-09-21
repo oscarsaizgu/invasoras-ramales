@@ -135,8 +135,10 @@ calidad identificativa.
 # Guía Botánica (`cantabria-flora.json`)
 
 Guía de la flora de Cantabria con **fichas verificadas** (revisión taxonómica y
-de estatus del 21/09/2026). Contiene 168 especies: 82 autóctonas, 58 alóctonas,
-23 invasoras y 5 con estatus pendiente de revisión. No es «la lista de
+de estatus del 21/09/2026). Contiene 172 especies: 86 autóctonas, 59 alóctonas,
+23 invasoras y 4 con estatus pendiente de revisión. El informe de la segunda
+auditoría (comprobaciones, cambios y especies pendientes) está en
+`AUDITORIA-BOTANICA-2026-09-21.md`. No es «la lista de
 invasoras»: la mayoría de las fichas no lo son.
 
 ## Estatus de cada ficha (`estatus`)
@@ -165,7 +167,8 @@ etiquetados «(Cantabria)» van al final), `familia` (POWO) y
 filtros), `estatus`, `estatusDetalle` (explicación con las fuentes),
 `presenciaCantabria`, `origen`, la descripción (`queEs`, `comoReconocerla`,
 `hojas`, `flores`, `frutosSemillas`, `floracion`, `fructificacion`, `habitat`,
-`distribucionGeneralidades`), `fotos`, `pendiente` (lo que **no** se ha podido
+`distribucionGeneralidades`; en las fichas del Plan de Cantabria, `biologiaEcologia`,
+`introduccion`, `medidasControl` y `erradicacionCantabria`), `fotos`, `pendiente` (lo que **no** se ha podido
 verificar: se muestra en la ficha como «Pendiente de verificar»),
 `fuentesPorCampo` (`taxonomia`, `estatus`, `distribucion`, `descripcion`; cada
 una con `label` y `url`), `fuentes` (unión de las anteriores, por
@@ -178,16 +181,35 @@ Fichas de género: `nivelTaxonomico: "genero"` (nombre acabado en « spp.»);
 
 **Regla de la ficha:** no se escribe ningún dato que no salga de una fuente.
 Las secciones sin fuente contrastada (confusiones con otras especies, interés
-ecológico, curiosidades, usos) se dejan **vacías** en lugar de rellenarse. Las
-fichas anteriores a esta revisión conservan su texto divulgativo, marcado en
-`pendiente` como «pendiente de contrastar línea a línea con Flora Ibérica».
+ecológico, curiosidades, usos) se dejan **vacías** en lugar de rellenarse; en la
+segunda auditoría (21/09/2026) se eliminaron todos los textos de este tipo que
+no tenían fuente (`interesEcologico`, `importanciaCantabria`, `curiosidades`:
+61 textos). El texto descriptivo de cada ficha procede de una de estas fuentes,
+indicada en `fuentesPorCampo.descripcion`:
+
+- **Fichas del Plan de Cantabria (76 especies exóticas):** texto literal de las
+  fichas oficiales del Plan Estratégico Regional (2017): «Cómo reconocerla»,
+  «Generalidades» (campo `biologiaEcologia`, que antes se guardaba por error como
+  distribución), «Medidas y control», introducción y viabilidad de erradicación.
+  Solo se corrigieron artefactos de extracción y erratas tipográficas. Estos
+  textos no se han reescrito ni completado con otras fuentes; donde Flora Ibérica
+  da otra fenología, se anota en `pendiente`.
+- **Resto de fichas (96):** redactadas a partir de **Flora Ibérica** (RJB-CSIC);
+  dos excepciones sin tratamiento en Flora Ibérica: *Iris pseudacorus* (Flora of
+  North America) y *Phragmites australis* (Flora of China). Los datos que la
+  fuente no recoge (color de la flor, fruto, nombre común…) se dejan vacíos y se
+  anotan en `pendiente`.
+- Las cifras (tamaños, altitudes, meses) de esas 96 fichas se verificaron contra
+  el texto de la fuente.
 
 ## Fuentes usadas y su papel
 
 - **CEEEI** (MITECO, tabla de flora del 21/10/2025) y **Real Decreto 630/2013**
   (BOE-A-2013-8565): decide «invasora» y el ámbito de aplicación.
 - **Lista de especies alóctonas** (MITECO, junio 2025): solo como contraste; una
-  especie que solo está ahí es alóctona, no invasora.
+  especie que solo está ahí es alóctona, no invasora. Su relación de especies
+  nativas de la Lista Patrón (LPES) por género se usa como evidencia **positiva**
+  de que una especie es nativa (no es exhaustiva).
 - **POWO / Kew** (Plants of the World Online): nombre aceptado, autor, familia,
   sinónimos y carácter nativo/introducido en España.
 - **Flora Ibérica** (RJB-CSIC): descripción, hábitat, fenología, nombres
@@ -204,13 +226,27 @@ fichas anteriores a esta revisión conservan su texto divulgativo, marcado en
 
 ## Fotografías
 
-Las fichas anteriores mantienen sus fotos. Las 35 fichas nuevas usan fotos de
-iNaturalist (observaciones de grado investigación, mayoritariamente de la
-Península Ibérica) con licencia **CC0, CC BY o CC BY-SA** (se descartaron las
-NC); cada foto guarda `imageAuthor`, `imageSource`, `imageSourceUrl` (la
-observación concreta) e `imageLicense`. Las fotos deben ser revisadas por una
-persona con conocimientos botánicos antes de darlas por definitivas. Cuando no
-se encontraron fotos suficientes, la ficha lo indica en `pendiente`.
+Fotos de iNaturalist; cada foto guarda `imageAuthor`, `imageSource`,
+`imageSourceUrl` (página de la observación o, si procede de la foto por defecto
+de un taxón, página de esa foto) e `imageLicense`.
+
+Las 40 fichas rehechas o añadidas en 2026 (35 nuevas + 5 añadidas) pasaron una
+selección estricta, con la evidencia guardada en `imageChecks`: observación de
+grado investigación; taxón de la observación igual a la especie; al menos 2
+identificaciones de acuerdo y ninguna en desacuerdo (salvo 2 fotos de
+identificación inequívoca); licencia **CC0, CC BY o CC BY-SA**; ≥ 800 px; ubicación
+no oculta y precisión ≤ 5 km; ámbito ibérico; un observador por foto; y revisión
+visual. Cuando ninguna foto cumple, la ficha se queda sin fotos (*Ulex gallii*,
+*Pinus radiata*) en lugar de usar una dudosa.
+
+Las fotos de las demás fichas (licencias mayoritariamente CC BY-NC: 455 CC BY-NC y
+25 CC BY-NC-SA de 781 fotos) se comprobaron contra la API de iNaturalist (grado
+investigación y taxón coincidente) pero **no** se han vuelto a revisar una a una.
+La licencia NC permite uso no comercial con atribución: conviene que el
+Ayuntamiento confirme que la web encaja en ese uso. Cuatro imágenes del asistente
+de reportes (`images/plumero.jpg`, `vara.jpeg`, `bambu.jpg`, `amor.jpg`) no tienen
+autoría ni licencia documentadas: se han retirado de las fichas y siguen
+usándose en el asistente hasta que se decida.
 
 ## Cómo tratar los cambios de nombre (sinonimia)
 

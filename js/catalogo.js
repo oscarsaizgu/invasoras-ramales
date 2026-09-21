@@ -80,7 +80,7 @@ function normalizarEspecie(e) {
 }
 
 function nombreComunDe(entry) {
-  return (entry.comunes && entry.comunes.length) ? entry.comunes[0] : 'Nombre común no disponible';
+  return (entry.comunes && entry.comunes.length) ? entry.comunes[0] : entry.cientifico;
 }
 
 export async function cargarDatos() {
@@ -403,7 +403,7 @@ function abrirFicha(entry) {
   rellenarParrafo('ficha-seccion-donde', 'ficha-donde', entry.habitat);
   rellenarParrafo('ficha-seccion-distribucion', 'ficha-distribucion', entry.distribucionGeneralidades);
 
-  rellenarParrafo('ficha-seccion-ecologico', 'ficha-ecologico', entry.interesEcologico);
+  rellenarParrafo('ficha-seccion-ecologico', 'ficha-ecologico', entry.biologiaEcologia);
   rellenarParrafo('ficha-seccion-cantabria', 'ficha-cantabria', entry.importanciaCantabria);
   rellenarParrafo('ficha-seccion-curiosidades', 'ficha-curiosidades', entry.curiosidades);
 
