@@ -11,6 +11,7 @@ export function renderEspecies() {
     btn.className = 'species-btn' + (sp.esOtra ? ' species-btn--other' : '');
     btn.dataset.especie = sp.cientifico;
     btn.dataset.nombre = sp.nombre;
+    if (sp.alias && sp.alias.length) btn.dataset.alias = sp.alias.join('|');
     btn.setAttribute('aria-pressed', 'false');
 
     if (sp.esOtra) {

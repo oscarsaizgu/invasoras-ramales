@@ -83,7 +83,10 @@ function preseleccionarEspecieDesdeUrl() {
   const cientifico = params.get('especie');
   if (!cientifico) return;
 
-  const boton = document.querySelector(`.species-btn[data-especie="${CSS.escape(cientifico)}"]`);
+  const norm = s => (s || '').toString().replace(/×/g, 'x').trim().toLowerCase();
+  const boton = Array.from(document.querySelectorAll('.species-btn')).find(b =>
+    norm(b.dataset.especie) === norm(cientifico) ||
+    (b.dataset.alias || '').split('|').some(a => norm(a) === norm(cientifico)));
   if (boton) {
     boton.click();
   } else {

@@ -1228,6 +1228,9 @@ body.pagina-inicio .home {
   padding: 0.15rem 0.5rem; border-radius: 20px;
   margin-top: 0.25rem;
 }
+.especie-card__badge--autoctona { color: #2d6a2d; background: rgba(45,106,45,0.12); }
+.especie-card__badge--exotica { color: #9a4f0b; background: rgba(200,110,30,0.14); }
+.especie-card__badge--dudosa { color: #4a544a; background: rgba(90,100,90,0.14); }
 
 /* ================================================================
    FICHA DE ESPECIE (overlay)
@@ -1367,7 +1370,8 @@ body.pagina-inicio .home {
 }
 .ficha-estatus--invasora { background: rgba(168,52,42,0.12); color: #a8342a; }
 .ficha-estatus--autoctona { background: rgba(45,106,45,0.12); color: #2d6a2d; }
-.ficha-estatus--exotica { background: rgba(180,140,30,0.14); color: #8a6a10; }
+.ficha-estatus--exotica { background: rgba(200,110,30,0.14); color: #9a4f0b; }
+.ficha-estatus--dudosa { background: rgba(90,100,90,0.14); color: #4a544a; }
 
 /* ── Secciones de la ficha (Cómo reconocerla, Características...) ──
    Como ahora hay más secciones opcionales y varían según la especie,
@@ -1641,7 +1645,8 @@ body.pagina-inicio .home {
 }
 .identificar-resultado__estado--invasora { color: #a8342a; }
 .identificar-resultado__estado--autoctona { color: #2d6a2d; }
-.identificar-resultado__estado--exotica { color: #8a6a10; }
+.identificar-resultado__estado--exotica { color: #9a4f0b; }
+.identificar-resultado__estado--dudosa { color: #4a544a; }
 .identificar-resultado__no-incluida {
   font-family: var(--font);
   font-size: 0.78rem;

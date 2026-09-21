@@ -102,8 +102,13 @@ async function cargarDatosDeGuia() {
     const especiesConFicha = new Set();
     lista.forEach(entry => {
       if (!entry || !entry.cientifico) return;
-      especiesConFicha.add(entry.cientifico);
-      if (entry.categoria) categorias.set(entry.cientifico, entry.categoria);
+      // También bajo sus sinónimos: una observación guardada con un nombre
+      // antiguo (p. ej. "Fallopia japonica", hoy Reynoutria japonica) debe
+      // seguir encontrando su ficha y su categoría.
+      [entry.cientifico, ...(Array.isArray(entry.sinonimos) ? entry.sinonimos : [])].forEach(nombre => {
+        especiesConFicha.add(nombre);
+        if (entry.categoria) categorias.set(nombre, entry.categoria);
+      });
     });
     return { categorias, especiesConFicha };
   } catch (err) {

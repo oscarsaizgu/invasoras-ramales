@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Guía botánica | Ramales Natural</title>
-<meta name="description" content="Guía visual de las especies de flora invasora de Cantabria: 76 especies, con fotografías, características y medidas de control.">
+<meta name="description" content="Guía visual de la flora de Cantabria: especies autóctonas, alóctonas y exóticas invasoras, con fotografías, características y fuentes verificadas.">
 <meta name="theme-color" content="#22392c">
 <link rel="icon" href="images/logo-rn-blanco.png" type="image/png">
 <link rel="apple-touch-icon" href="images/logo-rn-blanco.png">
@@ -61,8 +61,8 @@
   <section class="content-page" aria-labelledby="especies-info-titulo">
     <p class="content-label">Ramales Natural</p>
     <h1 id="especies-info-titulo" class="content-titulo" tabindex="-1">🌿 Guía botánica</h1>
-    <p class="content-lead">Conoce las especies invasoras de Ramales y Cantabria.</p>
-    <p>Explora, identifica y aprende sobre las especies de flora exótica invasora presentes en nuestro entorno.</p>
+    <p class="content-lead">Conoce la flora de Ramales y de Cantabria.</p>
+    <p>Explora, identifica y aprende sobre las plantas autóctonas, las alóctonas y las exóticas invasoras presentes en nuestro entorno.</p>
 
     <div class="catalogo-buscador">
       <span class="catalogo-buscador__icon" aria-hidden="true">🔍</span>
@@ -84,9 +84,17 @@
       <button type="button" class="catalogo-filtro" data-filtro="acuatica">💧 Acuáticas</button>
     </div>
 
+    <div class="catalogo-filtros" id="catalogo-filtros-estatus" role="group" aria-label="Filtrar por estatus en Cantabria">
+      <button type="button" class="catalogo-filtro is-active" data-estatus="todas">Todos los estatus</button>
+      <button type="button" class="catalogo-filtro" data-estatus="autoctona">🟢 Autóctonas</button>
+      <button type="button" class="catalogo-filtro" data-estatus="exotica_no_invasora">🟠 Alóctonas</button>
+      <button type="button" class="catalogo-filtro" data-estatus="invasora">🔴 Invasoras</button>
+      <button type="button" class="catalogo-filtro" data-estatus="dudosa">⚪ Pendientes de revisión</button>
+    </div>
+
     <div class="catalogo-seccion">
-      <h2 class="catalogo-seccion__titulo">Especies invasoras del catálogo</h2>
-      <p class="catalogo-fuente">Fuente oficial: <a href="https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320" target="_blank" rel="noopener">Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria</a> (Gobierno de Cantabria, 2017)</p>
+      <h2 class="catalogo-seccion__titulo">Especies del catálogo</h2>
+      <p class="catalogo-fuente"><strong>Invasora</strong> solo significa que la especie figura en el <a href="https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html" target="_blank" rel="noopener">Catálogo Español de Especies Exóticas Invasoras (CEEEI, MITECO)</a> con un ámbito de aplicación que incluye Cantabria. Una especie <strong>alóctona</strong> es una planta de fuera de la región que vive aquí sin estar catalogada como invasora. El estatus de cada especie se explica en su ficha, con sus fuentes.</p>
       <p class="catalogo-resultados" id="catalogo-resultados-info" aria-live="polite"></p>
       <div class="catalogo-grid" id="catalogo-grid"></div>
       <p class="catalogo-vacio" id="catalogo-vacio" hidden>No hemos encontrado ninguna especie con ese nombre.</p>
@@ -115,14 +123,43 @@
         <p class="ficha-cientifico" id="ficha-cientifico"></p>
         <span class="ficha-estatus" id="ficha-estatus" hidden></span>
 
-        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
-          <h3>Características</h3>
-          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
+        <div class="ficha-seccion" id="ficha-seccion-estatus-detalle">
+          <h3>Estatus en Cantabria</h3>
+          <p id="ficha-estatus-detalle"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-quees">
+          <p id="ficha-quees"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-nomenclatura">
+          <h3>Nombre científico</h3>
+          <ul class="ficha-caracteristicas" id="ficha-nomenclatura"></ul>
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-reconocer">
           <h3>¿Cómo reconocerla?</h3>
           <p id="ficha-reconocer"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-confusiones">
+          <h3>Posible confusión</h3>
+          <ul class="ficha-caracteristicas" id="ficha-confusiones"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-partes">
+          <h3>Hojas, flores y frutos</h3>
+          <ul class="ficha-caracteristicas" id="ficha-partes"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-ciclo">
+          <h3>Floración y fructificación</h3>
+          <ul class="ficha-caracteristicas" id="ficha-ciclo"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
+          <h3>Características</h3>
+          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-donde">
@@ -131,13 +168,33 @@
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-distribucion">
-          <h3>Distribución en Cantabria</h3>
+          <h3>Distribución</h3>
           <p id="ficha-distribucion"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-ecologico">
+          <h3>Interés ecológico</h3>
+          <p id="ficha-ecologico"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-cantabria">
+          <h3>Importancia en Cantabria</h3>
+          <p id="ficha-cantabria"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-curiosidades">
+          <h3>Curiosidades</h3>
+          <p id="ficha-curiosidades"></p>
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-invasora">
           <h3 id="ficha-invasora-titulo">¿Por qué es invasora?</h3>
           <p id="ficha-invasora"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-pendiente">
+          <h3>Pendiente de verificar</h3>
+          <ul class="ficha-caracteristicas" id="ficha-pendiente"></ul>
         </div>
 
         <div class="ficha-seccion" id="ficha-seccion-fuentes">

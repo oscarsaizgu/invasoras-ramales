@@ -1,1395 +1,839 @@
 [
   {
-    "cientifico": "Abutilon theophrasti",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
     "cientifico": "Acacia dealbata",
     "sinonimos": [],
+    "nombreComun": "Mimosa, acacia, acacia francesa",
+    "ambito": "todo el territorio español, excepto Canarias y Baleares",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Acacia farnesiana",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Acacia melanoxylon",
     "sinonimos": [],
+    "nombreComun": "Acacia negra",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Orden TED/1126/2020",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Acacia salicina",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Acanthus mollis",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Agapanthus sp.",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Agave americana",
     "sinonimos": [],
+    "nombreComun": "Pitera común",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Ageratina adenophora",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Ageratina riparia",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Ailanthus altissima",
     "sinonimos": [],
+    "nombreComun": "Ailanto, árbol del cielo, zumaque falso",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Alternanthera philoxeroides",
     "sinonimos": [],
+    "nombreComun": "Lagunilla, hierba del lagarto, huiro verde",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Amaranthus deflexus",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Ambrosia artemisiifolia",
     "sinonimos": [],
+    "nombreComun": "Ambrosia",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Araujia sericifera",
     "sinonimos": [],
+    "nombreComun": "Planta cruel, miraguano",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Arctotheca calendula",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Artemisia verlotiorum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Arundo donax",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      },
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Asparagus asparagoides",
     "sinonimos": [],
+    "nombreComun": "Esparraguera africana",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Aster squamatus subsp. hieronymus",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Atriplex semilunaris",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Azolla spp.",
     "sinonimos": [],
+    "nombreComun": "Azolla",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Baccharis halimifolia",
     "sinonimos": [],
+    "nombreComun": "Bácaris, chilca, chilca de hoja de orzaga, carqueja",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Bidens aurea",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Bidens frondosa",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Bromus willdenowii",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Buddleja davidii",
-    "sinonimos": [
-      "Buddleja variabilis"
-    ],
+    "sinonimos": [],
+    "nombreComun": "Budleya, baileya, arbusto de las mariposas",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Cabomba caroliniana",
     "sinonimos": [],
+    "nombreComun": "Ortiga acuática",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Calotropis procera",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Canna indica",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Carpobrotus acinaciformis",
     "sinonimos": [],
+    "nombreComun": "Hierba del cuchillo, uña de gato, uña de león",
+    "ambito": "todo el territorio español, excepto Canarias",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Carpobrotus edulis",
     "sinonimos": [],
+    "nombreComun": "Hierba del cuchillo, uña de gato, uña de león",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Carpobrotus sp.",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Cenchrus setaceus",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Chamaesyce polygonifolia",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Conyza sp.",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Coronopus didymus",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Cortaderia selloana",
-    "sinonimos": [
-      "Cortaderia argentea"
-    ],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Cortaderia spp.",
     "sinonimos": [],
+    "nombreComun": "Hierba de la pampa, carrizo de la pampa",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 216/2019",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Cotula coronopifolia",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Crassula helmsii",
     "sinonimos": [],
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Crocosmia x crocosmiiflora",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Cylindropuntia spp.",
     "sinonimos": [],
+    "nombreComun": "Cylindropuntia",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Orden TED/1126/2020",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Cyperus alternifolius",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Cyperus eragrostris",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Cyrtomium falcatum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Datura stramonium",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Dittrichia viscosa",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Egeria densa",
-    "sinonimos": [],
+    "sinonimos": [
+      "Elodea densa"
+    ],
+    "nombreComun": "Broza del Brasil, Egeria",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Eichhornia crassipes",
-    "sinonimos": [],
+    "sinonimos": [
+      "Pontederia crassipes"
+    ],
+    "nombreComun": "Jacinto de agua, camalote",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Elodea canadensis",
     "sinonimos": [],
+    "nombreComun": "Broza del Canadá, peste de agua",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Elodea nuttallii",
     "sinonimos": [],
+    "nombreComun": "Broza del Canadá, peste de agua",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Erigeron karvinskianus",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Eschscholzia californica",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Fallopia baldschuanica",
-    "sinonimos": [],
+    "sinonimos": [
+      "Reynoutria baldschuanica"
+    ],
+    "nombreComun": "Viña del Tíbet",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Fallopia japonica",
     "sinonimos": [
       "Reynoutria japonica"
     ],
+    "nombreComun": "Hierba nudosa japonesa",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Furcraea foetida",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Hedychium gardnerianum",
     "sinonimos": [],
+    "nombreComun": "Jengibre blanco",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Helianthus tuberosus",
     "sinonimos": [],
+    "nombreComun": "Pataca o tupinambo",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Heracleum mantegazzianum",
     "sinonimos": [],
+    "nombreComun": "Perejil gigante",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Hydrocotyle ranunculoides",
     "sinonimos": [],
+    "nombreComun": "Redondita de agua",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Impatiens balfourii",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Ipomoea indica",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Ipomoea sp.",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Juncus tenuis",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Leucaena leucocephala",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Ligustrum ovalifolium",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Lonicera japonica",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Ludwigia spp.",
     "sinonimos": [],
+    "nombreComun": "Duraznillo de agua",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "excepciones": [
+      "Ludwigia palustris"
+    ],
+    "nota": "El CEEEI incluye el género Ludwigia excepto L. palustris (nativa de España según POWO).",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Maireana brevifolia",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Matthiola incana",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Mirabilis jalapa",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Myoporum laetum",
     "sinonimos": [],
+    "nombreComun": "Mióporo",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Orden TED/339/2023",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Myriophyllum aquaticum",
     "sinonimos": [],
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Narcissus tazetta",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Nassella neesiana",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Nicotiana glauca",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      },
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Nymphaea mexicana",
     "sinonimos": [],
+    "nombreComun": "Lirio Amarillo",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Oenothera sp.",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Opuntia dillenii",
-    "sinonimos": [],
+    "sinonimos": [
+      "Opuntia tuna"
+    ],
+    "nombreComun": "Tunera india",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Opuntia maxima",
     "sinonimos": [],
+    "nombreComun": "Tunera común",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Opuntia stricta",
     "sinonimos": [],
+    "nombreComun": "Chumbera",
+    "ambito": "Península Ibérica y Baleares",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Oxalis latifolia",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Oxalis pes-caprae",
     "sinonimos": [],
+    "nombreComun": "Agrio, agrios, vinagrera, vinagreras",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
+      }
+    ]
+  },
+  {
+    "cientifico": "Cenchrus setaceus",
+    "sinonimos": [
+      "Cenchrus setaceus",
+      "Pennisetum setaceum"
+    ],
+    "nombreComun": "Plumero, rabogato, pasto de elefante",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
+    "fuentes": [
+      {
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Parthenocissus tricuspidata",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Paspalum dilatatum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Paspalum paspalodes",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Paspalum vaginatum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Passiflora caerulea",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Pennisetum clandestinum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Pennisetum purpureum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Pennisetum villosum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Phoenix dactylifera",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Phyllostachys aurea",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Phytolacca americana",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Pistia stratiotes",
     "sinonimos": [],
+    "nombreComun": "Lechuga de agua",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Pittosporum tobira",
-    "sinonimos": [],
-    "fuentes": [
+      },
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Pyracantha angustifolia",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Rhus typhina",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Ricinus communis",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Robinia pseudoacacia",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Salvinia spp.",
     "sinonimos": [],
+    "nombreComun": "Salvinia",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Senecio inaequidens",
     "sinonimos": [],
+    "nombreComun": "Senecio del Cabo",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Senecio mikanioides",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Sorghum halepense",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Spartina alterniflora",
-    "sinonimos": [],
+    "sinonimos": [
+      "Sporobolus alterniflorus"
+    ],
+    "nombreComun": "Borraza",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
+    ]
   },
   {
     "cientifico": "Spartina densiflora",
-    "sinonimos": [],
+    "sinonimos": [
+      "Sporobolus montevidensis"
+    ],
+    "nombreComun": "Espartillo",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": false,
     "fuentes": [
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
         "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+      },
+      {
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "nacional"
+    ]
   },
   {
     "cientifico": "Spartina patens",
-    "sinonimos": [],
+    "sinonimos": [
+      "Sporobolus pumilus"
+    ],
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Spartium junceum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
-      }
-    ],
-    "ambito": "nacional"
-  },
-  {
-    "cientifico": "Sporobolus indicus",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Stenotaphrum secundatum",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   },
   {
     "cientifico": "Tradescantia fluminensis",
     "sinonimos": [],
+    "nombreComun": "Amor de hombre, oreja de gato",
+    "ambito": "todo el territorio español",
+    "incluyeCantabria": true,
+    "norma": "Real Decreto 630/2013",
+    "planRegionalCantabria": true,
     "fuentes": [
       {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
+        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO (tabla completa, 21/10/2025)",
+        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
       },
       {
-        "label": "Catálogo Español de Especies Exóticas Invasoras (CEEEI) — MITECO",
-        "url": "https://www.miteco.gob.es/es/biodiversidad/temas/conservacion-de-especies/especies-exoticas-invasoras/ce_eei_flora.html"
+        "label": "Real Decreto 630/2013 (BOE-A-2013-8565)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-8565"
       }
-    ],
-    "ambito": "regional-cantabria+nacional"
-  },
-  {
-    "cientifico": "Tropaeolum majus",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Vinca major",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Xanthium strumarium",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Yucca gloriosa",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
-  },
-  {
-    "cientifico": "Zantedeschia aethiopica",
-    "sinonimos": [],
-    "fuentes": [
-      {
-        "label": "Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria — Gobierno de Cantabria (2017)",
-        "url": "https://www.cantabria.es/detalle/-/journal_content/56_INSTANCE_DETALLE/16835/6017320"
-      }
-    ],
-    "ambito": "regional-cantabria"
+    ]
   }
 ]

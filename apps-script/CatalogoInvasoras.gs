@@ -53,7 +53,7 @@ function leerCatalogoInvasoras_() {
 
 /** Mismo criterio de normalización que normalizar() en catalogo.js. */
 function normalizarTexto_(txt) {
-  return (txt || '').toString().normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+  return (txt || '').toString().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/×/g, 'x').toLowerCase().trim();
 }
 
 function coincideNombreInvasora_(nombreBuscado, entry) {
@@ -62,6 +62,20 @@ function coincideNombreInvasora_(nombreBuscado, entry) {
   var sinonimos = entry.sinonimos || [];
   for (var i = 0; i < sinonimos.length; i++) {
     if (normalizarTexto_(sinonimos[i]) === nc) return true;
+  }
+  return false;
+}
+
+/**
+ * Especies concretas de un género que el catálogo excluye expresamente
+ * (campo `excepciones`; p. ej. el CEEEI incluye "Ludwigia spp. [excepto
+ * L. palustris]"). Mismo criterio que estaExcluida() en js/catalogo.js.
+ */
+function estaExcluidaInvasora_(nombreBuscado, entry) {
+  var nc = normalizarTexto_(nombreBuscado);
+  var ex = entry.excepciones || [];
+  for (var i = 0; i < ex.length; i++) {
+    if (normalizarTexto_(ex[i]) === nc) return true;
   }
   return false;
 }
@@ -95,7 +109,8 @@ function buscarEnCatalogoInvasoras_(cientifico, catalogo) {
   var genero = normalizarTexto_(cientifico).split(' ')[0];
   for (var j = 0; j < catalogo.length; j++) {
     var ec = normalizarTexto_(catalogo[j].cientifico);
-    if ((ec.endsWith(' spp.') || ec.endsWith(' sp.')) && ec.split(' ')[0] === genero) {
+    if ((ec.endsWith(' spp.') || ec.endsWith(' sp.')) && ec.split(' ')[0] === genero
+        && !estaExcluidaInvasora_(cientifico, catalogo[j])) {
       return { entry: catalogo[j], tipo: 'genero' };
     }
   }

@@ -22,12 +22,15 @@ export const CONFIG = {
 
 // Especies mostradas en el paso de selección.
 // nombre: nombre común · cientifico: nombre científico (also stored value)
+// alias: otros nombres (aceptados hoy por POWO/Flora Ibérica) con los que la guía
+// puede enlazar aquí; el valor guardado en los reportes sigue siendo `cientifico`
+// para no dividir en dos especies el histórico del mapa y de Google Sheets.
 // imagen: ruta de la foto · icono: emoji si no hay foto
 export const ESPECIES = [
   { id: 'plumero', nombre: 'Plumero', cientifico: 'Cortaderia selloana', imagen: 'images/plumero.jpg', icono: '🌾' },
-  { id: 'bambu', nombre: 'Bambú japonés', cientifico: 'Fallopia japonica', imagen: 'images/bambu.jpg', icono: '🎋' },
+  { id: 'bambu', nombre: 'Bambú japonés', cientifico: 'Fallopia japonica', alias: ['Reynoutria japonica'], imagen: 'images/bambu.jpg', icono: '🎋' },
   { id: 'amor', nombre: 'Amor de hombre', cientifico: 'Tradescantia fluminensis', imagen: 'images/amor.jpg', icono: '🌿' },
-  { id: 'vara', nombre: 'Vara de San José', cientifico: 'Crocosmia x crocosmiiflora', imagen: 'images/vara.jpeg', icono: '🌼' },
+  { id: 'vara', nombre: 'Vara de San José', cientifico: 'Crocosmia x crocosmiiflora', alias: ['Crocosmia × crocosmiiflora'], imagen: 'images/vara.jpeg', icono: '🌼' },
   { id: 'otra', nombre: 'Otra / No sé', cientifico: 'Otras', imagen: '', icono: '❓', esOtra: true },
 ];
 

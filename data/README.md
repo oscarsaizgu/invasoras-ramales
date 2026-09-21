@@ -125,9 +125,7 @@ comunidad) y solo fotos con licencia abierta individual
 (`cc0`/`cc-by`/`cc-by-nc`/`cc-by-sa`/`cc-by-nc-sa`), ordenadas por votos
 para priorizar las más útiles. Cada foto guarda `imageAuthor`,
 `imageSource`, `imageSourceUrl` (ficha del taxón o de la observación
-concreta) e `imageLicense` — nunca se inventa una atribución. La misma
-información se duplica en `assets/especies/credits.json` para los
-créditos de la aplicación.
+concreta) e `imageLicense` — nunca se inventa una atribución.
 
 Si una especie no tiene suficientes fotos con licencia abierta
 disponibles en iNaturalist, se guardan las que haya (pueden ser menos
@@ -136,77 +134,139 @@ calidad identificativa.
 
 # Guía Botánica (`cantabria-flora.json`)
 
-Catálogo botánico de especies de flora documentadas en Cantabria (no solo
-invasoras). Cada especie puede tener, cuando hay fuente fiable que lo
-sostenga: nombre científico aceptado, `sinonimos` (para que Pl@ntNet
-pueda devolver un nombre distinto y aun así encontrarse la ficha),
-nombre(s) común(es), familia, biotipo/categoría, `estatus`
-(`autoctona` | `exotica` | `invasora` | `null` si no se puede determinar
-con fiabilidad — ver `Laurus nobilis` como ejemplo de estatus dejado sin
-determinar a propósito), descripción divulgativa (`queEs`,
-`comoReconocerla`, `hojas`, `flores`, `frutosSemillas`, `floracion`,
-`fructificacion`, `habitat`, `distribucionGeneralidades`,
-`interesEcologico`, `importanciaCantabria`, `curiosidades`),
-`destacadaRamales` y `fuentes`.
+Guía de la flora de Cantabria con **fichas verificadas** (revisión taxonómica y
+de estatus del 21/09/2026). Contiene 168 especies: 82 autóctonas, 58 alóctonas,
+23 invasoras y 5 con estatus pendiente de revisión. No es «la lista de
+invasoras»: la mayoría de las fichas no lo son.
 
-`fichaCompleta: true|false` distingue las especies con ficha divulgativa
-desarrollada de las que solo tienen los datos mínimos (nombre,
-sinónimos, estatus) mientras se completan progresivamente — así se puede
-seguir ampliando el catálogo sin tener que redactar toda la ficha de
-golpe.
+## Estatus de cada ficha (`estatus`)
 
-**IMPORTANTE:** el campo `estatus` de este archivo (autóctona / exótica /
-invasora) es la clasificación **botánica general** de la especie. NO es
-la fuente que determina si un registro debe considerarse invasora para
-efectos de reporte — para eso existe `catalogo-invasoras.json`,
-independiente y comprobable por separado (ver más abajo). Que una
-especie esté en esta guía no implica que sea invasora, y que no esté
-todavía no implica que no lo sea.
+| Valor | Significado | Criterio |
+|---|---|---|
+| `invasora` | Exótica invasora | Figura en el **CEEEI** (MITECO) con un ámbito que incluye Cantabria. Es el único criterio. |
+| `aloctona` | Presente en Cantabria pero no de origen local y **no** catalogada como invasora aquí | POWO (Kew) la da como introducida en España, o Flora Ibérica la cita como naturalizada/cultivada. Aparecer solo en el Plan Estratégico Regional de Cantabria o en la lista MITECO de alóctonas NO la hace invasora. |
+| `autoctona` | Nativa | POWO la da como nativa de España **y** hay presencia en Cantabria (Flora Ibérica, GBIF). |
+| `dudosa` | Estatus pendiente de revisión | Las fuentes se contradicen o no bastan (p. ej. *Laurus nobilis*, *Populus nigra*, *Buxus sempervirens*, *Myosotis scorpioides*, *Dittrichia viscosa*). |
+
+`exotica` (valor antiguo) se sigue leyendo como `aloctona`. **El campo `estatus`
+de la ficha nunca decide por sí solo si un registro es invasora:** en la web el
+nivel se resuelve en `js/catalogo.js` (`resolverNivelInvasion`) exclusivamente
+con `catalogo-invasoras.json` (CEEEI + ámbito). Si el `estatus` de una ficha
+y el CEEEI se contradijeran, gana el CEEEI.
+
+## Campos de cada ficha
+
+`id`, `cientifico` (nombre **aceptado** según POWO/Kew), `autor`, `sinonimos`
+(sin autores, para que Pl@ntNet u otras fuentes puedan devolver un nombre
+distinto y aun así encontrar la ficha), `comunes` (Flora Ibérica, «N.v.»; los
+etiquetados «(Cantabria)» van al final), `familia` (POWO) y
+`familiaFloraIberica` (solo cuando Flora Ibérica usa otra familia),
+`biotipo`, `categoria` (`herbacea|arbusto|arbol|acuatica`, la que usan los
+filtros), `estatus`, `estatusDetalle` (explicación con las fuentes),
+`presenciaCantabria`, `origen`, la descripción (`queEs`, `comoReconocerla`,
+`hojas`, `flores`, `frutosSemillas`, `floracion`, `fructificacion`, `habitat`,
+`distribucionGeneralidades`), `fotos`, `pendiente` (lo que **no** se ha podido
+verificar: se muestra en la ficha como «Pendiente de verificar»),
+`fuentesPorCampo` (`taxonomia`, `estatus`, `distribucion`, `descripcion`; cada
+una con `label` y `url`), `fuentes` (unión de las anteriores, por
+compatibilidad) y `revisionTaxonomica`.
+
+Campos solo para especies del CEEEI: `enCatalogoNacionalCEEEI`, `nombreCEEEI`
+(nombre tal como aparece en el CEEEI), `ambitoCEEEI`, `planRegionalCantabria`.
+Fichas de género: `nivelTaxonomico: "genero"` (nombre acabado en « spp.»);
+`excepciones` excluye especies del género (p. ej. *Ludwigia palustris*, nativa).
+
+**Regla de la ficha:** no se escribe ningún dato que no salga de una fuente.
+Las secciones sin fuente contrastada (confusiones con otras especies, interés
+ecológico, curiosidades, usos) se dejan **vacías** en lugar de rellenarse. Las
+fichas anteriores a esta revisión conservan su texto divulgativo, marcado en
+`pendiente` como «pendiente de contrastar línea a línea con Flora Ibérica».
+
+## Fuentes usadas y su papel
+
+- **CEEEI** (MITECO, tabla de flora del 21/10/2025) y **Real Decreto 630/2013**
+  (BOE-A-2013-8565): decide «invasora» y el ámbito de aplicación.
+- **Lista de especies alóctonas** (MITECO, junio 2025): solo como contraste; una
+  especie que solo está ahí es alóctona, no invasora.
+- **POWO / Kew** (Plants of the World Online): nombre aceptado, autor, familia,
+  sinónimos y carácter nativo/introducido en España.
+- **Flora Ibérica** (RJB-CSIC): descripción, hábitat, fenología, nombres
+  vernáculos y presencia por provincias (S = Santander/Cantabria; `[S]` =
+  naturalizada/cultivada; `(S)` = cita fiable sin material revisado).
+- **GBIF**: solo como apoyo de presencia (registros en Cantabria, consulta con
+  `gadm_gid=ESP.3_1`, y en el polígono de Ramales). Nunca decide el estatus.
+- **Plan Estratégico Regional de Gestión y Control de EEI de Cantabria (2017)**
+  (Gobierno de Cantabria): se cita cuando la especie es objetivo del plan; no
+  determina «invasora».
+- **No disponible:** *Anthos* (Real Jardín Botánico) no pudo consultarse
+  (no responde a consultas automáticas) y no se ha usado; *World Flora Online*
+  no se ha necesitado. Pendiente de contrastar a mano cuando se pueda.
+
+## Fotografías
+
+Las fichas anteriores mantienen sus fotos. Las 35 fichas nuevas usan fotos de
+iNaturalist (observaciones de grado investigación, mayoritariamente de la
+Península Ibérica) con licencia **CC0, CC BY o CC BY-SA** (se descartaron las
+NC); cada foto guarda `imageAuthor`, `imageSource`, `imageSourceUrl` (la
+observación concreta) e `imageLicense`. Las fotos deben ser revisadas por una
+persona con conocimientos botánicos antes de darlas por definitivas. Cuando no
+se encontraron fotos suficientes, la ficha lo indica en `pendiente`.
+
+## Cómo tratar los cambios de nombre (sinonimia)
+
+El nombre científico guardado es el aceptado por POWO; el anterior queda en
+`sinonimos`. Casos revisados: *Fallopia japonica* → *Reynoutria japonica*,
+*Eichhornia crassipes* → *Pontederia crassipes*, *Bromus willdenowii* →
+*Bromus catharticus*, *Chamaesyce polygonifolia* → *Euphorbia polygonifolia*,
+*Coronopus didymus* → *Lepidium didymum*, *Paspalum paspalodes* → *Paspalum
+distichum*, *Senecio mikanioides* → *Delairea odorata*, *Spartina alterniflora*
+→ *Sporobolus alterniflorus*, *Spartina patens* → *Sporobolus pumilus*,
+*Tamus communis* → *Dioscorea communis*, y otros. El formulario de reporte
+sigue guardando el nombre que ya usaba el envío (`config.js`), con `alias` para
+poder preseleccionar desde una ficha con el nombre nuevo.
 
 # Catálogo independiente de especies invasoras (`catalogo-invasoras.json`)
 
-Lista independiente de `cantabria-flora.json`, cuyo único propósito es
-responder a una pregunta: "¿esta especie está reconocida como invasora
-por una fuente oficial?" — usada para decidir si una identificación
-puede generar un registro de invasora. Se construye a partir de:
+Lista independiente de `cantabria-flora.json`, con un único propósito: responder
+«¿esta especie es invasora en Cantabria según la fuente oficial?». Se usa para
+decidir si una identificación puede generar un reporte de invasora.
 
-- Las especies objetivo del *Plan Estratégico Regional de Gestión y
-  Control de Especies Exóticas Invasoras de Cantabria* (Gobierno de
-  Cantabria, 2017) — ámbito `regional-cantabria`.
-- El listado de flora del *Catálogo Español de Especies Exóticas
-  Invasoras* (CEEEI, MITECO) — ámbito `nacional`.
-
-No es una copia de la guía botánica: una especie puede estar en el
-catálogo de invasoras sin tener todavía ficha divulgativa completa en
-`cantabria-flora.json` (en ese caso, `resolverEspecie()` la resuelve con
-los datos mínimos disponibles). También se han excluido explícitamente
-del listado nacional tres táxones (*Arbutus unedo*, *Cytisus scoparius*,
-*Ulex europaeus*) que aparecían en una extracción automática de la
-página del MITECO pero que son especies nativas ibéricas bien
-documentadas — su inclusión no pudo confirmarse contra el texto legal
-primario y se prefirió omitirlas antes que arriesgar una clasificación
-errónea. Esta lista debe revisarse periódicamente contra la fuente
-primaria del MITECO (el Excel/BOE oficial), no solo contra su página web.
+Contiene **solo** las especies del **CEEEI** (flora) cuyo ámbito de aplicación
+incluye Cantabria: 43 entradas de las 69 filas de flora del CEEEI. Un ámbito
+vacío significa todo el territorio español; «Excepto Canarias» y «Excepto
+Canarias y Baleares» y «Península Ibérica y Baleares» incluyen Cantabria;
+«Canarias», «Baleares» y «Canarias y Baleares» no. Ya **no** se incluyen las
+especies que solo aparecían en el Plan Regional de Cantabria (2017): esas son
+alóctonas hasta que entren en el CEEEI.
 
 Formato, un array de:
 
 ```json
 {
-  "cientifico": "Ailanthus altissima",
-  "sinonimos": [],
-  "fuentes": [{ "label": "...", "url": "https://..." }],
-  "ambito": "regional-cantabria+nacional"
+  "cientifico": "Fallopia japonica",
+  "sinonimos": ["Reynoutria japonica"],
+  "nombreComun": "Hierba nudosa japonesa",
+  "ambito": "todo el territorio español",
+  "incluyeCantabria": true,
+  "norma": "Real Decreto 630/2013",
+  "planRegionalCantabria": true,
+  "excepciones": [],
+  "fuentes": [{ "label": "...", "url": "https://..." }]
 }
 ```
+
+Revisar periódicamente contra el CEEEI vigente del MITECO (se actualiza a
+menudo). El Apps Script (`apps-script/CatalogoInvasoras.gs`) lee este mismo
+archivo publicado en la web: **hay que volver a desplegar el Apps Script** tras
+esta actualización para que los reportes usen la lista nueva.
 
 # Estatus de flora fuera del catálogo (`estatus-flora.json`)
 
 Tabla ligera adicional para casos concretos: permite fijar el estatus
-autóctona/exótica (no invasora — eso ya lo cubre
-`catalogo-invasoras.json`) de una especie identificada por Pl@ntNet que
-todavía no tiene ficha en `cantabria-flora.json`. Está vacía salvo que
-se documente una fuente fiable puntual; no añadir entradas sin fuente
-citable.
+autóctona/alóctona (no invasora — eso ya lo cubre `catalogo-invasoras.json`) de
+una especie identificada por Pl@ntNet que todavía no tiene ficha en
+`cantabria-flora.json`. Está vacía salvo que se documente una fuente fiable
+puntual; no añadir entradas sin fuente citable.
 
 ```json
 {

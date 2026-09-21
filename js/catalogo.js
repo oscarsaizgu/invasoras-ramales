@@ -4,15 +4,17 @@
 // Tres fuentes de datos, cada una con una responsabilidad distinta
 // (ver data/README.md para el detalle y las fuentes citadas):
 //
-//   - ESPECIES (data/cantabria-flora.json): catálogo botánico general
-//     de flora documentada en Cantabria (autóctona, exótica e
-//     invasora), con fichas divulgativas. No es "la lista de
-//     invasoras" — la mayoría de sus 104 especies actuales no lo son.
+//   - ESPECIES (data/cantabria-flora.json): guía botánica de la flora
+//     de Cantabria con fichas verificadas. Cada ficha lleva su
+//     `estatus` botánico (autoctona | aloctona | invasora | dudosa) y
+//     las fuentes por campo. No es "la lista de invasoras".
 //   - CATALOGO_INVASORAS (data/catalogo-invasoras.json): fuente
-//     INDEPENDIENTE y autoritativa sobre si una especie está
-//     reconocida como invasora (Plan de Cantabria + CEEEI/MITECO).
+//     INDEPENDIENTE y autoritativa sobre si una especie es invasora:
+//     solo las especies del Catálogo Español de Especies Exóticas
+//     Invasoras (CEEEI, MITECO) cuyo ámbito incluye Cantabria.
 //     Es la única que decide si una identificación puede generar un
-//     registro — nunca el simple hecho de estar en ESPECIES.
+//     registro — nunca el simple hecho de estar en ESPECIES ni el
+//     `estatus` de la ficha.
 //   - ESTATUS_EXTERNO (data/estatus-flora.json): estatus puntual
 //     (autóctona/exótica) para especies aún sin ficha en ESPECIES.
 //
@@ -27,16 +29,16 @@ let ESPECIES = [];
 let CATALOGO_INVASORAS = []; // data/catalogo-invasoras.json — fuente independiente
 let ESTATUS_EXTERNO = []; // data/estatus-flora.json — ver data/README.md
 
-// La página Guía Botánica (guia-botanica.html), en esta primera fase,
-// solo muestra las especies invasoras que ya tenían ficha completa en
-// el catálogo original (entry.estatus === 'invasora' en ESPECIES). Se
-// guarda en un array APARTE en vez de filtrar ESPECIES directamente
-// porque identificar.js sigue necesitando el catálogo completo (133
-// especies) para poder reconocer también autóctonas y exóticas no
-// invasoras al identificar una foto con Pl@ntNet.
+// La página Guía Botánica (guia-botanica.html) muestra TODO el catálogo
+// (autóctonas, alóctonas, invasoras y pendientes de revisión). Cada
+// entrada lleva su `nivelInvasion` ya resuelto por resolverNivelInvasion()
+// — la misma fuente de verdad que usan las fichas y la identificación —,
+// de modo que "invasora" sale siempre del CEEEI (catalogo-invasoras.json)
+// y nunca del simple hecho de estar en este array.
 let ESPECIES_GUIA = [];
 
 let filtroActivo = 'todas';
+let filtroEstatus = 'todas';
 let consulta = '';
 let visibles = PAGINA;
 
@@ -112,8 +114,10 @@ async function cargarCatalogoInvasoras() {
   }
 }
 
+// Además de quitar tildes y mayúsculas, "×" (signo de híbrido, tal como lo
+// escriben POWO o Pl@ntNet) se trata igual que la "x" de las fichas.
 function normalizar(txt) {
-  return (txt || '').toString().normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  return (txt || '').toString().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/×/g, 'x').toLowerCase();
 }
 
 function coincide(entry, q) {
@@ -127,30 +131,36 @@ function coincide(entry, q) {
 // mismo campo `categoria` que ya trae cada especie en cantabria-flora.json
 // — no se inventa ninguna categoría nueva.
 function pasaFiltro(entry) {
-  if (filtroActivo === 'todas') return true;
-  return entry.categoria === filtroActivo;
+  if (filtroActivo !== 'todas' && entry.categoria !== filtroActivo) return false;
+  if (filtroEstatus !== 'todas' && entry.nivelInvasion !== filtroEstatus) return false;
+  return true;
 }
 
-// Los tres estados visuales que puede ver la persona usuaria tras una
-// identificación (independientemente del detalle interno que se guarde):
-// 🔴 invasora / 🟢 autoctona / ⚪ exotica_no_invasora / (desconocida → sin etiqueta)
+// Los estados visuales que puede ver la persona usuaria (en la guía y tras
+// una identificación), independientemente del detalle interno que se guarde:
+// 🔴 invasora (solo CEEEI + ámbito Cantabria) / 🟢 autóctona / 🟠 alóctona
+// (presente en Cantabria pero NO catalogada como invasora) / ⚪ pendiente de
+// revisión (no puede determinarse con las fuentes consultadas). El nivel
+// interno 'exotica_no_invasora' se conserva por compatibilidad con
+// identificar.js y las clases CSS ya existentes; su etiqueta pública es
+// "Alóctona".
 const ETIQUETA_NIVEL = {
   invasora: { texto: 'Exótica invasora', clase: 'invasora', emoji: '🔴' },
   autoctona: { texto: 'Autóctona', clase: 'autoctona', emoji: '🟢' },
-  exotica_no_invasora: { texto: 'No invasora', clase: 'exotica', emoji: '⚪' },
+  exotica_no_invasora: { texto: 'Alóctona', clase: 'exotica', emoji: '🟠' },
+  dudosa: { texto: 'Estatus pendiente de revisión', clase: 'dudosa', emoji: '⚪' },
 };
 
 // ── Tarjetas ──
-// Todas las tarjetas de esta guía son de especies invasoras (ver
-// ESPECIES_GUIA), así que el indicador rojo se muestra siempre.
 function crearTarjeta(entry) {
   const nombreComun = nombreComunDe(entry);
   const foto = entry.fotos && entry.fotos[0] ? entry.fotos[0].image : null;
+  const etiqueta = ETIQUETA_NIVEL[entry.nivelInvasion];
 
   const card = document.createElement('button');
   card.type = 'button';
   card.className = 'especie-card' + (foto ? '' : ' especie-card--neutra');
-  card.setAttribute('aria-label', 'Ver la especie: ' + nombreComun);
+  card.setAttribute('aria-label', 'Ver la especie: ' + nombreComun + (etiqueta ? ' (' + etiqueta.texto + ')' : ''));
 
   card.innerHTML = `
     ${foto
@@ -159,7 +169,7 @@ function crearTarjeta(entry) {
     <span class="especie-card__cuerpo">
       <span class="especie-card__comun">${nombreComun}</span>
       <span class="especie-card__cientifico">${entry.cientifico}</span>
-      <span class="especie-card__badge">🔴 Exótica invasora</span>
+      ${etiqueta ? `<span class="especie-card__badge especie-card__badge--${etiqueta.clase}">${etiqueta.emoji} ${etiqueta.texto}</span>` : ''}
       <span class="especie-card__ver">Ver la especie →</span>
     </span>`;
 
@@ -182,7 +192,7 @@ function renderCatalogo() {
   vacio.hidden = resultado.length > 0;
   vacio.textContent = 'No hemos encontrado ninguna especie con ese nombre.';
   info.textContent = resultado.length
-    ? `${resultado.length} especie${resultado.length === 1 ? '' : 's'} invasora${resultado.length === 1 ? '' : 's'}`
+    ? `${resultado.length} especie${resultado.length === 1 ? '' : 's'}`
     : '';
   btnMas.hidden = resultado.length <= visibles;
 }
@@ -349,15 +359,44 @@ function abrirFicha(entry) {
   if (entry.fructificacion) ciclo.push(`<li><strong>Fructificación:</strong> ${entry.fructificacion}</li>`);
   rellenarLista('ficha-seccion-ciclo', 'ficha-ciclo', ciclo);
 
-  // Características (familia, biotipo, origen, estado en Cantabria)
+  // Nomenclatura: nombre aceptado (con autor, si consta) y sinónimos, para
+  // que quien busque por un nombre antiguo (o el que devuelva Pl@ntNet)
+  // entienda por qué el nombre de la ficha es otro.
+  const nomenclatura = [];
+  if (entry.autor) nomenclatura.push(`<li><strong>Nombre aceptado:</strong> <em>${entry.cientifico}</em> ${entry.autor}</li>`);
+  const sinonimosVisibles = (entry.sinonimos || []).filter(s => s && normalizar(s) !== normalizar(entry.cientifico));
+  if (sinonimosVisibles.length) {
+    nomenclatura.push(`<li><strong>También conocida como:</strong> ${sinonimosVisibles.map(s => `<em>${s}</em>`).join(', ')}</li>`);
+  }
+  if (entry.nombreCEEEI && normalizar(entry.nombreCEEEI) !== normalizar(entry.cientifico)) {
+    nomenclatura.push(`<li><strong>Nombre en el CEEEI:</strong> <em>${entry.nombreCEEEI}</em></li>`);
+  }
+  rellenarLista('ficha-seccion-nomenclatura', 'ficha-nomenclatura', nomenclatura);
+
+  // Estatus en Cantabria: por qué lleva la etiqueta que lleva.
+  rellenarParrafo('ficha-seccion-estatus-detalle', 'ficha-estatus-detalle', entry.estatusDetalle);
+
+  // Características (familia, biotipo, origen, presencia en Cantabria...)
   const caracteristicas = [];
-  if (entry.familia) caracteristicas.push(`<li><strong>Familia:</strong> ${entry.familia}</li>`);
+  if (entry.familia) {
+    const alt = entry.familiaFloraIberica && normalizar(entry.familiaFloraIberica) !== normalizar(entry.familia)
+      ? ` (en Flora Ibérica: ${entry.familiaFloraIberica})` : '';
+    caracteristicas.push(`<li><strong>Familia:</strong> ${entry.familia}${alt}</li>`);
+  }
   if (entry.biotipo) caracteristicas.push(`<li><strong>Tipo de planta:</strong> ${entry.biotipo}</li>`);
   if (entry.origen) caracteristicas.push(`<li><strong>Origen:</strong> ${entry.origen}</li>`);
+  if (entry.presenciaCantabria) caracteristicas.push(`<li><strong>Presencia en Cantabria:</strong> ${entry.presenciaCantabria}</li>`);
   if (entry.erradicacionCantabria) {
     caracteristicas.push(`<li><strong>Estado en Cantabria:</strong> posibilidad de erradicación ${entry.erradicacionCantabria.toLowerCase()}</li>`);
   }
   rellenarLista('ficha-seccion-caracteristicas', 'ficha-caracteristicas', caracteristicas);
+
+  // Posible confusión con otras especies (solo cuando hay fuente que lo
+  // respalde en la propia ficha; nunca se rellena por defecto).
+  const confusiones = (entry.confusiones || [])
+    .filter(c => c && c.especie && c.nota)
+    .map(c => `<li><strong><em>${c.especie}</em>:</strong> ${c.nota}</li>`);
+  rellenarLista('ficha-seccion-confusiones', 'ficha-confusiones', confusiones);
 
   // Hábitat y distribución en Cantabria — dos secciones separadas
   // (antes iban juntas en "¿Dónde vive?").
@@ -376,28 +415,49 @@ function abrirFicha(entry) {
   // se repite.
   const invasoraPartes = [];
   if (nivel === 'invasora') {
-    const ambitoNacional = entry.enCatalogoNacionalCEEEI
-      || (entry.fuentesInvasion || []).some(f => /CEEEI|MITECO/i.test(f.label || ''));
-    invasoraPartes.push(ambitoNacional
-      ? 'Está reconocida como especie exótica invasora en el Catálogo Español de Especies Exóticas Invasoras (CEEEI), de ámbito estatal.'
-      : 'Está identificada como especie objetivo en el Plan Estratégico Regional de Gestión y Control de Especies Exóticas Invasoras de Cantabria.');
+    const ambito = entry.ambitoCEEEI || (entry.fuentesInvasion || []).map(f => f.ambito).find(Boolean);
+    if (ambito) {
+      invasoraPartes.push(`Está incluida en el Catálogo Español de Especies Exóticas Invasoras (CEEEI). Ámbito de aplicación: ${ambito}, que incluye Cantabria.`);
+    } else {
+      invasoraPartes.push('Está incluida en el Catálogo Español de Especies Exóticas Invasoras (CEEEI), con un ámbito de aplicación que incluye Cantabria.');
+    }
     if (entry.medidasControl) invasoraPartes.push(entry.medidasControl);
   }
   rellenarParrafo('ficha-seccion-invasora', 'ficha-invasora', invasoraPartes.join(' ') || null);
 
-  // Fuentes — solo las científicas/oficiales (entry.fuentes y
-  // entry.fuentesInvasion: Plan de Cantabria, CEEEI/MITECO, Flora
-  // Ibérica...), nunca señalando si el origen es "externo" o propio. Las
-  // fuentes de cada fotografía NO se listan aquí: ya aparecen debajo de
-  // la propia foto (ver actualizarFoto()/credito más abajo), repetirlas
-  // en este listado era redundante.
-  const fuentesUrls = new Set();
+  // Información que todavía no se ha podido contrastar con fuentes
+  // fiables: se dice claramente en vez de omitirlo o darlo por bueno.
+  const pendientes = (entry.pendiente || []).filter(Boolean).map(p => `<li>${p}</li>`);
+  rellenarLista('ficha-seccion-pendiente', 'ficha-pendiente', pendientes);
+
+  // Fuentes — agrupadas por tipo de dato (taxonomía, estatus, distribución,
+  // descripción) cuando la ficha las trae desglosadas (fuentesPorCampo);
+  // si no, se mantiene el listado único de siempre (entry.fuentes +
+  // entry.fuentesInvasion). Las fuentes de cada fotografía NO se listan
+  // aquí: ya aparecen debajo de la propia foto (ver actualizarFoto()).
   const fuentes = [];
-  [...(entry.fuentes || []), ...(entry.fuentesInvasion || [])].forEach(f => {
-    if (!f || !f.url || fuentesUrls.has(f.url)) return;
-    fuentesUrls.add(f.url);
-    fuentes.push(`<li><a href="${f.url}" target="_blank" rel="noopener">${f.label}</a></li>`);
-  });
+  // Una fuente sin URL verificable se muestra como texto, sin enlace.
+  const enlace = f => (f.url ? `<a href="${f.url}" target="_blank" rel="noopener">${f.label}</a>` : f.label);
+  if (entry.fuentesPorCampo && Object.keys(entry.fuentesPorCampo).length) {
+    const ETIQUETAS_CAMPO = {
+      taxonomia: 'Nombre y sinonimia',
+      estatus: 'Estatus (autóctona / alóctona / invasora)',
+      distribucion: 'Presencia y distribución',
+      descripcion: 'Descripción',
+    };
+    Object.keys(ETIQUETAS_CAMPO).forEach(campo => {
+      const lista = (entry.fuentesPorCampo[campo] || []).filter(f => f && f.label);
+      if (!lista.length) return;
+      fuentes.push(`<li><strong>${ETIQUETAS_CAMPO[campo]}:</strong> ${lista.map(enlace).join(' · ')}</li>`);
+    });
+  } else {
+    const fuentesUrls = new Set();
+    [...(entry.fuentes || []), ...(entry.fuentesInvasion || [])].forEach(f => {
+      if (!f || !f.url || fuentesUrls.has(f.url)) return;
+      fuentesUrls.add(f.url);
+      fuentes.push(`<li>${enlace(f)}</li>`);
+    });
+  }
   rellenarLista('ficha-seccion-fuentes', 'ficha-fuentes', fuentes);
 
   // Botón ficha oficial: solo si tenemos ficha propia con URL oficial (del
@@ -514,13 +574,26 @@ function initBuscador() {
   });
 }
 
+// Dos grupos de chips independientes: tipo de planta (data-filtro) y
+// estatus en Cantabria (data-estatus). Cada grupo solo desactiva a los suyos.
 function initFiltros() {
-  const chips = document.querySelectorAll('.catalogo-filtro');
+  const chips = document.querySelectorAll('.catalogo-filtro[data-filtro]');
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
       chips.forEach(c => c.classList.remove('is-active'));
       chip.classList.add('is-active');
       filtroActivo = chip.dataset.filtro;
+      visibles = PAGINA;
+      renderCatalogo();
+    });
+  });
+
+  const chipsEstatus = document.querySelectorAll('.catalogo-filtro[data-estatus]');
+  chipsEstatus.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chipsEstatus.forEach(c => c.classList.remove('is-active'));
+      chip.classList.add('is-active');
+      filtroEstatus = chip.dataset.estatus;
       visibles = PAGINA;
       renderCatalogo();
     });
@@ -577,6 +650,15 @@ function coincideNombre(nombreBuscado, entry) {
   return (entry.sinonimos || []).some(s => normalizar(s) === nc);
 }
 
+// `excepciones`: especies concretas de un género (entrada "Genero spp.")
+// que el catálogo excluye expresamente — p. ej. el CEEEI incluye
+// "Ludwigia spp. [excepto L. palustris]". Nunca deben resolverse por la
+// coincidencia de género.
+function estaExcluida(nombreBuscado, entry) {
+  const nc = normalizar(nombreBuscado);
+  return (entry.excepciones || []).some(x => normalizar(x) === nc);
+}
+
 function buscarPorCientifico(cientifico, lista) {
   const match = lista.find(e => coincideNombre(cientifico, e));
   if (match) return match;
@@ -584,28 +666,47 @@ function buscarPorCientifico(cientifico, lista) {
   const genero = normalizar(cientifico).split(' ')[0];
   return lista.find(e => {
     const ec = normalizar(e.cientifico);
-    return (ec.endsWith(' spp.') || ec.endsWith(' sp.')) && ec.split(' ')[0] === genero;
+    return (ec.endsWith(' spp.') || ec.endsWith(' sp.')) && ec.split(' ')[0] === genero && !estaExcluida(cientifico, e);
   }) || null;
+}
+
+// Traduce el `estatus` de una ficha de la guía al nivel interno que usan
+// la identificación y las etiquetas. 'invasora' NUNCA se toma de aquí: solo
+// el catálogo CEEEI (CATALOGO_INVASORAS) puede decidirlo. 'exotica' se
+// acepta como alias antiguo de 'aloctona'.
+function nivelDesdeEstatusGuia(estatus) {
+  if (estatus === 'autoctona') return 'autoctona';
+  if (estatus === 'aloctona' || estatus === 'exotica') return 'exotica_no_invasora';
+  if (estatus === 'dudosa') return 'dudosa';
+  return null;
 }
 
 // Única fuente de verdad sobre si una especie es invasora, siempre
 // independiente de si tiene o no ficha en la guía botánica (ESPECIES).
-// Consulta primero el catálogo independiente de invasoras (Plan de
-// Cantabria + CEEEI/MITECO); si no hay coincidencia ahí, nunca se
-// concluye "invasora" solo porque la especie esté en la guía.
+// Consulta primero el catálogo independiente de invasoras
+// (data/catalogo-invasoras.json, construido exclusivamente a partir del
+// CEEEI y de su ámbito de aplicación en Cantabria); si no hay coincidencia
+// ahí, nunca se concluye "invasora" solo porque la especie esté en la guía.
 function resolverNivelInvasion(cientifico, guia) {
-  const refInvasora = buscarPorCientifico(cientifico, CATALOGO_INVASORAS);
-  if (refInvasora) {
-    return { nivel: 'invasora', fuentesInvasion: refInvasora.fuentes || [] };
+  let refInvasora = buscarPorCientifico(cientifico, CATALOGO_INVASORAS);
+  // La ficha puede llamarse distinto al nombre buscado (p. ej. una entrada
+  // de género "Carpobrotus spp." cuyos sinónimos son las especies del CEEEI):
+  // se prueban también sus propios nombres.
+  if (!refInvasora && guia) {
+    for (const n of [guia.cientifico, ...(guia.sinonimos || [])]) {
+      refInvasora = buscarPorCientifico(n, CATALOGO_INVASORAS);
+      if (refInvasora) break;
+    }
   }
-  if (guia && guia.estatus === 'autoctona') return { nivel: 'autoctona', fuentesInvasion: [] };
-  if (guia && guia.estatus === 'exotica') return { nivel: 'exotica_no_invasora', fuentesInvasion: [] };
+  if (refInvasora) {
+    return { nivel: 'invasora', fuentesInvasion: refInvasora.fuentes || [], ambitoCEEEI: refInvasora.ambito || null };
+  }
+  const nivelGuia = guia ? nivelDesdeEstatusGuia(guia.estatus) : null;
+  if (nivelGuia) return { nivel: nivelGuia, fuentesInvasion: [] };
 
   const externo = buscarPorCientifico(cientifico, ESTATUS_EXTERNO);
   if (externo) {
-    const nivel = externo.estatus === 'autoctona' ? 'autoctona'
-      : externo.estatus === 'exotica' ? 'exotica_no_invasora'
-      : 'desconocida';
+    const nivel = nivelDesdeEstatusGuia(externo.estatus) || 'desconocida';
     return { nivel, fuentesInvasion: [], fuenteEstatus: externo.fuente };
   }
 
@@ -624,17 +725,18 @@ function resolverNivelInvasion(cientifico, guia) {
 // "desconocida" y no se muestra ninguna etiqueta — nunca se infiere.
 export function resolverEspecie({ cientifico, comunes, fotoDataUrl }) {
   const guia = buscarPorCientifico(cientifico, ESPECIES);
-  const { nivel, fuentesInvasion, fuenteEstatus } = resolverNivelInvasion(cientifico, guia);
+  const { nivel, fuentesInvasion, fuenteEstatus, ambitoCEEEI } = resolverNivelInvasion(cientifico, guia);
 
   if (guia) {
-    return { ...guia, nivelInvasion: nivel, fuentesInvasion, enGuia: true };
+    return { ...guia, nivelInvasion: nivel, fuentesInvasion, ambitoCEEEI: ambitoCEEEI || guia.ambitoCEEEI || null, enGuia: true };
   }
 
   return {
     cientifico,
     comunes: Array.isArray(comunes) ? comunes.filter(Boolean) : [],
     fotos: fotoDataUrl ? [{ image: fotoDataUrl }] : [],
-    estatus: nivel === 'autoctona' ? 'autoctona' : nivel === 'exotica_no_invasora' ? 'exotica' : null,
+    estatus: nivel === 'autoctona' ? 'autoctona' : nivel === 'exotica_no_invasora' ? 'aloctona' : null,
+    ambitoCEEEI: ambitoCEEEI || null,
     fuentes: fuenteEstatus ? [fuenteEstatus] : [],
     nivelInvasion: nivel,
     fuentesInvasion,
@@ -664,12 +766,16 @@ export async function initCatalogo() {
     cargarEstatusExterno(),
   ]);
 
-  // Guía Botánica (esta primera fase): solo las especies ya marcadas
-  // como invasora en el catálogo original. Se calcula aquí, no se
-  // reescriben los datos: ESPECIES sigue completo para identificar.js.
+  // Guía Botánica: todo el catálogo. El nivel de cada entrada se resuelve
+  // con la misma función que usa la identificación (resolverEspecie), así
+  // que "invasora" sale siempre del CEEEI y no del campo `estatus` de la
+  // ficha.
   ESPECIES_GUIA = ESPECIES
-    .filter(e => e.estatus === 'invasora')
-    .map(e => ({ ...e, nivelInvasion: 'invasora', enGuia: true }));
+    .map(e => {
+      const { nivel, fuentesInvasion, ambitoCEEEI } = resolverNivelInvasion(e.cientifico, e);
+      return { ...e, nivelInvasion: nivel, fuentesInvasion, ambitoCEEEI: ambitoCEEEI || e.ambitoCEEEI || null, enGuia: true };
+    })
+    .sort((a, b) => nombreComunDe(a).localeCompare(nombreComunDe(b), 'es'));
 
   renderCatalogo();
   abrirFichaDesdeUrlSiCorresponde();
