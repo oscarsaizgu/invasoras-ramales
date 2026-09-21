@@ -106,6 +106,121 @@
     </div>
   </section>
 
+  <!-- FICHA DE ESPECIE (guía de Cantabria) — para "Conocer esta especie" -->
+  <div class="ficha-overlay" id="ficha-overlay" hidden>
+    <div class="ficha-panel" role="dialog" aria-modal="true" aria-labelledby="ficha-comun">
+      <button type="button" class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar ficha">✕</button>
+
+      <div class="ficha-carrusel" id="ficha-carrusel">
+        <img class="ficha-carrusel__img" id="ficha-carrusel-img" alt="">
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--prev" id="ficha-prev" aria-label="Fotografía anterior">←</button>
+        <button type="button" class="ficha-carrusel__flecha ficha-carrusel__flecha--next" id="ficha-next" aria-label="Fotografía siguiente">→</button>
+        <span class="ficha-carrusel__contador" id="ficha-contador"></span>
+        <a class="ficha-carrusel__credito" id="ficha-carrusel-credito" href="#" target="_blank" rel="noopener" hidden></a>
+      </div>
+      <div class="ficha-miniaturas" id="ficha-miniaturas" hidden></div>
+
+      <div class="ficha-cuerpo">
+        <p class="ficha-comun" id="ficha-comun"></p>
+        <p class="ficha-cientifico" id="ficha-cientifico"></p>
+        <span class="ficha-estatus" id="ficha-estatus" hidden></span>
+
+        <div class="ficha-seccion" id="ficha-seccion-estatus-detalle">
+          <h3>Estatus en Cantabria</h3>
+          <p id="ficha-estatus-detalle"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-quees">
+          <p id="ficha-quees"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-nomenclatura">
+          <h3>Nombre científico</h3>
+          <ul class="ficha-caracteristicas" id="ficha-nomenclatura"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-reconocer">
+          <h3>¿Cómo reconocerla?</h3>
+          <p id="ficha-reconocer"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-confusiones">
+          <h3>Posible confusión</h3>
+          <ul class="ficha-caracteristicas" id="ficha-confusiones"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-partes">
+          <h3>Hojas, flores y frutos</h3>
+          <ul class="ficha-caracteristicas" id="ficha-partes"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-ciclo">
+          <h3>Floración y fructificación</h3>
+          <ul class="ficha-caracteristicas" id="ficha-ciclo"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-caracteristicas">
+          <h3>Características</h3>
+          <ul class="ficha-caracteristicas" id="ficha-caracteristicas"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-donde">
+          <h3>Hábitat</h3>
+          <p id="ficha-donde"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-distribucion">
+          <h3>Distribución</h3>
+          <p id="ficha-distribucion"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-ecologico">
+          <h3>Biología y ecología</h3>
+          <p id="ficha-ecologico"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-cantabria">
+          <h3>Importancia en Cantabria</h3>
+          <p id="ficha-cantabria"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-curiosidades">
+          <h3>Curiosidades</h3>
+          <p id="ficha-curiosidades"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-invasora">
+          <h3 id="ficha-invasora-titulo">¿Por qué es invasora?</h3>
+          <p id="ficha-invasora"></p>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-pendiente">
+          <h3>Pendiente de verificar</h3>
+          <ul class="ficha-caracteristicas" id="ficha-pendiente"></ul>
+        </div>
+
+        <div class="ficha-seccion" id="ficha-seccion-fuentes">
+          <h3>Fuentes</h3>
+          <ul class="ficha-fuentes" id="ficha-fuentes"></ul>
+        </div>
+
+        <div class="ficha-acciones">
+          <div class="ficha-no-guia-aviso" id="ficha-no-guia-aviso" hidden>
+            <p>Esta especie todavía no está en nuestro catálogo.</p>
+            <p>Estamos trabajando para ampliar la guía botánica de Ramales Natural.</p>
+          </div>
+          <a href="#" target="_blank" rel="noopener" class="btn btn-secondary ficha-btn-oficial" id="ficha-btn-oficial">Consultar ficha oficial</a>
+          <button type="button" class="btn btn-primary ficha-btn-reportar" id="ficha-btn-reportar">+ Reportar esta especie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM DE FOTOGRAFÍA -->
+  <div class="zoom-overlay" id="zoom-overlay" hidden>
+    <img class="zoom-overlay__img" id="zoom-overlay-img" alt="">
+  </div>
+
 </main>
 
 <footer class="app-footer">

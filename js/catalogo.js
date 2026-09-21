@@ -753,6 +753,23 @@ export function abrirFichaDesdeIdentificacion({ cientifico, comunes, fotoDataUrl
 
 export { ETIQUETA_NIVEL };
 
+async function cargarFuentes() {
+  [ESPECIES, CATALOGO_INVASORAS, ESTATUS_EXTERNO] = await Promise.all([
+    cargarDatos(),
+    cargarCatalogoInvasoras(),
+    cargarEstatusExterno(),
+  ]);
+}
+
+// Para páginas que solo necesitan abrir la ficha (p. ej. el mapa): prepara
+// el modal de ficha y sus datos, sin buscador/filtros/listado de la guía.
+// Devuelve una promesa que se resuelve cuando ya se puede abrir una ficha.
+export async function initFichaEnPagina() {
+  initFicha();
+  initZoom();
+  await cargarFuentes();
+}
+
 export async function initCatalogo() {
   initBuscador();
   initFiltros();
@@ -760,11 +777,7 @@ export async function initCatalogo() {
   initFicha();
   initZoom();
 
-  [ESPECIES, CATALOGO_INVASORAS, ESTATUS_EXTERNO] = await Promise.all([
-    cargarDatos(),
-    cargarCatalogoInvasoras(),
-    cargarEstatusExterno(),
-  ]);
+  await cargarFuentes();
 
   // Guía Botánica: todo el catálogo. El nivel de cada entrada se resuelve
   // con la misma función que usa la identificación (resolverEspecie), así

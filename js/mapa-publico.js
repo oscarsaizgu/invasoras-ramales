@@ -1,4 +1,5 @@
 import { CONFIG } from './config.js';
+import { initFichaEnPagina, abrirFichaDesdeIdentificacion } from './catalogo.js';
 
 // ---------------------------------------------------------------------------
 // Fuentes de datos — "mapa vivo": reportes ciudadanos (capa principal, aún
@@ -51,8 +52,12 @@ async function cargarHistoricoQGIS() {
 // pintar el mapa, a partir del mismo id de archivo.
 function urlFotoEmbebible(url) {
   if (!url) return null;
-  const m = String(url).match(/[?&]id=([^&]+)/);
-  if (!m) return url; // formato inesperado: se deja tal cual en vez de romperlo
+  const texto = String(url).trim();
+  // Un reporte sin foto llega desde Sheets con el texto "Sin fotografía" (o
+  // vacío) en esa celda: no es una URL, así que no hay foto que mostrar.
+  if (!/^https?:\/\//i.test(texto)) return null;
+  const m = texto.match(/[?&]id=([^&]+)/);
+  if (!m) return texto; // URL con formato inesperado: se deja tal cual
   return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000`;
 }
 
@@ -144,6 +149,7 @@ function completarPaleta(paleta, especiesNuevas) {
 // ---------------------------------------------------------------------------
 
 let map = null;
+let fichaLista = Promise.resolve(); // se sustituye en initMap() por la carga real de datos de la ficha
 let coloresPorEspecie = new Map();
 let categoriasPorEspecie = new Map();
 let especiesConFicha = new Set();
@@ -164,6 +170,8 @@ function initMap() {
     attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community',
     maxZoom: 19,
   }).addTo(map);
+  map.on('popupopen', (e) => conectarVerFicha(e.popup));
+  fichaLista = initFichaEnPagina();
 }
 
 function nombreComunCanonico(observaciones) {
@@ -203,15 +211,29 @@ function iconoClusterHtml(color) {
 
 function popupHtml(especie, nombreComun, foto) {
   const tieneFicha = especiesConFicha.has(especie);
-  const enlaceFicha = `guia-botanica.html?especie=${encodeURIComponent(especie)}`;
+  // Sin foto válida no se genera ningún <img>. Si la foto existe pero no
+  // carga (archivo borrado en Drive, etc.), onerror la quita del popup.
   return `
     <div class="map-popup">
-      ${foto ? `<img class="map-popup__foto" src="${foto}" alt="">` : ''}
+      ${foto ? `<img class="map-popup__foto" src="${foto}" alt="" onerror="this.remove()">` : ''}
       ${nombreComun ? `<strong class="map-popup__comun">${nombreComun}</strong>` : ''}
       <em class="map-popup__cientifico">${especie}</em>
-      ${tieneFicha ? `<a class="map-popup__ficha" href="${enlaceFicha}">Ver ficha en la guía →</a>` : ''}
+      ${tieneFicha ? `<a class="map-popup__ficha" href="#" role="button" data-especie="${especie}">Ver ficha →</a>` : ''}
     </div>
   `;
+}
+
+// "Ver ficha" abre el mismo modal de ficha que usan la guía y la
+// identificación, sin salir del mapa. Los popups de Leaflet frenan la
+// propagación de los clics, así que el enlace se conecta al abrir cada popup.
+function conectarVerFicha(popup) {
+  const enlace = popup.getElement()?.querySelector('.map-popup__ficha');
+  if (!enlace) return;
+  enlace.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await fichaLista;
+    abrirFichaDesdeIdentificacion({ cientifico: enlace.dataset.especie });
+  });
 }
 
 // Construye, para una fuente concreta, un grupo de clúster por especie.
