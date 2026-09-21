@@ -21,8 +21,9 @@ function dataUrlABase64(dataUrl) {
 // Mientras CONFIG.reportesApiUrl esté vacío (no desplegado todavía), esta
 // función no hace ninguna petición — el envío por FormSubmit sigue
 // funcionando exactamente igual que antes.
+// Devuelve true si Apps Script recibió el reporte, false si no (nunca lanza).
 async function enviarReporteAppsScript(especieComun) {
-  if (!CONFIG.reportesApiUrl) return;
+  if (!CONFIG.reportesApiUrl) return false;
 
   try {
     // Si el usuario eligió "Otra / No sé" pero Pl@ntNet sí identificó algo
@@ -70,14 +71,40 @@ async function enviarReporteAppsScript(especieComun) {
     // valor por defecto de fetch para un body string) se evita el
     // preflight; Apps Script igualmente parsea e.postData.contents como
     // JSON sin mirar la cabecera.
-    await fetch(CONFIG.reportesApiUrl, {
+    const resp = await fetch(CONFIG.reportesApiUrl, {
       method: 'POST',
       body: JSON.stringify(cuerpo),
     });
+    if (!resp.ok) return false;
+    try {
+      const resultado = await resp.json();
+      return resultado.ok !== false;
+    } catch (errJson) {
+      return true; // la petición se completó; solo no se pudo leer el cuerpo
+    }
   } catch (err) {
-    // Best-effort: un fallo aquí (red, Apps Script caído, etc.) NUNCA debe
-    // impedir que el reporte por email (FormSubmit) se considere enviado.
-    console.warn('No se ha podido enviar el reporte a Apps Script (se mantiene el envío por email):', err);
+    // Un fallo aquí (red, Apps Script caído, etc.) no rompe el envío por
+    // email: enviarReporte() decide el resultado final con ambos.
+    console.warn('No se ha podido enviar el reporte a Apps Script:', err);
+    return false;
+  }
+}
+
+// FormSubmit (email) y Apps Script (Sheets/Drive) se lanzan EN PARALELO y
+// son independientes: FormSubmit puede tardar 30 s o cortarse en el cliente
+// aunque el correo llegue, y antes eso impedía que se llegara a llamar a
+// Apps Script (el reporte no aparecía en Sheets y se mostraba un error).
+async function enviarEmailFormSubmit(data) {
+  try {
+    const resp = await fetch(CONFIG.submitUrl, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: data,
+    });
+    return resp.ok;
+  } catch (err) {
+    console.warn('No se ha podido confirmar el envío por email (FormSubmit):', err);
+    return false;
   }
 }
 
@@ -192,14 +219,11 @@ export async function enviarReporte() {
       data.append('foto_' + (i + 1), blob, `foto_${i + 1}.jpg`);
     });
 
-    const resp = await fetch(CONFIG.submitUrl, {
-      method: 'POST',
-      headers: { Accept: 'application/json' },
-      body: data,
-    });
-    if (!resp.ok) throw new Error('Respuesta no válida del servidor');
-
-    await enviarReporteAppsScript(especieComun);
+    const [emailOk, sheetsOk] = await Promise.all([
+      enviarEmailFormSubmit(data),
+      enviarReporteAppsScript(especieComun),
+    ]);
+    if (!emailOk && !sheetsOk) throw new Error('No se pudo entregar el reporte por ninguna vía');
 
     // Reporte completado: solo metadatos no identificativos (nunca
     // especie/nombre/email/observaciones/coordenadas/fotos).
