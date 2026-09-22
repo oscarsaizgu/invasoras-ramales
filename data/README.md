@@ -119,18 +119,16 @@ objetivo) 3–5 fotografías útiles para reconocerla en el campo — no son
 decorativas: se prioriza que muestren porte, hojas, flores y frutos
 cuando existen imágenes así de calidad y con licencia reutilizable.
 
-Fuente: iNaturalist (API pública `api.inaturalist.org`), filtrando
-observaciones `quality_grade=research` (identificación validada por la
-comunidad) y solo fotos con licencia abierta individual
-(`cc0`/`cc-by`/`cc-by-nc`/`cc-by-sa`/`cc-by-nc-sa`), ordenadas por votos
-para priorizar las más útiles. Cada foto guarda `imageAuthor`,
-`imageSource`, `imageSourceUrl` (ficha del taxón o de la observación
-concreta) e `imageLicense` — nunca se inventa una atribución.
+Fuente: iNaturalist (API pública `api.inaturalist.org`), observaciones
+`quality_grade=research` (identificación validada por la comunidad), sin
+restringir por licencia: en la revisión fotográfica del 21/09/2026 lo primero
+fue que la foto sea la especie, esté bien hecha, permita identificarla y muestre
+los caracteres importantes. Cada foto guarda `imageAuthor`, `imageSource`,
+`imageSourceUrl` (ficha del taxón o de la observación concreta) e
+`imageLicense` — nunca se inventa una atribución.
 
-Si una especie no tiene suficientes fotos con licencia abierta
-disponibles en iNaturalist, se guardan las que haya (pueden ser menos
-de 3) en lugar de forzar el número con imágenes dudosas o de baja
-calidad identificativa.
+Se prefieren pocas fotos buenas a muchas mediocres (2–4 por especie: porte,
+hoja/tallo y flor o fruto cuando aportan).
 
 # Guía Botánica (`cantabria-flora.json`)
 
@@ -230,23 +228,24 @@ Fotos de iNaturalist; cada foto guarda `imageAuthor`, `imageSource`,
 `imageSourceUrl` (página de la observación o, si procede de la foto por defecto
 de un taxón, página de esa foto) e `imageLicense`.
 
-Las 40 fichas rehechas o añadidas en 2026 (35 nuevas + 5 añadidas) pasaron una
-selección estricta, con la evidencia guardada en `imageChecks`: observación de
-grado investigación; taxón de la observación igual a la especie; al menos 2
-identificaciones de acuerdo y ninguna en desacuerdo (salvo 2 fotos de
-identificación inequívoca); licencia **CC0, CC BY o CC BY-SA**; ≥ 800 px; ubicación
-no oculta y precisión ≤ 5 km; ámbito ibérico; un observador por foto; y revisión
-visual. Cuando ninguna foto cumple, la ficha se queda sin fotos (*Ulex gallii*,
-*Pinus radiata*) en lugar de usar una dudosa.
+Revisión fotográfica completa (21/09/2026): se revisaron una a una las 781
+fotos anteriores y 1.817 candidatas nuevas de iNaturalist (observaciones de
+grado investigación, sin filtrar por licencia; cada especie llegó a la revisión con
+las fotos actuales más hasta 12 candidatas nuevas de porte, flor y fruto). Quedan
+569 fotos (2–4 por especie): 230 son de las anteriores y 339 son nuevas. Las fotos
+nuevas guardan en `imageChecks` la observación, el taxón, las identificaciones de
+acuerdo y el lugar; las conservadas mantienen las suyas si las tenían.
+El detalle por especie (fotos conservadas y nuevas, licencias, especies a revisar a mano)
+está en `INFORME-FOTOGRAFICO-2026-09-21.md`.
 
-Las fotos de las demás fichas (licencias mayoritariamente CC BY-NC: 455 CC BY-NC y
-25 CC BY-NC-SA de 781 fotos) se comprobaron contra la API de iNaturalist (grado
-investigación y taxón coincidente) pero **no** se han vuelto a revisar una a una.
-La licencia NC permite uso no comercial con atribución: conviene que el
-Ayuntamiento confirme que la web encaja en ese uso. Cuatro imágenes del asistente
-de reportes (`images/plumero.jpg`, `vara.jpeg`, `bambu.jpg`, `amor.jpg`) no tienen
-autoría ni licencia documentadas: se han retirado de las fichas y siguen
-usándose en el asistente hasta que se decida.
+Licencias de las 569 fotos: CC BY 193, CC BY-NC 224, CC0 42, CC BY-SA 18, CC BY-NC-SA 18,
+CC BY-NC-ND 3 y **71 con «todos los derechos reservados»** (`imageLicense`:
+`all-rights-reserved`). La licencia no se usó para elegir; conviene que el
+Ayuntamiento decida si la web puede mostrar las fotos NC (uso no comercial) y si
+pide permiso a los autores de las de derechos reservados o las cambia. Cuatro
+imágenes del asistente de reportes (`images/plumero.jpg`, `vara.jpeg`, `bambu.jpg`,
+`amor.jpg`) no tienen autoría ni licencia documentadas: se han retirado de las
+fichas y siguen usándose en el asistente hasta que se decida.
 
 ## Cómo tratar los cambios de nombre (sinonimia)
 
