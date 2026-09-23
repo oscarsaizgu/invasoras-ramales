@@ -1980,7 +1980,8 @@ body.pagina-inicio .home {
 .app-footer a { color: var(--crema); text-decoration: none; font-weight: 700; }
 .app-footer a:hover { text-decoration: underline; }
 
-.app-footer__logo { height: 42px; width: auto; margin: 0 auto 1.1rem; opacity: 0.92; }
+.app-footer__logos { display: flex; align-items: center; justify-content: center; gap: 1.1rem; margin-bottom: 1.1rem; }
+.app-footer__logo { height: 42px; width: auto; margin: 0; opacity: 0.92; }
 
 .app-footer__brand {
   font-family: var(--font-titulo);
